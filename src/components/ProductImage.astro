@@ -1,0 +1,82 @@
+---
+import { Image } from 'astro:assets'
+
+interface Props {
+  src: string
+  alt: string
+  width?: number
+  height?: number
+  category?: 'hero' | 'product' | 'thumbnail' | 'gallery'
+  loading?: 'lazy' | 'eager'
+  class?: string
+}
+
+const {
+  src,
+  alt,
+  width = 800,
+  height = 600,
+  category = 'product',
+  loading = 'lazy',
+  class: className = '',
+} = Astro.props
+
+// カテゴリ別のデフォルトサイズ
+const defaultSizes = {
+  hero: { width: 1200, height: 630 },
+  product: { width: 800, height: 600 },
+  thumbnail: { width: 400, height: 300 },
+  gallery: { width: 1024, height: 768 },
+}
+
+const { width: defaultWidth, height: defaultHeight } = defaultSizes[category]
+const finalWidth = width || defaultWidth
+const finalHeight = height || defaultHeight
+
+// カテゴリ別のCSSクラス
+const categoryClasses = {
+  hero: 'w-full aspect-video object-cover rounded-lg',
+  product: 'w-full h-auto object-cover rounded-md',
+  thumbnail: 'w-full h-auto object-cover rounded-sm',
+  gallery: 'w-full h-auto object-cover rounded-lg cursor-pointer transition-transform hover:scale-105',
+}
+
+const categoryClass = categoryClasses[category] || categoryClasses.product
+const finalClass = `${categoryClass} ${className}`.trim()
+---
+
+<Image
+  src={src}
+  alt={alt}
+  width={finalWidth}
+  height={finalHeight}
+  loading={loading}
+  class={finalClass}
+  format="webp"
+  quality="high"
+/>
+
+<style>
+  /* 画像の遅延読み込み用プレースホルダー */
+  img {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  img[loading="lazy"]:not([src]) {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+  }
+
+  @keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* ダークモード対応 */
+  [data-theme='dark'] img {
+    background: linear-gradient(90deg, #2a2a2a 25%, #1a1a1a 50%, #2a2a2a 75%);
+    background-size: 200% 100%;
+  }
+</style>

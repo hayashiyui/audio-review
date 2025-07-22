@@ -9,7 +9,8 @@
       "Bash(pnpm dev:*)",
       "Bash(pnpm run:*)",
       "Bash(pnpm astro:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(cp:*)"
     ],
     "deny": []
   }
