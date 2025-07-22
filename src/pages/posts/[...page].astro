@@ -1,0 +1,58 @@
+---
+import PostsCard from '@/components/PostsCard.astro'
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import PageHead from '@/components/PageHead.astro'
+import PaginationComponent from '@/components/ui/pagination'
+import { SITE } from '@/consts'
+import Layout from '@/layouts/Layout.astro'
+import { getAllReviews, groupReviewsByYear } from '@/lib/data-utils'
+import type { PaginateFunction } from 'astro'
+
+export async function getStaticPaths({
+  paginate,
+}: {
+  paginate: PaginateFunction
+}) {
+  const allReviews = await getAllReviews()
+  return paginate(allReviews, { pageSize: SITE.postsPerPage })
+}
+
+const { page } = Astro.props
+
+const reviewsByYear = groupReviewsByYear(page.data)
+const years = Object.keys(reviewsByYear).sort((a, b) => parseInt(b) - parseInt(a))
+---
+
+<Layout class="max-w-3xl">
+  <PageHead slot="head" title="オーディオ機器レビュー" />
+  <Breadcrumbs
+    items={[
+      { label: 'レビュー', href: '/posts', icon: 'lucide:headphones' },
+      { label: `Page ${page.currentPage}`, icon: 'lucide:file-text' },
+    ]}
+  />
+
+  <div class="flex min-h-[calc(100vh-18rem)] flex-col gap-y-8">
+    {
+      years.map((year) => (
+        <section class="flex flex-col gap-y-4">
+          <div class="font-medium">{year}</div>
+          <ul class="flex flex-col gap-4">
+            {reviewsByYear[year].map((review) => (
+              <li>
+                <PostsCard entry={review} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+
+  <PaginationComponent
+    currentPage={page.currentPage}
+    totalPages={page.lastPage}
+    baseUrl="/posts/"
+    client:load
+  />
+</Layout>
