@@ -12,8 +12,8 @@ export async function getAllPosts(): Promise<CollectionEntry<'blog'>[]> {
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 }
 
-export async function getAllReviews(): Promise<CollectionEntry<'posts'>[]> {
-  const reviews = await getCollection('posts')
+export async function getAllReviews(): Promise<CollectionEntry<'reviews'>[]> {
+  const reviews = await getCollection('reviews')
   return reviews
     .filter((review) => !review.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -127,10 +127,46 @@ export async function getRecentPosts(
   return posts.slice(0, count)
 }
 
+export async function getRecentReviews(
+  count: number,
+): Promise<CollectionEntry<'reviews'>[]> {
+  const reviews = await getAllReviews()
+  return reviews.slice(0, count)
+}
+
+export async function getAllReviewTags(): Promise<Map<string, number>> {
+  const reviews = await getAllReviews()
+  return reviews.reduce((acc, review) => {
+    review.data.tags?.forEach((tag) => {
+      acc.set(tag, (acc.get(tag) || 0) + 1)
+    })
+    return acc
+  }, new Map<string, number>())
+}
+
+export async function getReviewsByTag(
+  tag: string,
+): Promise<CollectionEntry<'reviews'>[]> {
+  const reviews = await getAllReviews()
+  return reviews.filter((review) => review.data.tags?.includes(tag))
+}
+
 export async function getSortedTags(): Promise<
   { tag: string; count: number }[]
 > {
   const tagCounts = await getAllTags()
+  return [...tagCounts.entries()]
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => {
+      const countDiff = b.count - a.count
+      return countDiff !== 0 ? countDiff : a.tag.localeCompare(b.tag)
+    })
+}
+
+export async function getSortedReviewTags(): Promise<
+  { tag: string; count: number }[]
+> {
+  const tagCounts = await getAllReviewTags()
   return [...tagCounts.entries()]
     .map(([tag, count]) => ({ tag, count }))
     .sort((a, b) => {
@@ -178,10 +214,10 @@ export function groupPostsByYear(
 }
 
 export function groupReviewsByYear(
-  reviews: CollectionEntry<'posts'>[],
-): Record<string, CollectionEntry<'posts'>[]> {
+  reviews: CollectionEntry<'reviews'>[],
+): Record<string, CollectionEntry<'reviews'>[]> {
   return reviews.reduce(
-    (acc: Record<string, CollectionEntry<'posts'>[]>, review) => {
+    (acc: Record<string, CollectionEntry<'reviews'>[]>, review) => {
       const year = review.data.date.getFullYear().toString()
       ;(acc[year] ??= []).push(review)
       return acc
@@ -324,16 +360,16 @@ export async function getTOCSections(postId: string): Promise<TOCSection[]> {
 }
 
 export async function getPostTOCSections(postId: string): Promise<TOCSection[]> {
-  const posts = await getCollection('posts')
-  const post = posts.find((p) => p.id === postId)
-  if (!post) return []
+  const reviews = await getCollection('reviews')
+  const review = reviews.find((r) => r.id === postId)
+  if (!review) return []
 
-  const { headings } = await render(post)
+  const { headings } = await render(review)
   if (headings.length === 0) return []
 
   return [{
     type: 'parent',
-    title: post.data.title,
+    title: review.data.title,
     headings: headings.map((heading) => ({
       slug: heading.slug,
       text: heading.text,
@@ -343,8 +379,8 @@ export async function getPostTOCSections(postId: string): Promise<TOCSection[]> 
 }
 
 export async function getAdjacentReviews(currentId: string): Promise<{
-  newer: CollectionEntry<'posts'> | null
-  older: CollectionEntry<'posts'> | null
+  newer: CollectionEntry<'reviews'> | null
+  older: CollectionEntry<'reviews'> | null
 }> {
   const allReviews = await getAllReviews()
   const currentIndex = allReviews.findIndex((review) => review.id === currentId)

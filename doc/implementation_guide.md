@@ -122,10 +122,10 @@ export default {
 };
 ```
 
-* **shadcn/ui** で追加パーツ
+* **shadcn** で追加パーツ
 
   ```bash
-  npx shadcn-ui@latest add badge accordion tabs
+  pnpm dlx shadcn@latest add badge accordion tabs
   ```
 * **View Transitions**
 
@@ -159,15 +159,6 @@ pnpm astro add cloudflare      # adapter-cloudflare を追加
 3. リポジトリ選択 → **Framework preset** = `Astro`
 4. Build command `pnpm run build`, Output `dist`
 5. **Save and Deploy**
-
-### B. Wrangler CLI（手動）
-
-```bash
-npm install -D wrangler
-pnpm run build          # dist/ 生成
-npx wrangler pages dev ./dist        # ローカルプレビュー
-npx wrangler pages deploy ./dist     # 本番公開
-```
 
 > **Node バージョン固定**
 > Pages 設定 → Environment Variables → `NODE_VERSION = 20`

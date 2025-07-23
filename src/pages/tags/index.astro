@@ -4,10 +4,10 @@ import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import Layout from '@/layouts/Layout.astro'
-import { getSortedTags } from '@/lib/data-utils'
+import { getSortedReviewTags } from '@/lib/data-utils'
 import { Icon } from 'astro-icon/components'
 
-const sortedTags = await getSortedTags()
+const sortedTags = await getSortedReviewTags()
 ---
 
 <Layout class="max-w-3xl">

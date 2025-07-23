@@ -46,7 +46,7 @@ npx shadcn-ui@latest add badge accordion tabs
 ```
 src/
 ├── content/
-│   ├── posts/              # ブログ記事（md/mdxファイル）
+│   ├── reviews/            # ブログ記事（md/mdxファイル）
 │   └── content.config.ts   # コンテンツスキーマ定義
 └── pages/                  # ルートページ
 
@@ -70,7 +70,7 @@ public/
 
 ## コンテンツ作成
 
-- ブログ記事は`src/content/posts/`に配置
+- ブログ記事は`src/content/reviews/`に配置
 - `.md`または`.mdx`拡張子を使用
 - ファイル名がURLスラッグになる
 - ヒーロー画像：`public/images/hero/`
@@ -108,7 +108,7 @@ npx wrangler pages deploy ./dist
 - インタラクティブコンポーネント用MDXサポート
 - Astro画像コンポーネントによる画像最適化
 - スムーズなナビゲーション用View Transitions
-- **オーディオ機器レビュー専用postsコレクション**
+- **オーディオ機器レビュー専用reviewsコレクション**
 - **PC/モバイル対応TOC（目次）機能**
 - **前後記事ナビゲーション**
 - **日本語フォント（Noto Sans JP）対応**
@@ -117,10 +117,10 @@ npx wrangler pages deploy ./dist
 
 ### ✅ 完了済み
 - [x] astro-eruditeテンプレートベースの初期セットアップ
-- [x] postsコレクションスキーマ設計・実装
+- [x] reviewsコレクションスキーマ設計・実装
 - [x] サンプルオーディオ機器レビュー記事作成（4記事）
-- [x] posts一覧ページ（年別グループ化、ページネーション）
-- [x] posts詳細ページ（blogと同等機能）
+- [x] reviews一覧ページ（年別グループ化、ページネーション）
+- [x] reviews詳細ページ（blogと同等機能）
 - [x] TOC機能（PC: サイドバー、モバイル: ヘッダー）
 - [x] 前後記事ナビゲーション
 - [x] Noto Sans JP Variable Font設定
@@ -134,15 +134,15 @@ npx wrangler pages deploy ./dist
 ## 技術的知見・重要な発見
 
 ### Astro v5 Content Loader API
-- **重要**: 新しいContent Loader APIでは`post.slug`ではなく`post.id`を使用
-- `getStaticPaths()`で`params: { id: post.id }`を設定
-- URLパスとして`/posts/${post.id}`形式になる
+- **重要**: 新しいContent Loader APIでは`review.slug`ではなく`review.id`を使用
+- `getStaticPaths()`で`params: { id: review.id }`を設定
+- URLパスとして`/reviews/${review.id}`形式になる
 
-### postsコレクション実装
+### reviewsコレクション実装
 ```typescript
 // src/content.config.ts
-const posts = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/posts' }),
+const reviews = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/reviews' }),
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
@@ -156,11 +156,11 @@ const posts = defineCollection({
 
 ### TOC機能の実装パターン
 ```typescript
-// posts用TOC関数
-export async function getPostTOCSections(postId: string): Promise<TOCSection[]> {
-  const posts = await getCollection('posts')
-  const post = posts.find((p) => p.id === postId)
-  const { headings } = await render(post)
+// reviews用TOC関数
+export async function getReviewTOCSections(reviewId: string): Promise<TOCSection[]> {
+  const reviews = await getCollection('reviews')
+  const review = reviews.find((r) => r.id === reviewId)
+  const { headings } = await render(review)
   // headingsをTOCSection形式に変換
 }
 ```
@@ -189,13 +189,13 @@ export async function getPostTOCSections(postId: string): Promise<TOCSection[]> 
 
 ## 遭遇した問題と解決方法
 
-### 1. postsコレクション読み込み問題
-**問題**: 初期設定でpostsが認識されない
+### 1. reviewsコレクション読み込み問題
+**問題**: 初期設定でreviewsが認識されない
 **解決**: `src/content.config.ts`（`config.ts`でなく`content.config.ts`）に正しく設定
 
-### 2. 404エラー（post.slug問題）
-**問題**: `post.slug`使用でページが見つからない
-**解決**: Astro v5では`post.id`を使用するよう修正
+### 2. 404エラー（review.slug問題）
+**問題**: `review.slug`使用でページが見つからない
+**解決**: Astro v5では`review.id`を使用するよう修正
 
 ### 3. Sharp依存関係エラー
 **問題**: 画像最適化でビルド失敗
@@ -214,7 +214,7 @@ export async function getPostTOCSections(postId: string): Promise<TOCSection[]> 
 ```
 src/
 ├── content/
-│   ├── posts/                      # オーディオ機器レビュー
+│   ├── reviews/                    # オーディオ機器レビュー
 │   │   ├── sennheiser-hd600-review.mdx
 │   │   ├── topping-d90se-review.mdx
 │   │   ├── kef-ls50-meta-review.mdx
@@ -223,19 +223,19 @@ src/
 │   ├── authors/                    # 著者情報
 │   └── content.config.ts           # 全コレクション定義
 ├── components/
-│   ├── PostsCard.astro            # posts用カード（BlogCardベース）
-│   ├── PostsNavigation.astro      # posts用前後ナビゲーション
+│   ├── ReviewsCard.astro          # reviews用カード（BlogCardベース）
+│   ├── ReviewsNavigation.astro    # reviews用前後ナビゲーション
 │   ├── TOCSidebar.astro           # PC用TOC
 │   └── TOCHeader.astro            # モバイル用TOC
 ├── pages/
-│   └── posts/
-│       ├── [...id].astro          # posts詳細ページ
-│       └── [...page].astro        # posts一覧ページ
+│   └── reviews/
+│       ├── [...id].astro          # reviews詳細ページ
+│       └── [...page].astro        # reviews一覧ページ
 ├── lib/
 │   └── data-utils.ts
-│       ├── getAllReviews()        # posts取得
+│       ├── getAllReviews()        # reviews取得
 │       ├── getAdjacentReviews()   # 前後記事取得
-│       └── getPostTOCSections()   # posts用TOC
+│       └── getReviewTOCSections() # reviews用TOC
 └── styles/
     └── global.css                 # Noto Sans JP設定
 ```
@@ -246,7 +246,7 @@ src/
 - [ ] 画像管理の最適化（WebP変換、遅延読み込み）
 - [ ] 検索機能の実装
 - [ ] カテゴリ・タグページの充実
-- [ ] RSS feedにposts追加
+- [ ] RSS feedにreviews追加
 - [ ] SEO最適化（構造化データ）
 
 ### コンテンツ

@@ -1,5 +1,5 @@
 ---
-import PostsCard from '@/components/PostsCard.astro'
+import ReviewsCard from '@/components/ReviewsCard.astro'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
 import PaginationComponent from '@/components/ui/pagination'
@@ -27,7 +27,7 @@ const years = Object.keys(reviewsByYear).sort((a, b) => parseInt(b) - parseInt(a
   <PageHead slot="head" title="オーディオ機器レビュー" />
   <Breadcrumbs
     items={[
-      { label: 'レビュー', href: '/posts', icon: 'lucide:headphones' },
+      { label: 'レビュー', href: '/reviews', icon: 'lucide:headphones' },
       { label: `Page ${page.currentPage}`, icon: 'lucide:file-text' },
     ]}
   />
@@ -40,7 +40,7 @@ const years = Object.keys(reviewsByYear).sort((a, b) => parseInt(b) - parseInt(a
           <ul class="flex flex-col gap-4">
             {reviewsByYear[year].map((review) => (
               <li>
-                <PostsCard entry={review} />
+                <ReviewsCard entry={review} />
               </li>
             ))}
           </ul>
@@ -52,7 +52,7 @@ const years = Object.keys(reviewsByYear).sort((a, b) => parseInt(b) - parseInt(a
   <PaginationComponent
     currentPage={page.currentPage}
     totalPages={page.lastPage}
-    baseUrl="/posts/"
+    baseUrl="/reviews/"
     client:load
   />
 </Layout>

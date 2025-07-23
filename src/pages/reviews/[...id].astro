@@ -1,7 +1,7 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PostHead from '@/components/PostHead.astro'
-import PostsNavigation from '@/components/PostsNavigation.astro'
+import ReviewsNavigation from '@/components/ReviewsNavigation.astro'
 import TOCHeader from '@/components/TOCHeader.astro'
 import TOCSidebar from '@/components/TOCSidebar.astro'
 import { badgeVariants } from '@/components/ui/badge'
@@ -12,23 +12,23 @@ import { Icon } from 'astro-icon/components'
 import { getCollection, render } from 'astro:content'
 
 export async function getStaticPaths() {
-  const posts = await getCollection('posts', ({ data }) => !data.draft)
-  return posts.map((post) => ({
-    params: { id: post.id },
-    props: post,
+  const reviews = await getCollection('reviews', ({ data }) => !data.draft)
+  return reviews.map((review) => ({
+    params: { id: review.id },
+    props: review,
   }))
 }
 
-const post = Astro.props
-const currentPostId = Astro.params.id
-const { Content, headings } = await render(post)
+const review = Astro.props
+const currentReviewId = Astro.params.id
+const { Content, headings } = await render(review)
 
-const tocSections = await getPostTOCSections(currentPostId)
-const navigation = await getAdjacentReviews(currentPostId)
+const tocSections = await getPostTOCSections(currentReviewId)
+const navigation = await getAdjacentReviews(currentReviewId)
 ---
 
 <Layout>
-  <PostHead slot="head" post={post} />
+  <PostHead slot="head" post={review} />
   {
     headings?.length > 0 && (
       <TOCHeader slot="table-of-contents" headings={headings} />
@@ -41,18 +41,18 @@ const navigation = await getAdjacentReviews(currentPostId)
     <div class="col-start-2">
       <Breadcrumbs
         items={[
-          { href: '/posts', label: 'レビュー', icon: 'lucide:headphones' },
-          { href: `/posts/${post.id}`, label: post.data.title, icon: 'lucide:file-text' },
+          { href: '/reviews', label: 'レビュー', icon: 'lucide:headphones' },
+          { href: `/reviews/${review.id}`, label: review.data.title, icon: 'lucide:file-text' },
         ]}
       />
     </div>
 
     {
-      post.data.heroImage && (
+      review.data.heroImage && (
         <div class="col-span-full mx-auto w-full max-w-5xl">
           <img
-            src={post.data.heroImage}
-            alt={post.data.title}
+            src={review.data.heroImage}
+            alt={review.data.title}
             class="w-full rounded-lg object-cover aspect-video"
           />
         </div>
@@ -65,7 +65,7 @@ const navigation = await getAdjacentReviews(currentPostId)
           class="mb-2 scroll-mt-31 text-3xl leading-tight font-medium sm:text-4xl"
           id="post-title"
         >
-          {post.data.title}
+          {review.data.title}
         </h1>
 
         <div
@@ -74,39 +74,39 @@ const navigation = await getAdjacentReviews(currentPostId)
           <div
             class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
           >
-            <span>{formatDate(post.data.date)}</span>
+            <span>{formatDate(review.data.date)}</span>
           </div>
 
-          {post.data.brand && (
+          {review.data.brand && (
             <div
               class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
             >
-              <span>{post.data.brand}</span>
+              <span>{review.data.brand}</span>
             </div>
           )}
           
-          {post.data.model && (
+          {review.data.model && (
             <div
               class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
             >
-              <span>{post.data.model}</span>
+              <span>{review.data.model}</span>
             </div>
           )}
           
-          {post.data.category && (
+          {review.data.category && (
             <div
               class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
             >
-              <span>{post.data.category}</span>
+              <span>{review.data.category}</span>
             </div>
           )}
         </div>
 
         <div class="flex flex-wrap justify-center gap-2">
           {
-            post.data.tags &&
-              post.data.tags.length > 0 &&
-              post.data.tags.map((tag) => (
+            review.data.tags &&
+              review.data.tags.length > 0 &&
+              review.data.tags.map((tag) => (
                 <a
                   href={`/tags/${tag}`}
                   class={badgeVariants({ variant: 'secondary' })}
@@ -119,7 +119,7 @@ const navigation = await getAdjacentReviews(currentPostId)
         </div>
       </div>
 
-      <PostsNavigation
+      <ReviewsNavigation
         newerPost={navigation.newer}
         olderPost={navigation.older}
       />
@@ -127,7 +127,7 @@ const navigation = await getAdjacentReviews(currentPostId)
 
     {
       tocSections.length > 0 && (
-        <TOCSidebar sections={tocSections} currentPostId={currentPostId} />
+        <TOCSidebar sections={tocSections} currentPostId={currentReviewId} />
       )
     }
 
@@ -135,7 +135,7 @@ const navigation = await getAdjacentReviews(currentPostId)
       <Content />
     </article>
 
-    <PostsNavigation
+    <ReviewsNavigation
       newerPost={navigation.newer}
       olderPost={navigation.older}
     />

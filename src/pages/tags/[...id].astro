@@ -1,36 +1,36 @@
 ---
-import BlogCard from '@/components/BlogCard.astro'
+import ReviewsCard from '@/components/ReviewsCard.astro'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
-import { getAllTags, getPostsByTag } from '@/lib/data-utils'
+import { getAllReviewTags, getReviewsByTag } from '@/lib/data-utils'
 
 export async function getStaticPaths() {
-  const tagMap = await getAllTags()
+  const tagMap = await getAllReviewTags()
   const uniqueTags = Array.from(tagMap.keys())
 
   return Promise.all(
     uniqueTags.map(async (tag) => {
-      const posts = await getPostsByTag(tag)
+      const reviews = await getReviewsByTag(tag)
       return {
         params: { id: tag },
         props: {
           tag,
-          posts,
+          reviews,
         },
       }
     }),
   )
 }
 
-const { tag, posts } = Astro.props
+const { tag, reviews } = Astro.props
 ---
 
 <Layout class="max-w-3xl">
   <PageHead
     slot="head"
-    title={`Posts tagged with "${tag}"`}
-    description={`A collection of posts tagged with ${tag}.`}
+    title={`Reviews tagged with "${tag}"`}
+    description={`A collection of reviews tagged with ${tag}.`}
     noindex
   />
   <Breadcrumbs
@@ -42,9 +42,9 @@ const { tag, posts } = Astro.props
 
   <ul class="flex flex-col gap-y-4">
     {
-      posts.map((post) => (
+      reviews.map((review) => (
         <li>
-          <BlogCard entry={post} />
+          <ReviewsCard entry={review} />
         </li>
       ))
     }

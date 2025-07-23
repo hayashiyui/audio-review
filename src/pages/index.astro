@@ -1,13 +1,13 @@
 ---
-import BlogCard from '@/components/BlogCard.astro'
+import ReviewsCard from '@/components/ReviewsCard.astro'
 import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
 import { buttonVariants } from '@/components/ui/button'
 import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
-import { getRecentPosts } from '@/lib/data-utils'
+import { getRecentReviews } from '@/lib/data-utils'
 
-const blog = await getRecentPosts(SITE.featuredPostCount)
+const reviews = await getRecentReviews(SITE.featuredPostCount)
 ---
 
 <Layout class="max-w-3xl">
@@ -15,69 +15,40 @@ const blog = await getRecentPosts(SITE.featuredPostCount)
   <section>
     <div class="rounded-lg border">
       <div class="flex flex-col space-y-1.5 p-6">
-        <h3 class="text-3xl leading-none font-medium">er·u·dite</h3>
+        <h3 class="text-3xl leading-none font-medium">音楽をもっと、深く</h3>
         <p class="text-muted-foreground text-sm">
-          /ˈer(y)əˌdīt/ &bull; <span class="font-medium">adjective</span>
+          オーディオ機器の本質を探る &bull; <span class="font-medium">あなたの音楽体験を変える一台を見つけよう</span>
         </p>
       </div>
       <div class="p-6 pt-0">
         <p class="text-muted-foreground mb-2 text-sm">
-          astro-erudite is an opinionated, unstyled static blogging template
-          built with <Link
-            href="https://astro.build"
-            class="text-foreground"
-            external
-            underline>Astro</Link
-          >, <Link
-            href="https://tailwindcss.com"
-            class="text-foreground"
-            external
-            underline>Tailwind</Link
-          >, and <Link
-            href="https://ui.shadcn.com"
-            class="text-foreground"
-            external
-            underline>shadcn/ui</Link
-          >. Extraordinarily loosely based on the <Link
-            href="https://astro-micro.vercel.app/"
-            class="text-foreground"
-            external
-            underline>Astro Micro</Link
-          > theme.
+          ヘッドホン、スピーカー、DAC、アンプなど、様々なオーディオ機器の詳細なレビューをお届けします。
+          音質、デザイン、コストパフォーマンスを中心に、実際の使用感を重視した率直な評価を心がけています。
         </p>
         <p class="text-muted-foreground text-sm">
-          To use this template, check out the <Link
-            href="https://github.com/jktrn/astro-erudite"
-            class="text-foreground"
-            underline
-            external>GitHub</Link
-          > repository. To learn more about why this template exists, read this blog
-          post: <Link
-            href="/blog/the-state-of-static-blogs"
-            class="text-foreground"
-            underline>The State of Static Blogs in 2024</Link
-          >.
+          初心者からオーディオファイルまで、あなたの音楽体験をより豊かにする機器選びをサポートします。
+          すべてのレビューは実際に使用した上での感想をベースに、公正かつ詳細に記述しています。
         </p>
       </div>
     </div>
   </section>
   <section class="flex flex-col gap-y-4">
-    <h2 class="text-2xl font-medium">Latest posts</h2>
+    <h2 class="text-2xl font-medium">Latest Reviews</h2>
     <ul class="flex flex-col gap-y-4">
       {
-        blog.map((post) => (
+        reviews.map((review) => (
           <li>
-            <BlogCard entry={post} />
+            <ReviewsCard entry={review} />
           </li>
         ))
       }
     </ul>
     <div class="flex justify-center">
       <Link
-        href="/blog"
+        href="/reviews"
         class={buttonVariants({ variant: 'ghost' }) + ' group'}
       >
-        See all posts <span
+        See all reviews <span
           class="ml-1.5 transition-transform group-hover:translate-x-1"
           >&rarr;</span
         >
