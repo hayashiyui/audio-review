@@ -2,11 +2,7 @@
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
-import ProjectCard from '@/components/ProjectCard.astro'
 import Layout from '@/layouts/Layout.astro'
-import { getAllProjects } from '@/lib/data-utils'
-
-const projects = await getAllProjects()
 ---
 
 <Layout class="max-w-3xl">
@@ -16,31 +12,40 @@ const projects = await getAllProjects()
   <section>
     <div class="min-w-full">
       <div class="prose mb-8">
+        <h1 class="text-3xl font-medium mb-6">音楽をもっと、深く</h1>
         <p class="mt-0">
-          astro-erudite is an opinionated, unstyled static blogging template
-          that prioritizes simplicity and performance, built with <Link
-            href="https://astro.build"
-            external
-            underline>Astro</Link
-          >, <Link href="https://tailwindcss.com" external underline
-            >Tailwind</Link
-          >, and <Link href="https://ui.shadcn.com" external underline
-            >shadcn/ui</Link
-          >. It provides a clean foundation for your content while being
-          extremely easy to customize.
+          私たちは、オーディオ機器の世界を深く探求し、音楽愛好家が最高の音響体験を見つけるお手伝いをしています。
+          ヘッドホン、スピーカー、DAC、アンプなど、様々な機器の詳細なレビューを通じて、
+          あなたの音楽体験を変える一台を見つけていただくことが私たちの使命です。
         </p>
         <p>
-          To learn more about the philosophy behind this template, check out the
-          following blog post: <Link
-            href="/blog/the-state-of-static-blogs"
-            underline>The State of Static Blogs in 2024</Link
-          >.
+          世界中の優れたオーディオ機器について技術的な分析と主観的な評価を組み合わせた
+          包括的なレビューをお届けします。初心者からオーディオマニアまで、
+          すべての音楽愛好家に有用な情報を提供することを目指しています。
+        </p>
+        <p>
+          最新のレビューは<Link href="/reviews" underline>こちら</Link>からご覧いただけます。
         </p>
       </div>
 
-      <h2 class="mb-4 text-2xl font-medium">Example Projects Listing</h2>
-      <div class="flex flex-col gap-4">
-        {projects.map((project) => <ProjectCard project={project} />)}
+      <h2 class="mb-4 text-2xl font-medium">レビューカテゴリ</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="rounded-lg border p-4">
+          <h3 class="font-medium mb-2">ヘッドホン</h3>
+          <p class="text-sm text-muted-foreground">開放型・密閉型、有線・無線問わず幅広くレビュー</p>
+        </div>
+        <div class="rounded-lg border p-4">
+          <h3 class="font-medium mb-2">スピーカー</h3>
+          <p class="text-sm text-muted-foreground">ブックシェルフからフロア型まで様々なスピーカー</p>
+        </div>
+        <div class="rounded-lg border p-4">
+          <h3 class="font-medium mb-2">DAC・アンプ</h3>
+          <p class="text-sm text-muted-foreground">デジタル・アナログコンバーターとヘッドホンアンプ</p>
+        </div>
+        <div class="rounded-lg border p-4">
+          <h3 class="font-medium mb-2">アクセサリ</h3>
+          <p class="text-sm text-muted-foreground">ケーブル、電源機器、その他オーディオアクセサリ</p>
+        </div>
       </div>
     </div>
   </section>

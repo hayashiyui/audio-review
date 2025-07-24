@@ -3,7 +3,7 @@ import type { IconMap, SocialLink, Site } from '@/types'
 export const SITE: Site = {
   title: 'Audio Review Blog',
   description:
-    'オーディオ機器レビューブログ。ヘッドホン、スピーカー、DAC、アンプなどの詳細レビュー。',
+    'オーディオ機器の専門レビューサイト。ヘッドホン、スピーカー、DAC、アンプの詳細レビューと試聴レポート。音質評価から価格比較まで、あなたの音楽体験を向上させる製品選びをサポートします。',
   href: 'https://audio-review.pages.dev',
   author: 'Audio Reviewer',
   locale: 'ja-JP',

@@ -60,7 +60,7 @@ const posts = defineCollection({
     date: z.date(),
     brand: z.string().optional(),
     model: z.string().optional(),
-    category: z.enum(['スピーカー','ヘッドホン','デジタルプレーヤー','DAC','パワーアンプ','プリアンプ','プリメインアンプ','アナログ','ケーブル','アクセサリ']).optional(),
+    category: z.enum(['スピーカー','ヘッドホン','イヤホン','デジタルプレーヤー','DAC','パワーアンプ','プリアンプ','プリメインアンプ','ヘッドホンアンプ','アナログ','ケーブル','アクセサリ']).optional(),
     tags: z.array(z.string()).optional(),
     heroImage: z.string().optional(),
   }),
