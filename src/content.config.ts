@@ -48,30 +48,31 @@ const projects = defineCollection({
 
 const reviews = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/reviews' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    date: z.coerce.date(),
-    brand: z.string().optional(),
-    model: z.string().optional(),
-    category: z.enum([
-      'スピーカー',
-      'ヘッドホン',
-      'イヤホン',
-      'デジタルプレーヤー',
-      'DAC',
-      'パワーアンプ',
-      'プリアンプ',
-      'プリメインアンプ',
-      'ヘッドホンアンプ',
-      'アナログ',
-      'ケーブル',
-      'アクセサリ'
-    ]).optional(),
-    tags: z.array(z.string()).optional(),
-    heroImage: z.string().optional(),
-    draft: z.boolean().optional().default(false),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      date: z.coerce.date(),
+      brand: z.string().optional(),
+      model: z.string().optional(),
+      category: z.enum([
+        'スピーカー',
+        'ヘッドホン',
+        'イヤホン',
+        'デジタルプレーヤー',
+        'DAC',
+        'パワーアンプ',
+        'プリアンプ',
+        'プリメインアンプ',
+        'ヘッドホンアンプ',
+        'アナログ',
+        'ケーブル',
+        'アクセサリ'
+      ]).optional(),
+      tags: z.array(z.string()).optional(),
+      heroImage: image().optional(),
+      draft: z.boolean().optional().default(false),
+    }),
 })
 
 export const collections = { blog, authors, projects, reviews }

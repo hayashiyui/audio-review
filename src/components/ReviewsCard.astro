@@ -3,6 +3,7 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { formatDate } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
+import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 import Link from './Link.astro'
 
@@ -21,10 +22,12 @@ const formattedDate = formatDate(entry.data.date)
     {
       entry.data.heroImage && (
         <Link href={`/reviews/${entry.id}`} class="max-w-3xs sm:shrink-0">
-          <img
+          <Image
             src={entry.data.heroImage}
             alt={entry.data.title}
             class="w-full rounded-lg object-cover aspect-video hover:opacity-80 transition-opacity"
+            width={300}
+            height={169}
           />
         </Link>
       )

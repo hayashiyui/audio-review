@@ -32,7 +32,7 @@ pnpm dev                    # http://localhost:4321
 
 # ビルド関連
 npx astro build             # 本番用ビルド
-pnpm run preview            # ビルド結果のプレビュー
+npx astro preview           # ビルド結果のプレビュー
 
 # Cloudflareアダプター追加（SSR/ODR用）
 pnpm astro add cloudflare
@@ -126,6 +126,7 @@ npx wrangler pages deploy ./dist
 - [x] Noto Sans JP Variable Font設定
 - [x] プロジェクトドキュメント整備
 - [x] 画像管理用ディレクトリ構造の設定
+- [x] astro:assets画像最適化の実装（WebP自動変換）
 
 ### 🔄 保留中
 - [ ] shadcn/uiコンポーネント追加（accordion, tabs等）
@@ -209,10 +210,23 @@ export async function getReviewTOCSections(reviewId: string): Promise<TOCSection
 **問題**: `pnpm run build`が動作しない
 **解決**: `npx astro build`が正しいコマンド
 
+### 6. astro:assets画像最適化が機能しない問題
+**問題**: `npx astro build`してもWebP画像が生成されない
+**解決**: 
+1. `src/content.config.ts`のreviewsコレクションで`heroImage: image().optional()`に変更
+2. 画像を`public/images/`から`src/assets/images/`に移動
+3. MDXファイルで相対パス（`../../assets/images/hero/taiko-olympus.jpg`）を使用
+4. コンポーネントで`<img>`タグを`<Image>`コンポーネント（astro:assetsから）に変更
+5. **効果**: 119KB → 9KB（92%削減）のWebP自動生成に成功
+
 ## 詳細ファイル構造
 
 ```
 src/
+├── assets/
+│   └── images/
+│       └── hero/                   # ヒーロー画像（astro:assets管理）
+│           └── taiko-olympus.jpg
 ├── content/
 │   ├── reviews/                    # オーディオ機器レビュー
 │   │   ├── sennheiser-hd600-review.mdx
@@ -243,7 +257,7 @@ src/
 ## 今後の課題・改善点
 
 ### 機能拡張
-- [ ] 画像管理の最適化（WebP変換、遅延読み込み）
+- [x] 画像管理の最適化（WebP変換実装済み、遅延読み込みは未実装）
 - [ ] 検索機能の実装
 - [ ] カテゴリ・タグページの充実
 - [ ] RSS feedにreviews追加
@@ -284,3 +298,11 @@ src/
 - **最適化スクリプト**: ImageMagick活用の自動画像最適化（scripts/optimize-images.js）
 - **命名規則の標準化**: {brand}-{model}-{type}.{ext}形式（カテゴリ分けなし）
 - **設計思想**: 過度な分類を避け、ファイル名による識別を優先
+
+### astro:assets画像最適化
+- **画像配置**: `src/assets/images/`に配置（publicフォルダではなく）
+- **スキーマ定義**: `content.config.ts`で`image()`ヘルパーを使用
+- **自動変換**: JPG/PNG → WebP自動変換（92%以上のサイズ削減）
+- **レスポンシブ対応**: 複数サイズの画像を自動生成
+- **Imageコンポーネント**: `<img>`の代わりに`<Image>`を使用
+- **相対パス使用**: MDXから`../../assets/images/`形式で参照

@@ -9,6 +9,7 @@ import Layout from '@/layouts/Layout.astro'
 import { getAdjacentReviews, getPostTOCSections } from '@/lib/data-utils'
 import { formatDate } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
+import { Image } from 'astro:assets'
 import { getCollection, render } from 'astro:content'
 
 export async function getStaticPaths() {
@@ -50,10 +51,12 @@ const navigation = await getAdjacentReviews(currentReviewId)
     {
       review.data.heroImage && (
         <div class="col-span-full mx-auto w-full max-w-5xl">
-          <img
+          <Image
             src={review.data.heroImage}
             alt={review.data.title}
             class="w-full rounded-lg object-cover aspect-video"
+            width={1200}
+            height={675}
           />
         </div>
       )
