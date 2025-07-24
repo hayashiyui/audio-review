@@ -1,22 +1,20 @@
 @reference './global.css';
 
 @layer base {
-  p,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  p {
     @apply wrap-break-word;
   }
-
+  
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
+    @apply break-normal;
+  }
+
+  h1 {
     @apply text-balance;
   }
 
@@ -46,15 +44,15 @@
     }
 
     :where(h2):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-      @apply mt-8 mb-4 text-2xl;
+      @apply mt-8 mb-4 text-xl sm:text-2xl;
     }
 
     :where(h3):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-      @apply mt-8 mb-4 text-xl;
+      @apply mt-8 mb-4 text-lg sm:text-xl;
     }
 
     :where(h4):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-      @apply mt-7 mb-3 text-lg;
+      @apply mt-7 mb-3 text-base sm:text-lg;
     }
 
     :where(h5, h6):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
