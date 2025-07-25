@@ -32,7 +32,7 @@ export function generateBlogPostingSchema(
     "description": entry.data.description,
     "image": imageUrl,
     "datePublished": entry.data.date.toISOString(),
-    "dateModified": entry.data.updatedDate?.toISOString() || entry.data.date.toISOString(),
+    "dateModified": entry.data.date.toISOString(),
     "url": new URL(`/blog/${entry.id}`, SITE.href).toString(),
     "mainEntityOfPage": {
       "@type": "WebPage",

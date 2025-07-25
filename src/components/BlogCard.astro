@@ -49,7 +49,7 @@ const subpostCount = !isSubpost(entry.id) && entry.collection === 'blog' ? await
        ((entry.collection === 'columns' || entry.collection === 'reviews') && entry.data.heroImage)) && (
         <div class="max-w-3xs sm:shrink-0">
           <Picture
-            src={entry.collection === 'blog' ? entry.data.image : entry.data.heroImage}
+            src={entry.collection === 'blog' ? entry.data.image! : entry.data.heroImage!}
             alt={entry.data.title}
             width={300}
             densities={[1.5, 2]}

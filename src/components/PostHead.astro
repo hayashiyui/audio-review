@@ -13,10 +13,9 @@ const { post } = Astro.props
 const title = post.data.title || SITE.title
 const description = post.data.description || SITE.description
 const image = new URL('/static/1200x630.png', Astro.site)
-const author =
-  post.data.authors && post.data.authors.length > 0
-    ? post.data.authors.join(', ')
-    : SITE.author
+const author = post.collection === 'blog' && post.data.authors && post.data.authors.length > 0
+  ? post.data.authors.join(', ')
+  : SITE.author
 
 // コレクション別の構造化データを生成
 let structuredData: object | null = null
@@ -40,9 +39,14 @@ if (post.collection === 'blog') {
 <meta property="og:description" content={description} />
 <meta
   property="og:image"
-  content={post?.data?.image?.src
-    ? `${SITE.href}${post.data.image.src}`
-    : image}
+  content={(() => {
+    if (post.collection === 'blog' && post.data.image?.src) {
+      return `${SITE.href}${post.data.image.src}`
+    } else if ((post.collection === 'reviews' || post.collection === 'columns') && post.data.heroImage?.src) {
+      return `${SITE.href}${post.data.heroImage.src}`
+    }
+    return image
+  })()}
 />
 <meta property="og:image:alt" content={title} />
 <meta property="og:type" content="website" />
@@ -55,9 +59,14 @@ if (post.collection === 'blog') {
 <meta name="twitter:description" content={description} />
 <meta
   property="twitter:image"
-  content={post?.data?.image?.src
-    ? `${SITE.href}${post.data.image.src}`
-    : image}
+  content={(() => {
+    if (post.collection === 'blog' && post.data.image?.src) {
+      return `${SITE.href}${post.data.image.src}`
+    } else if ((post.collection === 'reviews' || post.collection === 'columns') && post.data.heroImage?.src) {
+      return `${SITE.href}${post.data.heroImage.src}`
+    }
+    return image
+  })()}
 />
 <meta name="twitter:image:alt" content={title} />
 <meta name="twitter:card" content="summary_large_image" />
@@ -72,5 +81,5 @@ if (post.collection === 'blog') {
 
 <!-- 記事別の構造化データ -->
 {structuredData && (
-  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
 )}
