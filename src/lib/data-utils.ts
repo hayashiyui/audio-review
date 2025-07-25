@@ -1,5 +1,5 @@
 import { getCollection, render, type CollectionEntry } from 'astro:content'
-import { readingTime, calculateWordCountFromHtml } from '@/lib/utils'
+import { readingTime, calculateCharCountFromHtml } from '@/lib/utils'
 
 export async function getAllAuthors(): Promise<CollectionEntry<'authors'>[]> {
   return await getCollection('authors')
@@ -336,24 +336,24 @@ export async function getCombinedReadingTime(postId: string): Promise<string> {
   const post = await getPostById(postId)
   if (!post) return readingTime(0)
 
-  let totalWords = calculateWordCountFromHtml(post.body)
+  let totalChars = calculateCharCountFromHtml(post.body)
 
   if (!isSubpost(postId)) {
     const subposts = await getSubpostsForParent(postId)
     for (const subpost of subposts) {
-      totalWords += calculateWordCountFromHtml(subpost.body)
+      totalChars += calculateCharCountFromHtml(subpost.body)
     }
   }
 
-  return readingTime(totalWords)
+  return readingTime(totalChars)
 }
 
 export async function getPostReadingTime(postId: string): Promise<string> {
   const post = await getPostById(postId)
   if (!post) return readingTime(0)
 
-  const wordCount = calculateWordCountFromHtml(post.body)
-  return readingTime(wordCount)
+  const charCount = calculateCharCountFromHtml(post.body)
+  return readingTime(charCount)
 }
 
 export type TOCHeading = {
@@ -498,8 +498,8 @@ export async function getColumnReadingTime(columnId: string): Promise<string> {
   const column = await getColumnById(columnId)
   if (!column) return readingTime(0)
 
-  const wordCount = calculateWordCountFromHtml(column.body)
-  return readingTime(wordCount)
+  const charCount = calculateCharCountFromHtml(column.body)
+  return readingTime(charCount)
 }
 
 export async function getReviewById(
@@ -513,6 +513,6 @@ export async function getReviewReadingTime(reviewId: string): Promise<string> {
   const review = await getReviewById(reviewId)
   if (!review) return readingTime(0)
 
-  const wordCount = calculateWordCountFromHtml(review.body)
-  return readingTime(wordCount)
+  const charCount = calculateCharCountFromHtml(review.body)
+  return readingTime(charCount)
 }

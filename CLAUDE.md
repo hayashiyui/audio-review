@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## プロジェクト概要
 
-オーディオ機器レビューブログ。Astroとastro-eruditeテンプレートを使用したシンプルで高速、カスタマイズ可能なブログシステム。
+オーディオ機器レビューとコラムサイト。Astroとastro-eruditeテンプレートを使用したシンプルで高速、カスタマイズ可能なブログシステム。機器レビューと技術解説コラムの両方を提供。
 
 ## 技術スタック
 
@@ -149,6 +149,8 @@ npx wrangler pages deploy ./dist
 - [x] **BlogCard.astroの汎用化（blog/reviews/columns対応）**
 - [x] **読書時間計算の修正（コレクション別対応）**
 - [x] **RSSフィードへのcolumns統合**
+- [x] **トップページに最新コラム表示追加**
+- [x] **日本語読書時間計算の文字数ベース対応**
 
 ### 🔄 保留中
 - [ ] shadcn/uiコンポーネント追加（accordion, tabs等）
@@ -308,6 +310,43 @@ export async function getReviewTOCSections(reviewId: string): Promise<TOCSection
 - 型安全性とコレクション別処理を両立させる設計が重要
 - 汎用コンポーネントは段階的拡張を前提とした設計にすべき
 
+### 9. 日本語読書時間計算問題（2025-07-25）
+**問題**: 日本語コンテンツの読書時間が大幅に短く表示される（8000文字のコラムが4分）
+**原因**: 
+- 英語向けの「語数」ベース計算（200語/分）を使用
+- 日本語は単語間にスペースがないため`split(/\s+/)`で正確にカウントできない
+- `calculateWordCountFromHtml()`が日本語文章を適切に分析できない
+
+**解決策**:
+1. **日本語文字数ベース計算の実装**:
+   ```typescript
+   export function calculateCharCountFromHtml(html: string | null | undefined): number {
+     if (!html) return 0
+     const textOnly = html.replace(/<[^>]+>/g, '')
+     // 改行、タブ、余分な空白を除去して文字数をカウント
+     return textOnly.replace(/\s+/g, '').length
+   }
+   ```
+2. **読書速度の調整**:
+   ```typescript
+   export function readingTime(charCount: number): string {
+     // 日本語文字数基準：1000文字/分で計算（読みやすいコラム・記事想定）
+     const readingTimeMinutes = Math.max(1, Math.round(charCount / 1000))
+     return `${readingTimeMinutes} min read`
+   }
+   ```
+3. **全関数の文字数ベース対応**: data-utils.tsの全読書時間計算関数を更新
+
+**効果**: 
+- 8000文字のコラム: 4分 → 16-17分（実感に近い表示）
+- 日本語コンテンツに適した正確な読書時間表示
+
+**教訓**:
+- 多言語対応では言語特性を考慮した実装が必要
+- 英語向けライブラリ・アルゴリズムの日本語適用時は検証が重要
+- 読書速度は言語・ジャンル・想定読者層により大きく異なる
+- ユーザーテストによる実感値との照合が重要
+
 ## 詳細ファイル構造
 
 ```
@@ -435,3 +474,13 @@ src/
   5. 専用ナビゲーションコンポーネント作成
   6. 既存汎用コンポーネントの対応確認・拡張
   7. RSSフィード・メニューへの追加
+
+### 日本語読書時間計算
+- **計算方式**: 文字数ベース（1000文字/分）
+- **実装理由**: 日本語は単語間スペースがなく、英語の「語数」カウントが不適切
+- **HTMLテキスト抽出**: `html.replace(/<[^>]+>/g, '')` でタグ除去後、`replace(/\s+/g, '')` で空白除去
+- **読書速度設定**: 
+  - 技術記事・コラム想定で1000文字/分
+  - 一般的な日本語読書速度（400-600文字/分）より速めに設定
+  - オーディオ愛好者の専門知識・読書習慣を考慮
+- **ユーザー体験**: 実際の読書時間との一致を重視したチューニング
