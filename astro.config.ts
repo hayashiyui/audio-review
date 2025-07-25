@@ -21,10 +21,6 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   site: 'https://audiomatome.com',
-  image: {
-    responsiveStyles: true, // レスポンシブ画像機能を有効化
-    layout: 'constrained', // 'constrained' | 'full-width' | 'fixed' | 'none'
-  },
   integrations: [
     expressiveCode({
       themes: ['github-light', 'github-dark'],
