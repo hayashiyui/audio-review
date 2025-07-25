@@ -67,7 +67,12 @@ export default defineConfig({
     }),
     mdx(),
     react(),
-    sitemap(),
+    sitemap({
+      filter: (page) => 
+        !page.includes('/about') && 
+        !page.includes('/authors') && 
+        !page.includes('/blog')
+    }),
     icon(),
   ],
   vite: {
