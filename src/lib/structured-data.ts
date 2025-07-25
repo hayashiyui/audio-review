@@ -58,6 +58,11 @@ export function generateReviewSchema(entry: CollectionEntry<'reviews'>) {
     "@type": "Review",
     "reviewBody": entry.data.description,
     "datePublished": entry.data.date.toISOString(),
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "4",
+      "bestRating": "5"
+    },
     "url": new URL(`/reviews/${entry.id}`, SITE.href).toString(),
     "itemReviewed": {
       "@type": "Product",  
