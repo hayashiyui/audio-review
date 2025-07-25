@@ -1,7 +1,10 @@
 ---
 import { SITE } from '@/consts'
 import { ClientRouter } from 'astro:transitions'
+import { generateWebsiteSchema } from '@/lib/structured-data'
 import Favicons from './Favicons.astro'
+
+const websiteSchema = generateWebsiteSchema()
 ---
 
 <head>
@@ -44,6 +47,9 @@ import Favicons from './Favicons.astro'
 
   <Favicons />
   <!-- <ClientRouter /> -->
+
+  <!-- サイト全体の構造化データ -->
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 
   <slot />
 </head>
