@@ -62,27 +62,20 @@ export function generateBlogPostingSchema(
 }
 
 /**
- * レビュー記事の構造化データ（Review schema）を生成
+ * レビュー記事の構造化データ（Article schema）を生成
  */
 export function generateReviewSchema(entry: CollectionEntry<'reviews'>) {
   const imageUrl = entry.data.heroImage
     ? `${SITE.href}${entry.data.heroImage.src}`
     : null
 
-  const productName = entry.data.brand && entry.data.model 
-    ? `${entry.data.brand} ${entry.data.model}`
-    : entry.data.title
-
   return {
     "@context": "https://schema.org",
-    "@type": "Review",
-    "reviewBody": entry.data.description,
+    "@type": "Article",
+    "headline": entry.data.title,
+    "description": entry.data.description,
+    "image": imageUrl,
     "datePublished": entry.data.date.toISOString(),
-    "reviewRating": {
-      "@type": "Rating",
-      "ratingValue": "4",
-      "bestRating": "5"
-    },
     "author": {
       "@type": "Person",
       "name": SITE.author
@@ -92,16 +85,8 @@ export function generateReviewSchema(entry: CollectionEntry<'reviews'>) {
       "name": SITE.author
     },
     "url": new URL(`/reviews/${entry.id}`, SITE.href).toString(),
-    "itemReviewed": {
-      "@type": "Thing",  
-      "name": productName,
-      "brand": entry.data.brand ? {
-        "@type": "Brand",
-        "name": entry.data.brand
-      } : undefined,
-      "category": entry.data.category,
-      "image": imageUrl
-    },
+    "articleSection": entry.data.category,
+    "keywords": entry.data.tags?.join(', '),
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": new URL(`/reviews/${entry.id}`, SITE.href).toString()
