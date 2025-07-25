@@ -10,6 +10,7 @@ import { getAdjacentReviews, getPostTOCSections } from '@/lib/data-utils'
 import { formatDate } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets'
+import { Picture } from 'astro:assets'
 import { getCollection, render } from 'astro:content'
 
 export async function getStaticPaths() {
@@ -48,19 +49,23 @@ const navigation = await getAdjacentReviews(currentReviewId)
       />
     </div>
 
-    {
-      review.data.heroImage && (
-        <div class="col-span-full mx-auto w-full max-w-5xl">
-          <Image
-            src={review.data.heroImage}
-            alt={review.data.title}
-            class="w-full rounded-lg object-cover aspect-video"
-            width={1200}
-            height={675}
-          />
-        </div>
-      )
-    }
+    {review.data.heroImage && (
+      <div class="col-span-full mx-auto w-full max-w-5xl">
+        <Picture
+          src={review.data.heroImage}
+          alt={review.data.title}
+          /* 1280px コンテナに合わせて上限を制限 */
+          widths={[640, 828, 960, 1080, 1200, 1280]}
+          sizes="(min-width: 1280px) 1280px, 100vw"
+          formats={['avif', 'webp']}
+          fit="cover"
+          position="center"
+          priority
+          class="w-full rounded-lg object-cover aspect-video"
+        />
+      </div>
+    )}
+
 
     <section class="col-start-2 flex flex-col gap-y-6 text-center">
       <div class="flex flex-col">
