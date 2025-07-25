@@ -14,7 +14,7 @@ export const SITE: Site = {
 export const NAV_LINKS: SocialLink[] = [
   {
     href: '/reviews',
-    label: 'レビュー',
+    label: 'オーディオレビュー',
   },
 ]
 
