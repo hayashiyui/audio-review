@@ -11,7 +11,8 @@
       "Bash(pnpm astro:*)",
       "Bash(git add:*)",
       "Bash(cp:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(grep:*)"
     ],
     "deny": []
   }
