@@ -75,4 +75,26 @@ const reviews = defineCollection({
     }),
 })
 
-export const collections = { blog, authors, projects, reviews }
+const columns = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/columns' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      date: z.coerce.date(),
+      category: z.enum([
+        'オーディオ基礎知識',
+        'セットアップ',
+        '音楽論',
+        '業界動向',
+        '技術解説',
+        'エッセイ',
+        'その他'
+      ]).optional(),
+      tags: z.array(z.string()).optional(),
+      heroImage: image().optional(),
+      draft: z.boolean().optional().default(false),
+    }),
+})
+
+export const collections = { blog, authors, projects, reviews, columns }

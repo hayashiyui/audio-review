@@ -46,7 +46,8 @@ npx shadcn-ui@latest add badge accordion tabs
 ```
 src/
 ├── content/
-│   ├── reviews/            # ブログ記事（md/mdxファイル）
+│   ├── reviews/            # オーディオ機器レビュー（md/mdxファイル）
+│   ├── columns/            # オーディオコラム（md/mdxファイル）
 │   └── content.config.ts   # コンテンツスキーマ定義
 └── pages/                  # ルートページ
 
@@ -57,23 +58,35 @@ public/
 
 ## コンテンツスキーマ
 
-`src/content/content.config.ts`でオーディオ機器レビュー用メタデータを定義：
+`src/content/content.config.ts`でコンテンツ用メタデータを定義：
 
+### reviewsコレクション（オーディオ機器レビュー）
 - `title`: 文字列（必須）
+- `description`: 文字列（必須）
 - `date`: 日付（必須）
 - `brand`: 文字列（オプション）- 機器ブランド
 - `model`: 文字列（オプション）- 機器モデル
 - `category`: 列挙型（オプション）- 'スピーカー','ヘッドホン','イヤホン','デジタルプレーヤー','DAC','パワーアンプ','プリアンプ','プリメインアンプ','ヘッドホンアンプ','アナログ','ケーブル','アクセサリ'
 - `tags`: 文字列配列（オプション）
-- `heroImage`: 文字列（オプション）- ヒーロー画像パス
-- `draft`: 真偽値（オプション）- 下書き状態
+- `heroImage`: image（オプション）- ヒーロー画像
+- `draft`: 真偽値（オプション、デフォルト: false）- 下書き状態
+
+### columnsコレクション（オーディオコラム）
+- `title`: 文字列（必須）
+- `description`: 文字列（必須）
+- `date`: 日付（必須）
+- `category`: 列挙型（オプション）- 'オーディオ基礎知識','セットアップ','音楽論','業界動向','技術解説','エッセイ','その他'
+- `tags`: 文字列配列（オプション）
+- `heroImage`: image（オプション）- ヒーロー画像
+- `draft`: 真偽値（オプション、デフォルト: false）- 下書き状態
 
 ## コンテンツ作成
 
-- ブログ記事は`src/content/reviews/`に配置
+- **レビュー記事**: `src/content/reviews/`に配置
+- **コラム記事**: `src/content/columns/`に配置
 - `.md`または`.mdx`拡張子を使用
 - ファイル名がURLスラッグになる
-- ヒーロー画像：`public/images/hero/`
+- ヒーロー画像：`src/assets/images/hero/`（astro:assets最適化対応）
 - 下書き記事：フロントマターで`draft: true`
 
 ## デプロイ
@@ -109,11 +122,14 @@ npx wrangler pages deploy ./dist
 - Astro画像コンポーネントによる画像最適化
 - スムーズなナビゲーション用View Transitions
 - **オーディオ機器レビュー専用reviewsコレクション**
+- **オーディオコラム専用columnsコレクション**
 - **PC/モバイル対応TOC（目次）機能**
 - **前後記事ナビゲーション**
 - **日本語フォント（Noto Sans JP）対応**
+- **複数コレクション対応の汎用コンポーネント設計**
+- **統合RSSフィード（reviews/columns/blog）**
 
-## 実装状況（2025-01-22現在）
+## 実装状況（2025-07-25現在）
 
 ### ✅ 完了済み
 - [x] astro-eruditeテンプレートベースの初期セットアップ
@@ -127,6 +143,12 @@ npx wrangler pages deploy ./dist
 - [x] プロジェクトドキュメント整備
 - [x] 画像管理用ディレクトリ構造の設定
 - [x] astro:assets画像最適化の実装（WebP自動変換）
+- [x] **columnsコレクション設計・実装（オーディオコラム機能）**
+- [x] **columns一覧ページ・詳細ページの作成**
+- [x] **メニューナビゲーションへのcolumns追加**
+- [x] **BlogCard.astroの汎用化（blog/reviews/columns対応）**
+- [x] **読書時間計算の修正（コレクション別対応）**
+- [x] **RSSフィードへのcolumns統合**
 
 ### 🔄 保留中
 - [ ] shadcn/uiコンポーネント追加（accordion, tabs等）
@@ -250,6 +272,42 @@ export async function getReviewTOCSections(reviewId: string): Promise<TOCSection
 - TodoWriteツールの活用で作業漏れを防止できる
 - 段階的確認と最終検証の両方が重要
 
+### 8. columnsコレクション追加時の読書時間計算問題（2025-07-25）
+**問題**: BlogCard.astroでcolumnsが常に「1 min read」と表示される
+**原因**: 
+- BlogCard.astroが`getCombinedReadingTime()`（blog専用）を使用
+- columns用の読書時間計算関数が存在しない
+- `readingTime(0)`が返されて最低値の「1 min read」が固定表示
+
+**解決策**:
+1. **コレクション別読書時間計算関数の実装**:
+   ```typescript
+   export async function getColumnReadingTime(columnId: string): Promise<string> {
+     const column = await getColumnById(columnId)
+     if (!column) return readingTime(0)
+     const wordCount = calculateWordCountFromHtml(column.body)
+     return readingTime(wordCount)
+   }
+   ```
+2. **BlogCard.astroの汎用化**:
+   ```typescript
+   // コレクション種別に応じた読書時間計算
+   let readTime: string
+   if (entry.collection === 'columns') {
+     readTime = await getColumnReadingTime(entry.id)
+   } else if (entry.collection === 'reviews') {
+     readTime = await getReviewReadingTime(entry.id)
+   } else {
+     readTime = await getCombinedReadingTime(entry.id)
+   }
+   ```
+3. **型定義の拡張**: `entry: CollectionEntry<'blog'> | CollectionEntry<'columns'> | CollectionEntry<'reviews'>`
+
+**教訓**:
+- 新しいコレクション追加時は既存コンポーネントの対応確認が必要
+- 型安全性とコレクション別処理を両立させる設計が重要
+- 汎用コンポーネントは段階的拡張を前提とした設計にすべき
+
 ## 詳細ファイル構造
 
 ```
@@ -264,23 +322,34 @@ src/
 │   │   ├── topping-d90se-review.mdx
 │   │   ├── kef-ls50-meta-review.mdx
 │   │   └── taikoaudio-olympus.mdx
+│   ├── columns/                    # オーディオコラム
+│   │   └── absorber-vs-diffuser.mdx
 │   ├── blog/                       # 既存ブログ記事
 │   ├── authors/                    # 著者情報
 │   └── content.config.ts           # 全コレクション定義
 ├── components/
-│   ├── ReviewsCard.astro          # reviews用カード（BlogCardベース）
+│   ├── BlogCard.astro             # 汎用カード（blog/reviews/columns対応）
 │   ├── ReviewsNavigation.astro    # reviews用前後ナビゲーション
+│   ├── ColumnsNavigation.astro    # columns用前後ナビゲーション
 │   ├── TOCSidebar.astro           # PC用TOC
 │   └── TOCHeader.astro            # モバイル用TOC
 ├── pages/
-│   └── reviews/
-│       ├── [...id].astro          # reviews詳細ページ
-│       └── [...page].astro        # reviews一覧ページ
+│   ├── reviews/
+│   │   ├── [...id].astro          # reviews詳細ページ
+│   │   └── [...page].astro        # reviews一覧ページ
+│   └── columns/
+│       ├── [...id].astro          # columns詳細ページ
+│       └── [...page].astro        # columns一覧ページ
 ├── lib/
 │   └── data-utils.ts
 │       ├── getAllReviews()        # reviews取得
-│       ├── getAdjacentReviews()   # 前後記事取得
-│       └── getReviewTOCSections() # reviews用TOC
+│       ├── getAllColumns()        # columns取得
+│       ├── getAdjacentReviews()   # 前後記事取得（reviews）
+│       ├── getAdjacentColumns()   # 前後記事取得（columns）
+│       ├── getReviewTOCSections() # reviews用TOC
+│       ├── getColumnTOCSections() # columns用TOC
+│       ├── getReviewReadingTime() # reviews読書時間
+│       └── getColumnReadingTime() # columns読書時間
 └── styles/
     └── global.css                 # Noto Sans JP設定
 ```
@@ -289,9 +358,9 @@ src/
 
 ### 機能拡張
 - [x] 画像管理の最適化（WebP変換実装済み、遅延読み込みは未実装）
+- [x] RSS feedにreviews/columns追加
 - [ ] 検索機能の実装
 - [ ] カテゴリ・タグページの充実
-- [ ] RSS feedにreviews追加
 - [ ] SEO最適化（構造化データ）
 
 ### コンテンツ
@@ -347,3 +416,22 @@ src/
   - 文字後: `[^#\[\]ref-][0-9]{1,2}[。、）]`
 - **作業管理**: TodoWriteツールによる段階的タスク管理が効果的
 - **品質保証**: 複数検索パターンでの最終検証が必須（36箇所のリンクと42個の引用文献の整合性確認）
+
+### 複数コレクション対応の設計パターン
+- **汎用コンポーネント設計**: BlogCard.astroのように、複数のコレクション型をUnion typeで受け入れる設計
+- **コレクション別処理の分岐**: `entry.collection`プロパティによる条件分岐で適切な処理を選択
+- **読書時間計算の標準化**: 200語/分基準で`calculateWordCountFromHtml()`→`readingTime()`の統一パターン
+- **画像フィールド正規化**: blogは`image`、reviews/columnsは`heroImage`の差異への対応
+- **著者情報の条件付き表示**: blogのみauthorsフィールドを持つ設計への対応
+- **ナビゲーション設計**: コレクション専用ナビゲーションコンポーネント（ReviewsNavigation/ColumnsNavigation）
+- **RSSフィード統合**: 全コレクションを日付順ソートで統一配信する設計
+
+### コンテンツ管理のベストプラクティス
+- **コレクション追加の標準手順**:
+  1. `content.config.ts`でスキーマ定義
+  2. data-utils.tsに専用関数群追加（get, getBy, getAdjacent, getTOC, getReadingTime）
+  3. pages/[collection]/[...page].astroで一覧ページ
+  4. pages/[collection]/[...id].astroで詳細ページ
+  5. 専用ナビゲーションコンポーネント作成
+  6. 既存汎用コンポーネントの対応確認・拡張
+  7. RSSフィード・メニューへの追加

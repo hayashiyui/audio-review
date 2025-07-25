@@ -1,0 +1,130 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import ColumnsNavigation from '@/components/ColumnsNavigation.astro'
+import PostHead from '@/components/PostHead.astro'
+import TOCHeader from '@/components/TOCHeader.astro'
+import TOCSidebar from '@/components/TOCSidebar.astro'
+import { badgeVariants } from '@/components/ui/badge'
+import Layout from '@/layouts/Layout.astro'
+import { getAdjacentColumns, getColumnTOCSections } from '@/lib/data-utils'
+import { formatDate } from '@/lib/utils'
+import { Icon } from 'astro-icon/components'
+import { Image } from 'astro:assets'
+import { getCollection, render } from 'astro:content'
+
+export async function getStaticPaths() {
+  const columns = await getCollection('columns', ({ data }) => !data.draft)
+  return columns.map((column) => ({
+    params: { id: column.id },
+    props: column,
+  }))
+}
+
+const column = Astro.props
+const currentColumnId = Astro.params.id
+const { Content, headings } = await render(column)
+
+const tocSections = await getColumnTOCSections(currentColumnId)
+const navigation = await getAdjacentColumns(currentColumnId)
+---
+
+<Layout>
+  <PostHead slot="head" post={column} />
+  {
+    headings?.length > 0 && (
+      <TOCHeader slot="table-of-contents" headings={headings} />
+    )
+  }
+
+  <section
+    class="grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6"
+  >
+    <div class="col-start-2">
+      <Breadcrumbs
+        items={[
+          { href: '/columns', label: 'オーディオコラム', icon: 'lucide:pen-tool' },
+          { href: `/columns/${column.id}`, label: column.data.title, icon: 'lucide:file-text' },
+        ]}
+      />
+    </div>
+
+    {
+      column.data.heroImage && (
+        <div class="col-span-full mx-auto w-full max-w-5xl">
+          <Image
+            src={column.data.heroImage}
+            alt={column.data.title}
+            class="w-full rounded-lg object-cover aspect-video"
+            width={1200}
+            height={675}
+          />
+        </div>
+      )
+    }
+
+    <section class="col-start-2 flex flex-col gap-y-6 text-center">
+      <div class="flex flex-col">
+        <h1
+          class="mb-2 scroll-mt-31 text-3xl leading-tight font-medium sm:text-4xl"
+          id="post-title"
+        >
+          {column.data.title}
+        </h1>
+
+        <div
+          class="text-muted-foreground divide-border mb-4 flex flex-col items-center justify-center divide-y text-xs sm:flex-row sm:flex-wrap sm:divide-x sm:divide-y-0 sm:text-sm"
+        >
+          <div
+            class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
+          >
+            <span>{formatDate(column.data.date)}</span>
+          </div>
+          
+          {column.data.category && (
+            <div
+              class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
+            >
+              <span>{column.data.category}</span>
+            </div>
+          )}
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-2">
+          {
+            column.data.tags &&
+              column.data.tags.length > 0 &&
+              column.data.tags.map((tag) => (
+                <a
+                  href={`/tags/${tag}`}
+                  class={badgeVariants({ variant: 'secondary' })}
+                >
+                  <Icon name="lucide:hash" class="size-3" />
+                  {tag}
+                </a>
+              ))
+          }
+        </div>
+      </div>
+
+      <ColumnsNavigation
+        newerPost={navigation.newer}
+        olderPost={navigation.older}
+      />
+    </section>
+
+    {
+      tocSections.length > 0 && (
+        <TOCSidebar sections={tocSections} currentPostId={currentColumnId} />
+      )
+    }
+
+    <article class="prose col-start-2 max-w-none">
+      <Content />
+    </article>
+
+    <ColumnsNavigation
+      newerPost={navigation.newer}
+      olderPost={navigation.older}
+    />
+  </section>
+</Layout>

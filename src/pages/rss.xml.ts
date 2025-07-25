@@ -1,14 +1,15 @@
 import { SITE } from '@/consts'
 import rss from '@astrojs/rss'
 import type { APIContext } from 'astro'
-import { getAllPosts, getAllReviews } from '@/lib/data-utils'
+import { getAllPosts, getAllReviews, getAllColumns } from '@/lib/data-utils'
 
 export async function GET(context: APIContext) {
   try {
     const posts = await getAllPosts()
     const reviews = await getAllReviews()
+    const columns = await getAllColumns()
 
-    // レビューとブログ記事を結合してソート
+    // レビュー、ブログ記事、コラムを結合してソート
     const allItems = [
       ...reviews.map((review) => ({
         title: review.data.title,
@@ -16,6 +17,13 @@ export async function GET(context: APIContext) {
         pubDate: review.data.date,
         link: `/reviews/${review.id}/`,
         categories: review.data.tags || [],
+      })),
+      ...columns.map((column) => ({
+        title: column.data.title,
+        description: column.data.description || `${column.data.category || 'オーディオ'}に関するコラム`,
+        pubDate: column.data.date,
+        link: `/columns/${column.id}/`,
+        categories: column.data.tags || [],
       })),
       ...posts.map((post) => ({
         title: post.data.title,

@@ -1,0 +1,61 @@
+---
+import Link from '@/components/Link.astro'
+import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import { Icon } from 'astro-icon/components'
+
+const { newerPost, olderPost } = Astro.props
+---
+
+<nav class={cn(
+  "col-start-2 grid gap-4",
+  olderPost && newerPost ? "grid-cols-2" : "grid-cols-1",
+  !olderPost && newerPost && "justify-end",
+  olderPost && !newerPost && "justify-start"
+)}>
+  {olderPost && (
+    <Link
+      href={`/columns/${olderPost.id}#post-title`}
+      class={cn(
+        buttonVariants({ variant: 'outline' }),
+        'rounded-lg group flex items-center justify-start size-full',
+      )}
+    >
+      <Icon
+        name="lucide:arrow-left"
+        class="mr-2 size-4 transition-transform group-hover:-translate-x-1"
+      />
+      <div class="flex flex-col items-start overflow-hidden text-wrap">
+        <span class="text-muted-foreground text-left text-xs">
+          Previous Column
+        </span>
+        <span class="w-full text-left text-sm text-balance text-ellipsis">
+          {olderPost.data.title}
+        </span>
+      </div>
+    </Link>
+  )}
+
+  {newerPost && (
+    <Link
+      href={`/columns/${newerPost.id}#post-title`}
+      class={cn(
+        buttonVariants({ variant: 'outline' }),
+        'rounded-lg group flex items-center justify-end size-full',
+      )}
+    >
+      <div class="flex flex-col items-end overflow-hidden text-wrap">
+        <span class="text-muted-foreground text-right text-xs">
+          Next Column
+        </span>
+        <span class="w-full text-right text-sm text-balance text-ellipsis">
+          {newerPost.data.title}
+        </span>
+      </div>
+      <Icon
+        name="lucide:arrow-right"
+        class="ml-2 size-4 transition-transform group-hover:translate-x-1"
+      />
+    </Link>
+  )}
+</nav>

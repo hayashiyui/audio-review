@@ -19,6 +19,13 @@ export async function getAllReviews(): Promise<CollectionEntry<'reviews'>[]> {
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 }
 
+export async function getAllColumns(): Promise<CollectionEntry<'columns'>[]> {
+  const columns = await getCollection('columns')
+  return columns
+    .filter((column) => !column.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+}
+
 export async function getAllPostsAndSubposts(): Promise<
   CollectionEntry<'blog'>[]
 > {
@@ -134,6 +141,13 @@ export async function getRecentReviews(
   return reviews.slice(0, count)
 }
 
+export async function getRecentColumns(
+  count: number,
+): Promise<CollectionEntry<'columns'>[]> {
+  const columns = await getAllColumns()
+  return columns.slice(0, count)
+}
+
 export async function getAllReviewTags(): Promise<Map<string, number>> {
   const reviews = await getAllReviews()
   return reviews.reduce((acc, review) => {
@@ -149,6 +163,23 @@ export async function getReviewsByTag(
 ): Promise<CollectionEntry<'reviews'>[]> {
   const reviews = await getAllReviews()
   return reviews.filter((review) => review.data.tags?.includes(tag))
+}
+
+export async function getAllColumnTags(): Promise<Map<string, number>> {
+  const columns = await getAllColumns()
+  return columns.reduce((acc, column) => {
+    column.data.tags?.forEach((tag) => {
+      acc.set(tag, (acc.get(tag) || 0) + 1)
+    })
+    return acc
+  }, new Map<string, number>())
+}
+
+export async function getColumnsByTag(
+  tag: string,
+): Promise<CollectionEntry<'columns'>[]> {
+  const columns = await getAllColumns()
+  return columns.filter((column) => column.data.tags?.includes(tag))
 }
 
 export async function getSortedTags(): Promise<
@@ -167,6 +198,18 @@ export async function getSortedReviewTags(): Promise<
   { tag: string; count: number }[]
 > {
   const tagCounts = await getAllReviewTags()
+  return [...tagCounts.entries()]
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => {
+      const countDiff = b.count - a.count
+      return countDiff !== 0 ? countDiff : a.tag.localeCompare(b.tag)
+    })
+}
+
+export async function getSortedColumnTags(): Promise<
+  { tag: string; count: number }[]
+> {
+  const tagCounts = await getAllColumnTags()
   return [...tagCounts.entries()]
     .map(([tag, count]) => ({ tag, count }))
     .sort((a, b) => {
@@ -220,6 +263,19 @@ export function groupReviewsByYear(
     (acc: Record<string, CollectionEntry<'reviews'>[]>, review) => {
       const year = review.data.date.getFullYear().toString()
       ;(acc[year] ??= []).push(review)
+      return acc
+    },
+    {},
+  )
+}
+
+export function groupColumnsByYear(
+  columns: CollectionEntry<'columns'>[],
+): Record<string, CollectionEntry<'columns'>[]> {
+  return columns.reduce(
+    (acc: Record<string, CollectionEntry<'columns'>[]>, column) => {
+      const year = column.data.date.getFullYear().toString()
+      ;(acc[year] ??= []).push(column)
       return acc
     },
     {},
@@ -393,4 +449,70 @@ export async function getAdjacentReviews(currentId: string): Promise<{
     newer: currentIndex > 0 ? allReviews[currentIndex - 1] : null,
     older: currentIndex < allReviews.length - 1 ? allReviews[currentIndex + 1] : null,
   }
+}
+
+export async function getAdjacentColumns(currentId: string): Promise<{
+  newer: CollectionEntry<'columns'> | null
+  older: CollectionEntry<'columns'> | null
+}> {
+  const allColumns = await getAllColumns()
+  const currentIndex = allColumns.findIndex((column) => column.id === currentId)
+
+  if (currentIndex === -1) {
+    return { newer: null, older: null }
+  }
+
+  return {
+    newer: currentIndex > 0 ? allColumns[currentIndex - 1] : null,
+    older: currentIndex < allColumns.length - 1 ? allColumns[currentIndex + 1] : null,
+  }
+}
+
+export async function getColumnTOCSections(columnId: string): Promise<TOCSection[]> {
+  const columns = await getCollection('columns')
+  const column = columns.find((c) => c.id === columnId)
+  if (!column) return []
+
+  const { headings } = await render(column)
+  if (headings.length === 0) return []
+
+  return [{
+    type: 'parent',
+    title: column.data.title,
+    headings: headings.map((heading) => ({
+      slug: heading.slug,
+      text: heading.text,
+      depth: heading.depth,
+    })),
+  }]
+}
+
+export async function getColumnById(
+  columnId: string,
+): Promise<CollectionEntry<'columns'> | null> {
+  const allColumns = await getAllColumns()
+  return allColumns.find((column) => column.id === columnId) || null
+}
+
+export async function getColumnReadingTime(columnId: string): Promise<string> {
+  const column = await getColumnById(columnId)
+  if (!column) return readingTime(0)
+
+  const wordCount = calculateWordCountFromHtml(column.body)
+  return readingTime(wordCount)
+}
+
+export async function getReviewById(
+  reviewId: string,
+): Promise<CollectionEntry<'reviews'> | null> {
+  const allReviews = await getAllReviews()
+  return allReviews.find((review) => review.id === reviewId) || null
+}
+
+export async function getReviewReadingTime(reviewId: string): Promise<string> {
+  const review = await getReviewById(reviewId)
+  if (!review) return readingTime(0)
+
+  const wordCount = calculateWordCountFromHtml(review.body)
+  return readingTime(wordCount)
 }

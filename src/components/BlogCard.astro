@@ -4,6 +4,8 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import {
   getCombinedReadingTime,
+  getColumnReadingTime,
+  getReviewReadingTime,
   getSubpostCount,
   isSubpost,
   parseAuthors,
@@ -15,14 +17,24 @@ import type { CollectionEntry } from 'astro:content'
 import Link from './Link.astro'
 
 interface Props {
-  entry: CollectionEntry<'blog'>
+  entry: CollectionEntry<'blog'> | CollectionEntry<'columns'> | CollectionEntry<'reviews'>
 }
 
 const { entry } = Astro.props
 const formattedDate = formatDate(entry.data.date)
-const readTime = await getCombinedReadingTime(entry.id)
-const authors = await parseAuthors(entry.data.authors ?? [])
-const subpostCount = !isSubpost(entry.id) ? await getSubpostCount(entry.id) : 0
+
+// コレクション種別に応じた読書時間計算
+let readTime: string
+if (entry.collection === 'columns') {
+  readTime = await getColumnReadingTime(entry.id)
+} else if (entry.collection === 'reviews') {
+  readTime = await getReviewReadingTime(entry.id)
+} else {
+  readTime = await getCombinedReadingTime(entry.id)
+}
+
+const authors = entry.collection === 'blog' ? await parseAuthors(entry.data.authors ?? []) : []
+const subpostCount = !isSubpost(entry.id) && entry.collection === 'blog' ? await getSubpostCount(entry.id) : 0
 ---
 
 <div
@@ -33,10 +45,11 @@ const subpostCount = !isSubpost(entry.id) ? await getSubpostCount(entry.id) : 0
     class="flex flex-col gap-4 sm:flex-row"
   >
     {
-      entry.data.image && (
+      ((entry.collection === 'blog' && entry.data.image) || 
+       ((entry.collection === 'columns' || entry.collection === 'reviews') && entry.data.heroImage)) && (
         <div class="max-w-3xs sm:shrink-0">
           <Image
-            src={entry.data.image}
+            src={entry.collection === 'blog' ? entry.data.image : entry.data.heroImage}
             alt={entry.data.title}
             width={1200}
             height={630}
