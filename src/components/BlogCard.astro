@@ -12,7 +12,7 @@ import {
 } from '@/lib/data-utils'
 import { formatDate } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
-import { Image } from 'astro:assets'
+import { Picture } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 import Link from './Link.astro'
 
@@ -48,11 +48,16 @@ const subpostCount = !isSubpost(entry.id) && entry.collection === 'blog' ? await
       ((entry.collection === 'blog' && entry.data.image) || 
        ((entry.collection === 'columns' || entry.collection === 'reviews') && entry.data.heroImage)) && (
         <div class="max-w-3xs sm:shrink-0">
-          <Image
+          <Picture
             src={entry.collection === 'blog' ? entry.data.image : entry.data.heroImage}
             alt={entry.data.title}
-            width={1200}
-            height={630}
+            width={300}
+            densities={[1.5, 2]}
+            formats={['avif', 'webp']}
+            sizes="(min-width: 640px) 300px, 90vw"
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
             class="object-cover"
           />
         </div>
