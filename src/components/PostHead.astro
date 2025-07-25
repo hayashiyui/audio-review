@@ -1,6 +1,6 @@
 ---
 import { SITE } from '@/consts'
-import { isSubpost } from '@/lib/data-utils'
+import { isSubpost, parseAuthors } from '@/lib/data-utils'
 import { generateBlogPostingSchema, generateReviewSchema, generateArticleSchema } from '@/lib/structured-data'
 import type { CollectionEntry } from 'astro:content'
 
@@ -20,7 +20,8 @@ const author = post.collection === 'blog' && post.data.authors && post.data.auth
 // コレクション別の構造化データを生成
 let structuredData: object | null = null
 if (post.collection === 'blog') {
-  structuredData = generateBlogPostingSchema(post as CollectionEntry<'blog'>)
+  const authors = await parseAuthors(post.data.authors ?? [])
+  structuredData = generateBlogPostingSchema(post as CollectionEntry<'blog'>, authors)
 } else if (post.collection === 'reviews') {
   structuredData = generateReviewSchema(post as CollectionEntry<'reviews'>)
 } else if (post.collection === 'columns') {

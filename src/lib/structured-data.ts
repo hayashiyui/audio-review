@@ -11,7 +11,15 @@ export function generateWebsiteSchema() {
     "name": SITE.title,
     "description": SITE.description,
     "url": SITE.href,
-    "inLanguage": SITE.locale
+    "inLanguage": SITE.locale,
+    "author": {
+      "@type": "Person",
+      "name": SITE.author
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": SITE.author
+    }
   }
 }
 
@@ -19,7 +27,8 @@ export function generateWebsiteSchema() {
  * ブログ記事の構造化データ（BlogPosting schema）を生成
  */
 export function generateBlogPostingSchema(
-  entry: CollectionEntry<'blog'>
+  entry: CollectionEntry<'blog'>,
+  authors: Array<{ name: string; avatar: string }>
 ) {
   const imageUrl = entry.data.image 
     ? `${SITE.href}${entry.data.image.src}`
@@ -33,6 +42,17 @@ export function generateBlogPostingSchema(
     "image": imageUrl,
     "datePublished": entry.data.date.toISOString(),
     "dateModified": entry.data.date.toISOString(),
+    "author": authors.length > 0 ? authors.map(author => ({
+      "@type": "Person",
+      "name": author.name
+    })) : {
+      "@type": "Person",
+      "name": SITE.author
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": SITE.author
+    },
     "url": new URL(`/blog/${entry.id}`, SITE.href).toString(),
     "mainEntityOfPage": {
       "@type": "WebPage",
@@ -62,6 +82,14 @@ export function generateReviewSchema(entry: CollectionEntry<'reviews'>) {
       "@type": "Rating",
       "ratingValue": "4",
       "bestRating": "5"
+    },
+    "author": {
+      "@type": "Person",
+      "name": SITE.author
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": SITE.author
     },
     "url": new URL(`/reviews/${entry.id}`, SITE.href).toString(),
     "itemReviewed": {
@@ -96,6 +124,14 @@ export function generateArticleSchema(entry: CollectionEntry<'columns'>) {
     "description": entry.data.description,
     "image": imageUrl,
     "datePublished": entry.data.date.toISOString(),
+    "author": {
+      "@type": "Person",
+      "name": SITE.author
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": SITE.author
+    },
     "url": new URL(`/columns/${entry.id}`, SITE.href).toString(),
     "articleSection": entry.data.category,
     "keywords": entry.data.tags?.join(', '),
