@@ -7,7 +7,7 @@ export const SITE: Site = {
   href: 'https://audiomatome.com',
   author: 'Neko',
   locale: 'ja-JP',
-  featuredPostCount: 2,
+  featuredPostCount: 20,
   postsPerPage: 20,
 }
 
