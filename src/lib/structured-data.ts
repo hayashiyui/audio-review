@@ -93,7 +93,7 @@ export function generateReviewSchema(entry: CollectionEntry<'reviews'>) {
     },
     "url": new URL(`/reviews/${entry.id}`, SITE.href).toString(),
     "itemReviewed": {
-      "@type": "Product",  
+      "@type": "Thing",  
       "name": productName,
       "brand": entry.data.brand ? {
         "@type": "Brand",
