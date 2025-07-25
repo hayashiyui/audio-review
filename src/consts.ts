@@ -4,7 +4,7 @@ export const SITE: Site = {
   title: 'Audio Review Blog',
   description:
     'オーディオ機器の専門レビューサイト。ヘッドホン、スピーカー、DAC、アンプの詳細レビューと試聴レポート。音質評価から価格比較まで、あなたの音楽体験を向上させる製品選びをサポートします。',
-  href: 'https://audio-review.pages.dev',
+  href: 'https://audiomatome.com',
   author: 'Audio Reviewer',
   locale: 'ja-JP',
   featuredPostCount: 2,
