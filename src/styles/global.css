@@ -100,14 +100,3 @@
     @apply border-border outline-ring/50 tracking-tight;
   }
 }
-
-/* View Transitionsのフェードアニメーションを無効化 */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none !important;
-  opacity: 1 !important;
-}
-
-::view-transition-group(root) {
-  animation-duration: 0s !important;
-}
