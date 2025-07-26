@@ -347,6 +347,44 @@ export async function getReviewTOCSections(reviewId: string): Promise<TOCSection
 - 読書速度は言語・ジャンル・想定読者層により大きく異なる
 - ユーザーテストによる実感値との照合が重要
 
+### 11. canonical link設定問題（2025-07-25）
+**問題**: Lighthouse SEO監査で「Document does not have a valid rel=canonical」警告が発生
+**原因**: 
+- PostHead.astroで全ページのcanonical linkがホームページ（`SITE.href`）を指していた
+- 各記事ページは自身のURLを指すべきなのに、間違った設定となっていた
+- SEO的に問題のある重複コンテンツの可能性を示唆
+
+**解決策**:
+1. **canonical linkの修正**:
+   ```astro
+   // 修正前（ホームページを指していた）
+   <link rel="canonical" href={SITE.href} />
+   
+   // 修正後（現在のページを指すように）
+   <link rel="canonical" href={Astro.url} />
+   ```
+2. **型定義の汎用化**:
+   ```typescript
+   // 修正前（blogのみ対応）
+   post: CollectionEntry<'blog'>
+   
+   // 修正後（全コレクション対応）
+   post: CollectionEntry<'blog'> | CollectionEntry<'reviews'> | CollectionEntry<'columns'>
+   ```
+
+**効果**:
+- **blog記事**: `/blog/記事名/` の正しいcanonical link
+- **reviews記事**: `/reviews/記事名/` の正しいcanonical link  
+- **columns記事**: `/columns/記事名/` の正しいcanonical link
+- Lighthouse SEO警告の解消
+- 検索エンジンへの正しいURL情報伝達
+
+**教訓**:
+- canonical linkは各ページが自身のURLを指すのが基本
+- SEOコンポーネントは全コレクション対応の汎用設計が重要
+- Lighthouseによる定期的なSEO監査の実施が有効
+- astro-eruditeテンプレートの初期設定も検証が必要
+
 ## 詳細ファイル構造
 
 ```
