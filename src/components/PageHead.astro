@@ -1,18 +1,39 @@
 ---
 import { SITE } from '@/consts'
+import { getImage } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+import defaultOgImage from '@/assets/images/default-og.png'
 
 interface Props {
   title?: string
   description?: string
   noindex?: boolean
+  image?: ImageMetadata
 }
 
 const {
   title = SITE.title,
   description = SITE.description,
   noindex = false,
+  image,
 } = Astro.props
-const image = new URL('/static/1200x630.png', Astro.site)
+
+// 最適化画像のURL取得
+let optimizedImageUrl: URL
+try {
+  const sourceImage = image || defaultOgImage
+  const optimizedImage = await getImage({
+    src: sourceImage,
+    width: 1200,
+    height: 630,
+    format: 'webp'
+  })
+  optimizedImageUrl = new URL(optimizedImage.src, Astro.site)
+} catch (error) {
+  console.warn('画像最適化に失敗しました:', error)
+  // フォールバック
+  optimizedImageUrl = new URL('/static/1200x630.png', Astro.site)
+}
 ---
 
 <title>{`${title} | ${SITE.title}`}</title>
@@ -22,7 +43,7 @@ const image = new URL('/static/1200x630.png', Astro.site)
 
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={image} />
+<meta property="og:image" content={optimizedImageUrl} />
 <meta property="og:image:alt" content={title} />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content={SITE.locale} />
@@ -31,6 +52,6 @@ const image = new URL('/static/1200x630.png', Astro.site)
 
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={image} />
+<meta name="twitter:image" content={optimizedImageUrl} />
 <meta name="twitter:image:alt" content={title} />
 <meta name="twitter:card" content="summary_large_image" />
