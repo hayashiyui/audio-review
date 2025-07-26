@@ -70,6 +70,7 @@ const reviews = defineCollection({
         'アクセサリ'
       ]).optional(),
       tags: z.array(z.string()).optional(),
+      authors: z.array(z.string()).optional(),
       heroImage: image().optional(),
       draft: z.boolean().optional().default(false),
     }),
@@ -92,6 +93,7 @@ const columns = defineCollection({
         'その他'
       ]).optional(),
       tags: z.array(z.string()).optional(),
+      authors: z.array(z.string()).optional(),
       heroImage: image().optional(),
       draft: z.boolean().optional().default(false),
     }),

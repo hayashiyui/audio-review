@@ -5,7 +5,7 @@ export const SITE: Site = {
   description:
     'オーディオ機器の専門レビューサイト。ヘッドホン、スピーカー、DAC、アンプの詳細レビュー。',
   href: 'https://audiomatome.com',
-  author: 'Neko',
+  author: '哲学的なNEKO',
   locale: 'ja-JP',
   featuredPostCount: 20,
   postsPerPage: 20,
