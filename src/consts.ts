@@ -3,7 +3,7 @@ import type { IconMap, SocialLink, Site } from '@/types'
 export const SITE: Site = {
   title: 'Audio Review Blog',
   description:
-    'オーディオ機器の専門レビューサイト。ヘッドホン、スピーカー、DAC、アンプの詳細レビュー。',
+    'スーパーハイエンドからエントリーまで。スピーカー、ヘッドホン、イヤホン、DAC、アンプ等オーディオ機器の忖度なき深層レビュー。そっとポエムを添えて',
   href: 'https://audiomatome.com',
   author: '哲学的なNEKO',
   locale: 'ja-JP',
