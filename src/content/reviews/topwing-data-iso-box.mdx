@@ -15,9 +15,9 @@ heroImage: "../../assets/images/hero/topwing-data-iso-box.jpg"
 
 現代のネットワークオーディオにおいて、最高の音質を追求する上で避けて通れない課題が「ネットワークノイズ」の存在である。このノイズは、単なる電気的な干渉に留まらない。むしろ、オーディオ再生に無関係なデータパケットの奔流と、それを処理するためにオーディオ機器内部で発生する負荷という、より複雑な性質を持つ。
 
-一般的な家庭内ネットワークは、PC、スマートフォン、IoT家電など多数のデバイスが常にユニキャスト、マルチキャスト、ブロードキャストといった形式で通信し合う、混沌とした環境である [13](#ref-13)。特にIoT機器が常時発する「呼びかけ（マルチキャスト）」や、ネットワーク全体に送信されるブロードキャストパケットは、時に「ブロードキャストストーム」と呼ばれる飽和状態を引き起こし、ノイズの多いデータ環境を生み出す [13](#ref-13)。
+一般的な家庭内ネットワークは、PC、スマートフォン、IoT家電など多数のデバイスが常にユニキャスト、マルチキャスト、ブロードキャストといった形式で通信し合う、混沌とした環境である。特にIoT機器が常時発する「呼びかけ（マルチキャスト）」や、ネットワーク全体に送信されるブロードキャストパケットは、時に「ブロードキャストストーム」と呼ばれる飽和状態を引き起こし、ノイズの多いデータ環境を生み出す。
 
-このネットワークに接続されたネットワークオーディオプレーヤー（ストリーマー）は、音楽データと共にこれらの膨大な不要パケットを受け取ることになる。プレーヤー内部のOSとCPUは、この不要なデータを能動的に処理し、破棄するという作業を絶えず強いられる[14](#ref-14)。このデータ処理活動こそが、音質劣化の根源的なメカニズムである。CPUへの負荷やメモリアクセスは、プレーヤーのデジタル回路内で微細な電流変動を引き起こす。この変動が、高周波の電気的ノイズとなり、DAC（デジタル-アナログ変換器）やアナログ出力段と共有されている繊細な電源供給やグラウンドプレーンを汚染してしまうのである [15](#ref-15)。
+このネットワークに接続されたネットワークオーディオプレーヤー（ストリーマー）は、音楽データと共にこれらの膨大な不要パケットを受け取ることになる。プレーヤー内部のOSとCPUは、この不要なデータを能動的に処理し、破棄するという作業を絶えず強いられる[14](#ref-14)。このデータ処理活動こそが、音質劣化の根源的なメカニズムである。CPUへの負荷やメモリアクセスは、プレーヤーのデジタル回路内で微細な電流変動を引き起こす。この変動が、高周波の電気的ノイズとなり、DAC（デジタル-アナログ変換器）やアナログ出力段と共有されている繊細な電源供給やグラウンドプレーンを汚染してしまうのである。
 
 したがって、音質劣化の主たる要因は、LANケーブルを伝わって侵入するノイズそのものよりも、むしろ「汚れた」ネットワークストリームを処理しようと奮闘するオーディオ機器自身が「内部で生成するノイズ」にある。ネットワークは単にノイズを運ぶだけでなく、オーディオ機器に自らノイズを生成させることを強いているのである。ネットワーク分離を施した機器のレビューで一貫して「背景が静かになる」「S/N比が向上する」と評価されるのは[22](#ref-22)、この内部生成ノイズが低減されることに起因する。不要なパケットがプレーヤーに到達するのを防ぐことで、CPUの処理負荷が劇的に軽減され、結果としてDACがその性能を最大限に発揮できる静かな内部環境が実現されるのだ。
 
@@ -33,13 +33,13 @@ heroImage: "../../assets/images/hero/topwing-data-iso-box.jpg"
 
 ### **2.1 DIYの探求：ITハードウェアへの活路**
 
-ネットワーク分離という概念がオーディオ専用製品として確立される以前、熱心なオーディオ愛好家たちは、YAMAHAのRTXシリーズやNVRシリーズに代表される高機能ルーターが、オーディオネットワークを純化するための強力なツールとなり得ることを発見した 17。
+ネットワーク分離という概念がオーディオ専用製品として確立される以前、熱心なオーディオ愛好家たちは、YAMAHAのRTXシリーズやNVRシリーズに代表される高機能ルーターが、オーディオネットワークを純化するための強力なツールとなり得ることを発見した。
 
 このDIYアプローチは、単一の手法ではなく、大きく分けて二つの潮流が存在した。一つは物理的なネットワーク階層を追加する「二重ルーター」構成、もう一つは単一のルーター内で論理的な壁を築く「ポート分離」や「VLAN」である。
 
 ### **2.2 手法1：二重ルーター構成（物理的分離）**
 
-最も直感的で理解しやすいのが、二重ルーター構成である 3。これは、既存の家庭用ルーター（親機）のLANポートから、オーディオ専用に用意した2台目のルーター（子機）のWANポートへ接続する手法だ。
+最も直感的で理解しやすいのが、二重ルーター構成である [3](#ref-3)。これは、既存の家庭用ルーター（親機）のLANポートから、オーディオ専用に用意した2台目のルーター（子機）のWANポートへ接続する手法だ。
 
 この構成により、オーディオ機器群（ネットワークプレーヤー、NASなど）は、子ルーターが作り出す完全に新しい、独立したネットワークセグメント（例：192.168.100.x）に所属することになる。一方、PCやスマートフォン、IoT家電などは親ルーターのネットワーク（例：192.168.1.x）に留まる。
 
@@ -115,7 +115,7 @@ DATA ISO BOXとそのエコシステムがもたらす音質改善効果は、�
 
 音色やリアリズムの面では、音がより「芯のある」「ソリッドな」ものになり 、有機的で生々しい質感が増す。レビューでは「模擬剣が真剣になった」といった比喩や 、「リアルすぎて鳥肌が立った」という表現が用いられるほど、その効果は音楽の根源的なリアリティに訴えかける 。
 
-ただし、注意点も指摘されている。一部のユーザーは、そのソリッドで色付けのないサウンドを、やや分析的あるいは聴き疲れするものと感じる可能性があり、好みに応じてケーブル類での調整が必要になるかもしれない 。また、最終的な音質は使用する電源に大きく左右され、付属のACアダプターはあくまで出発点であり、高品質なリニア電源などに交換することで真価が発揮されるとの意見が多い 3。
+ただし、注意点も指摘されている。一部のユーザーは、そのソリッドで色付けのないサウンドを、やや分析的あるいは聴き疲れするものと感じる可能性があり、好みに応じてケーブル類での調整が必要になるかもしれない 。また、最終的な音質は使用する電源に大きく左右され、付属のACアダプターはあくまで出発点であり、高品質なリニア電源などに交換することで真価が発揮されるとの意見がある [3](#ref-3)。
 
 ## **第IV部：比較分析と市場における位置付け**
 
@@ -191,25 +191,25 @@ TOP WINGの主張は理解可能であり、検証可能だ。Synergistic Resear
 
 #### **引用文献**
 
-<span id="ref-1">1</span>. ネットワークオーディオ向けにVLANを設定 | こいけいろぐ KoikeiLog \- FC2, 7月 27, 2025にアクセス、 [https://surf2koike.blog.fc2.com/blog-entry-416.html](https://surf2koike.blog.fc2.com/blog-entry-416.html)  
-<span id="ref-2">2</span>. NVR500（YAMAHA製ルータ）に050のIP電話（VoIP）を設定する方法 | デジタルな出来事, 7月 27, 2025にアクセス、 [https://www-blog.aobaclub.com/nvr500\_voip\_050](https://www-blog.aobaclub.com/nvr500_voip_050)  
-<span id="ref-3">3</span>. 『音質改善にチャレンジ』ネットワークオーディオ沼入門（二重 ..., 7月 27, 2025にアクセス、 [https://audiocolumn.com/netaudio/11077/](https://audiocolumn.com/netaudio/11077/)  
-<span id="ref-4">4</span>. OPT ISO BOX を色々と試してみた感想③電源の変更&まとめ, 7月 27, 2025にアクセス、 [https://ameblo.jp/t-tahoe-t/entry-12880402919.html](https://ameblo.jp/t-tahoe-t/entry-12880402919.html)  
-<span id="ref-5">5</span>. Synergistic Research Ethernet Switch \- Positive Feedback, 7月 27, 2025にアクセス、 [https://positive-feedback.com/reviews/hardware-reviews/synergistic-research-ethernet-switch-uef/](https://positive-feedback.com/reviews/hardware-reviews/synergistic-research-ethernet-switch-uef/)  
-<span id="ref-6">6</span>. Extreme Router and DC Power Distributor User Feedback – Taiko ..., 7月 27, 2025にアクセス、 [https://taikoaudio.com/taiko-2020/news/extreme-router-and-dc-power-distributor-user-feedback/](https://taikoaudio.com/taiko-2020/news/extreme-router-and-dc-power-distributor-user-feedback/)  
-<span id="ref-7">7</span>. 新製品情報 TAIKO AUDIOのEXTREME ROUTERとDC POWER DISTRIBUTORが凄い！常設展示も決定！！, 7月 27, 2025にアクセス、 [https://sisaudio.blogspot.com/2024/04/taiko-audioextreme-routerdc-power.html](https://sisaudio.blogspot.com/2024/04/taiko-audioextreme-routerdc-power.html)  
-<span id="ref-8">8</span>. ルーター「DATA ISO BOX」＋アクセスポイント「OPT-AP」セット | トップウィング \- ジョーシン, 7月 27, 2025にアクセス、 [https://joshinweb.jp/av/309/4589631464956.html](https://joshinweb.jp/av/309/4589631464956.html)  
-<span id="ref-9">9</span>. ネットワーク・アタッチト・レシーバー(NAR) 〜ネットワークオーディオにおけるセパレート化 \- Sonore, 7月 27, 2025にアクセス、 [https://sonore-audio.jp/Network\_Attached\_Receiver.html](https://sonore-audio.jp/Network_Attached_Receiver.html)  
-<span id="ref-10">10</span>. 「今までの音はなんだったんだ」39600円の“光アイソレーション”「TOP WING OPT ISO BOX」を試す, 7月 27, 2025にアクセス、 [https://av.watch.impress.co.jp/docs/review/review/1655377.html](https://av.watch.impress.co.jp/docs/review/review/1655377.html)  
-<span id="ref-11">11</span>. ネット・オーディオ対応！ ピュアオーディオを超えるセパレート, 7月 27, 2025にアクセス、 [http://www.ippinkan.co.jp/airbow/product/pdf/AV-MM7005.pdf](http://www.ippinkan.co.jp/airbow/product/pdf/AV-MM7005.pdf)  
-<span id="ref-12">12</span>. 【中古】YAMAHA ギガアクセスVPNルーター RTX810, 7月 27, 2025にアクセス、 [https://nwkoubou.jp/SHOP/RTX810.html](https://nwkoubou.jp/SHOP/RTX810.html)  
-<span id="ref-13">13</span>. 「VLAN無しのスイッチによるルーティング」（1） Master of IP Network \- ITmedia, 7月 27, 2025にアクセス、 [https://atmarkit.itmedia.co.jp/bbs/phpBB/viewtopic.php?topic=19739\&forum=11](https://atmarkit.itmedia.co.jp/bbs/phpBB/viewtopic.php?topic=19739&forum=11)  
-<span id="ref-14">14</span>. オーディオルーター【二重ルーター】音質評価（１）バッファロー製でオーディオ専用セグメント化, 7月 27, 2025にアクセス、 [https://ameblo.jp/hirano2828/entry-12885228074.html](https://ameblo.jp/hirano2828/entry-12885228074.html)  
-<span id="ref-15">15</span>. 部門ごとに社内ネットワークを構成する(LAN1ポートをポート別に分ける) \- ヤマハネットワーク製品, 7月 27, 2025にアクセス、 [https://network.yamaha.com/setting/router\_firewall/security/lan\_side/divide\_network-rtx1200](https://network.yamaha.com/setting/router_firewall/security/lan_side/divide_network-rtx1200)  
-<span id="ref-16">16</span>. Yamaha RTX ルータのポート分離(Private VLAN)設定例 ..., 7月 27, 2025にアクセス、 [https://changineer.info/network/yamaha\_router\_rtx/yamaha\_router\_rtx\_vlan\_private\_example.html](https://changineer.info/network/yamaha_router_rtx/yamaha_router_rtx_vlan_private_example.html)  
-<span id="ref-17">17</span>. ヤマハ NVR510 レビュー評価・評判 \- 価格.com, 7月 27, 2025にアクセス、 [https://review.kakaku.com/review/K0000880251/](https://review.kakaku.com/review/K0000880251/)  
-<span id="ref-18">18</span>. 無線機能ポートセパレート \- NTT東日本 Web116.jp, 7月 27, 2025にアクセス、 [https://web116.jp/shop/hikari\_r/guide/600ki/7-a-l/m01\_m42.html](https://web116.jp/shop/hikari_r/guide/600ki/7-a-l/m01_m42.html)  
-<span id="ref-19">19</span>. ポート分離機能 \- RTpro, 7月 27, 2025にアクセス、 [https://www.rtpro.yamaha.co.jp/RT/docs/port-split/index.html](https://www.rtpro.yamaha.co.jp/RT/docs/port-split/index.html)  
-<span id="ref-20">20</span>. NVR700W NVR510 \- ヤマハネットワーク製品, 7月 27, 2025にアクセス、 [https://network.yamaha.com/support/download/catalog/nvr700w\_nvr510.pdf](https://network.yamaha.com/support/download/catalog/nvr700w_nvr510.pdf)  
-<span id="ref-21">21</span>. RTX810 特長 \- ヤマハネットワーク製品 \- Yamaha Corporation, 7月 27, 2025にアクセス、 [https://network.yamaha.com/products/routers/rtx810](https://network.yamaha.com/products/routers/rtx810)  
-<span id="ref-22">22</span>. ルーターによるネットワークオーディオ向けセグメント分離の効果 ..., 7月 27, 2025にアクセス、 [https://surf2koike.blog.fc2.com/blog-entry-423.html](https://surf2koike.blog.fc2.com/blog-entry-423.html)
+<span id="ref-1">1</span>. ネットワークオーディオ向けにVLANを設定 | こいけいろぐ KoikeiLog \- FC2, [https://surf2koike.blog.fc2.com/blog-entry-416.html](https://surf2koike.blog.fc2.com/blog-entry-416.html)  
+<span id="ref-2">2</span>. NVR500（YAMAHA製ルータ）に050のIP電話（VoIP）を設定する方法 | デジタルな出来事, [https://www-blog.aobaclub.com/nvr500\_voip\_050](https://www-blog.aobaclub.com/nvr500_voip_050)  
+<span id="ref-3">3</span>. 『音質改善にチャレンジ』ネットワークオーディオ沼入門（二重 ..., [https://audiocolumn.com/netaudio/11077/](https://audiocolumn.com/netaudio/11077/)  
+<span id="ref-4">4</span>. OPT ISO BOX を色々と試してみた感想③電源の変更&まとめ, [https://ameblo.jp/t-tahoe-t/entry-12880402919.html](https://ameblo.jp/t-tahoe-t/entry-12880402919.html)  
+<span id="ref-5">5</span>. Synergistic Research Ethernet Switch \- Positive Feedback, [https://positive-feedback.com/reviews/hardware-reviews/synergistic-research-ethernet-switch-uef/](https://positive-feedback.com/reviews/hardware-reviews/synergistic-research-ethernet-switch-uef/)  
+<span id="ref-6">6</span>. Extreme Router and DC Power Distributor User Feedback – Taiko ..., [https://taikoaudio.com/taiko-2020/news/extreme-router-and-dc-power-distributor-user-feedback/](https://taikoaudio.com/taiko-2020/news/extreme-router-and-dc-power-distributor-user-feedback/)  
+<span id="ref-7">7</span>. 新製品情報 TAIKO AUDIOのEXTREME ROUTERとDC POWER DISTRIBUTORが凄い！常設展示も決定！！, [https://sisaudio.blogspot.com/2024/04/taiko-audioextreme-routerdc-power.html](https://sisaudio.blogspot.com/2024/04/taiko-audioextreme-routerdc-power.html)  
+<span id="ref-8">8</span>. ルーター「DATA ISO BOX」＋アクセスポイント「OPT-AP」セット | トップウィング \- ジョーシン, [https://joshinweb.jp/av/309/4589631464956.html](https://joshinweb.jp/av/309/4589631464956.html)  
+<span id="ref-9">9</span>. ネットワーク・アタッチト・レシーバー(NAR) 〜ネットワークオーディオにおけるセパレート化 \- Sonore, [https://sonore-audio.jp/Network\_Attached\_Receiver.html](https://sonore-audio.jp/Network_Attached_Receiver.html)  
+<span id="ref-10">10</span>. 「今までの音はなんだったんだ」39600円の“光アイソレーション”「TOP WING OPT ISO BOX」を試す, [https://av.watch.impress.co.jp/docs/review/review/1655377.html](https://av.watch.impress.co.jp/docs/review/review/1655377.html)  
+<span id="ref-11">11</span>. ネット・オーディオ対応！ ピュアオーディオを超えるセパレート, [http://www.ippinkan.co.jp/airbow/product/pdf/AV-MM7005.pdf](http://www.ippinkan.co.jp/airbow/product/pdf/AV-MM7005.pdf)  
+<span id="ref-12">12</span>. 【中古】YAMAHA ギガアクセスVPNルーター RTX810, [https://nwkoubou.jp/SHOP/RTX810.html](https://nwkoubou.jp/SHOP/RTX810.html)  
+<span id="ref-13">13</span>. 「VLAN無しのスイッチによるルーティング」（1） Master of IP Network \- ITmedia, [https://atmarkit.itmedia.co.jp/bbs/phpBB/viewtopic.php?topic=19739\&forum=11](https://atmarkit.itmedia.co.jp/bbs/phpBB/viewtopic.php?topic=19739&forum=11)  
+<span id="ref-14">14</span>. オーディオルーター【二重ルーター】音質評価（１）バッファロー製でオーディオ専用セグメント化, [https://ameblo.jp/hirano2828/entry-12885228074.html](https://ameblo.jp/hirano2828/entry-12885228074.html)  
+<span id="ref-15">15</span>. 部門ごとに社内ネットワークを構成する(LAN1ポートをポート別に分ける) \- ヤマハネットワーク製品, [https://network.yamaha.com/setting/router\_firewall/security/lan\_side/divide\_network-rtx1200](https://network.yamaha.com/setting/router_firewall/security/lan_side/divide_network-rtx1200)  
+<span id="ref-16">16</span>. Yamaha RTX ルータのポート分離(Private VLAN)設定例 ..., [https://changineer.info/network/yamaha\_router\_rtx/yamaha\_router\_rtx\_vlan\_private\_example.html](https://changineer.info/network/yamaha_router_rtx/yamaha_router_rtx_vlan_private_example.html)  
+<span id="ref-17">17</span>. ヤマハ NVR510 レビュー評価・評判 \- 価格.com, [https://review.kakaku.com/review/K0000880251/](https://review.kakaku.com/review/K0000880251/)  
+<span id="ref-18">18</span>. 無線機能ポートセパレート \- NTT東日本 Web116.jp, [https://web116.jp/shop/hikari\_r/guide/600ki/7-a-l/m01\_m42.html](https://web116.jp/shop/hikari_r/guide/600ki/7-a-l/m01_m42.html)  
+<span id="ref-19">19</span>. ポート分離機能 \- RTpro, [https://www.rtpro.yamaha.co.jp/RT/docs/port-split/index.html](https://www.rtpro.yamaha.co.jp/RT/docs/port-split/index.html)  
+<span id="ref-20">20</span>. NVR700W NVR510 \- ヤマハネットワーク製品, [https://network.yamaha.com/support/download/catalog/nvr700w\_nvr510.pdf](https://network.yamaha.com/support/download/catalog/nvr700w_nvr510.pdf)  
+<span id="ref-21">21</span>. RTX810 特長 \- ヤマハネットワーク製品 \- Yamaha Corporation, [https://network.yamaha.com/products/routers/rtx810](https://network.yamaha.com/products/routers/rtx810)  
+<span id="ref-22">22</span>. ルーターによるネットワークオーディオ向けセグメント分離の効果 ..., [https://surf2koike.blog.fc2.com/blog-entry-423.html](https://surf2koike.blog.fc2.com/blog-entry-423.html)
