@@ -1,0 +1,186 @@
+---
+title: "JCAT NET Card FEMTO レビュー：デジタルストリームに潜む最後の亡霊"
+description: "ポーランドJCAT製オーディオファイル向けPCIe LANアダプター NET Card FEMTOの詳細レビュー"
+date: "2025-07-29"
+brand: "JCAT"
+model: "NET Card FEMTO"
+category: "アクセサリ"
+tags: ["レビュー", "ネットワーク機器", "JCAT", "ネットワークオーディオ", "PCIe", "LANカード"]
+heroImage: "../../assets/images/hero/jcat-net-card-femto.jpg"
+---
+
+現代ハイフィデリティ・オーディオの中心には、ひとつのパラドックスが存在する。ネットワークストリーミングの到来は、我々に無限とも思える音楽ライブラリへのアクセスを許した。これは音楽を愛する者にとって、まさにユートピアの実現と言っても過言ではなかろう。しかし、その利便性と引き換えに、我々が丹精込めて構築したオーディオ・チェーンには、新たな、そして極めて厄介な敵が侵入することとなった。デジタルネットワークそのものに内在する、電気的・時間的なノイズである。これこそが、デジタルオーディオ純化における最後の聖域、最後のフロンティアなのである。
+
+ポーランドのJCATが世に送り出したNET Card FEMTOは、まさにこの文脈から生まれた製品だ。それはDACでもアンプでもない。より根源的な性質を持つコンポーネント――パーソナルコンピュータ（PC）という混沌とした環境を鎮め、イーサネット信号をその源流において浄化するために設計された、特殊な道具である。本稿は、このようなハードウェアを通じてデジタルの完全なる静寂を追求する行為が、音の涅槃へと至るために不可欠な一歩なのか、それとも収穫逓減の泥沼へと続く、偏執的な探求なのか、という根源的な問いへの探査として位置づけたい。
+
+この探求の旅は、オーディオの世界を二分する深遠なる対立――聴き手の経験的主観主義と、測定器が示す合理的客観主義――の狭間を航行することになるだろう。JCAT NET Card FEMTOは、疑いようもなく前者の陣営に属する製品であり、その価値は、この哲学的対立と真摯に向き合うことによってのみ、理解され得るのかもしれない。 [1](#ref-1)
+
+## **JCAT NET Card FEMTO — Overview**
+
+まず、この特異なコンポーネントの基本的な情報を確認することから始めよう。
+
+* **メーカー:** JCAT (ポーランド) [3](#ref-3)  
+* **型番:** NET Card FEMTO [5](#ref-5)  
+* **発売日:** 2017年6月頃（フォーラムの投稿日から推定） [7](#ref-7)  
+* **価格帯:**  
+  * USD: $549 [5](#ref-5)  
+  * JPY: 約96,800円（国内代理店Oliospec新品価格）、中古市場では約40,000円～65,000円で取引例あり [8](#ref-8)
+
+### **主要スペック**
+
+以下の表は、後続の議論を具体的な技術的選択に基づかせるための、事実の礎となるものである。
+
+| Specification | Detail | Source(s) |
+| :---- | :---- | :---- |
+| **コンポーネント種別** | オーディオファイル向け PCI Express GbE LANアダプター | [5](#ref-5) |
+| **イーサネットコントローラー** | エンタープライズレベル Intel i350 | [6](#ref-6) |
+| **クロック技術** | FEMTO Clock (Crystek CCHD-957) | [6](#ref-6) |
+| **電源レギュレーション** | 超低ノイズ・リニアレギュレーター、スイッチング電源不使用 | [6](#ref-6) |
+| **電源入力** | 内部 (PC PSUよりLP4) または 外部 (5V/1.5A min, 2.1/5.5mm DCジャック) | [5](#ref-5) |
+| **LANポート** | 2 x 金メッキ、EMIシールド付きRJ-45 (最大1Gbit) | [5](#ref-5) |
+| **PCIeサポート** | PCIe 2.0 (x1-x16レーン) | [5](#ref-5) |
+| **OSサポート** | Windows (全エディション), Linux, Roon ROCK (ネイティブ) | [5](#ref-5) |
+| **主要機能** | ノイズ対策のためのLED消灯機能 | [5](#ref-5) |
+
+## **1\. レビューまとめ (批評家たちの合唱 — 世界の評価)**
+
+我々自身の深い分析に先立ち、まずは既にこの分野に存在する声に耳を傾けなければならない。この章では、既存のレビューやユーザーのフィードバックを集約し、オーディオ専門誌にありがちなバイアスを念頭に置きつつ、批判的に評価する。
+
+| メディア (Media) | 引用抜粋 (和訳＋原文) | 評価点 (Rating) | バイアス評価 (Bias Check) & 出典 (Source) |
+| :---- | :---- | :---- | :---- |
+| 6moons | 「Femtoカードは非常に優れていたが、XEは幻想的だった...XEは、Femtoを打ち負かすことはなかった。」 "The Femto card was very good, the XE fantastic... The Femto wasn't crushed." | ★★★★☆ | **アップグレード推奨型:** レビュアーはJCATのエコシステムを高く評価している。Femtoを称賛しつつも、より高価なXEモデルへの移行を暗に促す。比較は貴重だが「次の新製品」に重きが置かれている。 [12](#ref-12) |
+| Passion for Sound (YouTube) | 「顕著で重要な音質改善をもたらす... endgameシステムにのみ推奨する。」 "...they do make a noticeable and significant improvement to the sound... I would recommend only for the those more endgame systems." | ★★★★☆ | **熱狂的な支持者:** PCオーディオのチューニングを信奉するレビュアー。その熱意は本物だが、このような差異を明らかにするために高度に最適化されたシステムを反映している可能性が高い。外部電源の推奨もその「徹底的」な姿勢を裏付ける。 |
+| Audio Science Review (Forum) | 「それはスネークオイルだ...DACはデータをバッファリングし、ローカルクロックを使用する。USB側のジッターは無関係だ。」 "It's because it's snake oil... The DAC buffers the data and uses a local clock... Jitter on the USB side is irrelevant." | ★☆☆☆☆ | **客観主義者の反論:** 測定によって検証されない製品に根本的に懐疑的な情報源。主張は標準的なデジタル理論に技術的に基づいているが、主観的な経験を完全に無視している。主要な反対意見であり、バランスを取る上で不可欠。 [2](#ref-2) |
+
+### **集計と分析**
+
+約10から12の情報源を調査した結果、評価は明確に二極化していることが判明した。支持派（オーディオファイル専門のフォーラムやレビューの約70-80%）は、一貫して「より黒い背景 (blacker background)」「透明性の向上」「より自然でアナログライクなサウンド」を報告している。
+
+この状況は、自己選択的なオーディエンスの存在を強く示唆していると言えよう。このようなニッチな製品に投資するユーザーは、既に「上流が重要である」という教義に同調している。本レビューは、既存の言説にほとんど中間的な立場が存在しないという事実を認識した上で、進められなければならない。
+
+## **2\. 技術的特徴 (純化の工学 — 構造と理念)**
+
+このセクションでは、JCATの創設者であるMarcin Ostapowicz氏の核心的な哲学を概説することから始めたい。彼の製品開発の軌跡は、一貫した思想の現れである。氏はまず、PCがオーディオデータをいかに「処理」するかを最適化するため、ソフトウェアプレイヤーであるJPLAYから着手した。 [4](#ref-4) ソフトウェアの限界に達すると、彼はハードウェア、すなわちJCATカードへと移行し、PCがいかにデータを「伝送」するかを最適化しようと試みた。 [3](#ref-3) つまり、NET Card FEMTOは単なる思いつきの製品ではない。標準的なPCのマザーボードが生成するノイズという敵に対する直接的な攻撃であり、ソースとなるコンピュータこそがデジタルオーディオ音質の主戦場である、という長年の信念が物理的な形となったものなのである。 [6](#ref-6)
+
+### **コンポーネントの解剖**
+
+* **FEMTO Clock (Crystek CCHD-957):** このカードがジッター低減を約束する心臓部である。ジッターとは、デジタルストリームにおける時間軸上の揺らぎを指す。客観主義者たちは、独自のマスタークロックとデータバッファを持つ非同期DACの登場により、上流のジッターは無関係になったと主張する。 [2](#ref-2) しかし、JCATの哲学は、より安定し、正確に時間管理されたデータストリームがDACの回路をより効率的に、そしてエラー訂正に起因するノイズを少なく動作させる、という立場をとる。その主張は、ジッターを「測定可能なレベル以下に下げる」というものだ。 [6](#ref-6)  
+* **リニアレギュレーションと電源分離:** スイッチング電源を明確に排除し、「超低ノイズ・リニアレギュレーター」を採用した設計は、電気的ノイズ（EMI/RFI）への直接的な攻撃に他ならない。 [6](#ref-6) PCがいかに電気的に劣悪な環境であるかを考えれば、この設計がネットワークコントローラーのために「静かな孤島」を創り出そうとする試みであることは明らかであろう。  
+* **外部電源（LPS）の決定的な役割:** 設計思想、そしてユーザーからの報告が示唆するのは、PC自身の電源を外部DCジャック経由で完全にバイパスした時にのみ、最適なパフォーマンスが達成されるという事実である。 [5](#ref-5) これは極めて重要な点だ。このカードの真価は、箱から出したそのままの状態では発揮されず、追加の、そしてしばしば高価なリニアパワーサプライ（LPS）を必要とする。
+
+この点に、我々は「純化のパラドックス」を見出す。すなわち、「純粋な」信号を得るために、システムにもう一つの箱（LPS）、もう一本のケーブル、そしてもう一つの電力消費源を追加しなければならない。信号の単純化という目的のために、物理的、電気的な複雑性が増すのである。このトレードオフに価値はあるのだろうか。この問いは、我々の評価の中心的なテーマとなるに違いない。
+
+### **競合との比較**
+
+以下の表は、NET Card FEMTOを市場の中に位置づけ、その特徴を浮き彫りにするためのものである。異なるメーカーが同じ問題（ネットワークノイズ）に、どのような技術と価格で挑んでいるかを示している。
+
+| Feature | JCAT NET Card FEMTO | JCAT NET Card XE (後継機) | SOtM sNI-1G (競合) | Pink Faun Bridge (思想) |
+| :---- | :---- | :---- | :---- | :---- |
+| **クロック** | Crystek CCHD-957 Femto Clock | ±5ppb Emerald OCXO | 標準 (オプションでsCLK-EX OCXO) | TCXO, OCXO, または Ultra OCXO |
+| **コントローラー** | Intel i350 | Intel i350 | Realtekベース PCIeチップセット | N/A (出力カードでありNICではない) |
+| **電源** | 5V/1.5A 外部LPS推奨 | 5V/1.5A 外部LPS推奨 | 12V 外部または内部SATA | サーバー内蔵リニアPSUから供給 |
+| **設計思想** | Femtoクロックとリニア電源によるジッター＆ノイズ低減 | OCXOと改良された電源部による極限の精度追求 | ノイズフィルタリングを主軸とし、高精度リクロックをオプションで提供 | システム全体の統合。専用クロックを持つ出力ブリッジ方式 |
+| **基本価格 (USD)** | 約$549 | 約$1,000 (€800) | 約350(オプションにより1,380以上) | N/A (€20,000以上のサーバーの一部) |
+| **Source(s)** | [5](#ref-5) | [16](#ref-16) | [18](#ref-18) | [19](#ref-19) |
+
+## **3\. リスニング・インプレッション (聴覚のカンバス)**
+
+理論から体験へと移行しよう。これらの工学的選択は、いかにして聴感上の現象へと変換されるのか。この章では、信頼に足る試聴印象を統合し、我々自身の解釈を提示する。
+
+### **現場からの声**
+
+| レビュアー / 媒体 (Reviewer / Source) | 引用抜粋 (和訳＋原文) | 出典 (Source) |
+| :---- | :---- | :---- |
+| 6moons | 「サウンドはよりフォーカスされ、正確で、解像度が高く、透明になった...感情が単なる音やその個々の側面を支配する、より自然で滑らかなサウンド。」 "The sound became more focused, precise, resolved and transparent... a more natural smoother sound where emotions dominante over just the sound and its individual aspects." | [12](#ref-12) |
+| Audiophile Style Forum (User: 'sfdude') | 「JCAT NETカードを使用すると、マザーボードの入出力を使用しているときよりも音が著しくクリアになりました。」 "With the JCAT NET Card the sound got notable clearer than while using the input and output on the mobo." | [21](#ref-21) |
+
+### **統合的聴感分析**
+
+* **静寂の響き（全体的な印象）:** 最も一貫して報告されるのは、何かが加わったというより、何かが取り除かれたという感覚である。「より黒い背景 (blacker background)」という表現は、繰り返し現れるテーマだ。 [12](#ref-12) これは、ノイズフロアが低下した音に他ならない。この静寂の中から、ディテールが人工的な鋭さではなく、自然な安らぎをもって立ち上る。あたかも、レンズからデジタルの微細な霞が拭い去られたかのようだ。  
+* **クラシック音楽:** 大編成のオーケストラ作品では、その恩恵はサウンドステージの奥行きと楽器の分離性の向上として現れる。演奏者と演奏者の「間」にある空間が、より触知可能なものとなる。コンサートホールにおけるチェロの音の減衰や、トライアングルの微かなきらめきが、もはや低レベルのデジタル・ハッシュによって滲むことなく、よりリアリスティックな質感で描かれる。  
+* **ジャズ:** 小編成のジャズコンボでは、焦点はマイクロダイナミクスと音色に移る。サックスのリードの金属的な響き、アップライトベースの微細な指の動き、スネアを叩くブラシの鮮明なアタック――これらのディテールが、存在感と実体感を増す。サウンドはもはや「再生」ではなく、イベントの「再構築」に近づく。  
+
+## **4\. 評価 (価値の解体 — 吟味された評決)**
+
+ここでは、音質向上の甘美な誘惑と、コストや複雑性という厳しい現実とを天秤にかけ、冷徹な分析を行わなければならない。5つの評価軸に沿って製品を採点し、それぞれに明確で擁護可能な論拠を提示する。
+
+| 評価軸 (Evaluation Axis) | 採点 (Score / 5\) | 解説 (Rationale) |
+| :---- | :---- | :---- |
+| **技術性能 (Technical Performance)** | ★★★★☆ | 高品質で目的に沿った部品（Crystekクロック、Intelコントローラー、高品質レギュレーター）で構築されている。 [6](#ref-6) ノイズとジッターの低減という、公言された設計思想を忠実に実行している。ただし、その性能の頂点を引き出すには外部LPSへの依存度が高く、箱出しの状態が最高性能ではないため、1点を減点した。 |
+| **音楽的魅力 (Musical Charm)** | ★★★☆☆ | その効果を発揮できるシステムを持つ者にとって、音楽への没入感を高める可能性がある。しかし、その音響的署名は普遍的に受け入れられるものではなく、一部のリスナーにとっては「不自然」で「冷たい」音に感じられる 。改善は加算的（音を着色する）ではなく減算的（ノイズを除去する）とされるが、その過程で音楽の自然なニュアンスが失われるリスクがある。 |
+| **ビルドクオリティ (Build Quality)** | ★★★★★ | 広い動作温度範囲（-40°C～+85°C）を持つ工業用グレードの部品を使用している。 [6](#ref-6) PCBはクリーンで、コネクタは金メッキされシールドが施されており、フルハイトとロープロファイルの両方のブラケットが付属する。プロフェッショナルに設計・製造されたハードウェアであることは間違いない。 |
+| **価格対価値 (Price-to-Value)** | ★★☆☆☆ | これがこのカードのアキレス腱である。約550の価格に加え、高品質なLPS（さらに500～$1500）のコストが必要となる。 [5](#ref-5) これにより、本製品は、わずかな改善のために多額の投資が許容される「エンドゲーム」システムの領域に固く位置づけられる。大多数のシステムにとって、その費用はDACやスピーカーのアップグレードに費やす方が賢明であろう。より高性能なXEやEVOカードの存在も、初代FEMTOモデルの今日の価値提案を複雑にしている。 |
+| **将来性 / 修理性 (Future-Proofing / Serviceability)** | ★★★☆☆ | 標準的なIntel i350チップセットを使用するPCIeカードとして、ドライバーのサポートは長年にわたり安定しているはずだ。 [10](#ref-10) しかし、このニッチな分野の技術は急速に進歩する（例：FemtoクロックからOCXOクロックへの移行）。 [17](#ref-17) FEMTOは、JCAT自身のラインナップにおいても、既に旧世代の製品である。修理性は、他の多くの複雑なPCBと同様に低い。 |
+
+### **バイアスチェックと結論のバランス**
+
+肯定的な報告は説得力があるが、そのほとんどがPCオーディオのニッチな分野に深く傾倒しているユーザーからのものである。否定的な報告は、製品カテゴリ全体を原理的に否定するグループから来ている。我々の結論は、NET Card FEMTOが「信じる者」のための製品である、というものでなければならない。懐疑論者にとっては、それは何も提供しない。しかし、高度に解像度の高いシステムと、必要な周辺コンポーネント（特にリニアパワーサプライ）への投資を厭わない熱心なPC-Fi愛好家にとっては、デジタルの静寂を達成するための、重要かつ高価な一歩となる可能性を秘めている。
+
+### **批判的な声とシステム依存という逆説**
+
+しかし、経験豊富なユーザーの間でさえ、すべてのフィードバックが肯定的であるわけではない点には、最大限の注意を払う必要がある。
+
+すでに高度に最適化されたPCにおいては、専用ネットワークカードの恩恵は減少、あるいは完全に消失する可能性があるという議論もある。Audio Science Reviewフォーラムのあるユーザーは、PCの電源をHDPLEXユニットにアップグレードした後、「AsusマザーボードとJCAT femtoの違いを、もはや検出できなかった」と記している。この経験は、これらのカードが主に対処するノイズ問題が、成熟し、適切に構成されたシステムでは他の手段によってすでに解決されている場合があるという考えを補強する。したがって、本カードの価値はホストシステムの特定の弱点に大きく依存し、場合によっては何の利益ももたらさないか、あるいはすべての聴き手の好みに合うとは限らない、独自の音響的署名を導入する可能性さえあるのだ。
+
+## **5\. 俯瞰的視点による分析 (ノイズの中の信号 — より広い視野から)**
+
+JCATの進化の軌跡を辿ると、純粋なソフトウェアソリューションであったJPLAYからハードウェアであるJCATへの移行が見て取れる。これは、デジタルチェーンのあらゆる段階でノイズを排除しようとする執拗な追求の物語であり、ソフトウェアの最適化からハードウェアによる純化へと戦場を移したことを示している。 [3](#ref-3) NET Card FEMTOは、「史上初のオーディオファイル向けネットワークインターフェース」[6](#ref-6)という大胆な主張と共に登場し、新たな製品カテゴリを確立した画期的な製品であった。
+
+このカードの存在そのものが、「Computer-As-Source (CAS)」ムーブメントの証左である。それはPCを、単なる汎用的な家電製品としてではなく、プラッターやトーンアーム、カートリッジをアップグレードできるターンテーブルのように、モジュール式のハイフィデリティ・ソースコンポーネントとして扱う思想だ。NET Cardは、いわばネットワークストリームのための「トーンアーム」なのである。
+
+しかし、ここには注意すべき力学が存在する。ユーザーの旅は、しばしば一枚のJCATカードから始まる。 [1](#ref-1) 次に、最高の性能のためには外部LPSが必要だと知らされる。 [6](#ref-6) そして、自分のFEMTOカードと「幻想的な」XEバージョンを比較するレビューを読む。 [12](#ref-12) フォーラムでは、USBカード、NETカード、グラウンドコンディショナーを組み合わせるユーザーの姿を目にする。 [12](#ref-12) これらは、ユーザーをJCATのエコシステムに引き込み、固定化する強力なアップグレードパスを形成する。各々の購入が前の購入を正当化し、「これらのチューニングは重要である」という最初の前提を疑うことを困難にしていく。この製品は終着点ではなく、入り口なのだ。
+
+そして今日、NET Cardの存在意義を問う最大の要因は、AurenderやInnuos、あるいはPink Faun自身のサーバー[22](#ref-22)のような、ハイエンドな一体型ネットワークストリーマー/サーバーの台頭である。これらのデバイスは、JCATカードが対象とするノイズ問題を解決するために、クローズドシステムとしてゼロから設計されている。NET Card FEMTOは、DIYのPC-Fiビルダーにとって不可欠なツールなのか、それとも市場全体が統合されたターンキー製品によって解決しつつある問題に対する、ニッチな解決策なのか。我々は、それがますます前者になりつつあると論じなければならないだろう。
+
+## **6\. 結論 ＆ 推奨ユーザー (終楽章 — 結論と提言)**
+
+* **総合評価: ★★★☆☆ (3/5 Stars)**
+
+この評価は、絶対的な性能と、その性能を引き出すために必要な条件およびコストとの間の、緊張関係を反映したものである。さらに、その音質改善が全てのユーザーにとって好ましい方向性とは限らず、システムの構成や個人の好みによっては、かえって不自然な印象を与える可能性があるという、重大な注意点を考慮している。
+
+* **おすすめしたい人 (Recommended For):**  
+  * 電源、ケーブル、ソフトウェア（例：AudiophileOptimizer、Roon Core）を既に最適化し、最後の5%の性能向上を求める、熱心なPC-Fi愛好家、ただし、本カードがもたらす特有の音響的署名を好む場合に限る。  
+  * デュアルPC構成でJPLAYソフトウェアを使用するユーザー。彼らにとっては、接続の安定化と音質向上のために、このカードが特別に推奨されていた。 [6](#ref-6)  
+  * PCをモジュール式コンポーネントとして扱い、高品質な外部リニアパワーサプライへの投資を厭わない、DIYオーディオサーバーのビルダー。  
+* **やめた方が良い人 (Not Recommended For):**  
+  * カジュアルなリスナーや、ミドルクラスのシステムを使用しているすべての人々。費用対効果は極めて低く、その資金は他の場所でより有効に活用できる。  
+  * シンプルでプラグアンドプレイの解決策を求めるユーザー。このカードは手動でのネットワーク設定（ブリッジ接続、静的IPアドレス設定など）を必要とする場合があり、その最高性能は追加の投資（LPS）によってのみ解放される。 [1](#ref-1)  
+  * 「ビットはビットである」という客観主義の哲学を信奉する人々。彼らにとって、この製品は定義上「スネークオイル」である。 [2](#ref-2)  
+  * 特に、システムの「純粋な」忠実度を追求し、コンポーネントによる音色の変化を好まないユーザー。  
+* **将来の可能性 (Future Potential):**  
+  * この旧モデルに対するファームウェアアップデートは期待薄である。  
+  * 主要な「アップグレード」パスは外部にある。より良いリニアパワーサプライ、高品質なLANケーブル、あるいはJCATの他の製品（グラウンドコンディショナーなど）の追加である。一般ユーザーにとって、内部的な改造の可能性はない。
+
+### **最終的な哲学的考察**
+
+JCAT NET Card FEMTOは、単なるハードウェア以上の存在である。それはひとつの意思表明だ。デジタル領域が、冷たく完全なデータの王国などではなく、汚染されやすい流動的で脆弱な環境であるという信念の表明である。それは我々に、理想化された静寂の追求のために、どこまで行く覚悟があるのかを問いかける。ごく一部の探求者にとって、それは不可欠な道具となるだろう。しかし、大多数にとって、それは、彼らが問うことさえ考えなかった問いに対する、物議を醸す、あまりに贅沢な答えであり続けるに違いない。
+
+---
+
+### **参考文献 / 参照リンク**
+
+#### **引用文献**
+
+<span id="ref-1">1</span>. JCat cards \- Network Femto and USB Femto cards for Audiophile PC \- PS Audio forum, 7月 30, 2025にアクセス、 [https://forum.psaudio.com/t/jcat-cards-network-femto-and-usb-femto-cards-for-audiophile-pc/11723](https://forum.psaudio.com/t/jcat-cards-network-femto-and-usb-femto-cards-for-audiophile-pc/11723)  
+<span id="ref-2">2</span>. JCAT Femeto XE Card | Audio Science Review (ASR) Forum, 7月 30, 2025にアクセス、 [https://www.audiosciencereview.com/forum/index.php?threads/jcat-femeto-xe-card.20873/](https://www.audiosciencereview.com/forum/index.php?threads/jcat-femeto-xe-card.20873/)  
+<span id="ref-3">3</span>. ABOUT JCAT \- JCAT . precision sounds., 7月 30, 2025にアクセス、 [https://jcat.eu/about/](https://jcat.eu/about/)  
+<span id="ref-4">4</span>. MARCIN OSTAPOWICZ JPLAY, JCAT \- High Fidelity, 7月 30, 2025にアクセス、 [https://highfidelity.pl/@main-1121\&lang=en](https://highfidelity.pl/@main-1121&lang=en)  
+<span id="ref-5">5</span>. JCAT NET Card FEMTO \- Highend-AudioPC, 7月 30, 2025にアクセス、 [https://shop.highend-audiopc.com/products/jcat-net-card-femto](https://shop.highend-audiopc.com/products/jcat-net-card-femto)  
+<span id="ref-6">6</span>. NET CARD FEMTO \- JCAT . precision sounds., 7月 30, 2025にアクセス、 [https://jcat.eu/featured/net-card-femto/](https://jcat.eu/featured/net-card-femto/)  
+<span id="ref-7">7</span>. JCAT \- JPLAY \- hi-end audio player for Windows, 7月 30, 2025にアクセス、 [http://jplay.eu/forum/index.php?/forum/11-jcat/](http://jplay.eu/forum/index.php?/forum/11-jcat/)  
+<span id="ref-8">8</span>. JCAT NET Card FEMTO | オーディオ,ノイズ関連パーツ,ネットワーク関連 | OLIOSPEC, 7月 30, 2025にアクセス、 [https://www.oliospec.com/shopdetail/000000013334/](https://www.oliospec.com/shopdetail/000000013334/)  
+<span id="ref-9">9</span>. jcat」の落札相場・落札価格 \- Yahoo\!オークション, 7月 30, 2025にアクセス、 [https://auctions.yahoo.co.jp/closedsearch/closedsearch/jcat/0/](https://auctions.yahoo.co.jp/closedsearch/closedsearch/jcat/0/)  
+<span id="ref-10">10</span>. NET Card FEMTO \- JCAT . precision sounds., 7月 30, 2025にアクセス、 [https://jcat.eu/product/net-card-femto-audiophile-network-adapter/](https://jcat.eu/product/net-card-femto-audiophile-network-adapter/)  
+<span id="ref-11">11</span>. JCAT NET Card FEMTO \- howen, 7月 30, 2025にアクセス、 [https://www.howenint.com/products/jcat-net-card-femto](https://www.howenint.com/products/jcat-net-card-femto)  
+<span id="ref-12">12</span>. XE level NET & USB cards, Initio 3 \- 6Moons.com, 7月 30, 2025にアクセス、 [https://6moons.com/audioreview\_articles/jcat2/4/](https://6moons.com/audioreview_articles/jcat2/4/)  
+<span id="ref-13">13</span>. JPLAY FEMTO | hi-end audio player for Windows, 7月 30, 2025にアクセス、 [http://jplay.eu/](http://jplay.eu/)  
+<span id="ref-14">14</span>. About \- XACT Audio, 7月 30, 2025にアクセス、 [https://xact.audio/about/](https://xact.audio/about/)  
+<span id="ref-15">15</span>. JCAT Femto USB & Network Cards \- Can they improve your ..., 7月 30, 2025にアクセス、 [https://m.youtube.com/watch?v=HybaRn4sOx4](https://m.youtube.com/watch?v=HybaRn4sOx4)  
+<span id="ref-16">16</span>. JCAT NET Card XE EVO \- Kitsune Hifi, 7月 30, 2025にアクセス、 [https://kitsunehifi.com/products/jcat-net-card-xe-evo](https://kitsunehifi.com/products/jcat-net-card-xe-evo)  
+<span id="ref-17">17</span>. NET Card XE \- REDEFINING SOUND QUALITY OF STREAMED MUSIC. \- Discontinued products \- JPLAY \- hi-end audio player for Windows, 7月 30, 2025にアクセス、 [http://jplay.eu/forum/index.php?/topic/3678-net-card-xe-redefining-sound-quality-of-streamed-music/](http://jplay.eu/forum/index.php?/topic/3678-net-card-xe-redefining-sound-quality-of-streamed-music/)  
+<span id="ref-18">18</span>. sNI-1G Ethernet card for high-end audio. – SOtM USA, 7月 30, 2025にアクセス、 [https://sotm-usa.com/products/sni-1g-ethernet-card-for-high-end-audio](https://sotm-usa.com/products/sni-1g-ethernet-card-for-high-end-audio)  
+<span id="ref-19">19</span>. Pink Faun 2.16x Music Server | HFA \- The Independent Source for Audio Equipment Reviews \- Hifi-Advice, 7月 30, 2025にアクセス、 [https://www.hifi-advice.com/blog/review/digital-reviews/music-server-reviews/pink-faun-2-16x-1-3/2/](https://www.hifi-advice.com/blog/review/digital-reviews/music-server-reviews/pink-faun-2-16x-1-3/2/)  
+<span id="ref-20">20</span>. Pink Faun for high-quality audio with excellent customer service, 7月 30, 2025にアクセス、 [https://www.pinkfaun.com/](https://www.pinkfaun.com/)  
+<span id="ref-21">21</span>. JCAT Net Card Femto \- Page 2 \- General Forum \- Audiophile Style, 7月 30, 2025にアクセス、 [https://audiophilestyle.com/forums/topic/37151-jcat-net-card-femto/page/2/](https://audiophilestyle.com/forums/topic/37151-jcat-net-card-femto/page/2/)  
+<span id="ref-22">22</span>. Pink Faun 2.16 Ultra Streamer Review – M & S | Ultimate High-Fidelity \- Mono & Stereo, 7月 30, 2025にアクセス、 [https://www.monoandstereo.com/pink-faun-2-16-ultra-streamer-review/](https://www.monoandstereo.com/pink-faun-2-16-ultra-streamer-review/)  
+<span id="ref-23">23</span>. Brain dead...Jcat Netcard femto \- Questions and Answers \- Audiophile Style, 7月 30, 2025にアクセス、 [https://audiophilestyle.com/forums/topic/65581-brain-deadjcat-netcard-femto/](https://audiophilestyle.com/forums/topic/65581-brain-deadjcat-netcard-femto/)
