@@ -32,14 +32,14 @@ const formattedDate = formatDate(entry.data.date)
             <Picture
               src={entry.data.heroImage}
               alt={entry.data.title}
-              width={48}
+              width={85}
               height={48}
               densities={[1.5, 2]}
               formats={['avif', 'webp']}
-              sizes="48px"
+              sizes="85px"
               loading="lazy"
               decoding="async"
-              class="w-12 h-12 rounded object-cover hover:opacity-80 transition-opacity"
+              class="h-12 aspect-video rounded object-cover hover:opacity-80 transition-opacity"
             />
           </Link>
         )
