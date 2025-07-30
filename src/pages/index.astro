@@ -8,19 +8,21 @@ import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
 import { getRecentReviews, getRecentColumns } from '@/lib/data-utils'
 
-const reviews = await getRecentReviews(SITE.featuredPostCount)
-const columns = await getRecentColumns(1)
+const reviews = await getRecentReviews(6) // PC向けグリッド表示に合わせて6件表示
+const columns = await getRecentColumns(3) // グリッド表示で3件表示
 ---
 
-<Layout class="max-w-3xl">
+<Layout class="max-w-6xl ml-2">
   <PageHead slot="head" title="Home" />
   {
     columns.length > 0 && (
       <section class="flex flex-col gap-y-4">
-        <Link href="/columns" class="no-underline">
-          <h2 class="text-2xl font-medium hover:text-foreground/80 transition-colors cursor-pointer">Latest Column</h2>
-        </Link>
-        <ul class="flex flex-col gap-y-4">
+        <div class="w-full text-left">
+          <Link href="/columns" class="no-underline">
+            <h2 class="text-lg font-medium hover:text-foreground/80 transition-colors cursor-pointer">Latest Columns</h2>
+          </Link>
+        </div>
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {
             columns.map((column) => (
               <li>
@@ -44,10 +46,12 @@ const columns = await getRecentColumns(1)
     )
   }
   <section class="flex flex-col gap-y-4">
-    <Link href="/reviews" class="no-underline">
-      <h2 class="text-2xl font-medium hover:text-foreground/80 transition-colors cursor-pointer">Latest Reviews</h2>
-    </Link>
-    <ul class="flex flex-col gap-y-4">
+    <div class="w-full text-left">
+      <Link href="/reviews" class="no-underline">
+        <h2 class="text-lg font-medium hover:text-foreground/80 transition-colors cursor-pointer">Latest Reviews</h2>
+      </Link>
+    </div>
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {
         reviews.map((review) => (
           <li>

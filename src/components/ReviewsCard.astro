@@ -82,18 +82,19 @@ const formattedDate = formatDate(entry.data.date)
     </div>
   </div>
 
-  <!-- PC用レイアウト（従来通り） -->
-  <div class="hidden sm:flex sm:flex-col sm:gap-4 lg:flex-row">
+  <!-- PC用レイアウト（グリッド対応縦型） -->
+  <div class="hidden sm:flex sm:flex-col sm:gap-3">
     {
       entry.data.heroImage && (
-        <Link href={`/reviews/${entry.id}`} class="max-w-3xs mx-auto sm:mx-0 sm:shrink-0">
+        <Link href={`/reviews/${entry.id}`} class="block">
           <Picture
             src={entry.data.heroImage}
             alt={entry.data.title}
-            width={300}
+            width={400}
+            height={225}
             densities={[1.5, 2]}
             formats={['avif', 'webp']}
-            sizes="(min-width: 640px) 300px, 90vw"
+            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
             loading="lazy"
             decoding="async"
             class="w-full rounded-lg object-cover aspect-video hover:opacity-80 transition-opacity"
