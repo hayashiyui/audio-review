@@ -17,7 +17,9 @@ const columns = await getRecentColumns(1)
   {
     columns.length > 0 && (
       <section class="flex flex-col gap-y-4">
-        <h2 class="text-2xl font-medium">Latest Column</h2>
+        <Link href="/columns" class="no-underline">
+          <h2 class="text-2xl font-medium hover:text-foreground/80 transition-colors cursor-pointer">Latest Column</h2>
+        </Link>
         <ul class="flex flex-col gap-y-4">
           {
             columns.map((column) => (
@@ -42,7 +44,9 @@ const columns = await getRecentColumns(1)
     )
   }
   <section class="flex flex-col gap-y-4">
-    <h2 class="text-2xl font-medium">Latest Reviews</h2>
+    <Link href="/reviews" class="no-underline">
+      <h2 class="text-2xl font-medium hover:text-foreground/80 transition-colors cursor-pointer">Latest Reviews</h2>
+    </Link>
     <ul class="flex flex-col gap-y-4">
       {
         reviews.map((review) => (
