@@ -26,7 +26,7 @@ export async function getStaticPaths() {
 const { tag, reviews } = Astro.props
 ---
 
-<Layout class="max-w-3xl">
+<Layout class="max-w-6xl ml-2">
   <PageHead
     slot="head"
     title={`Reviews tagged with "${tag}"`}
@@ -40,7 +40,7 @@ const { tag, reviews } = Astro.props
     ]}
   />
 
-  <ul class="flex flex-col gap-y-4">
+  <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     {
       reviews.map((review) => (
         <li>

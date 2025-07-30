@@ -23,7 +23,7 @@ const reviewsByYear = groupReviewsByYear(page.data)
 const years = Object.keys(reviewsByYear).sort((a, b) => parseInt(b) - parseInt(a))
 ---
 
-<Layout class="max-w-3xl">
+<Layout class="max-w-6xl ml-2">
   <PageHead slot="head" title="オーディオ機器レビュー" />
   <Breadcrumbs
     items={[
@@ -37,7 +37,7 @@ const years = Object.keys(reviewsByYear).sort((a, b) => parseInt(b) - parseInt(a
       years.map((year) => (
         <section class="flex flex-col gap-y-4">
           <div class="font-medium">{year}</div>
-          <ul class="flex flex-col gap-4">
+          <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {reviewsByYear[year].map((review) => (
               <li>
                 <ReviewsCard entry={review} />
