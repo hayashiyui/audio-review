@@ -8,7 +8,7 @@ import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
 import { getRecentReviews, getRecentColumns } from '@/lib/data-utils'
 
-const reviews = await getRecentReviews(6) // PC向けグリッド表示に合わせて6件表示
+const reviews = await getRecentReviews(18) // PC向けグリッド表示で18件表示（3列×6行）
 const columns = await getRecentColumns(3) // グリッド表示で3件表示
 ---
 
