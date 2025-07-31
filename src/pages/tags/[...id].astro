@@ -1,36 +1,37 @@
 ---
+import BlogCard from '@/components/BlogCard.astro'
 import ReviewsCard from '@/components/ReviewsCard.astro'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
-import { getAllReviewTags, getReviewsByTag } from '@/lib/data-utils'
+import { getAllCombinedTags, getEntriesByTag } from '@/lib/data-utils'
 
 export async function getStaticPaths() {
-  const tagMap = await getAllReviewTags()
+  const tagMap = await getAllCombinedTags()
   const uniqueTags = Array.from(tagMap.keys())
 
   return Promise.all(
     uniqueTags.map(async (tag) => {
-      const reviews = await getReviewsByTag(tag)
+      const entries = await getEntriesByTag(tag)
       return {
         params: { id: tag },
         props: {
           tag,
-          reviews,
+          entries,
         },
       }
     }),
   )
 }
 
-const { tag, reviews } = Astro.props
+const { tag, entries } = Astro.props
 ---
 
 <Layout class="max-w-6xl ml-2">
   <PageHead
     slot="head"
-    title={`Reviews tagged with "${tag}"`}
-    description={`A collection of reviews tagged with ${tag}.`}
+    title={`Posts tagged with "${tag}"`}
+    description={`A collection of posts tagged with ${tag}.`}
     noindex
   />
   <Breadcrumbs
@@ -40,13 +41,45 @@ const { tag, reviews } = Astro.props
     ]}
   />
 
-  <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    {
-      reviews.map((review) => (
-        <li>
-          <ReviewsCard entry={review} />
-        </li>
-      ))
-    }
-  </ul>
+  {/* Columns セクション */}
+  {entries.columns.length > 0 && (
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">Columns ({entries.columns.length})</h2>
+      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {entries.columns.map((column) => (
+          <li>
+            <BlogCard entry={column} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {/* Reviews セクション */}
+  {entries.reviews.length > 0 && (
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">Reviews ({entries.reviews.length})</h2>
+      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {entries.reviews.map((review) => (
+          <li>
+            <ReviewsCard entry={review} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {/* Blog セクション */}
+  {entries.blogs.length > 0 && (
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">Blog ({entries.blogs.length})</h2>
+      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {entries.blogs.map((blog) => (
+          <li>
+            <BlogCard entry={blog} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
 </Layout>

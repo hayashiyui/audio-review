@@ -516,3 +516,73 @@ export async function getReviewReadingTime(reviewId: string): Promise<string> {
   const charCount = calculateCharCountFromHtml(review.body)
   return readingTime(charCount)
 }
+
+// Blog用タグ関数
+export async function getAllBlogTags(): Promise<Map<string, number>> {
+  const blogs = await getCollection('blog')
+  return blogs.reduce((acc, blog) => {
+    blog.data.tags?.forEach((tag) => {
+      acc.set(tag, (acc.get(tag) || 0) + 1)
+    })
+    return acc
+  }, new Map<string, number>())
+}
+
+export async function getBlogsByTag(
+  tag: string,
+): Promise<CollectionEntry<'blog'>[]> {
+  const blogs = await getCollection('blog')
+  return blogs.filter(blog => blog.data.tags?.includes(tag))
+}
+
+// 全コレクション統合タグ関数
+export async function getAllCombinedTags(): Promise<Map<string, number>> {
+  const [blogTags, reviewTags, columnTags] = await Promise.all([
+    getAllBlogTags(),
+    getAllReviewTags(),
+    getAllColumnTags(),
+  ])
+
+  const combinedTags = new Map<string, number>()
+
+  // 各コレクションのタグを統合
+  for (const [tag, count] of blogTags) {
+    combinedTags.set(tag, (combinedTags.get(tag) || 0) + count)
+  }
+  for (const [tag, count] of reviewTags) {
+    combinedTags.set(tag, (combinedTags.get(tag) || 0) + count)
+  }
+  for (const [tag, count] of columnTags) {
+    combinedTags.set(tag, (combinedTags.get(tag) || 0) + count)
+  }
+
+  return combinedTags
+}
+
+export async function getEntriesByTag(
+  tag: string,
+): Promise<{
+  blogs: CollectionEntry<'blog'>[]
+  reviews: CollectionEntry<'reviews'>[]
+  columns: CollectionEntry<'columns'>[]
+}> {
+  const [blogs, reviews, columns] = await Promise.all([
+    getBlogsByTag(tag),
+    getReviewsByTag(tag),
+    getColumnsByTag(tag),
+  ])
+
+  return { blogs, reviews, columns }
+}
+
+export async function getSortedAllTags(): Promise<
+  { tag: string; count: number }[]
+> {
+  const tagCounts = await getAllCombinedTags()
+  return [...tagCounts.entries()]
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => {
+      const countDiff = b.count - a.count
+      return countDiff !== 0 ? countDiff : a.tag.localeCompare(b.tag)
+    })
+}

@@ -111,14 +111,11 @@ const subpostCount = !isSubpost(entry.id) && entry.collection === 'blog' ? await
   </div>
 
   <!-- PC用レイアウト（従来通り） -->
-  <Link
-    href={`/${entry.collection}/${entry.id}`}
-    class="hidden sm:flex sm:flex-col sm:gap-4 lg:flex-row"
-  >
+  <div class="hidden sm:flex sm:flex-col sm:gap-4 lg:flex-row">
     {
       ((entry.collection === 'blog' && entry.data.image) || 
        ((entry.collection === 'columns' || entry.collection === 'reviews') && entry.data.heroImage)) && (
-        <div class="max-w-3xs sm:shrink-0">
+        <Link href={`/${entry.collection}/${entry.id}`} class="max-w-3xs sm:shrink-0">
           <Picture
             src={entry.collection === 'blog' ? entry.data.image! : entry.data.heroImage!}
             alt={entry.data.title}
@@ -128,14 +125,16 @@ const subpostCount = !isSubpost(entry.id) && entry.collection === 'blog' ? await
             sizes="(min-width: 640px) 300px, 90vw"
             loading="lazy"
             decoding="async"
-            class="object-cover"
+            class="object-cover hover:opacity-80 transition-opacity"
           />
-        </div>
+        </Link>
       )
     }
 
     <div class="grow">
-      <h3 class="mb-1 text-lg font-medium">{entry.data.title}</h3>
+      <Link href={`/${entry.collection}/${entry.id}`} class="block no-underline hover:underline">
+        <h3 class="mb-1 text-lg font-medium">{entry.data.title}</h3>
+      </Link>
       <p class="text-muted-foreground mb-2 text-sm">{entry.data.description}</p>
 
       <div
@@ -180,14 +179,16 @@ const subpostCount = !isSubpost(entry.id) && entry.collection === 'blog' ? await
         entry.data.tags && (
           <div class="flex flex-wrap gap-2">
             {entry.data.tags.map((tag) => (
-              <Badge variant="secondary" className="flex items-center gap-x-1">
-                <Icon name="lucide:hash" class="size-3" />
-                {tag}
-              </Badge>
+              <Link href={`/tags/${tag}`} class="no-underline">
+                <Badge variant="secondary" className="flex items-center gap-x-1 hover:bg-secondary/80 transition-colors">
+                  <Icon name="lucide:hash" class="size-3" />
+                  {tag}
+                </Badge>
+              </Link>
             ))}
           </div>
         )
       }
     </div>
-  </Link>
+  </div>
 </div>
