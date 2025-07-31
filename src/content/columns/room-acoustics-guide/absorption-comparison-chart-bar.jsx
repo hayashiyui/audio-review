@@ -1,4 +1,4 @@
-import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend, ResponsiveContainer } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 
 const AbsorptionComparisonChart = () => {
   const data = [
@@ -48,16 +48,17 @@ const AbsorptionComparisonChart = () => {
 
   return (
     <ResponsiveContainer width="100%" height={400}>
-      <RadarChart data={data}>
-        <PolarGrid />
-        <PolarAngleAxis dataKey="frequency" />
-        <PolarRadiusAxis angle={90} domain={[0, 1]} />
-        <Radar name="グラスウール5cm" dataKey="グラスウール5cm" stroke="#4285f4" fill="#4285f4" fillOpacity={0.1} strokeWidth={3} />
-        <Radar name="グラスウール10cm" dataKey="グラスウール10cm" stroke="#34a853" fill="#34a853" fillOpacity={0.1} strokeWidth={3} />
-        <Radar name="スーパーチャンク" dataKey="スーパーチャンク" stroke="#ffc658" fill="#ffc658" fillOpacity={0.1} strokeWidth={3} />
-        <Radar name="薄いカーテン" dataKey="薄いカーテン" stroke="#ff7c7c" fill="#ff7c7c" fillOpacity={0.1} strokeWidth={3} />
+      <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="frequency" />
+        <YAxis label={{ value: '吸音率', angle: -90, position: 'insideLeft' }} domain={[0, 1]} />
+        <Tooltip formatter={(value) => `${(value * 100).toFixed(0)}%`} />
         <Legend />
-      </RadarChart>
+        <Bar dataKey="グラスウール5cm" fill="#4285f4" name="グラスウール5cm" />
+        <Bar dataKey="グラスウール10cm" fill="#34a853" name="グラスウール10cm" />
+        <Bar dataKey="スーパーチャンク" fill="#ffc658" name="スーパーチャンク" />
+        <Bar dataKey="薄いカーテン" fill="#ff7c7c" name="薄いカーテン" />
+      </BarChart>
     </ResponsiveContainer>
   )
 }

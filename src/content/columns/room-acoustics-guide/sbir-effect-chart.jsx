@@ -38,10 +38,10 @@ const SBIREffectChart = () => {
         <Tooltip formatter={(value) => `${value} dB`} />
         <Legend />
         <ReferenceLine y={75} stroke="#666" strokeDasharray="5 5" />
-        <Line type="monotone" dataKey="dist30cm" stroke="#ff6b6b" name="壁から30cm" strokeWidth={2} />
-        <Line type="monotone" dataKey="dist60cm" stroke="#4ecdc4" name="壁から60cm" strokeWidth={2} />
-        <Line type="monotone" dataKey="dist100cm" stroke="#95e1d3" name="壁から100cm" strokeWidth={2} />
-        <Line type="monotone" dataKey="dist150cm" stroke="#f6b93b" name="壁から150cm" strokeWidth={2} />
+        <Line type="monotone" dataKey="dist30cm" stroke="#e53e3e" name="壁から30cm" strokeWidth={3} dot={false} />
+        <Line type="monotone" dataKey="dist60cm" stroke="#3b82f6" name="壁から60cm" strokeWidth={3} dot={false} />
+        <Line type="monotone" dataKey="dist100cm" stroke="#10b981" name="壁から100cm" strokeWidth={3} dot={false} />
+        <Line type="monotone" dataKey="dist150cm" stroke="#f59e0b" name="壁から150cm" strokeWidth={3} dot={false} />
       </LineChart>
     </ResponsiveContainer>
   )
