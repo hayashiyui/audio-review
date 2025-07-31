@@ -5,6 +5,7 @@ date: "2025-08-01"
 category: "技術解説"
 tags: ["ルームアコースティック", "音響測定", "REW", "スピーカー", "ベーストラップ", "デジタル補正", "ルームチューニング", "DIY"]
 ---
+import FrequencyResponseChart from './room-acoustics-guide-chart.jsx'
 
 ## **目次**
 1. [序論：最後の、そして最も重要なコンポーネントとしての「部屋」](#introduction)
@@ -548,6 +549,12 @@ Slice Interval: 5-10ms
 - ITDG < 10ms：音像のぼけ
 - 20ms以内に-10dB以内の反射：要対策
 - 不規則な減衰：フラッターエコーの可能性
+
+## 測定データの視覚化
+
+<FrequencyResponseChart />
+
+このグラフは、典型的な未処理の部屋（赤線）と、本ガイドに従って音響処理を施した部屋（青線）の周波数特性を比較しています。
 
 #### **RT60測定と解析**
 
