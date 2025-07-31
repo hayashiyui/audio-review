@@ -5,7 +5,11 @@ date: "2025-08-01"
 category: "技術解説"
 tags: ["ルームアコースティック", "音響測定", "REW", "スピーカー", "ベーストラップ", "デジタル補正", "ルームチューニング", "DIY"]
 ---
-import FrequencyResponseChart from './room-acoustics-guide-chart.jsx'
+import FrequencyResponseChartWrapper from './room-acoustics-guide/frequency-response-chart.astro'
+import RT60ComparisonChart from './room-acoustics-guide/rt60-comparison-chart.astro'
+import SBIREffectChart from './room-acoustics-guide/sbir-effect-chart.astro'
+import ImprovementProgressChart from './room-acoustics-guide/improvement-progress-chart.astro'
+import AbsorptionComparisonChart from './room-acoustics-guide/absorption-comparison-chart.astro'
 
 ## **目次**
 1. [序論：最後の、そして最も重要なコンポーネントとしての「部屋」](#introduction)
@@ -351,6 +355,10 @@ LEDEを発展させた考え方で、Peter D'Antonioらによって提唱され�
 | **IEC 60268-13** | リスニングルーム | 0.3-0.5秒 | 民生オーディオ用 |
 | **THX** | ホームシアター | 0.2-0.3秒 | 映画音響基準 |
 
+#### **用途別RT60目標値の視覚化**
+
+<RT60ComparisonChart />
+
 #### **背景騒音レベル**
 
 微細な音のディテールを聴き取るためには、部屋自体の静けさが重要です。
@@ -552,7 +560,7 @@ Slice Interval: 5-10ms
 
 ## 測定データの視覚化
 
-<FrequencyResponseChart />
+<FrequencyResponseChartWrapper />
 
 このグラフは、典型的な未処理の部屋（赤線）と、本ガイドに従って音響処理を施した部屋（青線）の周波数特性を比較しています。
 
@@ -738,6 +746,16 @@ d = スピーカーから壁までの距離(m)
 | 0.86m | 200Hz | 600Hz | 重要帯域に影響 |
 | 1.0m | 172Hz | 516Hz | 低中域に影響 |
 | 1.5m | 115Hz | 344Hz | 低域に影響 |
+
+#### **スピーカー配置によるSBIRの視覚化**
+
+<SBIREffectChart />
+
+**グラフの読み方：**
+- 各線は壁からの異なる距離を示します
+- 明確なディップ（落ち込み）が特定の周波数で発生
+- 30cm配置では573Hz付近、60cm配置では286Hz付近に問題
+- 配置距離により影響する周波数帯域が変化
 
 #### **ポジションによる最適化戦略**
 
@@ -951,6 +969,16 @@ d = スピーカーから壁までの距離(m)
 4. **補助：水平エッジ（壁-天井、壁-床）**
 
 #### **5.1.3. 実践的解決策：DIYと市販品**
+
+#### **音響材料の周波数特性比較**
+
+<AbsorptionComparisonChart />
+
+**グラフの読み方：**
+- **スーパーチャンク（黄）**：全帯域で高い吸音率、特に低域でも効果的
+- **グラスウール10cm（緑）**：中高域で優秀、低域もある程度カバー
+- **グラスウール5cm（青）**：中高域メイン、低域は限定的
+- **薄いカーテン（赤）**：高域のみ、過度な使用は音を死なせる
 
 **DIYスーパーチャンク型ベーストラップ詳細ガイド：**
 
@@ -1382,6 +1410,18 @@ Check（評価）
 Act（改善）
 ↓ 結果に基づき次の対策を決定
 ```
+
+#### **音響改善の進捗トラッキング**
+
+<ImprovementProgressChart />
+
+**改善段階の解説：**
+- **初期状態**：未処理の部屋、大きな周波数偏差
+- **配置最適化**：スピーカー・リスナー位置の調整効果
+- **ベーストラップ**：低域モードの大幅改善
+- **一次反射処理**：中高域の精密化
+- **拡散材追加**：さらなる音場の均質化
+- **デジタル補正**：最終的な微調整
 
 #### **改善記録の詳細フォーマット**
 
