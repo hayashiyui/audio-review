@@ -13,6 +13,7 @@ import rehypePrettyCode from 'rehype-pretty-code'
 import remarkEmoji from 'remark-emoji'
 import remarkMath from 'remark-math'
 import rehypeDocument from 'rehype-document'
+import rehypeMermaid from 'rehype-mermaid';
 
 import { pluginCollapsibleSections } from '@expressive-code/plugin-collapsible-sections'
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
@@ -86,7 +87,10 @@ export default defineConfig({
     enabled: false,
   },
   markdown: {
-    syntaxHighlight: false,
+    syntaxHighlight: {
+      type: 'shiki',
+      excludeLangs: ['mermaid', 'js'],
+    },
     rehypePlugins: [
       [
         rehypeDocument,
@@ -112,6 +116,7 @@ export default defineConfig({
           },
         },
       ],
+      rehypeMermaid,
     ],
     remarkPlugins: [remarkMath, remarkEmoji],
   },
