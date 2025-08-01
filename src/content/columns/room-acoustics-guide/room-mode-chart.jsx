@@ -92,7 +92,7 @@ const RoomModeChart = () => {
       <ResponsiveContainer width="100%" height={320}>
         <LineChart
           data={data}
-          margin={{ top: 40, right: 30, bottom: 70, left: 20 }}
+          margin={{ top: 40, right: 40, bottom: 70, left: 40 }}
         >
           <CartesianGrid strokeDasharray="3 3" stroke={theme.grid} />
           <XAxis

@@ -156,11 +156,6 @@ const SoundPropagationChart = () => {
             strokeWidth="3"
           />
           
-          {/* 壁のラベル */}
-          <text x={margin.left + chartWidth/2} y={margin.top - 10} textAnchor="middle" fontSize="11" fill={theme.textSecondary}>天井</text>
-          <text x={margin.left + chartWidth/2} y={margin.top + chartHeight + 20} textAnchor="middle" fontSize="11" fill={theme.textSecondary}>床</text>
-          <text x={margin.left - 30} y={margin.top + chartHeight/2} textAnchor="middle" fontSize="11" fill={theme.textSecondary} transform={`rotate(-90, ${margin.left - 30}, ${margin.top + chartHeight/2})`}>左壁</text>
-          <text x={margin.left + chartWidth + 30} y={margin.top + chartHeight/2} textAnchor="middle" fontSize="11" fill={theme.textSecondary} transform={`rotate(90, ${margin.left + chartWidth + 30}, ${margin.top + chartHeight/2})`}>右壁</text>
           
           {/* 直接音の経路 */}
           <SoundPath 
