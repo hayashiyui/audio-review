@@ -103,7 +103,15 @@ const SoundPropagationChart = () => {
   }
 
   return (
-    <div style={{ fontFamily: 'sans-serif', textAlign: 'center', backgroundColor: theme.background, padding: '20px', borderRadius: '12px' }}>
+    <div style={{ 
+      fontFamily: 'sans-serif', 
+      textAlign: 'center', 
+      backgroundColor: theme.background, 
+      padding: '16px', 
+      borderRadius: '12px',
+      maxWidth: '100%',
+      overflowX: 'auto'
+    }}>
       <h4 style={{ margin: '16px 0 8px 0', fontSize: '16px', fontWeight: 'bold', color: theme.text }}>
         音の伝搬経路（3つの音要素）
       </h4>
@@ -111,8 +119,19 @@ const SoundPropagationChart = () => {
         リスニングルーム内での音の伝わり方
       </div>
       
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <svg width={svgWidth} height={svgHeight} style={{ border: `1px solid ${theme.border}`, borderRadius: '8px', backgroundColor: theme.surface }}>
+      <div style={{ display: 'flex', justifyContent: 'center', maxWidth: '100%', overflow: 'hidden' }}>
+        <svg 
+          width="100%" 
+          height="100%" 
+          viewBox={`0 0 ${svgWidth} ${svgHeight}`}
+          style={{ 
+            maxWidth: `${svgWidth}px`,
+            height: 'auto',
+            border: `1px solid ${theme.border}`, 
+            borderRadius: '8px', 
+            backgroundColor: theme.surface 
+          }}
+        >
           {/* 矢印マーカーの定義 */}
           <ArrowMarker id="directArrow" color={theme.directSound} />
           <ArrowMarker id="earlyArrow" color={theme.earlyReflection} />
@@ -192,11 +211,25 @@ const SoundPropagationChart = () => {
           <circle cx={scaleX(floorReflection.x)} cy={scaleY(floorReflection.y)} r="4" fill={theme.reflection} stroke={theme.surface} strokeWidth="1" />
           
           {/* スピーカー */}
-          <polygon 
-            points={`${scaleX(speaker.x)},${scaleY(speaker.y)-12} ${scaleX(speaker.x)-10},${scaleY(speaker.y)+6} ${scaleX(speaker.x)+10},${scaleY(speaker.y)+6}`}
+          {/* スピーカーボックス */}
+          <rect
+            x={scaleX(speaker.x) - 12}
+            y={scaleY(speaker.y) - 10}
+            width="24"
+            height="20"
             fill={theme.speaker}
             stroke={theme.surface}
-            strokeWidth="2" 
+            strokeWidth="2"
+            rx="2"
+          />
+          {/* スピーカードライバー */}
+          <circle
+            cx={scaleX(speaker.x)}
+            cy={scaleY(speaker.y)}
+            r="6"
+            fill={theme.surface}
+            stroke={theme.speaker}
+            strokeWidth="2"
           />
           <text x={scaleX(speaker.x)} y={scaleY(speaker.y) + 25} textAnchor="middle" fontSize="12" fontWeight="bold" fill={theme.speaker}>
             スピーカー
@@ -237,11 +270,12 @@ const SoundPropagationChart = () => {
       <div style={{ 
         display: 'flex', 
         justifyContent: 'center', 
-        gap: '24px', 
+        gap: '16px', 
         marginTop: '16px',
-        fontSize: '12px',
+        fontSize: '11px',
         flexWrap: 'wrap',
-        color: theme.text
+        color: theme.text,
+        padding: '0 8px'
       }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ 
@@ -282,8 +316,8 @@ const SoundPropagationChart = () => {
         fontSize: '12px', 
         color: theme.text,
         textAlign: 'left',
-        maxWidth: '600px',
-        margin: '16px auto 0',
+        maxWidth: '100%',
+        margin: '16px 8px 0',
         backgroundColor: theme.surface,
         padding: '12px',
         borderRadius: '6px',

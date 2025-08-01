@@ -92,7 +92,7 @@ const RoomModeChart = () => {
       <ResponsiveContainer width="100%" height={320}>
         <LineChart
           data={data}
-          margin={{ top: 20, right: 30, bottom: 60, left: 20 }}
+          margin={{ top: 40, right: 30, bottom: 70, left: 20 }}
         >
           <CartesianGrid strokeDasharray="3 3" stroke={theme.grid} />
           <XAxis
@@ -135,7 +135,7 @@ const RoomModeChart = () => {
             x={roomWidth / 2} 
             stroke={isDark ? "#22d3ee" : "#4ecdc4"} 
             strokeDasharray="5 5" 
-            label={{ value: "節（中央）", position: "bottom", fontSize: 10, fill: theme.text }}
+            label={{ value: "節（中央）", position: "topLeft", fontSize: 10, fill: theme.text, offset: 10 }}
           />
 
           {/* 音圧分布の曲線 */}
