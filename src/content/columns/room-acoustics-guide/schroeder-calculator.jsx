@@ -1,7 +1,45 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 // シュレーダー周波数計算機コンポーネント
 const SchroederCalculator = () => {
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    // data-theme属性でダークモード検出
+    const updateDarkMode = () => {
+      const theme = document.documentElement.getAttribute('data-theme')
+      setIsDark(theme === 'dark')
+    }
+    
+    // 初期設定
+    updateDarkMode()
+    
+    // data-theme属性の変更を監視
+    const observer = new MutationObserver(updateDarkMode)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    })
+    
+    return () => observer.disconnect()
+  }, [])
+
+  // テーマに応じた色設定
+  const theme = {
+    background: isDark ? '#1a1a1a' : '#f8f9fa',
+    surface: isDark ? '#2d2d2d' : 'white',
+    text: isDark ? '#e0e0e0' : '#2c3e50',
+    textSecondary: isDark ? '#b0b0b0' : '#666',
+    border: isDark ? '#404040' : '#e9ecef',
+    success: isDark ? '#10b981' : '#27ae60',
+    warning: isDark ? '#f59e0b' : '#f39c12',
+    error: isDark ? '#ef4444' : '#e74c3c',
+    info: isDark ? '#3b82f6' : '#007bff',
+    successBg: isDark ? '#064e3b' : '#d4edda',
+    warningBg: isDark ? '#78350f' : '#fff3cd',
+    errorBg: isDark ? '#7f1d1d' : '#ffebee',
+    infoBg: isDark ? '#1e3a8a' : '#e8f4fd'
+  }
   const [dimensions, setDimensions] = useState({
     length: 5.0,
     width: 3.5,
@@ -15,12 +53,38 @@ const SchroederCalculator = () => {
   // シュレーダー周波数の計算
   const schroederFreq = Math.round(2000 * Math.sqrt(rt60 / volume))
 
-  // 残響時間の評価
+  // 残響時間の評価（より精密な推奨値）
   const evaluateRT60 = (rt60, volume) => {
-    const recommendedRT60 = 0.3 + (volume / 100) * 0.1 // 簡単な推奨値
-    if (rt60 < recommendedRT60 - 0.1) return { status: 'short', color: '#f39c12', text: 'やや短め（吸音過多）' }
-    if (rt60 > recommendedRT60 + 0.1) return { status: 'long', color: '#e74c3c', text: 'やや長め（反射多め）' }
-    return { status: 'good', color: '#27ae60', text: '適切な範囲' }
+    // リスニングルーム用推奨値：Sabine式に基づく実用的推奨値
+    // 小部屋: 0.25-0.35秒、中部屋: 0.35-0.45秒、大部屋: 0.45-0.55秒
+    let recommendedMin, recommendedMax
+    
+    if (volume < 30) {
+      recommendedMin = 0.25
+      recommendedMax = 0.35
+    } else if (volume < 60) {
+      recommendedMin = 0.30 + (volume - 30) * 0.005 // 30-60m³で0.30-0.45
+      recommendedMax = 0.40 + (volume - 30) * 0.005
+    } else {
+      recommendedMin = 0.40
+      recommendedMax = 0.55
+    }
+    
+    if (rt60 < recommendedMin - 0.05) return { 
+      status: 'short', 
+      color: '#f39c12', 
+      text: `短め（推奨${recommendedMin.toFixed(2)}-${recommendedMax.toFixed(2)}秒）` 
+    }
+    if (rt60 > recommendedMax + 0.05) return { 
+      status: 'long', 
+      color: '#e74c3c', 
+      text: `長め（推奨${recommendedMin.toFixed(2)}-${recommendedMax.toFixed(2)}秒）` 
+    }
+    return { 
+      status: 'good', 
+      color: '#27ae60', 
+      text: `適切（推奨範囲${recommendedMin.toFixed(2)}-${recommendedMax.toFixed(2)}秒）` 
+    }
   }
 
   const rt60Evaluation = evaluateRT60(rt60, volume)
@@ -68,28 +132,28 @@ const SchroederCalculator = () => {
       fontFamily: 'sans-serif', 
       maxWidth: '700px', 
       margin: '0 auto',
-      backgroundColor: '#f8f9fa',
+      backgroundColor: theme.background,
       padding: '20px',
       borderRadius: '12px',
-      border: '1px solid #e9ecef'
+      border: `1px solid ${theme.border}`
     }}>
       <h4 style={{ 
         margin: '0 0 16px 0', 
         fontSize: '18px', 
         fontWeight: 'bold',
         textAlign: 'center',
-        color: '#2c3e50'
+        color: theme.text
       }}>
         📊 シュレーダー周波数計算機
       </h4>
       
-      <div style={{ fontSize: '13px', color: '#666', marginBottom: '20px', textAlign: 'center' }}>
+      <div style={{ fontSize: '13px', color: theme.textSecondary, marginBottom: '20px', textAlign: 'center' }}>
         部屋の音響対策の境界周波数を計算し、対策方針を決定します
       </div>
 
       {/* 寸法入力 */}
       <div style={{ marginBottom: '20px' }}>
-        <h5 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '12px', color: '#495057' }}>
+        <h5 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '12px', color: theme.text }}>
           📏 部屋の寸法
         </h5>
         <div style={{ 
@@ -130,10 +194,10 @@ const SchroederCalculator = () => {
                   textAlign: 'center',
                   border: `2px solid ${color}`,
                   borderRadius: '4px',
-                  backgroundColor: 'white'
+                  backgroundColor: theme.surface
                 }}
               />
-              <div style={{ fontSize: '11px', color: '#666', marginTop: '2px' }}>
+              <div style={{ fontSize: '11px', color: theme.text, marginTop: '2px' }}>
                 (m)
               </div>
             </div>
@@ -142,14 +206,14 @@ const SchroederCalculator = () => {
         <div style={{ 
           textAlign: 'center', 
           fontSize: '14px', 
-          color: '#495057',
-          backgroundColor: 'white',
+          color: theme.text,
+          backgroundColor: theme.surface,
           padding: '8px',
           borderRadius: '6px',
-          border: '1px solid #dee2e6'
+          border: `1px solid ${theme.border}`
         }}>
           <strong>容積:</strong> {volume.toFixed(1)} m³ 
-          <span style={{ fontSize: '12px', color: '#666', marginLeft: '8px' }}>
+          <span style={{ fontSize: '12px', color: theme.text, marginLeft: '8px' }}>
             (約{Math.round(volume / 1.65)}畳)
           </span>
         </div>
@@ -157,7 +221,7 @@ const SchroederCalculator = () => {
 
       {/* 残響時間入力 */}
       <div style={{ marginBottom: '24px' }}>
-        <h5 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '12px', color: '#495057' }}>
+        <h5 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '12px', color: theme.text }}>
           ⏱️ 残響時間（RT60）
         </h5>
         <div style={{ textAlign: 'center', marginBottom: '12px' }}>
@@ -175,7 +239,7 @@ const SchroederCalculator = () => {
               textAlign: 'center',
               border: `2px solid ${rt60Evaluation.color}`,
               borderRadius: '6px',
-              backgroundColor: 'white',
+              backgroundColor: theme.surface,
               fontWeight: 'bold'
             }}
           />
@@ -194,16 +258,16 @@ const SchroederCalculator = () => {
         <div style={{ 
           marginTop: '12px', 
           fontSize: '11px', 
-          backgroundColor: 'white',
+          backgroundColor: theme.surface,
           padding: '10px',
           borderRadius: '6px',
-          border: '1px solid #dee2e6'
+          border: `1px solid ${theme.border}`
         }}>
-          <div style={{ fontWeight: 'bold', marginBottom: '6px', color: '#495057' }}>
+          <div style={{ fontWeight: 'bold', marginBottom: '6px', color: theme.text }}>
             📝 残響時間の参考値
           </div>
           {rt60Guide.map((guide, index) => (
-            <div key={index} style={{ marginBottom: '3px', display: 'flex', justifyContent: 'space-between' }}>
+            <div key={index} style={{ marginBottom: '3px', display: 'flex', justifyContent: 'space-between', color: theme.text }}>
               <span style={{ fontWeight: 'bold' }}>{guide.type}:</span>
               <span>{guide.range}</span>
             </div>
@@ -213,7 +277,7 @@ const SchroederCalculator = () => {
 
       {/* 計算結果 */}
       <div style={{ 
-        backgroundColor: 'white',
+        backgroundColor: theme.surface,
         padding: '20px',
         borderRadius: '10px',
         border: '3px solid #007bff',
@@ -231,12 +295,12 @@ const SchroederCalculator = () => {
         <div style={{ 
           fontSize: '28px', 
           fontWeight: 'bold', 
-          color: '#2c3e50',
+          color: theme.text,
           marginBottom: '8px'
         }}>
           {schroederFreq} Hz
         </div>
-        <div style={{ fontSize: '14px', color: '#666' }}>
+        <div style={{ fontSize: '14px', color: theme.textSecondary }}>
           シュレーダー周波数（境界周波数）
         </div>
       </div>
@@ -246,15 +310,15 @@ const SchroederCalculator = () => {
         {/* 波の領域 */}
         <div style={{ 
           padding: '16px',
-          backgroundColor: '#ffebee',
+          backgroundColor: isDark ? '#7f1d1d' : '#ffebee',
           borderRadius: '8px',
-          border: '2px solid #ff6b6b'
+          border: isDark ? '2px solid #f87171' : '2px solid #ff6b6b'
         }}>
           <h6 style={{ 
             fontSize: '14px', 
             fontWeight: 'bold', 
             marginBottom: '8px',
-            color: '#d32f2f',
+            color: isDark ? '#fca5a5' : '#d32f2f',
             textAlign: 'center'
           }}>
             🌊 波の領域（モード対策）
@@ -264,11 +328,11 @@ const SchroederCalculator = () => {
             fontSize: '16px', 
             fontWeight: 'bold',
             marginBottom: '8px',
-            color: '#d32f2f'
+            color: isDark ? '#fca5a5' : '#d32f2f'
           }}>
             〜 {schroederFreq} Hz
           </div>
-          <div style={{ fontSize: '11px', lineHeight: 1.4 }}>
+          <div style={{ fontSize: '11px', lineHeight: 1.4, color: theme.text }}>
             <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>対策方針:</div>
             {recommendations.wave.map((rec, index) => (
               <div key={index} style={{ marginBottom: '2px' }}>• {rec}</div>
@@ -279,15 +343,15 @@ const SchroederCalculator = () => {
         {/* 光線の領域 */}
         <div style={{ 
           padding: '16px',
-          backgroundColor: '#e8f5e8',
+          backgroundColor: isDark ? '#064e3b' : '#e8f5e8',
           borderRadius: '8px',
-          border: '2px solid #4ecdc4'
+          border: isDark ? '2px solid #22d3ee' : '2px solid #4ecdc4'
         }}>
           <h6 style={{ 
             fontSize: '14px', 
             fontWeight: 'bold', 
             marginBottom: '8px',
-            color: '#2e7d32',
+            color: isDark ? '#86efac' : '#2e7d32',
             textAlign: 'center'
           }}>
             ☀️ 光線の領域（反射音対策）
@@ -297,11 +361,11 @@ const SchroederCalculator = () => {
             fontSize: '16px', 
             fontWeight: 'bold',
             marginBottom: '8px',
-            color: '#2e7d32'
+            color: isDark ? '#86efac' : '#2e7d32'
           }}>
             {schroederFreq} Hz 〜
           </div>
-          <div style={{ fontSize: '11px', lineHeight: 1.4 }}>
+          <div style={{ fontSize: '11px', lineHeight: 1.4, color: theme.text }}>
             <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>対策方針:</div>
             {recommendations.ray.map((rec, index) => (
               <div key={index} style={{ marginBottom: '2px' }}>• {rec}</div>
@@ -313,19 +377,19 @@ const SchroederCalculator = () => {
       {/* 解釈とアドバイス */}
       <div style={{ 
         padding: '16px',
-        backgroundColor: '#e8f4fd',
+        backgroundColor: theme.infoBg,
         borderRadius: '8px',
-        border: '1px solid #b8daff'
+        border: `1px solid ${theme.border}`
       }}>
         <h5 style={{ 
           fontSize: '14px', 
           fontWeight: 'bold', 
           marginBottom: '12px',
-          color: '#004085'
+          color: theme.info
         }}>
           💡 解釈とアドバイス
         </h5>
-        <div style={{ fontSize: '12px', lineHeight: 1.5 }}>
+        <div style={{ fontSize: '12px', lineHeight: 1.5, color: theme.text }}>
           <p style={{ marginBottom: '8px' }}>
             <strong>シュレーダー周波数とは：</strong>
             部屋の音響特性が「波」の性質から「光線」の性質に変わる境界周波数です。

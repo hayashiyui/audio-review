@@ -1,7 +1,45 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 // ルームモード計算機コンポーネント
 const RoomModeCalculator = () => {
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    // data-theme属性でダークモード検出
+    const updateDarkMode = () => {
+      const theme = document.documentElement.getAttribute('data-theme')
+      setIsDark(theme === 'dark')
+    }
+    
+    // 初期設定
+    updateDarkMode()
+    
+    // data-theme属性の変更を監視
+    const observer = new MutationObserver(updateDarkMode)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    })
+    
+    return () => observer.disconnect()
+  }, [])
+
+  // テーマに応じた色設定
+  const theme = {
+    background: isDark ? '#1a1a1a' : '#f8f9fa',
+    surface: isDark ? '#2d2d2d' : 'white',
+    text: isDark ? '#e0e0e0' : '#2c3e50',
+    textSecondary: isDark ? '#b0b0b0' : '#666',
+    border: isDark ? '#404040' : '#e9ecef',
+    success: isDark ? '#10b981' : '#27ae60',
+    warning: isDark ? '#f59e0b' : '#f39c12',
+    error: isDark ? '#ef4444' : '#e74c3c',
+    successBg: isDark ? '#064e3b' : '#d4edda',
+    warningBg: isDark ? '#78350f' : '#fff3cd',
+    errorBg: isDark ? '#7f1d1d' : '#ffebee',
+    infoBg: isDark ? '#1e3a8a' : '#e8f4fd'
+  }
+
   const [dimensions, setDimensions] = useState({
     length: 5.0,  // 奥行き
     width: 3.5,   // 幅  
@@ -56,7 +94,10 @@ const RoomModeCalculator = () => {
       const current = modes[i]
       const next = modes[i + 1]
       const freqDiff = next.frequency - current.frequency
-      if (freqDiff < 10) { // 10Hz以内に複数のモードがある場合
+      // 相対値（5%）と絶対値（8Hz）の併用で判定
+      const relativeThreshold = current.frequency * 0.05
+      const absoluteThreshold = 8
+      if (freqDiff < Math.max(relativeThreshold, absoluteThreshold)) {
         problematic.push({ current, next, diff: freqDiff })
       }
     }
@@ -71,15 +112,17 @@ const RoomModeCalculator = () => {
     const ratio2 = dimensions.length / dimensions.height
     const ratio3 = dimensions.width / dimensions.height
     
-    // Bolt's ratios やGolden ratioに近いかチェック
-    const goldenRatio = 1.618
-    const boltRatio1 = 1.6
-    const boltRatio2 = 2.5
+    // 推奨比率：黄金比系（1:1.6:2.6）とBolt推奨比率
+    const goldenRatio = 1.618  // 1:1.618
+    const goldenRatio2 = 2.618 // 1:2.618 (φ²)
+    const boltRatio1 = 1.6     // Bolt推奨
+    const boltRatio2 = 2.3     // Bolt推奨
     
     const isGoodRatio = (
-      Math.abs(ratio1 - goldenRatio) < 0.2 ||
-      Math.abs(ratio1 - boltRatio1) < 0.2 ||
-      Math.abs(ratio2 - boltRatio2) < 0.3
+      Math.abs(ratio1 - goldenRatio) < 0.15 ||
+      Math.abs(ratio1 - boltRatio1) < 0.15 ||
+      Math.abs(ratio2 - goldenRatio2) < 0.2 ||
+      Math.abs(ratio2 - boltRatio2) < 0.2
     )
     
     return { isGood: isGoodRatio, ratios: [ratio1, ratio2, ratio3] }
@@ -92,22 +135,22 @@ const RoomModeCalculator = () => {
       fontFamily: 'sans-serif', 
       maxWidth: '700px', 
       margin: '0 auto',
-      backgroundColor: '#f8f9fa',
+      backgroundColor: theme.background,
       padding: '20px',
       borderRadius: '12px',
-      border: '1px solid #e9ecef'
+      border: `1px solid ${theme.border}`
     }}>
       <h4 style={{ 
         margin: '0 0 16px 0', 
         fontSize: '18px', 
         fontWeight: 'bold',
         textAlign: 'center',
-        color: '#2c3e50'
+        color: theme.text
       }}>
         🧮 あなたの部屋のルームモード計算機
       </h4>
       
-      <div style={{ fontSize: '13px', color: '#666', marginBottom: '20px', textAlign: 'center' }}>
+      <div style={{ fontSize: '13px', color: theme.textSecondary, marginBottom: '20px', textAlign: 'center' }}>
         部屋の寸法を入力すると、問題となる定在波の周波数を計算します
       </div>
 
@@ -119,9 +162,9 @@ const RoomModeCalculator = () => {
         marginBottom: '24px' 
       }}>
         {[
-          { key: 'length', label: '奥行き', color: '#3498db' },
-          { key: 'width', label: '幅', color: '#e74c3c' },
-          { key: 'height', label: '高さ', color: '#27ae60' }
+          { key: 'length', label: '奥行き', color: isDark ? '#60a5fa' : '#3498db' },
+          { key: 'width', label: '幅', color: isDark ? '#f87171' : '#e74c3c' },
+          { key: 'height', label: '高さ', color: isDark ? '#34d399' : '#27ae60' }
         ].map(({ key, label, color }) => (
           <div key={key} style={{ textAlign: 'center' }}>
             <label style={{ 
@@ -150,34 +193,51 @@ const RoomModeCalculator = () => {
                 textAlign: 'center',
                 border: `2px solid ${color}`,
                 borderRadius: '6px',
-                backgroundColor: 'white'
+                backgroundColor: theme.surface,
+                color: theme.text
               }}
             />
-            <div style={{ fontSize: '12px', color: '#666', marginTop: '4px' }}>
+            <div style={{ fontSize: '12px', color: theme.textSecondary, marginTop: '4px' }}>
               (m)
             </div>
           </div>
         ))}
       </div>
 
+      <div style={{ 
+        textAlign: 'center', 
+        fontSize: '14px', 
+        color: theme.text,
+        backgroundColor: theme.surface,
+        padding: '8px',
+        borderRadius: '6px',
+        border: `1px solid ${theme.border}`
+      }}>
+        <strong>容積:</strong> {(dimensions.length * dimensions.width * dimensions.height).toFixed(1)} m³ 
+        <span style={{ fontSize: '12px', color: theme.textSecondary, marginLeft: '8px' }}>
+          (約{Math.round((dimensions.length * dimensions.width * dimensions.height) / 1.65)}畳)
+        </span>
+      </div>
+
       {/* 部屋比率チェック */}
       <div style={{ 
         marginBottom: '24px', 
         padding: '12px', 
-        backgroundColor: roomRatioCheck.isGood ? '#d4edda' : '#fff3cd',
+        backgroundColor: roomRatioCheck.isGood ? theme.successBg : theme.warningBg,
         borderRadius: '8px',
-        border: `1px solid ${roomRatioCheck.isGood ? '#c3e6cb' : '#ffeeba'}`
+        border: `1px solid ${roomRatioCheck.isGood ? theme.success : theme.warning}`,
+        marginTop: '16px'
       }}>
-        <div style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '8px' }}>
+        <div style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '8px', color: theme.text }}>
           📐 部屋の比率評価
         </div>
-        <div style={{ fontSize: '12px' }}>
+        <div style={{ fontSize: '12px', color: theme.text }}>
           {roomRatioCheck.isGood ? 
             '✅ 良好な比率です！モード問題が比較的少ない部屋です。' :
             '⚠️  問題の多い比率です。黄金比（1:1.6:2.6）に近づけると改善されます。'
           }
         </div>
-        <div style={{ fontSize: '11px', color: '#666', marginTop: '4px' }}>
+        <div style={{ fontSize: '11px', color: theme.textSecondary, marginTop: '4px' }}>
           現在の比率: {roomRatioCheck.ratios.map(r => r.toFixed(2)).join(' : ')}
         </div>
       </div>
@@ -188,7 +248,7 @@ const RoomModeCalculator = () => {
           fontSize: '16px', 
           fontWeight: 'bold', 
           marginBottom: '12px',
-          color: '#2c3e50'
+          color: theme.text
         }}>
           🎵 検出された軸モード（300Hz以下）
         </h5>
@@ -208,19 +268,19 @@ const RoomModeCalculator = () => {
                 key={index}
                 style={{
                   padding: '10px',
-                  backgroundColor: isProblematic ? '#ffebee' : 'white',
-                  border: `1px solid ${isProblematic ? '#ffcdd2' : '#e0e0e0'}`,
+                  backgroundColor: isProblematic ? theme.errorBg : theme.surface,
+                  border: `1px solid ${isProblematic ? theme.error : theme.border}`,
                   borderRadius: '6px',
                   fontSize: '12px'
                 }}
               >
-                <div style={{ fontWeight: 'bold', color: isProblematic ? '#d32f2f' : '#333' }}>
+                <div style={{ fontWeight: 'bold', color: isProblematic ? theme.error : theme.text }}>
                   {mode.frequency} Hz
                 </div>
-                <div style={{ color: '#666', fontSize: '11px' }}>
+                <div style={{ color: theme.textSecondary, fontSize: '11px' }}>
                   {mode.axis} {mode.mode}次モード
                 </div>
-                <div style={{ color: '#666', fontSize: '10px' }}>
+                <div style={{ color: theme.textSecondary, fontSize: '10px' }}>
                   {mode.note}
                 </div>
               </div>
@@ -234,26 +294,26 @@ const RoomModeCalculator = () => {
         <div style={{ 
           marginBottom: '20px',
           padding: '12px',
-          backgroundColor: '#ffebee',
+          backgroundColor: theme.errorBg,
           borderRadius: '8px',
-          border: '1px solid #ffcdd2'
+          border: `1px solid ${theme.error}`
         }}>
           <h5 style={{ 
             fontSize: '14px', 
             fontWeight: 'bold', 
             marginBottom: '8px',
-            color: '#d32f2f'
+            color: theme.error
           }}>
             ⚠️ 特に注意が必要なモード
           </h5>
           {problematicModes.map((prob, index) => (
-            <div key={index} style={{ fontSize: '12px', marginBottom: '4px' }}>
+            <div key={index} style={{ fontSize: '12px', marginBottom: '4px', color: theme.text }}>
               {prob.current.frequency}Hz と {prob.next.frequency}Hz が近接
               （差: {prob.diff.toFixed(1)}Hz）
             </div>
           ))}
-          <div style={{ fontSize: '11px', color: '#666', marginTop: '8px' }}>
-            近接したモードは音が濁って聴こえる原因となります
+          <div style={{ fontSize: '11px', color: theme.textSecondary, marginTop: '8px' }}>
+            周波数差5%未満または8Hz未満の近接モードは音が濁る原因となります
           </div>
         </div>
       )}
@@ -261,26 +321,26 @@ const RoomModeCalculator = () => {
       {/* 対策のヒント */}
       <div style={{ 
         padding: '16px', 
-        backgroundColor: '#e8f5e8', 
+        backgroundColor: theme.infoBg, 
         borderRadius: '8px',
-        border: '1px solid #c8e6c9'
+        border: `1px solid ${isDark ? '#1e40af' : '#c8e6c9'}`
       }}>
         <h5 style={{ 
           fontSize: '14px', 
           fontWeight: 'bold', 
           marginBottom: '12px',
-          color: '#2e7d32'
+          color: theme.text
         }}>
           💡 対策のヒント
         </h5>
-        <div style={{ fontSize: '12px', lineHeight: 1.5 }}>
+        <div style={{ fontSize: '12px', lineHeight: 1.5, color: theme.text }}>
           <p><strong>最も効果的な対策：</strong></p>
           <ul style={{ margin: '8px 0', paddingLeft: '16px' }}>
             <li>コーナー（特に低い周波数のモード周辺）にベーストラップを配置</li>
             <li>リスナー位置を部屋の中央から避ける（節の位置を避ける）</li>
             <li>家具の配置でモードの腹・節の位置を調整</li>
           </ul>
-          <p style={{ fontSize: '11px', color: '#666', marginTop: '8px' }}>
+          <p style={{ fontSize: '11px', color: theme.textSecondary, marginTop: '8px' }}>
             ※ 100Hz以下のモードが特に問題となりやすいです
           </p>
         </div>

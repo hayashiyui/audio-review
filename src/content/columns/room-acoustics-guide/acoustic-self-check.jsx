@@ -1,7 +1,47 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 // 5分音響問題セルフチェックコンポーネント
 const AcousticSelfCheck = () => {
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    // data-theme属性でダークモード検出
+    const updateDarkMode = () => {
+      const theme = document.documentElement.getAttribute('data-theme')
+      setIsDark(theme === 'dark')
+    }
+    
+    // 初期設定
+    updateDarkMode()
+    
+    // data-theme属性の変更を監視
+    const observer = new MutationObserver(updateDarkMode)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    })
+    
+    return () => observer.disconnect()
+  }, [])
+
+  // テーマに応じた色設定
+  const theme = {
+    background: isDark ? '#1a1a1a' : '#f8f9fa',
+    surface: isDark ? '#2d2d2d' : 'white',
+    text: isDark ? '#e0e0e0' : '#2c3e50',
+    textSecondary: isDark ? '#b0b0b0' : '#666',
+    border: isDark ? '#404040' : '#e9ecef',
+    success: isDark ? '#10b981' : '#27ae60',
+    warning: isDark ? '#f59e0b' : '#f39c12',
+    error: isDark ? '#ef4444' : '#e74c3c',
+    info: isDark ? '#3b82f6' : '#007bff',
+    successBg: isDark ? '#064e3b' : '#d4edda',
+    warningBg: isDark ? '#78350f' : '#fff3cd',
+    errorBg: isDark ? '#7f1d1d' : '#ffebee',
+    infoBg: isDark ? '#1e3a8a' : '#e8f4fd',
+    primaryButton: isDark ? '#3b82f6' : '#007bff',
+    secondaryButton: isDark ? '#6b7280' : '#6c757d'
+  }
   const [currentStep, setCurrentStep] = useState(0)
   const [results, setResults] = useState({})
   const [isCompleted, setIsCompleted] = useState(false)
@@ -195,21 +235,21 @@ const AcousticSelfCheck = () => {
         fontFamily: 'sans-serif', 
         maxWidth: '700px', 
         margin: '0 auto',
-        backgroundColor: '#f8f9fa',
+        backgroundColor: theme.background,
         padding: '24px',
         borderRadius: '12px',
-        border: '1px solid #e9ecef'
+        border: `1px solid ${theme.border}`
       }}>
         <div style={{ textAlign: 'center', marginBottom: '24px' }}>
           <h4 style={{ 
             fontSize: '20px', 
             fontWeight: 'bold',
-            color: '#2c3e50',
+            color: theme.text,
             marginBottom: '8px'
           }}>
             🎉 セルフチェック完了！
           </h4>
-          <div style={{ fontSize: '14px', color: '#666' }}>
+          <div style={{ fontSize: '14px', color: theme.textSecondary }}>
             お疲れさまでした。結果をご確認ください。
           </div>
         </div>
@@ -217,7 +257,7 @@ const AcousticSelfCheck = () => {
         {/* 総合評価 */}
         <div style={{ 
           padding: '20px', 
-          backgroundColor: 'white',
+          backgroundColor: theme.surface,
           borderRadius: '10px',
           border: `3px solid ${ratingColor}`,
           marginBottom: '20px',
@@ -232,7 +272,7 @@ const AcousticSelfCheck = () => {
           }}>
             {overallRating}
           </div>
-          <div style={{ fontSize: '14px', color: '#666' }}>
+          <div style={{ fontSize: '14px', color: theme.textSecondary }}>
             スコア: {totalScore} / {maxScore}
           </div>
         </div>
@@ -242,19 +282,19 @@ const AcousticSelfCheck = () => {
           <div style={{ 
             marginBottom: '20px',
             padding: '16px',
-            backgroundColor: '#fff3cd',
+            backgroundColor: theme.warningBg,
             borderRadius: '8px',
-            border: '1px solid #ffeaa7'
+            border: `1px solid ${theme.border}`
           }}>
             <h5 style={{ 
               fontSize: '16px', 
               fontWeight: 'bold', 
               marginBottom: '12px',
-              color: '#856404'
+              color: theme.warning
             }}>
               🔍 検出された主な問題
             </h5>
-            <ul style={{ margin: 0, paddingLeft: '20px' }}>
+            <ul style={{ margin: 0, paddingLeft: '20px', color: theme.text }}>
               {problems.map((problem, index) => (
                 <li key={index} style={{ fontSize: '14px', marginBottom: '4px' }}>
                   {problem}
@@ -269,19 +309,19 @@ const AcousticSelfCheck = () => {
           <div style={{ 
             marginBottom: '20px',
             padding: '16px',
-            backgroundColor: '#d4edda',
+            backgroundColor: theme.successBg,
             borderRadius: '8px',
-            border: '1px solid #c3e6cb'
+            border: `1px solid ${theme.border}`
           }}>
             <h5 style={{ 
               fontSize: '16px', 
               fontWeight: 'bold', 
               marginBottom: '12px',
-              color: '#155724'
+              color: theme.success
             }}>
               💡 推奨される対策
             </h5>
-            <ul style={{ margin: 0, paddingLeft: '20px' }}>
+            <ul style={{ margin: 0, paddingLeft: '20px', color: theme.text }}>
               {recommendations.map((rec, index) => (
                 <li key={index} style={{ fontSize: '14px', marginBottom: '4px' }}>
                   {rec}
@@ -294,20 +334,20 @@ const AcousticSelfCheck = () => {
         {/* 次のステップ */}
         <div style={{ 
           padding: '16px',
-          backgroundColor: '#e8f4fd',
+          backgroundColor: theme.infoBg,
           borderRadius: '8px',
-          border: '1px solid #b8daff',
+          border: `1px solid ${theme.border}`,
           marginBottom: '20px'
         }}>
           <h5 style={{ 
             fontSize: '16px', 
             fontWeight: 'bold', 
             marginBottom: '12px',
-            color: '#004085'
+            color: theme.info
           }}>
             📋 次のステップ
           </h5>
-          <div style={{ fontSize: '14px', lineHeight: 1.5 }}>
+          <div style={{ fontSize: '14px', lineHeight: 1.5, color: theme.text }}>
             {totalScore <= 2 ? 
               '素晴らしい音響環境です！微調整で更なる向上を目指しましょう。' :
               'まずは最も問題となっている項目から対策を始めることをお勧めします。このガイドの第5部「実践的音響処理ガイド」で具体的な改善方法をご確認ください。'
@@ -320,8 +360,8 @@ const AcousticSelfCheck = () => {
             onClick={resetTest}
             style={{
               padding: '12px 24px',
-              backgroundColor: '#6c757d',
-              color: 'white',
+              backgroundColor: theme.textSecondary,
+              color: theme.surface,
               border: 'none',
               borderRadius: '6px',
               fontSize: '14px',
@@ -345,21 +385,21 @@ const AcousticSelfCheck = () => {
       fontFamily: 'sans-serif', 
       maxWidth: '700px', 
       margin: '0 auto',
-      backgroundColor: '#f8f9fa',
+      backgroundColor: theme.background,
       padding: '24px',
       borderRadius: '12px',
-      border: '1px solid #e9ecef'
+      border: `1px solid ${theme.border}`
     }}>
       <div style={{ textAlign: 'center', marginBottom: '24px' }}>
         <h4 style={{ 
           fontSize: '20px', 
           fontWeight: 'bold',
-          color: '#2c3e50',
+          color: theme.text,
           marginBottom: '8px'
         }}>
           🔍 5分音響問題セルフチェック
         </h4>
-        <div style={{ fontSize: '14px', color: '#666', marginBottom: '16px' }}>
+        <div style={{ fontSize: '14px', color: theme.textSecondary, marginBottom: '16px' }}>
           あなたの部屋の音響問題を簡単にチェックしましょう
         </div>
         
@@ -367,7 +407,7 @@ const AcousticSelfCheck = () => {
         <div style={{ 
           width: '100%', 
           height: '8px', 
-          backgroundColor: '#e9ecef', 
+          backgroundColor: theme.border, 
           borderRadius: '4px',
           overflow: 'hidden',
           marginBottom: '12px'
@@ -375,22 +415,18 @@ const AcousticSelfCheck = () => {
           <div style={{ 
             width: `${progress}%`, 
             height: '100%', 
-            backgroundColor: '#007bff',
+            backgroundColor: theme.info,
             transition: 'width 0.3s ease'
           }}></div>
-        </div>
-        
-        <div style={{ fontSize: '12px', color: '#666' }}>
-          {currentStep + 1} / {tests.length} - 残り約{(tests.length - currentStep - 1) * 1}分
         </div>
       </div>
 
       {/* 現在のテスト */}
       <div style={{ 
-        backgroundColor: 'white',
+        backgroundColor: theme.surface,
         padding: '24px',
         borderRadius: '10px',
-        border: '1px solid #dee2e6',
+        border: `1px solid ${theme.border}`,
         marginBottom: '20px'
       }}>
         <div style={{ textAlign: 'center', marginBottom: '20px' }}>
@@ -400,23 +436,13 @@ const AcousticSelfCheck = () => {
           <h5 style={{ 
             fontSize: '18px', 
             fontWeight: 'bold',
-            color: '#2c3e50',
+            color: theme.text,
             marginBottom: '8px'
           }}>
             {currentTest.title}
           </h5>
-          <div style={{ fontSize: '14px', color: '#666', marginBottom: '8px' }}>
+          <div style={{ fontSize: '14px', color: theme.textSecondary, marginBottom: '8px' }}>
             {currentTest.description}
-          </div>
-          <div style={{ 
-            fontSize: '12px', 
-            color: '#007bff',
-            backgroundColor: '#e7f3ff',
-            padding: '4px 8px',
-            borderRadius: '4px',
-            display: 'inline-block'
-          }}>
-            所要時間: {currentTest.duration}
           </div>
         </div>
 
@@ -426,11 +452,11 @@ const AcousticSelfCheck = () => {
             fontSize: '14px', 
             fontWeight: 'bold',
             marginBottom: '12px',
-            color: '#495057'
+            color: theme.text
           }}>
             📝 手順
           </h6>
-          <ol style={{ margin: 0, paddingLeft: '20px' }}>
+          <ol style={{ margin: 0, paddingLeft: '20px', color: theme.text }}>
             {currentTest.instructions.map((instruction, index) => (
               <li key={index} style={{ 
                 fontSize: '13px', 
@@ -449,7 +475,7 @@ const AcousticSelfCheck = () => {
             fontSize: '14px', 
             fontWeight: 'bold',
             marginBottom: '12px',
-            color: '#495057'
+            color: theme.text
           }}>
             💬 結果はいかがでしたか？
           </h6>
@@ -460,22 +486,23 @@ const AcousticSelfCheck = () => {
                 onClick={() => handleAnswer(currentTest.id, option)}
                 style={{
                   padding: '12px 16px',
-                  backgroundColor: 'white',
+                  backgroundColor: theme.surface,
                   border: `2px solid ${option.color}`,
                   borderRadius: '8px',
                   fontSize: '14px',
                   cursor: 'pointer',
                   textAlign: 'left',
                   transition: 'all 0.2s ease',
-                  fontWeight: '500'
+                  fontWeight: '500',
+                  color: theme.text
                 }}
                 onMouseEnter={(e) => {
                   e.target.style.backgroundColor = option.color
                   e.target.style.color = 'white'
                 }}
                 onMouseLeave={(e) => {
-                  e.target.style.backgroundColor = 'white'
-                  e.target.style.color = 'inherit'
+                  e.target.style.backgroundColor = theme.surface
+                  e.target.style.color = theme.text
                 }}
               >
                 {option.label}
@@ -492,8 +519,8 @@ const AcousticSelfCheck = () => {
           style={{
             padding: '8px 16px',
             backgroundColor: 'transparent',
-            color: '#6c757d',
-            border: '1px solid #6c757d',
+            color: theme.textSecondary,
+            border: `1px solid ${theme.textSecondary}`,
             borderRadius: '4px',
             fontSize: '12px',
             cursor: 'pointer'

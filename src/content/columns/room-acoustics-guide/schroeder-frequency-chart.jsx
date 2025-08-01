@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import {
   LineChart, Line, XAxis, YAxis,
   CartesianGrid, Tooltip, Legend,
@@ -6,6 +7,39 @@ import {
 
 // シュレーダー周波数による音響領域の分類を示すチャート
 const SchroederFrequencyChart = () => {
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    // data-theme属性でダークモード検出
+    const updateDarkMode = () => {
+      const theme = document.documentElement.getAttribute('data-theme')
+      setIsDark(theme === 'dark')
+    }
+    
+    // 初期設定
+    updateDarkMode()
+    
+    // data-theme属性の変更を監視
+    const observer = new MutationObserver(updateDarkMode)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    })
+    
+    return () => observer.disconnect()
+  }, [])
+
+  // テーマに応じた色設定
+  const theme = {
+    background: isDark ? '#1a1a1a' : 'transparent',
+    surface: isDark ? '#2d2d2d' : 'white',
+    text: isDark ? '#e0e0e0' : '#2c3e50',
+    textSecondary: isDark ? '#b0b0b0' : '#666',
+    border: isDark ? '#404040' : '#e0e0e0',
+    grid: isDark ? '#404040' : '#f0f0f0',
+    modalArea: isDark ? '#7f1d1d' : '#ff6b6b',
+    geometricArea: isDark ? '#064e3b' : '#4ecdc4'
+  }
   // シュレーダー周波数（記事の例：40m³、RT60=0.4sで約200Hz）
   const schroederFreq = 200
   
@@ -61,12 +95,13 @@ const SchroederFrequencyChart = () => {
       
       return (
         <div style={{ 
-          backgroundColor: 'white', 
-          border: '1px solid #ccc', 
+          backgroundColor: theme.surface, 
+          border: `1px solid ${theme.border}`, 
           borderRadius: '4px', 
           padding: '12px',
           fontSize: '12px',
-          maxWidth: '250px'
+          maxWidth: '250px',
+          color: theme.text
         }}>
           <p><strong>{label} Hz</strong></p>
           <p><strong>領域:</strong> {region}</p>
@@ -78,11 +113,11 @@ const SchroederFrequencyChart = () => {
   }
 
   return (
-    <div style={{ fontFamily: 'sans-serif', textAlign: 'center' }}>
-      <h4 style={{ margin: '16px 0 8px 0', fontSize: '16px', fontWeight: 'bold' }}>
+    <div style={{ fontFamily: 'sans-serif', textAlign: 'center', backgroundColor: theme.background, padding: '20px', borderRadius: '12px' }}>
+      <h4 style={{ margin: '16px 0 8px 0', fontSize: '16px', fontWeight: 'bold', color: theme.text }}>
         シュレーダー周波数による音響解析領域の分類
       </h4>
-      <div style={{ fontSize: '12px', color: '#666', marginBottom: '12px' }}>
+      <div style={{ fontSize: '12px', color: theme.textSecondary, marginBottom: '12px' }}>
         例：容積40m³（約10畳）、RT60=0.4秒の部屋 → fs = 200Hz
       </div>
       
@@ -91,7 +126,7 @@ const SchroederFrequencyChart = () => {
           data={data}
           margin={{ top: 20, right: 30, bottom: 60, left: 20 }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid strokeDasharray="3 3" stroke={theme.grid} />
           <XAxis
             dataKey="freq"
             type="number"
@@ -99,7 +134,8 @@ const SchroederFrequencyChart = () => {
             domain={[20, 20000]}
             tickFormatter={xTickFormatter}
             ticks={[20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000]}
-            label={{ value: '周波数 (Hz)', position: 'insideBottom', offset: -10 }}
+            tick={{ fill: theme.text, fontSize: 12 }}
+            label={{ value: '周波数 (Hz)', position: 'insideBottom', offset: -10, style: { fill: theme.text } }}
           />
           <YAxis 
             domain={[0, 1.2]} 
@@ -111,7 +147,7 @@ const SchroederFrequencyChart = () => {
           <ReferenceArea 
             x1={20} 
             x2={schroederFreq} 
-            fill="#ff6b6b" 
+            fill={theme.modalArea} 
             fillOpacity={0.3}
             stroke="none"
           />
@@ -120,7 +156,7 @@ const SchroederFrequencyChart = () => {
           <ReferenceArea 
             x1={schroederFreq} 
             x2={20000} 
-            fill="#4ecdc4" 
+            fill={theme.geometricArea} 
             fillOpacity={0.3}
             stroke="none"
           />
@@ -128,14 +164,14 @@ const SchroederFrequencyChart = () => {
           {/* シュレーダー周波数の境界線 */}
           <ReferenceLine 
             x={schroederFreq} 
-            stroke="#2c3e50" 
+            stroke={theme.text} 
             strokeWidth={3}
             strokeDasharray="8 4"
             label={{ 
               value: `シュレーダー周波数 (${schroederFreq}Hz)`, 
               position: "topRight", 
               fontSize: 11,
-              fill: "#2c3e50"
+              fill: theme.text
             }}
           />
 
@@ -156,13 +192,14 @@ const SchroederFrequencyChart = () => {
         justifyContent: 'center', 
         gap: '20px', 
         marginTop: '8px',
-        fontSize: '12px'
+        fontSize: '12px',
+        color: theme.text
       }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ 
             width: '12px', 
             height: '12px', 
-            backgroundColor: '#ff6b6b', 
+            backgroundColor: theme.modalArea, 
             opacity: 0.6,
             marginRight: '6px' 
           }}></div>
@@ -172,7 +209,7 @@ const SchroederFrequencyChart = () => {
           <div style={{ 
             width: '12px', 
             height: '12px', 
-            backgroundColor: '#4ecdc4', 
+            backgroundColor: theme.geometricArea, 
             opacity: 0.6,
             marginRight: '6px' 
           }}></div>
@@ -184,7 +221,7 @@ const SchroederFrequencyChart = () => {
       <div style={{ 
         marginTop: '12px', 
         fontSize: '12px', 
-        color: '#666',
+        color: theme.textSecondary,
         textAlign: 'left',
         maxWidth: '600px',
         margin: '12px auto 0'

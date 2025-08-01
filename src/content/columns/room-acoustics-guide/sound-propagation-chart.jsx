@@ -1,5 +1,45 @@
+import { useState, useEffect } from 'react'
+
 // 音の伝搬経路を示すSVGチャート
 const SoundPropagationChart = () => {
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    // data-theme属性でダークモード検出
+    const updateDarkMode = () => {
+      const theme = document.documentElement.getAttribute('data-theme')
+      setIsDark(theme === 'dark')
+    }
+    
+    // 初期設定
+    updateDarkMode()
+    
+    // data-theme属性の変更を監視
+    const observer = new MutationObserver(updateDarkMode)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    })
+    
+    return () => observer.disconnect()
+  }, [])
+
+  // テーマに応じた色設定
+  const theme = {
+    background: isDark ? '#1a1a1a' : '#f8f9fa',
+    surface: isDark ? '#2d2d2d' : 'white',
+    text: isDark ? '#f3f4f6' : '#2c3e50',
+    textSecondary: isDark ? '#d1d5db' : '#666',
+    border: isDark ? '#404040' : '#e0e0e0',
+    gridLight: isDark ? '#333' : '#f0f0f0',
+    gridDark: isDark ? '#404040' : '#333',
+    directSound: isDark ? '#60a5fa' : '#2c3e50',
+    earlyReflection: isDark ? '#f87171' : '#ff6b6b',
+    lateReflection: isDark ? '#a3a3a3' : '#95a5a6',
+    speaker: isDark ? '#ef4444' : '#e74c3c',
+    listener: isDark ? '#3b82f6' : '#3498db',
+    reflection: isDark ? '#fbbf24' : '#feca57'
+  }
   // SVGの寸法とスケール
   const svgWidth = 600
   const svgHeight = 400
@@ -12,6 +52,7 @@ const SoundPropagationChart = () => {
   
   // 座標変換関数
   const scaleX = (x) => margin.left + (x / room.width) * chartWidth
+  // scaleY: SVGは上が原点なので、部屋座標(下が原点)を上下反転
   const scaleY = (y) => margin.top + ((room.height - y) / room.height) * chartHeight
   
   // スピーカーとリスナーの位置
@@ -62,28 +103,28 @@ const SoundPropagationChart = () => {
   }
 
   return (
-    <div style={{ fontFamily: 'sans-serif', textAlign: 'center' }}>
-      <h4 style={{ margin: '16px 0 8px 0', fontSize: '16px', fontWeight: 'bold' }}>
+    <div style={{ fontFamily: 'sans-serif', textAlign: 'center', backgroundColor: theme.background, padding: '20px', borderRadius: '12px' }}>
+      <h4 style={{ margin: '16px 0 8px 0', fontSize: '16px', fontWeight: 'bold', color: theme.text }}>
         音の伝搬経路（3つの音要素）
       </h4>
-      <div style={{ fontSize: '12px', color: '#666', marginBottom: '16px' }}>
+      <div style={{ fontSize: '12px', color: theme.textSecondary, marginBottom: '16px' }}>
         リスニングルーム内での音の伝わり方
       </div>
       
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <svg width={svgWidth} height={svgHeight} style={{ border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+        <svg width={svgWidth} height={svgHeight} style={{ border: `1px solid ${theme.border}`, borderRadius: '8px', backgroundColor: theme.surface }}>
           {/* 矢印マーカーの定義 */}
-          <ArrowMarker id="directArrow" color="#2c3e50" />
-          <ArrowMarker id="earlyArrow" color="#ff6b6b" />
-          <ArrowMarker id="lateArrow" color="#95a5a6" />
+          <ArrowMarker id="directArrow" color={theme.directSound} />
+          <ArrowMarker id="earlyArrow" color={theme.earlyReflection} />
+          <ArrowMarker id="lateArrow" color={theme.lateReflection} />
           
           {/* グリッド線 */}
           <defs>
-            <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-              <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#f0f0f0" strokeWidth="1"/>
+            <pattern id={`grid-${isDark ? 'dark' : 'light'}`} width="50" height="50" patternUnits="userSpaceOnUse">
+              <path d="M 50 0 L 0 0 0 50" fill="none" stroke={theme.gridLight} strokeWidth="1" opacity={isDark ? "0.3" : "1"}/>
             </pattern>
           </defs>
-          <rect x={margin.left} y={margin.top} width={chartWidth} height={chartHeight} fill="url(#grid)" />
+          <rect x={margin.left} y={margin.top} width={chartWidth} height={chartHeight} fill={`url(#grid-${isDark ? 'dark' : 'light'})`} />
           
           {/* 部屋の境界線 */}
           <rect 
@@ -92,20 +133,20 @@ const SoundPropagationChart = () => {
             width={chartWidth} 
             height={chartHeight} 
             fill="none" 
-            stroke="#333" 
+            stroke={theme.gridDark} 
             strokeWidth="3"
           />
           
           {/* 壁のラベル */}
-          <text x={margin.left + chartWidth/2} y={margin.top - 10} textAnchor="middle" fontSize="11" fill="#666">天井</text>
-          <text x={margin.left + chartWidth/2} y={margin.top + chartHeight + 20} textAnchor="middle" fontSize="11" fill="#666">床</text>
-          <text x={margin.left - 30} y={margin.top + chartHeight/2} textAnchor="middle" fontSize="11" fill="#666" transform={`rotate(-90, ${margin.left - 30}, ${margin.top + chartHeight/2})`}>左壁</text>
-          <text x={margin.left + chartWidth + 30} y={margin.top + chartHeight/2} textAnchor="middle" fontSize="11" fill="#666" transform={`rotate(90, ${margin.left + chartWidth + 30}, ${margin.top + chartHeight/2})`}>右壁</text>
+          <text x={margin.left + chartWidth/2} y={margin.top - 10} textAnchor="middle" fontSize="11" fill={theme.textSecondary}>天井</text>
+          <text x={margin.left + chartWidth/2} y={margin.top + chartHeight + 20} textAnchor="middle" fontSize="11" fill={theme.textSecondary}>床</text>
+          <text x={margin.left - 30} y={margin.top + chartHeight/2} textAnchor="middle" fontSize="11" fill={theme.textSecondary} transform={`rotate(-90, ${margin.left - 30}, ${margin.top + chartHeight/2})`}>左壁</text>
+          <text x={margin.left + chartWidth + 30} y={margin.top + chartHeight/2} textAnchor="middle" fontSize="11" fill={theme.textSecondary} transform={`rotate(90, ${margin.left + chartWidth + 30}, ${margin.top + chartHeight/2})`}>右壁</text>
           
           {/* 直接音の経路 */}
           <SoundPath 
             points={[speaker, listener]}
-            color="#2c3e50"
+            color={theme.directSound}
             strokeWidth="4"
             label="直接音"
             markerEnd="url(#directArrow)"
@@ -114,7 +155,7 @@ const SoundPropagationChart = () => {
           {/* 初期反射音の経路（複数パス） */}
           <SoundPath 
             points={[speaker, ceilingReflection, listener]}
-            color="#ff6b6b"
+            color={theme.earlyReflection}
             strokeWidth="3"
             strokeDasharray="8 4"
             label="天井反射"
@@ -122,14 +163,14 @@ const SoundPropagationChart = () => {
           />
           <SoundPath 
             points={[speaker, leftWallReflection, listener]}
-            color="#ff6b6b"
+            color={theme.earlyReflection}
             strokeWidth="3"
             strokeDasharray="8 4"
             markerEnd="url(#earlyArrow)"
           />
           <SoundPath 
             points={[speaker, floorReflection, listener]}
-            color="#ff6b6b"
+            color={theme.earlyReflection}
             strokeWidth="3"
             strokeDasharray="8 4"
             markerEnd="url(#earlyArrow)"
@@ -138,55 +179,55 @@ const SoundPropagationChart = () => {
           {/* 後期反射音の経路（複雑な経路の例) */}
           <SoundPath 
             points={[speaker, rightWallReflection, ceilingReflection, leftWallReflection, listener]}
-            color="#95a5a6"
+            color={theme.lateReflection}
             strokeWidth="2"
             strokeDasharray="3 3"
             markerEnd="url(#lateArrow)"
           />
           
           {/* 反射点 */}
-          <circle cx={scaleX(ceilingReflection.x)} cy={scaleY(ceilingReflection.y)} r="4" fill="#feca57" stroke="#fff" strokeWidth="1" />
-          <circle cx={scaleX(leftWallReflection.x)} cy={scaleY(leftWallReflection.y)} r="4" fill="#feca57" stroke="#fff" strokeWidth="1" />
-          <circle cx={scaleX(rightWallReflection.x)} cy={scaleY(rightWallReflection.y)} r="4" fill="#feca57" stroke="#fff" strokeWidth="1" />
-          <circle cx={scaleX(floorReflection.x)} cy={scaleY(floorReflection.y)} r="4" fill="#feca57" stroke="#fff" strokeWidth="1" />
+          <circle cx={scaleX(ceilingReflection.x)} cy={scaleY(ceilingReflection.y)} r="4" fill={theme.reflection} stroke={theme.surface} strokeWidth="1" />
+          <circle cx={scaleX(leftWallReflection.x)} cy={scaleY(leftWallReflection.y)} r="4" fill={theme.reflection} stroke={theme.surface} strokeWidth="1" />
+          <circle cx={scaleX(rightWallReflection.x)} cy={scaleY(rightWallReflection.y)} r="4" fill={theme.reflection} stroke={theme.surface} strokeWidth="1" />
+          <circle cx={scaleX(floorReflection.x)} cy={scaleY(floorReflection.y)} r="4" fill={theme.reflection} stroke={theme.surface} strokeWidth="1" />
           
           {/* スピーカー */}
           <polygon 
             points={`${scaleX(speaker.x)},${scaleY(speaker.y)-12} ${scaleX(speaker.x)-10},${scaleY(speaker.y)+6} ${scaleX(speaker.x)+10},${scaleY(speaker.y)+6}`}
-            fill="#e74c3c" 
-            stroke="#fff" 
+            fill={theme.speaker}
+            stroke={theme.surface}
             strokeWidth="2" 
           />
-          <text x={scaleX(speaker.x)} y={scaleY(speaker.y) + 25} textAnchor="middle" fontSize="12" fontWeight="bold" fill="#e74c3c">
+          <text x={scaleX(speaker.x)} y={scaleY(speaker.y) + 25} textAnchor="middle" fontSize="12" fontWeight="bold" fill={theme.speaker}>
             スピーカー
           </text>
           
           {/* リスナー */}
-          <circle cx={scaleX(listener.x)} cy={scaleY(listener.y)} r="10" fill="#3498db" stroke="#fff" strokeWidth="2" />
-          <circle cx={scaleX(listener.x)} cy={scaleY(listener.y)} r="5" fill="#fff" />
-          <text x={scaleX(listener.x)} y={scaleY(listener.y) + 25} textAnchor="middle" fontSize="12" fontWeight="bold" fill="#3498db">
+          <circle cx={scaleX(listener.x)} cy={scaleY(listener.y)} r="10" fill={theme.listener} stroke={theme.surface} strokeWidth="2" />
+          <circle cx={scaleX(listener.x)} cy={scaleY(listener.y)} r="5" fill={theme.surface} />
+          <text x={scaleX(listener.x)} y={scaleY(listener.y) + 25} textAnchor="middle" fontSize="12" fontWeight="bold" fill={theme.listener}>
             リスナー
           </text>
           
           {/* 軸ラベル */}
-          <text x={margin.left + chartWidth/2} y={svgHeight - 15} textAnchor="middle" fontSize="12" fill="#333">
+          <text x={margin.left + chartWidth/2} y={svgHeight - 15} textAnchor="middle" fontSize="12" fill={theme.text}>
             部屋の幅 (m)
           </text>
-          <text x={20} y={margin.top + chartHeight/2} textAnchor="middle" fontSize="12" fill="#333" transform={`rotate(-90, 20, ${margin.top + chartHeight/2})`}>
+          <text x={20} y={margin.top + chartHeight/2} textAnchor="middle" fontSize="12" fill={theme.text} transform={`rotate(-90, 20, ${margin.top + chartHeight/2})`}>
             部屋の奥行 (m)
           </text>
           
           {/* 目盛り */}
           {[0, 2, 4, 6, 8].map(x => (
             <g key={x}>
-              <line x1={scaleX(x)} y1={margin.top + chartHeight} x2={scaleX(x)} y2={margin.top + chartHeight + 5} stroke="#333" />
-              <text x={scaleX(x)} y={margin.top + chartHeight + 18} textAnchor="middle" fontSize="10" fill="#333">{x}</text>
+              <line x1={scaleX(x)} y1={margin.top + chartHeight} x2={scaleX(x)} y2={margin.top + chartHeight + 5} stroke={theme.text} strokeWidth="1" />
+              <text x={scaleX(x)} y={margin.top + chartHeight + 18} textAnchor="middle" fontSize="10" fill={theme.text}>{x}</text>
             </g>
           ))}
           {[0, 1, 2, 3, 4, 5].map(y => (
             <g key={y}>
-              <line x1={margin.left - 5} y1={scaleY(y)} x2={margin.left} y2={scaleY(y)} stroke="#333" />
-              <text x={margin.left - 8} y={scaleY(y) + 3} textAnchor="end" fontSize="10" fill="#333">{y}</text>
+              <line x1={margin.left - 5} y1={scaleY(y)} x2={margin.left} y2={scaleY(y)} stroke={theme.text} strokeWidth="1" />
+              <text x={margin.left - 8} y={scaleY(y) + 3} textAnchor="end" fontSize="10" fill={theme.text}>{y}</text>
             </g>
           ))}
         </svg>
@@ -199,38 +240,39 @@ const SoundPropagationChart = () => {
         gap: '24px', 
         marginTop: '16px',
         fontSize: '12px',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        color: theme.text
       }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ 
             width: '20px', 
             height: '3px', 
-            backgroundColor: '#2c3e50', 
+            backgroundColor: theme.directSound, 
             marginRight: '6px' 
           }}></div>
-          <span><strong>直接音</strong>（最短経路）</span>
+          <span style={{ color: theme.text }}><strong>直接音</strong>（最短経路）</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ 
             width: '20px', 
             height: '3px', 
-            backgroundColor: '#ff6b6b', 
+            backgroundColor: theme.earlyReflection, 
             marginRight: '6px',
             borderStyle: 'dashed',
             borderWidth: '0 0 3px 0'
           }}></div>
-          <span><strong>初期反射音</strong>（1回反射）</span>
+          <span style={{ color: theme.text }}><strong>初期反射音</strong>（1回反射）</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ 
             width: '20px', 
             height: '2px', 
-            backgroundColor: '#95a5a6', 
+            backgroundColor: theme.lateReflection, 
             marginRight: '6px',
             borderStyle: 'dotted',
             borderWidth: '0 0 2px 0'
           }}></div>
-          <span><strong>後期反射音</strong>（複数回反射）</span>
+          <span style={{ color: theme.text }}><strong>後期反射音</strong>（複数回反射）</span>
         </div>
       </div>
       
@@ -238,17 +280,18 @@ const SoundPropagationChart = () => {
       <div style={{ 
         marginTop: '16px', 
         fontSize: '12px', 
-        color: '#666',
+        color: theme.text,
         textAlign: 'left',
         maxWidth: '600px',
         margin: '16px auto 0',
-        backgroundColor: '#f8f9fa',
+        backgroundColor: theme.surface,
         padding: '12px',
-        borderRadius: '6px'
+        borderRadius: '6px',
+        border: `1px solid ${theme.border}`
       }}>
-        <p><strong>直接音（実線）:</strong> スピーカーから壁に当たることなくリスナーに直接届く音</p>
-        <p><strong>初期反射音（破線）:</strong> 壁・床・天井で1回反射してリスナーに届く音</p>
-        <p><strong>後期反射音（点線）:</strong> 複数回反射を繰り返して遅れて届く残響音</p>
+        <p><strong style={{ color: theme.text }}>直接音（実線）:</strong> スピーカーから壁に当たることなくリスナーに直接届く音</p>
+        <p><strong style={{ color: theme.text }}>初期反射音（破線）:</strong> 壁・床・天井で1回反射してリスナーに届く音</p>
+        <p><strong style={{ color: theme.text }}>後期反射音（点線）:</strong> 複数回反射を繰り返して遅れて届く残響音</p>
       </div>
     </div>
   )
