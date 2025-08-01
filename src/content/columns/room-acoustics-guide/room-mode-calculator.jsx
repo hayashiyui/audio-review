@@ -106,26 +106,35 @@ const RoomModeCalculator = () => {
 
   const problematicModes = findProblematicModes(allModes)
 
-  // おすすめの部屋比率かチェック
+  // おすすめの部屋比率かチェック（業界標準：最長辺を1として正規化）
   const checkRoomRatio = () => {
-    const ratio1 = dimensions.length / dimensions.width
-    const ratio2 = dimensions.length / dimensions.height
-    const ratio3 = dimensions.width / dimensions.height
+    // 三辺を降順ソートして最長辺を基準にする
+    const dims = [dimensions.length, dimensions.width, dimensions.height].sort((a, b) => b - a)
+    const [Lmax, Lmid, Lmin] = dims
+    
+    // 最長辺を1とした正規化比率
+    const ratioMid = Lmid / Lmax  // 中間辺 / 最長辺
+    const ratioMin = Lmin / Lmax  // 最短辺 / 最長辺
     
     // 推奨比率：黄金比系（1:1.6:2.6）とBolt推奨比率
-    const goldenRatio = 1.618  // 1:1.618
-    const goldenRatio2 = 2.618 // 1:2.618 (φ²)
-    const boltRatio1 = 1.6     // Bolt推奨
-    const boltRatio2 = 2.3     // Bolt推奨
+    const goldenRatioMid = 1.0 / 1.618  // ≈ 0.618
+    const goldenRatioMin = 1.0 / 2.618  // ≈ 0.382
+    const boltRatioMid = 1.0 / 1.6      // = 0.625
+    const boltRatioMin = 1.0 / 2.3      // ≈ 0.435
     
+    // 許容範囲での判定
     const isGoodRatio = (
-      Math.abs(ratio1 - goldenRatio) < 0.15 ||
-      Math.abs(ratio1 - boltRatio1) < 0.15 ||
-      Math.abs(ratio2 - goldenRatio2) < 0.2 ||
-      Math.abs(ratio2 - boltRatio2) < 0.2
+      (Math.abs(ratioMid - goldenRatioMid) < 0.08 && Math.abs(ratioMin - goldenRatioMin) < 0.08) ||
+      (Math.abs(ratioMid - boltRatioMid) < 0.08 && Math.abs(ratioMin - boltRatioMin) < 0.08) ||
+      // その他のBolt推奨比率
+      (ratioMid > 0.55 && ratioMid < 0.75 && ratioMin > 0.35 && ratioMin < 0.50)
     )
     
-    return { isGood: isGoodRatio, ratios: [ratio1, ratio2, ratio3] }
+    return { 
+      isGood: isGoodRatio, 
+      ratios: [1.0, ratioMid, ratioMin],  // 1 : ratioMid : ratioMin の形
+      dimensions: [Lmax, Lmid, Lmin]  // ソートされた寸法も返す
+    }
   }
 
   const roomRatioCheck = checkRoomRatio()
@@ -234,11 +243,17 @@ const RoomModeCalculator = () => {
         <div style={{ fontSize: '12px', color: theme.text }}>
           {roomRatioCheck.isGood ? 
             '✅ 良好な比率です！モード問題が比較的少ない部屋です。' :
-            '⚠️  問題の多い比率です。黄金比（1:1.6:2.6）に近づけると改善されます。'
+            '⚠️  問題の多い比率です。黄金比（1:1.6:2.6 = 1:0.62:0.38）やBolt推奨比率に近づけると改善されます。'
           }
         </div>
         <div style={{ fontSize: '11px', color: theme.textSecondary, marginTop: '4px' }}>
-          現在の比率: {roomRatioCheck.ratios.map(r => r.toFixed(2)).join(' : ')}
+          <div>現在の比率（最長辺基準）: {roomRatioCheck.ratios.map(r => r.toFixed(2)).join(' : ')}</div>
+          <div style={{ marginTop: '2px' }}>
+            寸法順: {roomRatioCheck.dimensions.map(d => d.toFixed(1)).join('m × ')}m
+          </div>
+          <div style={{ marginTop: '2px', fontSize: '10px' }}>
+            推奨: 1:0.62:0.38（黄金比系）、1:0.63:0.43（Bolt推奨）
+          </div>
         </div>
       </div>
 
