@@ -335,6 +335,7 @@ const RoomModeCalculator = () => {
 
       {/* 対策のヒント */}
       <div style={{ 
+        marginTop: '20px',
         padding: '16px', 
         backgroundColor: theme.infoBg, 
         borderRadius: '8px',
@@ -349,11 +350,11 @@ const RoomModeCalculator = () => {
           💡 対策のヒント
         </h5>
         <div style={{ fontSize: '12px', lineHeight: 1.5, color: theme.text }}>
-          <p><strong>最も効果的な対策：</strong></p>
           <ul style={{ margin: '8px 0', paddingLeft: '16px' }}>
-            <li>コーナー（特に低い周波数のモード周辺）にベーストラップを配置</li>
-            <li>リスナー位置を部屋の中央から避ける（節の位置を避ける）</li>
-            <li>家具の配置でモードの腹・節の位置を調整</li>
+            <li>コーナー（低域モードの腹）にベーストラップを配置</li>
+            <li>リスナー位置を部屋の中央からずらし、主要モードの節を避ける</li>
+            <li>スピーカー／サブウーファーの位置を調整し、問題モードの励起を抑える</li>
+            <li>大型家具や本棚などを腹に配置してピークを緩和（位置自体は変わらないが強さを下げる）</li>
           </ul>
           <p style={{ fontSize: '11px', color: theme.textSecondary, marginTop: '8px' }}>
             ※ 100Hz以下のモードが特に問題となりやすいです
