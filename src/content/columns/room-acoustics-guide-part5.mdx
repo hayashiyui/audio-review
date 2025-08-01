@@ -1,0 +1,501 @@
+---
+title: "実践的ルームアコースティック完全ガイド【第5部】実践的音響処理ガイド"
+description: "ベーストラップから拡散材まで、物理的な音響処理の決定版。DIY製作方法、材料選定、効果的な配置戦略を詳解。低域モードと初期反射を征服し、理想の音響空間を実現。【6部作シリーズ第5部】"
+date: "2025-08-01T13:00:00"
+category: "技術解説"
+tags: ["ルームアコースティック完全ガイド", "ルームアコースティック", "ベーストラップ", "吸音材", "拡散材", "QRD", "グラスウール", "音響パネル", "DIY"]
+---
+import AbsorptionComparisonChart from './room-acoustics-guide/absorption-comparison-chart.astro'
+
+## **🎯 シリーズ目次**
+**【実践的ルームアコースティック完全ガイド】6部作シリーズ**
+
+1. [【第1部】序論・部屋の音響物理学](./room-acoustics-guide-part1)
+2. [【第2部】音響目標の定義：設計思想と国際基準](./room-acoustics-guide-part2)
+3. [【第3部】診断：自室の音響特性を測定し解釈する](./room-acoustics-guide-part3)
+4. [【第4部】スピーカーとリスナーの配置最適化](./room-acoustics-guide-part4)
+5. **【第5部】実践的音響処理ガイド** ← 現在のページ
+6. [【第6部】デジタル補正と理想の音響空間](./room-acoustics-guide-part6)
+
+---
+
+## **目次（第5部）**
+1. [低音域への取り組み：明瞭性の基盤](#section-5-1)
+2. [中高音域の制御：音場を彫刻する](#section-5-2)
+3. [施工の実際と注意点](#section-5-3)
+4. [総合的な音響処理戦略](#section-5-4)
+
+---
+
+<h2 id="chapter-5">**第5章：介入：実践的音響処理ガイド**</h2>
+
+### **📋 この章で学べること**
+- ベーストラップの理論と効果的な配置戦略
+- 吸音と拡散の使い分けと一次反射点の処理
+- DIY音響パネルの詳細な製作方法
+- 予算とスキルレベルに応じた実践的ソリューション
+
+スピーカーとリスナーの配置を最適化した後、それでも残る音響的な問題を解決するため、いよいよ物理的な音響処理材を導入します。この章では、音響問題の王様である「低音（ベース）」の制御から始め、次に音像定位と空間表現の鍵を握る「中高音」の反射制御へと進みます。
+
+<h3 id="section-5-1">**5.1. 低音域（〜約300 Hz）への取り組み：明瞭性の基盤**</h3>
+
+小部屋において最も支配的で聴感上の影響が大きいのは、ルームモードによる低音域の乱れです。この帯域のレスポンスが不均一だと、中高域の繊細なディテールがマスキングされ、音楽全体の土台が崩れてしまいます。
+
+#### **5.1.1. ベーストラップの理論と種類**
+
+低周波エネルギーを吸収する音響処理材を総称して「ベーストラップ」と呼びます。その動作原理によって、主に2つのタイプに大別されます。
+
+**多孔質吸音材（速度型吸音材）の物理学：**
+
+グラスウールやロックウールといった高密度の繊維系素材が代表例です <sup>[29](#ref-29)</sup>。音波がこの素材を通過する際、空気粒子の振動（速度）が繊維との摩擦によって熱エネルギーに変換されることで音を吸収します。
+
+**吸音係数の周波数特性：**
+```
+厚さと低域吸音の関係：
+λ/4の厚さで最大吸音
+100Hz → 86cm
+200Hz → 43cm
+500Hz → 17cm
+```
+
+**圧力型吸音材の種類と特性：**
+
+| タイプ | 動作原理 | 有効周波数 | 帯域幅 | 製作難易度 |
+|-------|---------|----------|--------|-----------|
+| 板振動型 | 質量と剛性による共振 | 50-200Hz | 狭〜中 | 中 |
+| 膜振動型 | 膜の共振 | 30-150Hz | 狭 | 高 |
+| ヘルムホルツ共鳴器 | 空洞共振 | 20-200Hz | 極狭 | 極高 |
+| 複合型 | 上記の組み合わせ | 30-300Hz | 広 | 高 |
+
+#### **5.1.2. 戦略的配置：コーナーこそが最重要拠点**
+
+ベーストラップをどこに置くべきか？その答えは明確です。**部屋のコーナー（隅）**です <sup>[5](#ref-5)</sup>。
+
+**コーナーの音圧分布：**
+```
+音圧レベル（相対値）：
+三面交差点（天井-壁-壁）：+9dB
+二面交差点（壁-壁）：+6dB
+壁面中央：+3dB
+部屋中央：0dB（基準）
+```
+
+**優先順位別コーナー配置：**
+
+1. **最優先：床-壁-壁の三面交差点**（4箇所）
+2. **優先：天井-壁-壁の三面交差点**（4箇所）
+3. **次点：垂直エッジ（壁-壁）**（4箇所）
+4. **補助：水平エッジ（壁-天井、壁-床）**
+
+#### **5.1.3. 実践的解決策：DIYと市販品**
+
+#### **音響材料の周波数特性比較**
+
+<AbsorptionComparisonChart />
+
+**グラフの読み方：**
+- **スーパーチャンク（黄）**：全帯域で高い吸音率、特に低域でも効果的
+- **グラスウール10cm（緑）**：中高域で優秀、低域もある程度カバー
+- **グラスウール5cm（青）**：中高域メイン、低域は限定的
+- **薄いカーテン（赤）**：高域のみ、過度な使用は音を死なせる
+
+**DIYスーパーチャンク型ベーストラップ詳細ガイド：**
+
+**材料リスト（1本あたり）：**
+| 材料 | 仕様 | 数量 | 概算費用 |
+|-----|------|-----|---------|
+| 断熱材 | グラスウール24K-50mm | 10枚 | 5,000円 |
+| 透過布 | スピーカーグリル用 | 3m² | 2,000円 |
+| 木材（任意） | 1×2材 | 4m | 1,000円 |
+| その他 | タッカー針、接着剤等 | - | 1,000円 |
+
+**製作手順詳細：**
+
+1. **断熱材の準備**
+   ```
+   カット方法：
+   □（50×50cm）→ △△（直角二等辺三角形）
+   必要枚数：床から天井まで（240cmなら48枚）
+   ```
+
+2. **積層方法**
+   - 最下部に木材で土台を作成（任意）
+   - 三角形を隙間なく積み上げ
+   - 2-3枚ごとに位置を確認
+
+3. **仕上げ**
+   - 布を前面にピンと張る
+   - 側面も布で覆う（見栄え向上）
+   - タッカーで確実に固定
+
+**効果の実測例：**
+```
+63Hz：-8dB改善
+125Hz：-6dB改善
+250Hz：-4dB改善
+```
+
+**DIYパネル型ベーストラップ：**
+
+**ストラドルマウント（コーナー設置）の効果：**
+```
+壁面密着：低域吸音係数 0.2-0.3
+15cm離し：低域吸音係数 0.4-0.6
+30cm離し：低域吸音係数 0.6-0.8
+```
+
+**市販品オプションの詳細比較：**
+
+| 製品カテゴリ | 代表製品 | 価格帯 | 効果 | 設置難易度 |
+|------------|---------|--------|------|-----------|
+| チューブトラップ | ASC TubeTrap | 5-10万円/本 | 高 | 易 |
+| パネル型 | RealTraps MondoTrap | 10-15万円/4枚 | 高 | 中 |
+| アクティブ型 | PSI AVAA C20 | 40-50万円/台 | 極高 | 易 |
+| DIYキット | GIK Acoustics | 3-5万円/4枚 | 中-高 | 中 |
+
+<h3 id="section-5-2">**5.2. 中高音域（〜約300 Hz以上）の制御：音場を彫刻する**</h3>
+
+低音の土台が固まったら、次は音像定位、明瞭度、空間の広がり感を決定づける中高音域の反射音制御に移ります。
+
+#### **5.2.1. 一次反射点の特定と処理**
+
+**ミラーテクニックの詳細手順：**
+
+1. **必要機材**
+   - 手鏡（30×40cm程度）
+   - 助手（または鏡固定器具）
+   - マスキングテープ
+
+2. **特定手順**
+   ```
+   リスナー視点での確認順序：
+   1. 左スピーカー → 左壁反射点
+   2. 右スピーカー → 右壁反射点
+   3. 両スピーカー → 天井反射点
+   4. 両スピーカー → 床反射点（カーペットなら不要）
+   ```
+
+3. **マーキング**
+   - 反射点の中心をマーク
+   - パネルサイズの輪郭も記載
+
+**反射点の優先順位：**
+
+| 反射面 | 影響度 | 処理の必要性 | 推奨処理 |
+|-------|--------|------------|---------|
+| 側壁（1次） | 極大 | 必須 | 吸音 or 拡散 |
+| 天井（1次） | 大 | 強く推奨 | 吸音 |
+| 床 | 大 | カーペットで可 | 吸音 |
+| 後壁 | 中 | 推奨 | 拡散 |
+| 前壁 | 小-中 | 任意 | 吸音 or 拡散 |
+
+#### **5.2.2. 大いなる論争：吸音か、拡散か？**
+
+一次反射点を特定したら、そこを「吸音」すべきか「拡散」すべきかという、ルームチューニングにおける中心的な問いに直面します。
+
+**科学的判断基準：**
+
+```
+決定フローチャート：
+                    一次反射点
+                        ↓
+              反射点までの距離は？
+              ↓                ↓
+           1m未満            1m以上
+              ↓                ↓
+      音場の好みは？      音場の好みは？
+      ↓         ↓        ↓         ↓
+    タイト    広い     タイト    広い
+      ↓         ↓        ↓         ↓
+   厚い吸音  薄い吸音  1D拡散   2D拡散
+```
+
+**吸音と拡散の定量的比較：**
+
+| 処理方法 | 反射音エネルギー | 時間的拡散 | 空間的拡散 | 音場への影響 |
+|---------|---------------|----------|----------|------------|
+| 吸音（10cm厚） | -20dB以上 | なし | なし | デッド、明瞭 |
+| 吸音（5cm厚） | -10dB程度 | なし | なし | ややデッド |
+| 1D拡散 | -3dB程度 | 中 | 一方向 | 自然、広がり |
+| 2D拡散 | -3dB程度 | 大 | 全方向 | 豊か、包囲感 |
+
+#### **5.2.3. 吸音パネルの製作**
+
+**高性能DIY吸音パネル詳細ガイド：**
+
+**材料選定ガイド：**
+
+| 吸音材 | 密度 | 厚さ | 用途 | 費用/m² |
+|-------|------|------|------|---------|
+| グラスウール32K | 32kg/m³ | 50mm | 中高域 | 1,500円 |
+| グラスウール48K | 48kg/m³ | 100mm | 広帯域 | 2,500円 |
+| ロックウール60K | 60kg/m³ | 100mm | 低域まで | 3,000円 |
+| ポリエステル吸音材 | - | 50mm | アレルギー対策 | 4,000円 |
+
+**製作手順（60×120cmパネル）：**
+
+1. **フレーム製作**
+   ```
+   材料カット：
+   - 長辺：120cm × 2本
+   - 短辺：56cm × 2本（内寸60cm）
+   - 深さ：吸音材厚+1cm
+   ```
+
+2. **背面処理**
+   - 不織布で背面を覆う
+   - 周囲をタッカー固定
+   - 吸音材の脱落防止
+
+3. **吸音材設置**
+   - フレームに隙間なく充填
+   - 圧縮は厳禁（性能低下）
+   - 複数枚の場合は隙間をなくす
+
+4. **仕上げ布張り**
+   - 布に適度なテンションをかける
+   - シワが寄らないよう注意
+   - 裏面で確実に固定
+
+**吸音性能の向上テクニック：**
+- 背面に空気層を設ける（低域効果向上）
+- 異なる密度の材料を層状に配置
+- 表面に薄い多孔板を追加（中域調整）
+
+#### **5.2.4. 拡散パネルの芸術**
+
+**QRD（二次剰余拡散器）の設計と製作：**
+
+**設計パラメータ：**
+```
+設計周波数 = c / (2 × 最大深さ)
+例：最大深さ10cm → 1,715Hz
+
+Well幅 = c / (2 × 上限周波数)
+例：上限5kHz → 3.4cm
+```
+
+**オンライン設計ツール活用：**
+1. QRDude：最も使いやすい無料ツール
+2. 入力パラメータ：
+   - Design frequency（設計周波数）
+   - Prime number（素数：7, 11, 13等）
+   - Number of periods（周期数）
+
+**DIY製作の実際：**
+
+**材料と工具：**
+| 項目 | 仕様 | 数量 | 費用 |
+|-----|------|-----|------|
+| 木材 | MDF 15mm厚 | 2枚 | 3,000円 |
+| 仕切り板 | MDF 5mm厚 | 必要分 | 2,000円 |
+| 接着剤 | 木工用ボンド | 1本 | 500円 |
+| 工具 | ノコギリ、定規等 | - | - |
+
+**製作手順：**
+1. 設計値に基づいて各wellの深さを決定
+2. 背板と仕切り板をカット
+3. 仕切り板を正確な間隔で接着
+4. 各wellに深さ調整材を接着
+
+**簡易版拡散パネルの代替案：**
+- 本棚（本の配置をランダムに）
+- スカイラインディフューザー（角材使用）
+- 市販の装飾パネル活用
+
+<h3 id="section-5-3">**5.3. 施工の実際と注意点**</h3>
+
+#### **賃貸物件での原状回復可能な設置方法**
+
+**設置方法別比較：**
+
+| 方法 | 耐荷重 | 原状回復 | コスト | 適用パネル |
+|-----|--------|---------|--------|-----------|
+| 突っ張り棒システム | 10kg程度 | ◎ | 低 | 軽量パネル |
+| ピクチャーレール | 20kg程度 | ◎ | 中 | 中重量パネル |
+| 床置きスタンド | 制限なし | ◎ | 高 | 全て |
+| 粘着フック | 5kg程度 | ○ | 低 | 軽量パネル |
+| マジックテープ | 10kg程度 | △ | 低 | 中軽量パネル |
+
+**突っ張り棒システムの詳細：**
+```
+設置例：
+天井 ━━━━━━━━━━━━
+     │  │（突っ張り棒）
+     │  │
+   [パネル]（結束バンドで固定）
+     │  │
+床   ━━━━━━━━━━━━
+```
+
+#### **安全面の注意事項**
+
+**必須の安全対策：**
+
+1. **材料取扱時**
+   - 防塵マスク（N95推奨）着用
+   - 保護手袋着用
+   - 保護メガネ着用
+   - 換気の確保
+
+2. **設置時**
+   - パネルの確実な固定
+   - 地震対策（転倒防止）
+   - 定期的な点検
+
+3. **メンテナンス**
+   - 月1回の固定確認
+   - 半年ごとの清掃
+   - 材料の劣化チェック
+
+<h3 id="section-5-4">**5.4. 総合的な音響処理戦略**</h3>
+
+#### **部屋全体の処理バランス**
+
+**理想的な処理配分：**
+```
+低音処理（ベーストラップ）：40%
+一次反射点処理：30%
+拡散処理：20%
+その他（天井雲等）：10%
+```
+
+#### **段階的実施プラン**
+
+**フェーズ1（必須）：**
+- [ ] コーナーベーストラップ（最低2本）
+- [ ] 側壁一次反射点処理
+- 予算：2-3万円
+- 期待効果：低域の大幅改善
+
+**フェーズ2（推奨）：**
+- [ ] 追加ベーストラップ（計4本）
+- [ ] 天井反射点処理
+- [ ] 後壁拡散処理
+- 予算：3-5万円
+- 期待効果：全帯域でバランス改善
+
+**フェーズ3（理想）：**
+- [ ] 全コーナー処理
+- [ ] 前壁処理
+- [ ] 追加拡散材
+- 予算：5万円以上
+- 期待効果：プロ級の音響環境
+
+---
+
+## **📚 次回予告**
+
+第6部では、物理的な音響処理を土台として、さらなる高みを目指すためのデジタル補正技術と、継続的な改善のための総合的アプローチについて詳しく解説します。
+
+**【第6部】デジタル補正と理想の音響空間**
+- デジタルルームコレクション（DRC）の導入と活用法
+- 物理的処理とデジタル処理の最適な組み合わせ
+- 継続的な改善のための測定・評価・調整サイクル
+- トラブルシューティングと高度な音響制御技術
+
+→ [【第6部】デジタル補正と理想の音響空間](./room-acoustics-guide-part6)
+
+---
+
+## **参考文献**
+
+### **基本文献**
+
+1. **石井 伸一郎, 高橋 賢一. (2014).** 『改訂増補 リスニングルームの音響学 断然音がよくなる! 視聴ルームの設計・測定・改造法』. 誠文堂新光社.
+   - 日本の住環境に特化した実践的指南書
+   - 石井式の理論と実践を詳述
+
+2. **Toole, Floyd E. (2008).** *Sound Reproduction: The Acoustics and Psychoacoustics of Loudspeakers and Rooms*. Focal Press.
+   - 現代の室内音響学の決定版
+   - 心理音響学的アプローチ
+
+3. **Everest, F. Alton. (2014).** *Master Handbook of Acoustics* (6th Edition). McGraw-Hill.
+   - 音響工学の包括的参考書
+   - 実践的な設計例が豊富
+
+### **技術論文・資料**
+
+4. **White, Glenn D.** "Small Room Acoustics De-Mythologized". AudioControl.
+   - 小部屋音響の誤解を解く
+
+5. **Noxon, Arthur M. (1986).** "Room Acoustics and Low Frequency Damping". AES Convention Paper.
+   - ベーストラップの理論的基礎
+
+6. **Walker, R.** "A Controlled-Reflection Listening Room for Multichannel Sound". Proceedings of the Institute of Acoustics.
+   - 制御反射室の設計理論
+
+### **オンラインリソース**
+
+7. **Room EQ Wizard (REW)**
+   - 公式サイト：https://www.roomeqwizard.com/
+   - フォーラム：https://www.avnirvana.com/forums/rew.10/
+
+8. **Acoustic Sciences Corporation**
+   - 技術論文：https://www.acousticsciences.com/technical-papers/
+   - TubeTrap開発元
+
+9. **GearSpace (旧GearSlutz)**
+   - Studio Building / Acoustics：https://gearspace.com/board/studio-building-acoustics/
+   - 世界最大の音響フォーラム
+
+### **日本語リソース**
+
+10. **ファイ・オーディオ**
+    - 石井式解説：https://www.phiaudio.com/
+    - 測定サービス情報
+
+11. **オーディナリーサウンド**
+    - REW日本語解説：https://ordinarysound.com/
+    - 実践的なガイド多数
+
+12. **Lo-Fi Audio ブログ**
+    - ルームアコースティック連載: https://naseba.exblog.jp/tags/room%20acoustic/
+    - 理論と実践のバランスが良い
+
+---
+
+## **引用文献一覧**
+
+<span id="ref-1">1</span>. 究極のオーディオルームをつくりたい【前編】「石井式リスニング ...,  [https://www.daiwahouse.co.jp/tryie/column/view/ishii_listening_room/](https://www.daiwahouse.co.jp/tryie/column/view/ishii_listening_room/)  
+<span id="ref-2">2</span>. Small Room Acoustics De-Mythologized \- AudioControl,  [https://www.audiocontrol.com/downloads/tech-papers/tech-paper-107.pdf](https://www.audiocontrol.com/downloads/tech-papers/tech-paper-107.pdf)  
+<span id="ref-3">3</span>. ルムアコ-1 : Lo-Fi Audio,  [https://naseba.exblog.jp/28702435/](https://naseba.exblog.jp/28702435/)  
+<span id="ref-4">4</span>. スタジオ音響設計の基礎｜日本音響エンジニアリング,  [https://www.noe.co.jp/technology/16/16std2.html](https://www.noe.co.jp/technology/16/16std2.html)  
+<span id="ref-5">5</span>. Room Acoustics and Low Frequency Damping (AES-1986) \- ASC,  [https://www.acousticsciences.com/technical-papers/room-acoustics-and-low-frequency-damping/](https://www.acousticsciences.com/technical-papers/room-acoustics-and-low-frequency-damping/)  
+<span id="ref-6">6</span>. ルムアコ-2 : Lo-Fi Audio,  [https://naseba.exblog.jp/29002258/](https://naseba.exblog.jp/29002258/)  
+<span id="ref-7">7</span>. ルムアコ-7 : Lo-Fi Audio,  [https://naseba.exblog.jp/29111775/](https://naseba.exblog.jp/29111775/)  
+<span id="ref-8">8</span>. スピーカーセッティング高域 反射編 – Monster Audio,  [https://audio-monster.com/?p=1233](https://audio-monster.com/?p=1233)  
+<span id="ref-9">9</span>. ルームチューニング序文part33 1/3 1次反射とコンサートホール ...,  [https://audio-monster.com/?p=627](https://audio-monster.com/?p=627)  
+<span id="ref-10">10</span>. オーディオルームに適した部屋とは？ルームチューニングについて | 音楽を聴く、ブログを書く,  [https://highend-life.com/2019/08/listeningroom-roomtuning.html/](https://highend-life.com/2019/08/listeningroom-roomtuning.html/)  
+<span id="ref-11">11</span>. 改訂増補 リスニングルームの音響学 | 株式会社誠文堂新光社,  [https://www.seibundo-shinkosha.net/book/hobby/19529/](https://www.seibundo-shinkosha.net/book/hobby/19529/)  
+<span id="ref-12">12</span>. "石井式"での『良い音の3大要素』を徹底解説 － 「Acoustic Audio Forum」潜入レポート,  [https://www.phileweb.com/sp/review/column/201604/25/470.html](https://www.phileweb.com/sp/review/column/201604/25/470.html)  
+<span id="ref-13">13</span>. 石井式の特徴 \- 石井式リスニングルーム,  [http://hoteiswebsite.c.ooco.jp/room/chpt01/001.htm](http://hoteiswebsite.c.ooco.jp/room/chpt01/001.htm)  
+<span id="ref-14">14</span>. ルムアコ-8 : Lo-Fi Audio,  [https://naseba.exblog.jp/29111882/](https://naseba.exblog.jp/29111882/)  
+<span id="ref-15">15</span>. Proceedings of the Institute of Acoustics \- A CONTROLLED ...,  [https://www.ioa.org.uk/system/files/proceedings/r\_walker\_a\_controlled\_reflection\_listening\_room\_for\_multichannel\_sound.pdf](https://www.ioa.org.uk/system/files/proceedings/r_walker_a_controlled_reflection_listening_room_for_multichannel_sound.pdf)  
+<span id="ref-16">16</span>. www.numberanalytics.com,  [https://www.numberanalytics.com/blog/iso-standards-architectural-acoustics-guide\#:\~:text=The%20ISO%20has%20developed%20a,buildings%20and%20of%20building%20elements](https://www.numberanalytics.com/blog/iso-standards-architectural-acoustics-guide#:~:text=The%20ISO%20has%20developed%20a,buildings%20and%20of%20building%20elements)  
+<span id="ref-17">17</span>. Mastering ISO Standards in Architectural Acoustics \- Number Analytics,  [https://www.numberanalytics.com/blog/ultimate-guide-iso-standards-architectural-acoustics](https://www.numberanalytics.com/blog/ultimate-guide-iso-standards-architectural-acoustics)  
+<span id="ref-18">18</span>. The ISO 3382 parameters \- ODEON Room Acoustics Software,  [https://www.odeon.dk/pdf/ISRA2013\_Paper\_The%20ISO%203382%20parameters\_Can%20we%20simulate%20them\_Can%20we%20measure%20them\_24July2013.pdf](https://www.odeon.dk/pdf/ISRA2013_Paper_The%20ISO%203382%20parameters_Can%20we%20simulate%20them_Can%20we%20measure%20them_24July2013.pdf)  
+<span id="ref-19">19</span>. Assessing the Acoustic Characteristics of Rooms: A Tutorial with Examples \- PMC,  [https://pmc.ncbi.nlm.nih.gov/articles/PMC6375510/](https://pmc.ncbi.nlm.nih.gov/articles/PMC6375510/)  
+<span id="ref-20">20</span>. Architectural Acoustics \- Acceptable Room Sound Levels \- Archtoolbox,  [https://www.archtoolbox.com/room-sound-levels/](https://www.archtoolbox.com/room-sound-levels/)  
+<span id="ref-21">21</span>. 石井式リスニングルーム \- asahi-net.or.jp,  [http://www.asahi-net.or.jp/\~up2j-knst/tube/listening-room.pdf](http://www.asahi-net.or.jp/~up2j-knst/tube/listening-room.pdf)  
+<span id="ref-22">22</span>. 石井式リスニングルームについて考える \- Acoustic Audio Forum \--,  [https://acaudio.jp/1263/](https://acaudio.jp/1263/)  
+<span id="ref-23">23</span>. Room EQ Wizard(REW)の使い方：音響測定ソフト | オーディナリー ...,  [https://ordinarysound.com/rew/](https://ordinarysound.com/rew/)  
+<span id="ref-24">24</span>. とのちのオーディオルーム 補足資料 初期設定,  [https://nobody-audio.com/img/HowToUseREW\_jp.pdf](https://nobody-audio.com/img/HowToUseREW_jp.pdf)  
+<span id="ref-25">25</span>. Room EQ Wizardで音響補正 \- えびサブレ \- ebiiim.com,  [https://blog.ebiiim.com/posts/rew-room-correction/](https://blog.ebiiim.com/posts/rew-room-correction/)  
+<span id="ref-26">26</span>. モニター・スピーカーを本来の音で正しく聴く \- EQを使ったルーム補正 \- シンタックスジャパン,  [https://synthax.jp/tutorials/articles/room-correction.html](https://synthax.jp/tutorials/articles/room-correction.html)  
+<span id="ref-27">27</span>. スピーカーセッティング 低音編まとめとtips – Monster Audio,  [https://audio-monster.com/?p=1229](https://audio-monster.com/?p=1229)  
+<span id="ref-28">28</span>. 製品データベース | オーディオユニオン,  [https://www.audiounion.jp/products/](https://www.audiounion.jp/products/)  
+<span id="ref-29">29</span>. 音響材料の基礎知識 - 日本音響材料協会,  [https://www.onzai.or.jp/](https://www.onzai.or.jp/)  
+<span id="ref-30">30</span>. ASC Tube Trap - Density Chart & Specifications,  [https://www.acousticsciences.com/products/tubetrap/](https://www.acousticsciences.com/products/tubetrap/)  
+<span id="ref-31">31</span>. RealTraps Product Guide - Bass Traps and Acoustic Panels,  [https://realtraps.com/products.htm](https://realtraps.com/products.htm)  
+<span id="ref-32">32</span>. PSI Audio AVAA Active Bass Trap,  [https://www.psiaudio.swiss/avaa/](https://www.psiaudio.swiss/avaa/)  
+<span id="ref-33">33</span>. GIK Acoustics - Acoustic Treatment Products,  [https://www.gikacoustics.com/](https://www.gikacoustics.com/)  
+<span id="ref-34">34</span>. QRDude Diffuser Design Software,  [http://www.subwoofer-builder.com/qrdude.htm](http://www.subwoofer-builder.com/qrdude.htm)  
+<span id="ref-35">35</span>. 賃貸でもOK！音響パネルの設置方法 - オーディオテクニカ,  [https://www.audio-technica.co.jp/](https://www.audio-technica.co.jp/)  
+<span id="ref-36">36</span>. 音響処理の安全対策ガイド - 労働安全衛生総合研究所,  [https://www.jniosh.johas.go.jp/](https://www.jniosh.johas.go.jp/)  
+<span id="ref-37">37</span>. 段階的音響改善計画 - Acoustic Treatment Planning Guide,  [https://acousticsolutions.com/](https://acousticsolutions.com/)  
+<span id="ref-38">38</span>. 部屋別音響処理ガイド - Room Acoustic Treatment by Size,  [https://primacoustic.com/](https://primacoustic.com/)  
+<span id="ref-39">39</span>. DIY音響処理の実践例 - Home Studio Acoustics,  [https://www.homestudiocorner.com/](https://www.homestudiocorner.com/)  
+<span id="ref-40">40</span>. 吸音・拡散材の選び方 - Acoustic Material Selection Guide,  [https://www.auralex.com/](https://www.auralex.com/)  
+<span id="ref-41">41</span>. 音響測定と改善の記録方法 - Audio Measurement Documentation,  [https://www.cross-spectrum.com/](https://www.cross-spectrum.com/)  
+<span id="ref-42">42</span>. 長期メンテナンス計画 - Acoustic Treatment Maintenance,  [https://www.acoustimac.com/](https://www.acoustimac.com/)

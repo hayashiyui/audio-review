@@ -1,0 +1,622 @@
+---
+title: "実践的ルームアコースティック完全ガイド【第6部】デジタル補正と理想の音響空間"
+description: "DRCからハイブリッドアプローチまで、最終的な磨き上げ技術を詳解。継続的改善サイクル、トラブルシューティング、そして理論から聴覚的至福への道。シリーズ完結編。【6部作シリーズ第6部・完結】"
+date: "2025-08-01T14:00:00"
+category: "技術解説"
+tags: ["ルームアコースティック完全ガイド", "ルームアコースティック", "DRC", "デジタル補正", "EQ", "miniDSP", "Dirac Live", "REW", "トラブルシューティング"]
+---
+import ImprovementProgressChart from './room-acoustics-guide/improvement-progress-chart.astro'
+
+## **🎯 シリーズ目次**
+**【実践的ルームアコースティック完全ガイド】6部作シリーズ**
+
+1. [【第1部】序論・部屋の音響物理学](./room-acoustics-guide-part1)
+2. [【第2部】音響目標の定義：設計思想と国際基準](./room-acoustics-guide-part2)
+3. [【第3部】診断：自室の音響特性を測定し解釈する](./room-acoustics-guide-part3)
+4. [【第4部】スピーカーとリスナーの配置最適化](./room-acoustics-guide-part4)
+5. [【第5部】実践的音響処理ガイド](./room-acoustics-guide-part5)
+6. **【第6部】デジタル補正と理想の音響空間** ← 現在のページ（完結編）
+
+---
+
+## **目次（第6部）**
+1. [デジタルルームコレクション（DRC）の導入](#section-6-1)
+2. [REWを使った実践的なEQ設定](#section-6-2)
+3. [反復のループ：漸進的改善の技術](#section-6-3)
+4. [高度な音響処理技術](#section-6-4)
+5. [トラブルシューティングガイド](#section-6-5)
+6. [最終調整とメンテナンス](#section-6-6)
+7. [**結論：理論から聴覚的至福へ**](#conclusion)
+8. [**付録**](#appendix)
+
+---
+
+<h2 id="chapter-6">**第6章：最終的な磨き上げ：高度技術とデジタル補正**</h2>
+
+### **📋 この章で学べること**
+- デジタルルームコレクション（DRC）の正しい理解と活用法
+- 物理的処理とデジタル処理の最適な組み合わせ
+- 測定データに基づく科学的なEQ設定
+- 継続的な改善のための反復プロセス
+
+物理的な音響処理によって部屋の基本的な性格を整えた後、最後の仕上げとして、より高度な技術やデジタル補正を導入することで、さらなる高みを目指すことができます。
+
+<h3 id="section-6-1">**6.1. デジタルルームコレクション（DRC）の導入**</h3>
+
+デジタル信号処理（DSP）を用いて部屋の周波数特性を補正する技術は、DRC（Digital Room Correction）と呼ばれ、現代のAVアンプや多くのオーディオプロセッサーに搭載されています。
+
+#### **DRCの能力と限界の詳細**
+
+**DRCが得意とする領域：**
+
+| 問題タイプ | 補正効果 | 推奨設定 | 注意点 |
+|-----------|---------|---------|--------|
+| 低域ピーク | 優秀 | -6dBまで | 過度な補正は避ける |
+| 広域な傾斜 | 良好 | ±3dB/oct | 自然な特性を維持 |
+| 狭帯域ピーク | 優秀 | Q値10以上OK | ノッチフィルター使用 |
+| スピーカー特性 | 良好 | 製造偏差補正 | 基本特性は変えない |
+
+**DRCの限界：**
+
+1. **深いナル（ディップ）の問題**
+   ```
+   物理的原因：音の打ち消し合い
+   DRCでブースト → パワー増大 → 歪み発生
+   解決策：物理的な位置変更のみ
+   ```
+
+2. **時間領域の問題**
+   ```
+   残響時間：物理的処理でのみ改善可能
+   初期反射：物理的処理でのみ制御可能
+   プリリンギング：FIRフィルターで若干改善
+   ```
+
+#### **DRCシステムの種類と特徴**
+
+**主要なDRCシステム比較：**
+
+| システム | タイプ | 特徴 | 価格帯 |
+|---------|--------|------|--------|
+| **REW + EQ APO** | PC based | 無料、高機能 | 0円 |
+| **Dirac Live** | 統合型 | 自動測定・補正 | 3-10万円 |
+| **Audyssey** | AVアンプ内蔵 | 簡単、効果的 | 内蔵 |
+| **Trinnov** | プロ用 | 最高性能 | 50万円〜 |
+| **miniDSP** | スタンドアロン | カスタマイズ性高 | 2-5万円 |
+
+<h3 id="section-6-2">**6.2. REWを使った実践的なEQ設定**</h3>
+
+#### **ステップ1：ターゲットカーブの設定**
+
+**推奨ターゲットカーブの詳細：**
+
+```
+Harman Target（一般的なリスニング用）：
+20Hz:  +6dB
+50Hz:  +4dB
+100Hz: +2dB
+200Hz: +1dB
+500Hz:  0dB
+1kHz:   0dB
+2kHz:  -1dB
+5kHz:  -3dB
+10kHz: -5dB
+20kHz: -8dB
+```
+
+**音楽ジャンル別調整：**
+
+| ジャンル | 低域調整 | 高域調整 | 理由 |
+|---------|---------|---------|------|
+| クラシック | +3dB@50Hz | -2dB@10kHz | 自然な響き |
+| ジャズ | +2dB@80Hz | -3dB@10kHz | タイトな低域 |
+| ロック | +4dB@60Hz | -1dB@10kHz | パンチ重視 |
+| EDM | +6dB@40Hz | 0dB@10kHz | 重低音重視 |
+
+#### **ステップ2：EQパラメータの設定**
+
+**REWのEQ最適化機能活用：**
+
+1. **EQ Filters設定**
+   ```
+   Target Level: 75dB
+   Target Type: House Curve
+   Max Boost: 3dB（重要）
+   Max Cut: 10dB
+   Max Q: 10
+   Max Filters: 10
+   ```
+
+2. **フィルタータイプの選択**
+   - Peak/Notch：特定周波数の調整
+   - High/Low Shelf：帯域全体の調整
+   - High/Low Pass：不要帯域のカット
+
+3. **Individual Filter調整**
+   ```
+   優先順位：
+   1. 最も大きなピークから処理
+   2. 広いQ値から始める
+   3. 必要に応じて狭める
+   ```
+
+#### **実装例：miniDSPでの設定**
+
+**miniDSP 2x4 HDでの実装手順：**
+
+1. **REWからのエクスポート**
+   - File → Export → Filter Impulse Response
+   - miniDSP用xmlファイルとして保存
+
+2. **miniDSPへのインポート**
+   - miniDSP pluginソフトウェア起動
+   - PEQ設定画面でインポート
+   - 各チャンネルに適用
+
+3. **レベル調整**
+   - Input/Outputゲイン調整
+   - クリッピング防止
+   - 左右バランス確認
+
+<h3 id="section-6-3">**6.3. 反復のループ：漸進的改善の技術**</h3>
+
+ルームアコースティックの改善は、一度で完了するプロジェクトではありません。
+
+#### **科学的な改善プロセス**
+
+**PDCAサイクルの適用：**
+
+```
+Plan（計画）
+↓ 測定データから優先課題を特定
+Do（実行）
+↓ 一つの対策を実施
+Check（評価）
+↓ 再測定で効果を確認
+Act（改善）
+↓ 結果に基づき次の対策を決定
+```
+
+#### **音響改善の進捗トラッキング**
+
+<ImprovementProgressChart />
+
+**改善段階の解説：**
+- **初期状態**：未処理の部屋、大きな周波数偏差
+- **配置最適化**：スピーカー・リスナー位置の調整効果
+- **ベーストラップ**：低域モードの大幅改善
+- **一次反射処理**：中高域の精密化
+- **拡散材追加**：さらなる音場の均質化
+- **デジタル補正**：最終的な微調整
+
+#### **改善記録の詳細フォーマット**
+
+```
+━━━━━━━━━━━━━━━━━━━━━━
+実施日：2024/01/20
+室温/湿度：22℃/45%
+
+【実施内容】
+対策：左前コーナーにスーパーチャンク設置
+寸法：底辺60cm×高さ240cm
+材料：GW32K-50mm、24枚使用
+
+【測定結果】
+周波数特性：
+- 63Hz: 85dB → 79dB（-6dB改善）
+- 125Hz: 82dB → 78dB（-4dB改善）
+
+RT60：
+- 125Hz: 0.95s → 0.72s
+- 250Hz: 0.68s → 0.58s
+
+【聴感評価】
+- ベースラインが明瞭に
+- キックの輪郭が向上
+- 全体的にタイトな低音
+
+【次回課題】
+右前コーナーの処理を検討
+━━━━━━━━━━━━━━━━━━━━━━
+```
+
+<h3 id="section-6-4">**6.4. 高度な音響処理技術**</h3>
+
+#### **アクティブ音響制御**
+
+**PSI AVAA C20の原理と効果：**
+
+```
+動作原理：
+1. 内蔵マイクで音圧検出
+2. DSPで逆位相信号生成
+3. 内蔵スピーカーで放射
+4. 15-150Hzで最大15dB吸収
+```
+
+**設置ガイドライン：**
+- コーナー設置が基本
+- 2台使用で効果倍増
+- 既存トラップとの併用可
+
+#### **ハイブリッドアプローチ**
+
+**物理＋デジタルの最適配分：**
+
+| 周波数帯域 | 物理的処理 | デジタル処理 | 理由 |
+|-----------|-----------|-------------|------|
+| 20-80Hz | 60% | 40% | モードは物理処理優先 |
+| 80-300Hz | 70% | 30% | SBIRは配置で対策 |
+| 300Hz-2kHz | 80% | 20% | 反射は物理処理必須 |
+| 2k-20kHz | 50% | 50% | 微調整はEQで可能 |
+
+<h3 id="section-6-5">**6.5. トラブルシューティングガイド**</h3>
+
+#### **よくある問題と解決策**
+
+**問題1：低音が改善されない**
+```
+診断フローチャート：
+測定で改善確認？
+├─ Yes → リスニング位置の問題
+│   └─ 位置を再検討
+└─ No → 処理不足
+    ├─ 追加トラップ検討
+    └─ より低い周波数対策
+```
+
+**問題2：音が死んでしまった**
+```
+症状：
+- RT60 < 0.2秒
+- 高域が異常に減衰
+- 音楽がつまらない
+
+対策：
+1. 薄い吸音材を一部除去
+2. 拡散材を追加
+3. 後壁を反射性に
+```
+
+**問題3：左右のバランスが悪い**
+```
+確認項目：
+□ スピーカーの設置対称性
+□ 部屋の左右非対称性
+□ 家具配置の影響
+□ 吸音材配置の対称性
+
+解決策：
+- 非対称な処理で補正
+- DRCで左右個別調整
+```
+
+<h3 id="section-6-6">**6.6. 最終調整とメンテナンス**</h3>
+
+#### **システム全体の最適化**
+
+**統合チェックリスト：**
+- [ ] 全測定ポイントで目標値達成
+- [ ] 主観的な満足度確認
+- [ ] 家族の了承（重要！）
+- [ ] 定期メンテナンス計画
+
+#### **季節変化への対応**
+
+**環境要因の影響：**
+
+| 要因 | 影響 | 対策 |
+|-----|------|------|
+| 温度変化 | 音速変化→周波数シフト | 年2回の再測定 |
+| 湿度変化 | 高域吸収変化 | 除湿/加湿器使用 |
+| 暖房器具 | 反射面追加 | 配置に注意 |
+| エアコン | 背景騒音増加 | 静音モード使用 |
+
+---
+
+<h2 id="conclusion">**結論：理論から聴覚的至福へ**</h2>
+
+### **達成された変革の総括**
+
+本ガイドに従って体系的な音響改善を実施することで、以下のような劇的な変化が実現されます：
+
+#### **客観的な改善指標**
+
+| 測定項目 | 改善前（典型値） | 改善後（目標値） | 改善度 |
+|---------|---------------|---------------|--------|
+| 低域偏差(20-200Hz) | ±15dB | ±3-6dB | 60-80% |
+| RT60 (500Hz) | 0.6-1.0秒 | 0.3-0.5秒 | 適正化 |
+| 左右対称性 | 5dB以上の差 | 1dB以内 | 80%改善 |
+| 背景騒音 | NC-35 | NC-25以下 | 10dB改善 |
+
+#### **主観的な音質向上**
+
+**改善される音質要素：**
+- **音像定位**：「スピーカーが消える」体験
+- **音場表現**：録音空間への没入感
+- **音色の正確性**：楽器本来の響き
+- **聴き疲れ**：長時間聴取でも快適
+- **音楽の感動**：アーティストの意図が伝わる
+
+### **投資対効果の考察**
+
+**コストパフォーマンス分析：**
+
+| 投資額 | 実施内容 | 期待効果 | ROI |
+|-------|---------|---------|-----|
+| 0円 | 配置最適化のみ | 30-50%改善 | ∞ |
+| 1-3万円 | 基本的なDIY処理 | 60-70%改善 | 極高 |
+| 5-10万円 | 本格的な音響処理 | 80-90%改善 | 高 |
+| 20万円〜 | プロ級の環境 | 95%以上改善 | 中 |
+
+> 💡 **重要な示唆**：
+> 最初の1-3万円の投資が最も費用対効果が高く、10万円の機器アップグレードより遥かに大きな改善をもたらすことが多い。
+
+### **継続的な探求への道**
+
+音響改善は終わりのない旅です。本ガイドで得た知識と経験を基に、さらなる高みを目指すための指針を示します。
+
+#### **次なるステップ**
+
+1. **知識の深化**
+   - Floyd Toole "Sound Reproduction"
+   - F. Alton Everest "Master Handbook of Acoustics"
+   - AES論文データベースの活用
+
+2. **コミュニティへの参加**
+   - GearSpace（旧GearSlutz）
+   - 国内オーディオフォーラム
+   - 地域のオーディオクラブ
+
+3. **実験と革新**
+   - 新素材の試用
+   - 独自の測定手法開発
+   - 成果の共有と議論
+
+### **最後に：音楽への敬意を込めて**
+
+適切に音響処理された部屋は、単なる技術的成果ではありません。それは、音楽という芸術形態に対する深い敬意の表れであり、アーティストとリスナーをつなぐ神聖な空間の創造です。
+
+石井伸一郎氏の言葉を借りれば、「部屋は最後の、そして最も重要なオーディオコンポーネント」です。本ガイドが、読者の皆様にとって、その最重要コンポーネントを最適化し、音楽体験を根本から変革するための確かな指針となることを願っています。
+
+科学的アプローチと芸術的感性を融合させ、理想の音響空間を実現する旅は、ここから始まります。
+
+**Happy Listening!** 🎵
+
+---
+
+<h2 id="appendix">**付録**</h2>
+
+### **A. 主要音響用語集（詳細版）**
+
+| 用語 | 定義 | 計算式/基準 | 実用的意味 |
+|-----|------|-----------|-----------|
+| **RT60** | 音圧が60dB減衰する時間 | RT60 = 0.161V/Sα | 響きの長さを定量化 |
+| **ルームモード** | 平行面間の定在波 | f = c/2 × √[(nx/Lx)²+(ny/Ly)²+(nz/Lz)²] | 低域の凸凹の原因 |
+| **シュレーダー周波数** | 波動/幾何音響の境界 | fs = 2000√(RT60/V) | 処理方法の分岐点 |
+| **SBIR** | 境界面干渉応答 | f = 172/d (Hz) | スピーカー配置の指針 |
+| **臨界距離** | 直接音=反射音の距離 | Dc = 0.057√(VQ/RT60) | ニアフィールドの目安 |
+| **吸音率** | 音の吸収割合 | α = 吸収/入射エネルギー | 材料選定の基準 |
+
+### **B. DIY音響パネル設計図（詳細版）**
+
+#### **B.1. スーパーチャンク型ベーストラップ詳細図**
+
+```
+正面図：              側面図：
+   60cm                  60cm
+┌─────┐          ╱│
+│     │240cm     ╱ │240cm
+│     │        ╱  │
+│     │      ╱   │
+└─────┘    ╱    │
+              └────┘
+
+材料配置（上面図）：
+┌─────────┐
+│＼         │
+│  ＼GW32K  │
+│    ＼     │
+│      ＼   │
+│────────＼ │
+└─────────┘
+```
+
+#### **B.2. ストラドルマウント吸音パネル詳細**
+
+```
+設置断面図：
+壁 │＼    ／│ 壁
+   │  ＼／  │
+   │パネル  │
+   │  ／＼  │
+   │／ 空気 ＼│
+      30cm
+```
+
+#### **B.3. QRDディフューザー設計例**
+
+```
+7-prime QRD (設計周波数 1kHz)：
+Well深さ (cm)：0, 2.4, 4.1, 4.9, 4.1, 2.4, 0
+Well幅：3.4cm
+
+断面図：
+│ ││▓││▓▓││▓▓▓││▓▓▓▓││▓▓▓││▓││ │
+└─┴──┴───┴────┴─────┴────┴───┴──┴─┘
+```
+
+### **C. 測定データ解析テンプレート**
+
+```
+【測定情報】
+日時：
+温度/湿度：
+測定システム：
+
+【周波数特性分析】
+20-80Hz：  最大偏差___dB @ ___Hz
+80-300Hz： 最大偏差___dB @ ___Hz  
+300Hz-2kHz：最大偏差___dB @ ___Hz
+2k-20kHz： 最大偏差___dB @ ___Hz
+
+【RT60分析】
+125Hz：___秒（目標：___秒）
+250Hz：___秒（目標：___秒）
+500Hz：___秒（目標：___秒）
+1kHz： ___秒（目標：___秒）
+2kHz： ___秒（目標：___秒）
+4kHz： ___秒（目標：___秒）
+
+【問題の優先順位】
+1. ___________________
+2. ___________________
+3. ___________________
+
+【推奨対策】
+1. ___________________
+2. ___________________
+3. ___________________
+```
+
+### **D. 部屋タイプ別対策ガイド**
+
+#### **6畳和室（約10m²）の場合**
+
+**音響特性：**
+- 畳による自然な中高域吸音
+- 襖・障子による適度な拡散
+- 天井高が低い（2.4m程度）
+
+**推奨対策：**
+1. コーナー2箇所にベーストラップ（低域対策）
+2. 天井中央に薄い雲型パネル（初期反射制御）
+3. 床の間活用（機器設置または拡散）
+
+**注意点：**
+- 畳を傷めない設置方法
+- 和室の美観を損なわない工夫
+- 襖の開閉による音響変化
+
+#### **8畳洋室（約13m²）の場合**
+
+**音響特性：**
+- 硬い平行面（石膏ボード）
+- フラッターエコー発生しやすい
+- 典型的な日本の住宅音響
+
+**推奨対策：**
+1. 4隅すべてにベーストラップ
+2. 側壁一次反射点に吸音パネル
+3. 背面壁に拡散処理
+4. 天井反射点にも吸音
+
+**予算配分例：**
+- ベーストラップ：40%
+- 吸音パネル：30%
+- 拡散材：20%
+- その他：10%
+
+---
+
+## **参考文献**
+
+### **基本文献**
+
+1. **石井 伸一郎, 高橋 賢一. (2014).** 『改訂増補 リスニングルームの音響学 断然音がよくなる! 視聴ルームの設計・測定・改造法』. 誠文堂新光社.
+   - 日本の住環境に特化した実践的指南書
+   - 石井式の理論と実践を詳述
+
+2. **Toole, Floyd E. (2008).** *Sound Reproduction: The Acoustics and Psychoacoustics of Loudspeakers and Rooms*. Focal Press.
+   - 現代の室内音響学の決定版
+   - 心理音響学的アプローチ
+
+3. **Everest, F. Alton. (2014).** *Master Handbook of Acoustics* (6th Edition). McGraw-Hill.
+   - 音響工学の包括的参考書
+   - 実践的な設計例が豊富
+
+### **技術論文・資料**
+
+4. **White, Glenn D.** "Small Room Acoustics De-Mythologized". AudioControl.
+   - 小部屋音響の誤解を解く
+
+5. **Noxon, Arthur M. (1986).** "Room Acoustics and Low Frequency Damping". AES Convention Paper.
+   - ベーストラップの理論的基礎
+
+6. **Walker, R.** "A Controlled-Reflection Listening Room for Multichannel Sound". Proceedings of the Institute of Acoustics.
+   - 制御反射室の設計理論
+
+### **オンラインリソース**
+
+7. **Room EQ Wizard (REW)**
+   - 公式サイト：https://www.roomeqwizard.com/
+   - フォーラム：https://www.avnirvana.com/forums/rew.10/
+
+8. **Acoustic Sciences Corporation**
+   - 技術論文：https://www.acousticsciences.com/technical-papers/
+   - TubeTrap開発元
+
+9. **GearSpace (旧GearSlutz)**
+   - Studio Building / Acoustics：https://gearspace.com/board/studio-building-acoustics/
+   - 世界最大の音響フォーラム
+
+### **日本語リソース**
+
+10. **ファイ・オーディオ**
+    - 石井式解説：https://www.phiaudio.com/
+    - 測定サービス情報
+
+11. **オーディナリーサウンド**
+    - REW日本語解説：https://ordinarysound.com/
+    - 実践的なガイド多数
+
+12. **Lo-Fi Audio ブログ**
+    - ルームアコースティック連載: https://naseba.exblog.jp/tags/room%20acoustic/
+    - 理論と実践のバランスが良い
+
+---
+
+## **引用文献一覧**
+
+<span id="ref-1">1</span>. 究極のオーディオルームをつくりたい【前編】「石井式リスニング ...,  [https://www.daiwahouse.co.jp/tryie/column/view/ishii_listening_room/](https://www.daiwahouse.co.jp/tryie/column/view/ishii_listening_room/)  
+<span id="ref-2">2</span>. Small Room Acoustics De-Mythologized \- AudioControl,  [https://www.audiocontrol.com/downloads/tech-papers/tech-paper-107.pdf](https://www.audiocontrol.com/downloads/tech-papers/tech-paper-107.pdf)  
+<span id="ref-3">3</span>. ルムアコ-1 : Lo-Fi Audio,  [https://naseba.exblog.jp/28702435/](https://naseba.exblog.jp/28702435/)  
+<span id="ref-4">4</span>. スタジオ音響設計の基礎｜日本音響エンジニアリング,  [https://www.noe.co.jp/technology/16/16std2.html](https://www.noe.co.jp/technology/16/16std2.html)  
+<span id="ref-5">5</span>. Room Acoustics and Low Frequency Damping (AES-1986) \- ASC,  [https://www.acousticsciences.com/technical-papers/room-acoustics-and-low-frequency-damping/](https://www.acousticsciences.com/technical-papers/room-acoustics-and-low-frequency-damping/)  
+<span id="ref-6">6</span>. ルムアコ-2 : Lo-Fi Audio,  [https://naseba.exblog.jp/29002258/](https://naseba.exblog.jp/29002258/)  
+<span id="ref-7">7</span>. ルムアコ-7 : Lo-Fi Audio,  [https://naseba.exblog.jp/29111775/](https://naseba.exblog.jp/29111775/)  
+<span id="ref-8">8</span>. スピーカーセッティング高域 反射編 – Monster Audio,  [https://audio-monster.com/?p=1233](https://audio-monster.com/?p=1233)  
+<span id="ref-9">9</span>. ルームチューニング序文part33 1/3 1次反射とコンサートホール ...,  [https://audio-monster.com/?p=627](https://audio-monster.com/?p=627)  
+<span id="ref-10">10</span>. オーディオルームに適した部屋とは？ルームチューニングについて | 音楽を聴く、ブログを書く,  [https://highend-life.com/2019/08/listeningroom-roomtuning.html/](https://highend-life.com/2019/08/listeningroom-roomtuning.html/)  
+<span id="ref-11">11</span>. 改訂増補 リスニングルームの音響学 | 株式会社誠文堂新光社,  [https://www.seibundo-shinkosha.net/book/hobby/19529/](https://www.seibundo-shinkosha.net/book/hobby/19529/)  
+<span id="ref-12">12</span>. "石井式"での『良い音の3大要素』を徹底解説 － 「Acoustic Audio Forum」潜入レポート,  [https://www.phileweb.com/sp/review/column/201604/25/470.html](https://www.phileweb.com/sp/review/column/201604/25/470.html)  
+<span id="ref-13">13</span>. 石井式の特徴 \- 石井式リスニングルーム,  [http://hoteiswebsite.c.ooco.jp/room/chpt01/001.htm](http://hoteiswebsite.c.ooco.jp/room/chpt01/001.htm)  
+<span id="ref-14">14</span>. ルムアコ-8 : Lo-Fi Audio,  [https://naseba.exblog.jp/29111882/](https://naseba.exblog.jp/29111882/)  
+<span id="ref-15">15</span>. Proceedings of the Institute of Acoustics \- A CONTROLLED ...,  [https://www.ioa.org.uk/system/files/proceedings/r\_walker\_a\_controlled\_reflection\_listening\_room\_for\_multichannel\_sound.pdf](https://www.ioa.org.uk/system/files/proceedings/r_walker_a_controlled_reflection_listening_room_for_multichannel_sound.pdf)  
+<span id="ref-16">16</span>. www.numberanalytics.com,  [https://www.numberanalytics.com/blog/iso-standards-architectural-acoustics-guide\#:\~:text=The%20ISO%20has%20developed%20a,buildings%20and%20of%20building%20elements](https://www.numberanalytics.com/blog/iso-standards-architectural-acoustics-guide#:~:text=The%20ISO%20has%20developed%20a,buildings%20and%20of%20building%20elements)  
+<span id="ref-17">17</span>. Mastering ISO Standards in Architectural Acoustics \- Number Analytics,  [https://www.numberanalytics.com/blog/ultimate-guide-iso-standards-architectural-acoustics](https://www.numberanalytics.com/blog/ultimate-guide-iso-standards-architectural-acoustics)  
+<span id="ref-18">18</span>. The ISO 3382 parameters \- ODEON Room Acoustics Software,  [https://www.odeon.dk/pdf/ISRA2013\_Paper\_The%20ISO%203382%20parameters\_Can%20we%20simulate%20them\_Can%20we%20measure%20them\_24July2013.pdf](https://www.odeon.dk/pdf/ISRA2013_Paper_The%20ISO%203382%20parameters_Can%20we%20simulate%20them_Can%20we%20measure%20them_24July2013.pdf)  
+<span id="ref-19">19</span>. Assessing the Acoustic Characteristics of Rooms: A Tutorial with Examples \- PMC,  [https://pmc.ncbi.nlm.nih.gov/articles/PMC6375510/](https://pmc.ncbi.nlm.nih.gov/articles/PMC6375510/)  
+<span id="ref-20">20</span>. Architectural Acoustics \- Acceptable Room Sound Levels \- Archtoolbox,  [https://www.archtoolbox.com/room-sound-levels/](https://www.archtoolbox.com/room-sound-levels/)  
+<span id="ref-21">21</span>. 石井式リスニングルーム \- asahi-net.or.jp,  [http://www.asahi-net.or.jp/\~up2j-knst/tube/listening-room.pdf](http://www.asahi-net.or.jp/~up2j-knst/tube/listening-room.pdf)  
+<span id="ref-22">22</span>. 石井式リスニングルームについて考える \- Acoustic Audio Forum \--,  [https://acaudio.jp/1263/](https://acaudio.jp/1263/)  
+<span id="ref-23">23</span>. Room EQ Wizard(REW)の使い方：音響測定ソフト | オーディナリー ...,  [https://ordinarysound.com/rew/](https://ordinarysound.com/rew/)  
+<span id="ref-24">24</span>. とのちのオーディオルーム 補足資料 初期設定,  [https://nobody-audio.com/img/HowToUseREW\_jp.pdf](https://nobody-audio.com/img/HowToUseREW_jp.pdf)  
+<span id="ref-25">25</span>. Room EQ Wizardで音響補正 \- えびサブレ \- ebiiim.com,  [https://blog.ebiiim.com/posts/rew-room-correction/](https://blog.ebiiim.com/posts/rew-room-correction/)  
+<span id="ref-26">26</span>. モニター・スピーカーを本来の音で正しく聴く \- EQを使ったルーム補正 \- シンタックスジャパン,  [https://synthax.jp/tutorials/articles/room-correction.html](https://synthax.jp/tutorials/articles/room-correction.html)  
+<span id="ref-27">27</span>. スピーカーセッティング 低音編まとめとtips – Monster Audio,  [https://audio-monster.com/?p=1229](https://audio-monster.com/?p=1229)  
+<span id="ref-28">28</span>. ルームチューニング奥の壁編 – Monster Audio,  [https://audio-monster.com/?p=654](https://audio-monster.com/?p=654)  
+<span id="ref-29">29</span>. ＤＩＹで防音対策【④グラスウールの施工】 | cana blog,  [https://cana20.com/fiberglass/](https://cana20.com/fiberglass/)  
+<span id="ref-30">30</span>. 完全解説！防音のプロがDIYで壁を防音強化,  [https://budscene.co.jp/about/17725/](https://budscene.co.jp/about/17725/)  
+<span id="ref-31">31</span>. ロックウールボードでDIY防音,  [https://ameblo.jp/5654199/entry-12748441557.html](https://ameblo.jp/5654199/entry-12748441557.html)  
+<span id="ref-32">32</span>. AVAA、あるいは現代のプロメテウス1 – Monster Audio,  [https://audio-monster.com/?p=546](https://audio-monster.com/?p=546)  
+<span id="ref-33">33</span>. Art's Presented Papers \- Acoustic Sciences,  [https://www.acousticsciences.com/presented-papers/](https://www.acousticsciences.com/presented-papers/)  
+<span id="ref-34">34</span>. 簡易吸音ボードの作り方～壁を傷つけずにDIYで防音対策 – 株式会社 ...,  [https://www.hitori-shizuka.jp/archives/4942](https://www.hitori-shizuka.jp/archives/4942)  
+<span id="ref-35">35</span>. 自作防音室・内装・吸音ボード・GCボード貼り付け・DIY,  [https://morimotoyoshiki.com/2021/08/14/16/42/1829/](https://morimotoyoshiki.com/2021/08/14/16/42/1829/)  
+<span id="ref-36">36</span>. 吸音材の意外と知らないこと＆自作方法 \- サウンドハウス,  [https://www.soundhouse.co.jp/contents/column/index?post=3059](https://www.soundhouse.co.jp/contents/column/index?post=3059)  
+<span id="ref-37">37</span>. 宅録ブースやスタジオの吸音パネルは自作できます。｜沖田純之介 サウンドデザイナー \- note,  [https://note.com/okidesign/n/nc75effd007bb](https://note.com/okidesign/n/nc75effd007bb)  
+<span id="ref-38">38</span>. 最強の吸音材！ロックウールの防音効果とは？箱を作って検証！,  [https://yugo-music.jp/article-18399.html](https://yugo-music.jp/article-18399.html)  
+<span id="ref-39">39</span>. 自作吸音パネルの試作品、第一弾｜Ryo Kimura \- note,  [https://note.com/rkimura640/n/n0d09a9c8706a](https://note.com/rkimura640/n/n0d09a9c8706a)  
+<span id="ref-40">40</span>. 【20】自作防音壁DIY・ロックウール（吸音材）の購入＆施工,  [https://morimotoyoshiki.com/2021/05/24/09/24/1064/](https://morimotoyoshiki.com/2021/05/24/09/24/1064/)  
+<span id="ref-41">41</span>. ルームチューニング材短評 ASC – Monster Audio,  [https://audio-monster.com/?p=780](https://audio-monster.com/?p=780)  
+<span id="ref-42">42</span>. AVAAを考える1 – Monster Audio,  [https://audio-monster.com/?p=2573](https://audio-monster.com/?p=2573)
