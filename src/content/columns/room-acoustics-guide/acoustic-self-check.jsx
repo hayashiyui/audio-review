@@ -50,14 +50,14 @@ const AcousticSelfCheck = () => {
   const tests = [
     {
       id: 'flutter',
-      title: 'フラッターエコー（金属音）テスト',
+      title: 'フラッターエコーテスト',
       description: '平行な壁面での音の往復を確認',
       icon: '👏',
       duration: '30秒',
       instructions: [
         '部屋の中央付近に立つ',
         '手を頭上で強く1回手拍子する',
-        '「ピチピチピチ…」という金属的な響きが聞こえるか確認',
+        '「キンキンキン…」という金属的な響きが聞こえるか確認',
         '壁に向かって手拍子し、横方向でも確認'
       ],
       options: [
