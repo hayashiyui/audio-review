@@ -586,3 +586,40 @@ export async function getSortedAllTags(): Promise<
       return countDiff !== 0 ? countDiff : a.tag.localeCompare(b.tag)
     })
 }
+
+// 関連記事取得機能
+
+export async function getRelatedArticles(
+  collection: 'reviews' | 'columns',
+  articleId: string,
+): Promise<(CollectionEntry<'reviews'> | CollectionEntry<'columns'>)[]> {
+  let currentArticle: CollectionEntry<'reviews'> | CollectionEntry<'columns'> | null = null
+
+  if (collection === 'reviews') {
+    currentArticle = await getReviewById(articleId)
+  } else if (collection === 'columns') {
+    currentArticle = await getColumnById(articleId)
+  }
+
+  if (!currentArticle || !currentArticle.data.relatedArticles) {
+    return []
+  }
+
+  const relatedEntries: (CollectionEntry<'reviews'> | CollectionEntry<'columns'>)[] = []
+
+  for (const relatedRef of currentArticle.data.relatedArticles) {
+    let relatedEntry = null
+    
+    if (relatedRef.collection === 'reviews') {
+      relatedEntry = await getReviewById(relatedRef.id)
+    } else if (relatedRef.collection === 'columns') {
+      relatedEntry = await getColumnById(relatedRef.id)
+    }
+
+    if (relatedEntry && !relatedEntry.data.draft) {
+      relatedEntries.push(relatedEntry)
+    }
+  }
+
+  return relatedEntries
+}

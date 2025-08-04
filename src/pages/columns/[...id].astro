@@ -2,6 +2,7 @@
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import ColumnsNavigation from '@/components/ColumnsNavigation.astro'
 import PostHead from '@/components/PostHead.astro'
+import RelatedArticles from '@/components/RelatedArticles.astro'
 import TOCHeader from '@/components/TOCHeader.astro'
 import TOCSidebar from '@/components/TOCSidebar.astro'
 import { badgeVariants } from '@/components/ui/badge'
@@ -124,6 +125,10 @@ const navigation = await getAdjacentColumns(currentColumnId)
     <article class="prose col-start-2 max-w-none">
       <Content />
     </article>
+
+    <div class="col-start-2">
+      <RelatedArticles collection="columns" articleId={currentColumnId} />
+    </div>
 
     <ColumnsNavigation
       newerPost={navigation.newer}

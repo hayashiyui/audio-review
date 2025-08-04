@@ -1,6 +1,7 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PostHead from '@/components/PostHead.astro'
+import RelatedArticles from '@/components/RelatedArticles.astro'
 import ReviewsNavigation from '@/components/ReviewsNavigation.astro'
 import TOCHeader from '@/components/TOCHeader.astro'
 import TOCSidebar from '@/components/TOCSidebar.astro'
@@ -140,6 +141,10 @@ const navigation = await getAdjacentReviews(currentReviewId)
     <article class="prose col-start-2 max-w-none">
       <Content />
     </article>
+
+    <div class="col-start-2">
+      <RelatedArticles collection="reviews" articleId={currentReviewId} />
+    </div>
 
     <ReviewsNavigation
       newerPost={navigation.newer}

@@ -74,6 +74,10 @@ const reviews = defineCollection({
       authors: z.array(z.string()).optional().default([SITE.author]),
       heroImage: image().optional(),
       draft: z.boolean().optional().default(false),
+      relatedArticles: z.array(z.object({
+        collection: z.enum(['reviews', 'columns']),
+        id: z.string()
+      })).optional(),
     }),
 })
 
@@ -97,6 +101,10 @@ const columns = defineCollection({
       authors: z.array(z.string()).optional().default([SITE.author]),
       heroImage: image().optional(),
       draft: z.boolean().optional().default(false),
+      relatedArticles: z.array(z.object({
+        collection: z.enum(['reviews', 'columns']),
+        id: z.string()
+      })).optional(),
     }),
 })
 
