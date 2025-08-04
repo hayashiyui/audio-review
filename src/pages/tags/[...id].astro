@@ -32,7 +32,6 @@ const { tag, entries } = Astro.props
     slot="head"
     title={`Posts tagged with "${tag}"`}
     description={`A collection of posts tagged with ${tag}.`}
-    noindex
   />
   <Breadcrumbs
     items={[
@@ -40,6 +39,11 @@ const { tag, entries } = Astro.props
       { label: tag, icon: 'lucide:tag' },
     ]}
   />
+
+  {/* タグ名ヘッダー */}
+  <header class="mb-2">
+    <h1 class="text-3xl font-bold mb-2">#{tag}</h1>
+  </header>
 
   {/* Columns セクション */}
   {entries.columns.length > 0 && (
