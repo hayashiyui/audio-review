@@ -95,6 +95,7 @@ const columns = defineCollection({
         '業界動向',
         '技術解説',
         'エッセイ',
+        '購入ガイド',
         'その他'
       ]).optional(),
       tags: z.array(z.string()).optional(),
