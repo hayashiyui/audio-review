@@ -1,0 +1,28 @@
+---
+import BlogCard from '@/components/BlogCard.astro'
+import { getReviewById, getColumnById } from '@/lib/data-utils'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  collection: 'reviews' | 'columns'
+  id: string
+}
+
+const { collection, id } = Astro.props
+
+let article: CollectionEntry<'reviews'> | CollectionEntry<'columns'> | null = null
+
+if (collection === 'reviews') {
+  article = await getReviewById(id)
+} else if (collection === 'columns') {
+  article = await getColumnById(id)
+}
+
+if (!article || article.data.draft) {
+  return null
+}
+---
+
+<div class="my-2">
+  <BlogCard entry={article} />
+</div>
