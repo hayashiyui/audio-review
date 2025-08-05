@@ -104,7 +104,9 @@ const navigation = await getAdjacentReviews(currentReviewId)
             <div
               class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
             >
-              <span>{review.data.category}</span>
+              <a href={`/reviews/category/${review.data.category}`} class="hover:underline">
+                {review.data.category}
+              </a>
             </div>
           )}
         </div>

@@ -1,0 +1,64 @@
+---
+import BlogCard from '@/components/BlogCard.astro'
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import PageHead from '@/components/PageHead.astro'
+import Layout from '@/layouts/Layout.astro'
+import { getAllColumnCategories, getColumnsByCategory, groupColumnsByYear } from '@/lib/data-utils'
+
+export async function getStaticPaths() {
+  const categoryMap = await getAllColumnCategories()
+  const categories = Array.from(categoryMap.keys())
+
+  return Promise.all(
+    categories.map(async (category) => {
+      const columns = await getColumnsByCategory(category)
+      return {
+        params: { category },
+        props: {
+          category,
+          columns,
+        },
+      }
+    }),
+  )
+}
+
+const { category, columns } = Astro.props
+const columnsByYear = groupColumnsByYear(columns)
+---
+
+<Layout class="max-w-6xl ml-2">
+  <PageHead
+    slot="head"
+    title={`${category} - オーディオコラム`}
+    description={`${category}カテゴリのオーディオコラム一覧`}
+  />
+  <Breadcrumbs
+    items={[
+      { href: '/columns', label: 'オーディオコラム', icon: 'lucide:pen-tool' },
+      { label: category, icon: 'lucide:tag' },
+    ]}
+  />
+
+  <header class="mb-8">
+    <h1 class="text-3xl font-bold mb-2">{category}</h1>
+    <p class="text-muted-foreground">
+      {columns.length} 件のコラム
+    </p>
+  </header>
+
+  {Object.entries(columnsByYear)
+    .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
+    .map(([year, yearColumns]) => (
+      <section class="mb-8">
+        <h2 class="mb-4 text-xl font-semibold">{year}</h2>
+        <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {yearColumns.map((column) => (
+            <li>
+              <BlogCard entry={column} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+</Layout>

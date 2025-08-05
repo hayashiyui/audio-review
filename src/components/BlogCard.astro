@@ -88,6 +88,16 @@ const subpostCount = !isSubpost(entry.id) && entry.collection === 'blog' ? await
         )
       }
       
+      {((entry.collection === 'reviews' || entry.collection === 'columns') && entry.data.category) && (
+        <>
+          <Separator orientation="vertical" className="h-3!" />
+          <Link href={`/${entry.collection}/category/${entry.data.category}`} class="flex items-center gap-1 no-underline hover:underline">
+            <Icon name="lucide:folder" class="size-2.5" />
+            {entry.data.category}
+          </Link>
+        </>
+      )}
+      
       {
         entry.data.tags && entry.data.tags.length > 0 && (
           <>
@@ -173,6 +183,15 @@ const subpostCount = !isSubpost(entry.id) && entry.collection === 'blog' ? await
             </>
           )
         }
+        {((entry.collection === 'reviews' || entry.collection === 'columns') && entry.data.category) && (
+          <>
+            <Separator orientation="vertical" className="h-4!" />
+            <Link href={`/${entry.collection}/category/${entry.data.category}`} class="flex items-center gap-1 no-underline hover:underline">
+              <Icon name="lucide:folder" class="size-3" />
+              {entry.data.category}
+            </Link>
+          </>
+        )}
       </div>
 
       {

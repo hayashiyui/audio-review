@@ -623,3 +623,75 @@ export async function getRelatedArticles(
 
   return relatedEntries
 }
+
+// カテゴリ関連関数
+
+export async function getReviewsByCategory(
+  category: string,
+): Promise<CollectionEntry<'reviews'>[]> {
+  const reviews = await getAllReviews()
+  return reviews.filter((review) => review.data.category === category)
+}
+
+export async function getColumnsByCategory(
+  category: string,
+): Promise<CollectionEntry<'columns'>[]> {
+  const columns = await getAllColumns()
+  return columns.filter((column) => column.data.category === category)
+}
+
+export async function getAllReviewCategories(): Promise<Map<string, number>> {
+  const reviews = await getAllReviews()
+  const categoryMap = new Map<string, number>()
+  
+  reviews.forEach((review) => {
+    if (review.data.category) {
+      categoryMap.set(
+        review.data.category, 
+        (categoryMap.get(review.data.category) || 0) + 1
+      )
+    }
+  })
+  
+  return categoryMap
+}
+
+export async function getAllColumnCategories(): Promise<Map<string, number>> {
+  const columns = await getAllColumns()
+  const categoryMap = new Map<string, number>()
+  
+  columns.forEach((column) => {
+    if (column.data.category) {
+      categoryMap.set(
+        column.data.category,
+        (categoryMap.get(column.data.category) || 0) + 1
+      )
+    }
+  })
+  
+  return categoryMap
+}
+
+export async function getSortedReviewCategories(): Promise<
+  { category: string; count: number }[]
+> {
+  const categoryMap = await getAllReviewCategories()
+  return [...categoryMap.entries()]
+    .map(([category, count]) => ({ category, count }))
+    .sort((a, b) => {
+      const countDiff = b.count - a.count
+      return countDiff !== 0 ? countDiff : a.category.localeCompare(b.category)
+    })
+}
+
+export async function getSortedColumnCategories(): Promise<
+  { category: string; count: number }[]
+> {
+  const categoryMap = await getAllColumnCategories()
+  return [...categoryMap.entries()]
+    .map(([category, count]) => ({ category, count }))
+    .sort((a, b) => {
+      const countDiff = b.count - a.count
+      return countDiff !== 0 ? countDiff : a.category.localeCompare(b.category)
+    })
+}

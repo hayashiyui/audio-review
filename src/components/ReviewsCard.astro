@@ -53,10 +53,10 @@ const formattedDate = formatDate(entry.data.date)
       {entry.data.category && (
         <>
           <Separator orientation="vertical" className="h-3!" />
-          <span class="flex items-center gap-1">
+          <Link href={`/reviews/category/${entry.data.category}`} class="flex items-center gap-1 no-underline hover:underline">
             <Icon name="lucide:folder" class="size-2.5" />
             {entry.data.category}
-          </span>
+          </Link>
         </>
       )}
       
@@ -122,10 +122,10 @@ const formattedDate = formatDate(entry.data.date)
         {entry.data.category && (
           <>
             <Separator orientation="vertical" className="h-4!" />
-            <span class="flex items-center gap-1">
+            <Link href={`/reviews/category/${entry.data.category}`} class="flex items-center gap-1 no-underline hover:underline">
               <Icon name="lucide:folder" class="size-3" />
               {entry.data.category}
-            </span>
+            </Link>
           </>
         )}
       </div>

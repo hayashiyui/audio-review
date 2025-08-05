@@ -88,7 +88,9 @@ const navigation = await getAdjacentColumns(currentColumnId)
             <div
               class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
             >
-              <span>{column.data.category}</span>
+              <a href={`/columns/category/${column.data.category}`} class="hover:underline">
+                {column.data.category}
+              </a>
             </div>
           )}
         </div>
