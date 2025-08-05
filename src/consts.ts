@@ -20,6 +20,10 @@ export const NAV_LINKS: SocialLink[] = [
     href: '/columns',
     label: 'コラム',
   },
+  {
+    href: '/tags',
+    label: 'タグ',
+  },
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [
