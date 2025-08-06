@@ -121,7 +121,7 @@ const subpostCount = !isSubpost(entry.id) && entry.collection === 'blog' ? await
   </div>
 
   <!-- PC用レイアウト（従来通り） -->
-  <div class="hidden sm:flex sm:flex-col sm:gap-4">
+  <div class="hidden sm:flex sm:flex-col sm:gap-3">
     {
       ((entry.collection === 'blog' && entry.data.image) || 
        ((entry.collection === 'columns' || entry.collection === 'reviews') && entry.data.heroImage)) && (
