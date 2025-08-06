@@ -1,0 +1,199 @@
+---
+title: "前のめりな音は正しい？空間忠実 vs 前方定位サウンド"
+description: "「音が前に出る」オーディオシステムは本当に優秀なのか？心理音響学と電気工学の観点から、前方定位サウンドの正体を科学的に分析。録音に忠実な空間再現とユーフォニックなカラーレーションを区別する。"
+date: "2025-08-07T01:00:00"
+category: "オーディオノウハウ"
+tags: ["音質評価", "サウンドステージ"]
+heroImage: "../../assets/images/hero/hakase.jpg"
+---
+
+#### 関連記事
+import RelatedArticleCard from '@/components/RelatedArticleCard.astro'
+
+<RelatedArticleCard collection="columns" id="sound-quality-evaluation-guide" />
+
+## **序論：プレゼンスの追求 対 原音の再現**
+
+オーディオ再生における根本的な問い、すなわち「ハイフィデリティ（高忠実度）の究極の目標は何か」という議論は、長年にわたりオーディオ愛好家や技術者の間で交わされてきました。それは、普遍的に「エキサイティング」な音楽体験を創出することでしょうか、それともソースとなる録音に刻まれた空間的・音色的情報を可能な限り正確に再現することでしょうか。本レポートは、後者の立場を支持し、特に「音が前に出てくる」という聴感上の現象を、品質の普遍的な指標ではなく、特定の音響的カラーレーション（色付け）の一形態として分析することを目的とします。
+
+オーディオ機器、特にケーブルの評価において、「音像がより手前に来る」ことが、より完全な再現であるかのような論調が見受けられます。しかし、この見解はハイフィデリティの基本理念と矛盾をきたす可能性があります。本来、正確な再生とは、録音された音源に含まれる楽器の前後位置関係を忠実に再現することであり、すべての音が画一的に前方へ移動する現象は、むしろ再生系が何らかの変更を信号に加えている証左と言えます。
+
+本レポートでは、まず高忠実度再生の「原典」となる録音物自体にサウンドステージ情報がどのように記録されているかを定義します。次に、人間が音の距離をどのように知覚するのかを心理音響学の観点から解き明かします。その上で、「音が前に出る」という現象を引き起こす物理的・電気的メカニズムを分析し、それがオーディオシステムによる一種の意図的、あるいは非意図的な信号改変であることを論証します。最終的に、空間再現性の評価における新たな枠組みを提示し、より原音に忠実な再生を目指すための指針を結論付けます。
+
+## **第I部：記録された音響空間 – サウンドステージの解体**
+
+ハイフィデリティ・システムが再現を目指す「原典」を理解するためには、まずサウンドステージが再生機器によって「創造」されるものではなく、録音物自体に内在する属性であることを明確にする必要があります。
+
+### **サウンドステージとその構成要素の定義**
+
+オーディオにおける「サウンドステージ」とは、ステレオスピーカーシステムによって再現される、スピーカー間およびその後方に広がる架空の三次元空間のことであり、これは心理音響的なイリュージョンです [1](#ref-1)。この空間は、
+
+**幅**（楽器の左右の広がり）、**高さ**、そして本レポートの主題において極めて重要な**奥行き**（手前から奥への距離感）によって構成されます [4](#ref-4)。
+
+一方で「イメージング（音像定位）」とは、そのサウンドステージ内に個々の音源（楽器やボーカル）を、安定し、輪郭の明確な点音源として配置する能力を指します。音像が非常に明確に定位し、あたかも触れることができるかのように感じられる状態は、「ホログラフィック」あるいは「パルパブル（触知的）」と表現されます。
+
+### **ミックスに込められた幻影：空間情報の記録手法**
+
+サウンドステージは偶然の産物ではなく、レコーディングおよびミキシングエンジニアによって意図的に構築されます。その主要な手法は以下の通りです。
+
+* **マイクロフォン技術：**  
+  * **近接マイクとアンビエントマイク：** 楽器に近接して設置されたマイクは、直接音を多く捉え、反射音を少なくすることで、親密さや近接感を演出します。対照的に、演奏空間の残響音を捉えるアンビエントマイクは、空間の広がりや距離感を生み出します [3](#ref-3)。  
+  * **ステレオマイキング（例：ブルームライン方式、ORTF方式）：** これらの技術は、両耳間時間差（Interaural Time Difference, ITD）や両耳間レベル差（Interaural Level Difference, ILD）といった自然な空間情報を捉え、演奏空間の音響的完全性を保持します [7](#ref-7)。  
+* **スタジオでの音響設計：** マルチトラック録音では、サウンドステージは完全に人工的に構築されます。  
+  * **パンニング：** 音源を左右に配置します。  
+  * **人工的なリバーブとディレイ：** 音響空間をシミュレートし、奥行き感を創出します。リバーブ成分が多い（ウェットな）信号ほど、遠くに聴こえます [9](#ref-9)。  
+  * **イコライゼーション（EQ）：** 後述するように、より明るい（高域が強調された）音は近くに知覚されます。  
+  * **相対的な音量：** より大きな音は近くにあると知覚されます [3](#ref-3)。
+
+### **忠実度の基準点：ソースへの忠実性**
+
+J・ゴードン・ホルト（J. Gordon Holt）のような先駆者や『Stereophile』、『The Absolute Sound』といった専門誌が提唱してきたハイエンドオーディオの哲学的目標は、マイクロフォンが捉えたオリジナルの音響事象を、可能な限り改変せずに再現することにあります [10](#ref-10)。
+
+したがって、オーディオシステムのサウンドステージ再現能力は、録音に**既に存在する**空間情報をいかに正確に分解し、再構築できるかによって評価されるべきです。遠くで録音されたオーケストラを聴き手の膝元に持ってくるようなシステムは、定義上、不正確な再生と言わざるを得ません。
+
+この文脈から、再生システムの役割を再定義することが重要です。オーディオ機器のマーケティングではしばしば、コンポーネントがサウンドステージを「創り出す」かのように語られます。しかし、より正確な捉え方は、サウンドステージを録音物固有の特性と見なし、再生システムの役割を「創造」ではなく「発掘」と位置づけることです。高解像度で低歪みなシステムは、奥行き情報を「付加」するのではなく、録音時にエンコードされた奥行きの手がかりを「マスキング」する要因が少ない、と理解すべきです。この視点は、「音が前に出るケーブルがより完全」という主張に対する根本的な反論となります。評価の問いは「このケーブルは深いサウンドステージを創るか？」ではなく、「このケーブルは録音に含まれるサウンドステージ情報をどれだけ忠実に伝達し、その知覚を歪めるようなカラーレーションをどの程度加えるか？」へと変わるべきです。
+
+## **第II部：聴覚における奥行き知覚の心理音響学**
+
+人間がどのようにして音の距離を認識するのか、その科学的基盤を理解することは、オーディオシステムがその知覚をいかに操作しうるかを解明する上で不可欠です。
+
+### **最終的なデコーダーとしての脳**
+
+聴覚は単なる機械的な波の伝達プロセスではなく、脳が物理的な音波を解釈し、環境の精神的なモデルを構築する知覚的な事象です [13](#ref-13)。音源の位置（方向と距離）を特定する能力は、我々の生存メカニズムの根幹をなすものです [14](#ref-14)。
+
+### **距離を知覚するための主要な音響的手がかり**
+
+脳が音源の距離を判断するために用いる主要な手がかりは、物理的な特性と密接に関連しています。
+
+1. **音の強度（ラウドネス）：** 最も直感的な手がかりです。自由音場では、音圧レベルは距離が2倍になるごとに6 dB減衰します（逆二乗の法則）。脳は特に聞き慣れた音に対してこの法則を利用し、距離を推定します [16](#ref-16)。  
+2. **スペクトル成分（音色）：** 空気は音波が伝播する際の自然なローパスフィルターとして機能し、高周波成分は低周波成分よりも大きく減衰します。その結果、遠くの音源は高域が減衰して「鈍く」聴こえ、近くの音源は「明るく」聴こえます [9](#ref-9)。研究によれば、3 kHzから6 kHz以上の周波数帯域は、空間定位において特に重要な役割を果たします [20](#ref-20)。  
+3. **直接音と間接音（残響音）の比率：** 閉鎖空間では、耳には音源からの直接音と、壁や天井などで反射した間接音（残響音）の両方が到達します。この直接音と間接音のエネルギー比（D/R比）は、強力な距離の手がかりとなります。近い音源はD/R比が高く（直接音が支配的）、遠い音源はD/R比が低く（間接音が支配的）なります [16](#ref-16)。  
+4. **過渡特性（トランジェント）の明瞭度：** 音の立ち上がり（アタック）の鋭さは、距離を知覚する上で重要な要素です。明瞭で歪みのないトランジェントは、反射音の影響が少ない直接音を示唆し、音源が近くにあると知覚させます。一方、反射音によって不明瞭になったり、なまったりしたトランジェントは、より遠い音源を示唆します [22](#ref-22)。優れた過渡応答特性（オーバーシュートやリンギングなく信号に追従する能力）が、リアリズムや即時性の感覚に繋がるのはこのためです [25](#ref-25)。
+
+これらの心理音響学的な手がかりをまとめることで、後の技術的分析の基礎を築くことができます。
+
+**表1：聴覚における距離知覚の心理音響学的手がかり**
+
+| 音響的手がかり | 物理的メカニズム | 近い音源の知覚効果 | 遠い音源の知覚効果 |
+| :---- | :---- | :---- | :---- |
+| **強度 / ラウドネス** | 逆二乗の法則：音圧は距離に応じて減衰する。 | 高い音圧レベル（より大きく聴こえる）。 | 低い音圧レベル（より小さく聴こえる）。 |
+| **スペクトル成分** | 空気の吸収により、高周波は低周波より大きく減衰する。 | 明るく、高周波成分が豊か。 | 鈍く、高周波がロールオフしている。 |
+| **直接音/間接音 比率** | 距離によって直接音と反射音のエネルギー比が変化する。 | 高いD/R比（クリアで直接的な音）。 | 低いD/R比（より拡散し、残響の多い音）。 |
+| **トランジェントの明瞭度** | 近距離では音の立ち上がりが反射音にマスキングされにくい。 | 鋭く、クリアで、速いアタック。 | 柔らかく、より拡散し、不明瞭なアタック。 |
+
+## **第III部：システムが誘発する空間情報の改変 – 「前方定位サウンド」の分析**
+
+このセクションでは、第II部で概説した心理音響学的な手がかりが、オーディオシステムのどのような電気的・音響的特性によって改変され、結果としてサウンドステージが前方にシフトするという知覚を生み出すのかを詳細に分析します。
+
+### **周波数特性と知覚される近接性**
+
+これが「前方定位サウンド」を生み出す最も主要なメカニズムです。前述の通り、明るい音は近くに知覚されます。オーディオコンポーネントが、人間の聴覚が最も敏感な帯域の一つである**アッパーミッドレンジ**から**プレゼンス領域**（一般的に 2 kHz∼5 kHz）に広帯域なブースト（強調）をもたらす場合、楽器やボーカルは人工的に前方へ、より近くへと押し出され、「エッジが立つ」「アグレッシブ」といった印象を与えます [27](#ref-27)。
+
+逆に、この帯域にディップ（落ち込み）が存在すると、「レイドバック」あるいは「リセッシブ（後退的）」なサウンドとなり、より遠くに音像が定位する印象を与えます。これは、意図的にサウンドステージの奥行き感を操作するテクニックとしても知られています。
+
+### **時間領域の忠実度と「即時性」の知覚**
+
+* **過渡応答（トランジェント・レスポンス）：** 優れた過渡応答特性を持つシステムは、音の立ち上がりを滲みやオーバーシュート、リンギング（付帯音）なしに再現します [23](#ref-23)。これにより、近接した音源の手がかりである「鋭く、クリアで、速いアタック」が保持され、しばしば「前方定位」と混同される「即時性（immediacy）」の感覚に寄与します。  
+* **位相のコヒーレンスと群遅延：** 周波数間の時間的な関係性の歪み（位相シフトや群遅延）は、トランジェントを不明瞭にし、ステレオイメージの焦点を甘くする可能性があります [32](#ref-32)。リニアな位相特性と低い群遅延を持つシステムは、波形の完全性を保ち、正確な音像定位と安定したサウンドステージに貢献します [34](#ref-34)。低域における大きな群遅延は一般的で聴取されにくいものの、中域での異常は知覚される明瞭度に影響を与え得ます [36](#ref-36)。
+
+### **オーディオケーブルの詳細分析（ユーザー指摘の事例）**
+
+* **複雑なフィルターとしてのケーブル：** オーディオケーブルは単純な導体ではありません。固有の**抵抗（R）**、**キャパシタンス（C）**、\*\*インダクタンス（L）\*\*を持っています。これらがソース機器の出力インピーダンスと受け手機器の入力インピーダンスと相互作用することで、複雑なRLCフィルター回路を形成します [37](#ref-37)。  
+* **共振と高周波ピーキング：** このRLC回路には共振周波数が存在します。この共振周波数が可聴帯域内またはその近傍にある場合、周波数特性に顕著なピーク（先鋭な山）を生じさせることがあります [40](#ref-40)。多くのインターコネクトケーブルでは、この共振が高周波帯域で発生し、まさに音を前方に定位させる「プレゼンス領域」のブーストを引き起こす可能性があります [37](#ref-37)。これは意図された機能ではなく、予測可能な電気的アーティファクトです。  
+* **表皮効果と高周波：** 表皮効果は、高周波電流が導体の表面に集中して流れる現象であり、その周波数における実効抵抗を増加させます [44](#ref-44)。オーディオケーブルにおける可聴性は議論の的ですが、これもケーブルの伝送特性が周波数によって変化し、距離感の手がかりとなるスペクトルバランスを改変しうる一因です。  
+* **「前のめりなケーブル」の正体：** ユーザーが指摘した「前のめり」あるいは「音が前に出る」と評されるケーブルは、そのLCR特性が接続機器との相互作用の結果として、2 kHz∼5 kHz のプレゼンス領域に共振ピークを形成している可能性が極めて高いと考えられます。これは一種のイコライゼーションであり、近接感という心理音響学的な手がかりを人工的に強調するカラーレーションに他なりません。
+
+この「前方定位サウンド」という知覚は、単一のメカニズムによって生じるのではなく、周波数領域と時間領域における歪みが複合的に作用した結果として現れます。ケーブルの共振のような現象は、この両領域に同時に影響を与える典型例です。共振は周波数特性にピークを生み出し（周波数領域の歪み）、これが「前方」という空間的な位置づけを知覚させます。同時に、共振は過渡応答に対してリンギングやオーバーシュートを引き起こし（時間領域の歪み）、これが「エッジが立つ」「アグレッシブ」といった音の質感を生み出します [26](#ref-26)。聴き手は、これら二つの関連した歪みを、「前方定位サウンド」という一つの統一された音響的特徴として認識するのです。
+
+**表2：コンポーネントの特性と知覚されるサウンドステージの奥行きへの影響**
+
+| 主観的な知覚表現 | 主要な技術的相関 | 奥行き手がかりへの影響メカニズム |
+| :---- | :---- | :---- |
+| **前方定位 / アグレッシブ / エッジが立つ** | アッパーミッドレンジ/プレゼンス領域（2 kHz∼5 kHz）のピーク | 高周波のスペクトル成分を人工的にブーストし、近接音源の音響特性を模倣する。ドライバー特性、クロスオーバー設計、ケーブル共振などが原因となりうる。 |
+| **後退的 / レイドバック / 遠い** | アッパーミッドレンジ/プレゼンス領域（2 kHz∼5 kHz）のディップ | 高周波のスペクトル成分を減衰させ、空気吸収による距離の効果を模倣する。 |
+| **即時的 / 速い / スナッピー** | 優れた過渡応答特性（速い立ち上がり、最小限のオーバーシュート/リンギング） | 音の初期アタックの明瞭度を保持する。これは直接的で残響のない（＝近い）音源の重要な手がかりとなる。 |
+| **不明瞭 / 遅い / 膨張した** | 劣った過渡応答特性（遅い立ち上がり、顕著なリンギングやオーバーシュート） | 初期アタックの明瞭度を低下させ、初期反射音の効果を模倣し、より遠い、あるいは残響の多い音源を示唆する。 |
+| **ホログラフィック / 焦点の合った音像** | 低いクロストーク、優れた位相コヒーレンスと低い群遅延 | チャンネル間の微細な時間差とレベル差を保持し、脳が安定した明確な音像を形成することを可能にする。 |
+| **拡散的 / 曖昧な音像** | 高いクロストーク、顕著な位相/群遅延歪み | チャンネル間の時間・レベル情報を曖昧にし、脳が正確な位置を特定するのを妨げ、音像を不明瞭にする。 |
+
+## **第IV部：ハイフィデリティの美徳としての「前方定位」の再評価**
+
+このセクションでは、これまでの技術的分析を統合し、「前方定位」という特性をハイフィデリティの文脈でどのように位置づけるべきかを批判的に再検討します。
+
+### **正確性 対 ユーフォニックなカラーレーション**
+
+「前方定位サウンド」は、ユーフォニック（聴感上心地よい）なカラーレーションの典型例です。多くの録音を初めて聴いた際に、よりエキサイティングで詳細に富んでいるように感じさせる効果がありますが、それは信号を体系的に改変することによって達成されています。
+
+真の正確性、すなわちハイフィデリティとは、システムが録音物に対する「透明な窓」として機能し、遠くに録音された演奏は遠くに、親密に録音された演奏は親密に再現することを要求します。あらゆる音源を等しく親密に聴かせるシステムは、もはや透明な窓ではなく、聴き手の前に恒久的に置かれた拡大鏡に他なりません。
+
+### **「オーディオ的な華やかさ」 対 自然な音色**
+
+前方定位効果を生み出すプレゼンス領域のブーストは、しばしば音色の正確性を犠牲にします。楽器や声に不自然な「エッジ」「グレア（きつい輝き）」「硬さ」を付加し、それらを本来の音色から遠ざけ、「オーディオ的な」再生音に変えてしまうことがあります。そのようなコンポーネントは、中立的な伝送路ではなく「エフェクト装置」として機能しており、ソースマテリアルが持つ多様な空間的・音色的パレットを忠実に再現することよりも、特定の刺激的なプレゼンテーションを優先しているのです。
+
+この「前方定位＝善」という評価軸がオーディオレビューにおいて定着した背景には、批評における一つのパラドックスが存在します。この種のカラーレーションは、短時間の比較試聴や、元々の録音が平凡な場合に、システムを非常に印象的に聴かせる効果があります [47](#ref-47)。レビュアーは、自身の好みや、あるいは機器間の「違い」を記述する必要性から、この刺激的なカラーレーションを「解像度の向上」や「ディテールの開示」といった肯定的な言葉で表現し、美徳として定式化してしまう傾向があります。これがフィードバックループを生み、メーカー側がその「評価の高い」音を意図的に作り出す設計（例えば、意図的に周波数特性にピークを持たせたスピーカーや、特定の共振特性を持つケーブル）へと誘導する可能性があります。結果として、ユーザーが指摘したような矛盾、すなわち、実際には中立性から逸脱し、すべての録音に画一的な性格を押し付けているシステムが、「より完全」「より情報量が多い」と賞賛される事態が生じるのです。
+
+## **結論と評価指針**
+
+オーディオにおける正確な空間再現とは、原盤に記録された空間情報の地図を忠実に保存・再現することに他なりません。一般に「音が前に出る」と表現される現象は、主としてアッパーミッドレンジの周波数特性における強調に起因する、測定可能で特定のカラーレーションであり、多くの場合、その根底にある電気的・音響的共振に由来する時間領域のアーティファクトを伴います。
+
+この結論に基づき、オーディオ機器の空間再現性を評価する際の言語と基準について、以下のように推奨します。
+
+* **評価言語の転換：** コンポーネントの空間的特性は、まず第一にその**中立性**と、**多様な録音物の空間的特徴を描き分ける能力**によって記述されるべきです。いかなる「前方定位」または「後退的」な傾向も、それ自体が美徳や欠陥なのではなく、**特定のカラーレーション**として明確に指摘されるべきです。  
+* **批評的聴取のためのガイダンス：**  
+  1. **多様なリファレンス録音の使用：** 聴き手は、コンポーネントの空間的な中立性を評価するために、明確で多様な空間的特性を持つ録音（例：親密なボーカル録音、大規模なオーケストラ作品、ミニマルなアコースティックトラックなど）を用いるべきです [49](#ref-49)。  
+  2. **一貫性 対 多様性の聴き分け：** そのコンポーネントは、すべての録音に同じ空間的な「指紋」を押し付けていないか？ それとも、各録音固有の音響特性が立ち現れるのを許容しているか？ 後者こそが、真に高忠実度で透明なコンポーネントの証です。  
+  3. **聴感を信じ、その「なぜ」を理解する：** ユーザーの最初の直感は正しかったと言えます。本レポートで概説した心理音響学および電気工学の原理を理解することで、批評的な聴き手は単なる好みの表明を超え、自らが聴く主観的な効果の客観的な原因を診断できるようになります。これは、より情報に基づいた、満足度の高いシステム構築へと繋がるでしょう。
+
+#### **引用文献**
+
+<span id="ref-1">1</span>. 第2回：オーディオ用語がよくわかりません。 | 音楽之友社が運営するWebマガジン「ONTOMO（オントモ）」のブログ。音楽／オーディオ雑誌発のこだわりの限定品や、情報を発信します。, [http://blog.ontomo-shop.com/?eid=7](http://blog.ontomo-shop.com/?eid=7)  
+<span id="ref-2">2</span>. www.audioresurgence.com, [https://www.audioresurgence.com/audiophile-reviewers-glossary-of-terms\#:\~:text=Soundstage%20%E2%80%93%20refers%20to%20the%20spatial,and%20vocalists%20within%20that%20space.](https://www.audioresurgence.com/audiophile-reviewers-glossary-of-terms#:~:text=Soundstage%20%E2%80%93%20refers%20to%20the%20spatial,and%20vocalists%20within%20that%20space.)  
+<span id="ref-3">3</span>. What is a Soundstage? \- Audioengine, [https://audioengine.com/explore/what-is-a-soundstage/](https://audioengine.com/explore/what-is-a-soundstage/)  
+<span id="ref-4">4</span>. HiFi Decoded: An Audiophile Terminology Guide \- Moon Audio, [https://www.moon-audio.com/pages/audiophile-terms-guide](https://www.moon-audio.com/pages/audiophile-terms-guide)  
+<span id="ref-5">5</span>. What do the commonly used "audiophile terms" mean (used mostly in product reviews) : r/headphones \- Reddit, [https://www.reddit.com/r/headphones/comments/19dzp0c/what\_do\_the\_commonly\_used\_audiophile\_terms\_mean/](https://www.reddit.com/r/headphones/comments/19dzp0c/what_do_the_commonly_used_audiophile_terms_mean/)  
+<span id="ref-6">6</span>. Audiophile Glossary \- Apos, [https://apos.audio/blogs/news/audiophile-glossary](https://apos.audio/blogs/news/audiophile-glossary)  
+<span id="ref-7">7</span>. Spatial cue reproduction in modern receiver-in-the-ear hearing instruments \- International Symposium on Auditory and Audiological Research (ISAAR), [https://proceedings.isaar.eu/index.php/isaarproc/article/view/2011-51](https://proceedings.isaar.eu/index.php/isaarproc/article/view/2011-51)  
+<span id="ref-8">8</span>. Surround by Sound: A Review of Spatial Audio Recording and Reproduction \- MDPI, [https://www.mdpi.com/2076-3417/7/5/532](https://www.mdpi.com/2076-3417/7/5/532)  
+<span id="ref-9">9</span>. Psychoacoustics: how perception influences music production \- iZotope, [https://www.izotope.com/en/learn/psychoacoustics-how-perception-influences-music-production](https://www.izotope.com/en/learn/psychoacoustics-how-perception-influences-music-production)  
+<span id="ref-10">10</span>. Articles by Robert Harley's Profile | The Absolute Sound Journalist | Muck Rack, [https://muckrack.com/robert-harley-2/articles](https://muckrack.com/robert-harley-2/articles)  
+<span id="ref-11">11</span>. J. Gordon Holt \- Wikipedia, [https://en.wikipedia.org/wiki/J.\_Gordon\_Holt](https://en.wikipedia.org/wiki/J._Gordon_Holt)  
+<span id="ref-12">12</span>. About: J. Gordon Holt \- DBpedia, [http://dbpedia.org/resource/J.\_Gordon\_Holt](http://dbpedia.org/resource/J._Gordon_Holt)  
+<span id="ref-13">13</span>. Psychoacoustics \- Wikipedia, [https://en.wikipedia.org/wiki/Psychoacoustics](https://en.wikipedia.org/wiki/Psychoacoustics)  
+<span id="ref-14">14</span>. Sound localization \- Wikipedia, [https://en.wikipedia.org/wiki/Sound\_localization](https://en.wikipedia.org/wiki/Sound_localization)  
+<span id="ref-15">15</span>. Stereo Sound: Perception & Hearing Science Activity | Exploratorium Teacher Institute Project, [https://www.exploratorium.edu/snacks/stereo-sound](https://www.exploratorium.edu/snacks/stereo-sound)  
+<span id="ref-16">16</span>. DISTANCE CUES FOR VIRTUAL AUDITORY SPACE, [https://www.cmu.edu/dietrich/psychology/shinn/publications/pdfs/2000/2000ieee\_shinn.pdf](https://www.cmu.edu/dietrich/psychology/shinn/publications/pdfs/2000/2000ieee_shinn.pdf)  
+<span id="ref-17">17</span>. Auditory Distance Perception by Translating Observers \- UC Santa Barbara, [https://people.psych.ucsb.edu/loomis/jack/speigle\_93.pdf](https://people.psych.ucsb.edu/loomis/jack/speigle_93.pdf)  
+<span id="ref-18">18</span>. Auditory Distance Perception, [http://perception.inrialpes.fr/\~Horaud/POP/TutorialsNOV06/ADP\_lu\_cooke.pdf](http://perception.inrialpes.fr/~Horaud/POP/TutorialsNOV06/ADP_lu_cooke.pdf)  
+<span id="ref-19">19</span>. The Influence of Visual Cues on Auditory Distance Perception, [https://pub.dega-akustik.de/DAGA\_2015/data/articles/000422.pdf](https://pub.dega-akustik.de/DAGA_2015/data/articles/000422.pdf)  
+<span id="ref-20">20</span>. Full article: A review of the perceptual effects of hearing loss for frequencies above 3 kHz, [https://www.tandfonline.com/doi/full/10.1080/14992027.2016.1204565](https://www.tandfonline.com/doi/full/10.1080/14992027.2016.1204565)  
+<span id="ref-21">21</span>. The perceptual significance of high-frequency energy in the human voice \- Frontiers, [https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2014.00587/full](https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2014.00587/full)  
+<span id="ref-22">22</span>. \[Glossary\] An Audiophile Guide to Describing Sound \- Headphonesty, [https://www.headphonesty.com/sound-description-glossary/](https://www.headphonesty.com/sound-description-glossary/)  
+<span id="ref-23">23</span>. スピーカーに要求される重要な性能の中で、“Ｔｒａｎｓｉｅｎｔ”（トランジェント）というものをご存じだろうか？英和辞書で引くと、「一時の、瞬間的な」と書かれている。オーディオ的にいえば \- 小原 由夫の Sight and Sound | ECLIPSE Home Audio Systems, [https://www.userlist-eclipse-td.com/sightandsound/ver1/vol6.html](https://www.userlist-eclipse-td.com/sightandsound/ver1/vol6.html)  
+<span id="ref-24">24</span>. 【オーディオ教養強化辞典】過渡特性（トランジェント）trasient response とは | Push on\! Mycar-life, [https://www.mycar-life.com/article/2015/12/25/3971.html](https://www.mycar-life.com/article/2015/12/25/3971.html)  
+<span id="ref-25">25</span>. スピーカーを波形通りに動かす「Adaptive Speaker Driver」 \- プレザントンテクノロジー株式会社, [https://pleasantone.co.jp/technology.html](https://pleasantone.co.jp/technology.html)  
+<span id="ref-26">26</span>. BP5 \- Hififreak.nl, [https://www.hififreak.nl/wp-content/uploads/2020/01/BP5\_pt5B\_MANUAL.pdf](https://www.hififreak.nl/wp-content/uploads/2020/01/BP5_pt5B_MANUAL.pdf)  
+<span id="ref-27">27</span>. Sounds Like? An Audio Glossary Glossary: R-S \- Stereophile.com, [https://www.stereophile.com/content/sounds-audio-glossary-glossary-r-s](https://www.stereophile.com/content/sounds-audio-glossary-glossary-r-s)  
+<span id="ref-28">28</span>. Sounds Like? An Audio Glossary Glossary: F-H \- Stereophile.com, [https://www.stereophile.com/content/sounds-audio-glossary-glossary-f-h](https://www.stereophile.com/content/sounds-audio-glossary-glossary-f-h)  
+<span id="ref-29">29</span>. What measurements number in the dashboard leads to a "warm and ..., [https://www.audiosciencereview.com/forum/index.php?threads/what-measurements-number-in-the-dashboard-leads-to-a-warm-and-intimate-sound-vs-colder-more-technical-clinical-sound.9707/](https://www.audiosciencereview.com/forum/index.php?threads/what-measurements-number-in-the-dashboard-leads-to-a-warm-and-intimate-sound-vs-colder-more-technical-clinical-sound.9707/)  
+<span id="ref-30">30</span>. Words that describe sound \- Gearspace, [https://gearspace.com/board/so-much-gear-so-little-time/524454-words-describe-sound.html](https://gearspace.com/board/so-much-gear-so-little-time/524454-words-describe-sound.html)  
+<span id="ref-31">31</span>. EQ Frequency Ranges And Their Impact On Sound In 2025 \- Mixing Monster, [https://mixingmonster.com/eq-frequency-ranges/](https://mixingmonster.com/eq-frequency-ranges/)  
+<span id="ref-32">32</span>. (PDF) Audibility of Group-Delay Equalization \- ResearchGate, [https://www.researchgate.net/publication/352265058\_Audibility\_of\_Group-Delay\_Equalization](https://www.researchgate.net/publication/352265058_Audibility_of_Group-Delay_Equalization)  
+<span id="ref-33">33</span>. Group delay and phase delay \- Wikipedia, [https://en.wikipedia.org/wiki/Group\_delay\_and\_phase\_delay](https://en.wikipedia.org/wiki/Group_delay_and_phase_delay)  
+<span id="ref-34">34</span>. Why is a linear phase important? \- Signal Processing Stack Exchange, [https://dsp.stackexchange.com/questions/31726/why-is-a-linear-phase-important](https://dsp.stackexchange.com/questions/31726/why-is-a-linear-phase-important)  
+<span id="ref-35">35</span>. The Art of Linear Phase EQ \- Number Analytics, [https://www.numberanalytics.com/blog/the-art-of-linear-phase-eq](https://www.numberanalytics.com/blog/the-art-of-linear-phase-eq)  
+<span id="ref-36">36</span>. Group delay explanation and measurement (in audio), [https://audiojudgement.com/group-delay-explanation-measurement-audio/](https://audiojudgement.com/group-delay-explanation-measurement-audio/)  
+<span id="ref-37">37</span>. Question about cable capacitance \- Gearspace, [https://gearspace.com/board/geekzone/524962-question-about-cable-capacitance.html](https://gearspace.com/board/geekzone/524962-question-about-cable-capacitance.html)  
+<span id="ref-38">38</span>. Electrical resonance \- Wikipedia, [https://en.wikipedia.org/wiki/Electrical\_resonance](https://en.wikipedia.org/wiki/Electrical_resonance)  
+<span id="ref-39">39</span>. RLC circuit \- Wikipedia, [https://en.wikipedia.org/wiki/RLC\_circuit](https://en.wikipedia.org/wiki/RLC_circuit)  
+<span id="ref-40">40</span>. The Effects of Cable on Signal Quality \- Audio Systems Group, [http://audiosystemsgroup.com/CableCapacitance.pdf](http://audiosystemsgroup.com/CableCapacitance.pdf)  
+<span id="ref-41">41</span>. What Are Resonant Peaks? | Remove Resonant Frequencies In 2025 \- Mixing Monster, [https://mixingmonster.com/what-are-resonant-peaks/](https://mixingmonster.com/what-are-resonant-peaks/)  
+<span id="ref-42">42</span>. Are cable resonances real and can they be audible? : Empirical Audio, [https://www.empiricalaudio.com/computer-audio/audio-faqs/are-cable-resonances-real](https://www.empiricalaudio.com/computer-audio/audio-faqs/are-cable-resonances-real)  
+<span id="ref-43">43</span>. Any technical minds know about cable capacitance? \- Audio Science Review (ASR) Forum, [https://www.audiosciencereview.com/forum/index.php?threads/any-technical-minds-know-about-cable-capacitance.18550/](https://www.audiosciencereview.com/forum/index.php?threads/any-technical-minds-know-about-cable-capacitance.18550/)  
+<span id="ref-44">44</span>. Skin effect \- Wikipedia, [https://en.wikipedia.org/wiki/Skin\_effect](https://en.wikipedia.org/wiki/Skin_effect)  
+<span id="ref-45">45</span>. The insulating materials in the audio cables and the skin effect, [https://www.polarisaudio.it/en/guide/audio-cables/the-insulating-materials-in-the-audio-cables-and-the-skin-effect](https://www.polarisaudio.it/en/guide/audio-cables/the-insulating-materials-in-the-audio-cables-and-the-skin-effect)  
+<span id="ref-46">46</span>. Possible methods for the measurement of transient intermodulation distortion \- Linear Audio, [https://linearaudio.net/sites/linearaudio.net/files/espoo%201976.pdf](https://linearaudio.net/sites/linearaudio.net/files/espoo%201976.pdf)  
+<span id="ref-47">47</span>. ABX Testing and Audio Perception, [https://theproaudiofiles.com/audio-perception-and-abx-testing/](https://theproaudiofiles.com/audio-perception-and-abx-testing/)  
+<span id="ref-48">48</span>. Audio Blind Testing \- You Are Doing It Wrong\! \- YouTube, [https://www.youtube.com/watch?v=vRG8TaxGcbU](https://www.youtube.com/watch?v=vRG8TaxGcbU)  
+<span id="ref-49">49</span>. The ultimate music tracks to test your hi-fi system, [https://www.whathifi.com/features/best-test-tracks-to-trial-your-hi-fi-system](https://www.whathifi.com/features/best-test-tracks-to-trial-your-hi-fi-system)  
+<span id="ref-50">50</span>. The Listeners Compass: Reference Tracks by Jamie Madden \- \- Roon Labs, [https://blog.roonlabs.net/the-listeners-compass-reference-tracks-jamie-madden/](https://blog.roonlabs.net/the-listeners-compass-reference-tracks-jamie-madden/)  
+<span id="ref-51">51</span>. 10 Reference Tracks You Should Be Using for Mixing in 2024 \- iZotope, [https://www.izotope.com/en/learn/mixing-reference-tracks](https://www.izotope.com/en/learn/mixing-reference-tracks)
