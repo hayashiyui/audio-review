@@ -91,7 +91,7 @@ const columns = defineCollection({
       category: z.enum([
         'オーディオ基礎知識',
         'セットアップ',
-        '音楽論',
+        'オーディオノウハウ',
         '業界動向',
         '技術解説',
         'エッセイ',
