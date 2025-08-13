@@ -48,18 +48,16 @@ const websiteSchema = generateWebsiteSchema()
   <Favicons />
   <ClientRouter />
 
-  <!-- Google Analytics (GA4) - 本番環境のみ -->
-  {!import.meta.env.DEV && (
-    <>
-      <!-- Google tag (gtag.js) -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1JP1QE2GWE" is:inline></script>
-      <script is:inline>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-1JP1QE2GWE');
-      </script>
-    </>
+  {import.meta.env.PROD && (
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1JP1QE2GWE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-1JP1QE2GWE');
+    </script>
   )}
 
   <!-- サイト全体の構造化データ -->
