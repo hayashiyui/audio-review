@@ -21,7 +21,12 @@ interface Props {
 }
 
 const { entry } = Astro.props
-const formattedDate = formatDate(entry.data.date)
+
+// updatedAtがある場合は更新日、ない場合は公開日を表示
+const isUpdated = !!(entry.collection === 'reviews' || entry.collection === 'columns') && entry.data.updatedAt
+const displayDate = isUpdated ? entry.data.updatedAt : entry.data.date
+const formattedDate = formatDate(displayDate)
+const datePrefix = isUpdated ? '更新' : '公開'
 
 // コレクション種別に応じた読書時間計算
 let readTime: string
@@ -72,7 +77,10 @@ const subpostCount = !isSubpost(entry.id) && entry.collection === 'blog' ? await
     
     <!-- 2行目: 日付、読書時間、タグ -->
     <div class="text-muted-foreground text-xs flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
-      <span>{formattedDate}</span>
+      <span class="flex items-center gap-1">
+        <Icon name={isUpdated ? "lucide:refresh-cw" : "lucide:calendar"} class="size-2.5" />
+        {formattedDate} {datePrefix}
+      </span>
       <Separator orientation="vertical" className="h-3!" />
       <span>{readTime}</span>
       
@@ -170,7 +178,10 @@ const subpostCount = !isSubpost(entry.id) && entry.collection === 'blog' ? await
             </>
           )
         }
-        <span>{formattedDate}</span>
+        <span class="flex items-center gap-1">
+          <Icon name={isUpdated ? "lucide:refresh-cw" : "lucide:calendar"} class="size-3" />
+          {formattedDate} {datePrefix}
+        </span>
         <Separator orientation="vertical" className="h-4!" />
         <span>{readTime}</span>
         {

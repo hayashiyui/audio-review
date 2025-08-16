@@ -16,14 +16,22 @@ export async function getAllReviews(): Promise<CollectionEntry<'reviews'>[]> {
   const reviews = await getCollection('reviews')
   return reviews
     .filter((review) => !review.data.draft)
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .sort((a, b) => {
+      const dateA = a.data.updatedAt ?? a.data.date
+      const dateB = b.data.updatedAt ?? b.data.date
+      return dateB.valueOf() - dateA.valueOf()
+    })
 }
 
 export async function getAllColumns(): Promise<CollectionEntry<'columns'>[]> {
   const columns = await getCollection('columns')
   return columns
     .filter((column) => !column.data.draft)
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .sort((a, b) => {
+      const dateA = a.data.updatedAt ?? a.data.date
+      const dateB = b.data.updatedAt ?? b.data.date
+      return dateB.valueOf() - dateA.valueOf()
+    })
 }
 
 export async function getAllPostsAndSubposts(): Promise<

@@ -81,8 +81,22 @@ const navigation = await getAdjacentReviews(currentReviewId)
           <div
             class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
           >
-            <span>{formatDate(review.data.date)}</span>
+            <span class="flex items-center gap-1">
+              <Icon name="lucide:calendar" class="size-3" />
+              {formatDate(review.data.date)} 公開
+            </span>
           </div>
+          
+          {review.data.updatedAt && (
+            <div
+              class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
+            >
+              <span class="flex items-center gap-1">
+                <Icon name="lucide:refresh-cw" class="size-3" />
+                {formatDate(review.data.updatedAt)} 更新
+              </span>
+            </div>
+          )}
 
           {review.data.brand && (
             <div

@@ -12,7 +12,12 @@ interface Props {
 }
 
 const { entry } = Astro.props
-const formattedDate = formatDate(entry.data.date)
+
+// updatedAtがある場合は更新日、ない場合は公開日を表示
+const isUpdated = !!entry.data.updatedAt
+const displayDate = isUpdated ? entry.data.updatedAt : entry.data.date
+const formattedDate = formatDate(displayDate)
+const datePrefix = isUpdated ? '更新' : '公開'
 ---
 
 <div
@@ -48,7 +53,10 @@ const formattedDate = formatDate(entry.data.date)
     
     <!-- 2行目: 日付、カテゴリ、タグ -->
     <div class="text-muted-foreground text-xs flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
-      <span>{formattedDate}</span>
+      <span class="flex items-center gap-1">
+        <Icon name={isUpdated ? "lucide:refresh-cw" : "lucide:calendar"} class="size-2.5" />
+        {formattedDate} {datePrefix}
+      </span>
       
       {entry.data.category && (
         <>
@@ -117,7 +125,10 @@ const formattedDate = formatDate(entry.data.date)
       <div
         class="text-muted-foreground mb-2 flex flex-wrap items-center gap-x-2 text-xs"
       >
-        <span>{formattedDate}</span>
+        <span class="flex items-center gap-1">
+          <Icon name={isUpdated ? "lucide:refresh-cw" : "lucide:calendar"} class="size-3" />
+          {formattedDate} {datePrefix}
+        </span>
         
         {entry.data.category && (
           <>

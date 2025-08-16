@@ -54,6 +54,7 @@ const reviews = defineCollection({
       title: z.string(),
       description: z.string(),
       date: z.coerce.date(),
+      updatedAt: z.coerce.date().optional(),
       brand: z.string().optional(),
       model: z.string().optional(),
       category: z.enum([
@@ -88,6 +89,7 @@ const columns = defineCollection({
       title: z.string(),
       description: z.string(),
       date: z.coerce.date(),
+      updatedAt: z.coerce.date().optional(),
       category: z.enum([
         'オーディオ基礎知識',
         'セットアップ',

@@ -81,8 +81,22 @@ const navigation = await getAdjacentColumns(currentColumnId)
           <div
             class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
           >
-            <span>{formatDate(column.data.date)}</span>
+            <span class="flex items-center gap-1">
+              <Icon name="lucide:calendar" class="size-3" />
+              {formatDate(column.data.date)} 公開
+            </span>
           </div>
+          
+          {column.data.updatedAt && (
+            <div
+              class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
+            >
+              <span class="flex items-center gap-1">
+                <Icon name="lucide:refresh-cw" class="size-3" />
+                {formatDate(column.data.updatedAt)} 更新
+              </span>
+            </div>
+          )}
           
           {column.data.category && (
             <div
