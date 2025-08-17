@@ -7,6 +7,11 @@ model: "A1000"
 category: "デジタルプレーヤー"
 tags: ["DAC", "ネットワークオーディオ", "Aurender", "韓国"]
 heroImage: "../../assets/images/hero/aurender-a1000.jpg"
+relatedArticles:
+  - collection: reviews
+    id: topwing-data-iso-box
+  - collection: reviews
+    id: synergistic-research-network-router
 ---
 
 デジタルオーディオが遍在する現代において、我々は無限の音楽へのアクセスを手に入れた。しかし、その利便性の奔流の中で、一つの根源的な問いが浮かび上がる。ハイフィデリティ・コンポーネントの真の存在意義とは何か。それは単にデータを忠実に音波へ変換する機械的な作業の遂行なのだろうか。それとも、音楽がその本来あるべき姿で立ち現れるための舞台を創造することにあるのだろうか。
@@ -21,10 +26,11 @@ import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
 
 <RelatedArticlesGrid 
   articles={[
+    { collection: "reviews", id: "topwing-data-iso-box" },
+    { collection: "reviews", id: "synergistic-research-network-router" },
     { collection: "columns", id: "sound-quality-evaluation-guide" },
-    { collection: "reviews", id: "topwing-data-iso-box" }
   ]}
-  columns={2}
+  columns={3}
   title="関連記事"
 />
 
