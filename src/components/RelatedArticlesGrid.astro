@@ -1,0 +1,53 @@
+---
+import BlogCard from '@/components/BlogCard.astro'
+import { getReviewById, getColumnById } from '@/lib/data-utils'
+import type { CollectionEntry } from 'astro:content'
+
+interface ArticleRef {
+  collection: 'reviews' | 'columns'
+  id: string
+}
+
+interface Props {
+  articles: ArticleRef[]
+  columns?: 2 | 3 | 4
+  title?: string
+}
+
+const { articles, columns = 3, title = '関連記事' } = Astro.props
+
+const fetchedArticles: (CollectionEntry<'reviews'> | CollectionEntry<'columns'>)[] = []
+
+for (const ref of articles) {
+  let article: CollectionEntry<'reviews'> | CollectionEntry<'columns'> | null = null
+  
+  if (ref.collection === 'reviews') {
+    article = await getReviewById(ref.id)
+  } else if (ref.collection === 'columns') {
+    article = await getColumnById(ref.id)
+  }
+  
+  if (article && !article.data.draft) {
+    fetchedArticles.push(article)
+  }
+}
+
+const gridCols = {
+  2: 'grid-cols-1 sm:grid-cols-2',
+  3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+  4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
+}
+---
+
+{fetchedArticles.length > 0 && (
+  <div class="not-prose w-full my-8">
+    {title && (
+      <h3 class="text-lg font-semibold mb-4">{title}</h3>
+    )}
+    <div class={`grid ${gridCols[columns]} gap-6`}>
+      {fetchedArticles.map((article) => (
+        <BlogCard entry={article} />
+      ))}
+    </div>
+  </div>
+)}
