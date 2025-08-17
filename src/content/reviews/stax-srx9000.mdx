@@ -7,6 +7,13 @@ model: "SR-X9000"
 category: "ヘッドホン"
 tags: ["STAX", "静電型", "プレーナー型", "ハイエンドオーディオ", "日本"]
 heroImage: "../../assets/images/hero/stax-srx9000.jpg"
+relatedArticles:
+  - collection: reviews
+    id: focal-utopia-sg
+  - collection: reviews
+    id: camerton-binom-er
+  - collection: columns
+    id: sound-quality-evaluation-guide
 ---
 
 オーディオにおける「至高の音」の探求は単なる信号の忠実な再現を超え、音楽という芸術が内包する情念、演奏家が込めた魂の息吹、そして録音空間そのものの空気を、いかにして聴き手の内なる世界に届けるかという、形而上学的な問いである。この問いに対し、半世紀以上にわたり「静電型」という唯一無二の道をもって答えを探し続けてきた孤高の求道者、それが STAX である [1](#ref-1)。
@@ -15,11 +22,17 @@ heroImage: "../../assets/images/hero/stax-srx9000.jpg"
 
 そして 2021年、STAX は新たなる頂点として SR-X9000 を世に送り出した。これは単なる新製品ではない。1990年代に登場し、その理想の高さゆえに量産が叶わなかった伝説の銘機 SR-Ω が抱いた夢の、数十年越しの成就である [4](#ref-4)。本稿では、この SR-X9000 という一つの到達点が内包する技術的な必然性、それが紡ぎ出す音響芸術、そして現代のハイエンドオーディオ市場におけるその存在意義を、深く思索的に解き明かしていきたい。
 
-**関連記事**
+import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
 
-import RelatedArticleCard from '@/components/RelatedArticleCard.astro'
-
-<RelatedArticleCard collection="columns" id="sound-quality-evaluation-guide" />
+<RelatedArticlesGrid 
+  articles={[
+    { collection: "reviews", id: "focal-utopia-sg" },
+    { collection: "reviews", id: "camerton-binom-er" },   
+    { collection: "columns", id: "sound-quality-evaluation-guide" },
+  ]}
+  columns={3}
+  title="関連記事"
+/>
 
 ## **STAX SR-X9000 — Overview**
 
