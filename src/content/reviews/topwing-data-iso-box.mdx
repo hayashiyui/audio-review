@@ -7,13 +7,23 @@ model: "DATA ISO BOX"
 category: "アクセサリ"
 tags: ["ネットワーク機器", "TOP WING", "ネットワークオーディオ", "日本"]
 heroImage: "../../assets/images/hero/topwing-data-iso-box.jpg"
+relatedArticles:
+  - collection: reviews
+    id: synergistic-research-network-router
+  - collection: columns
+    id: sound-quality-evaluation-guide
 ---
 
-**関連記事**
+import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
 
-import RelatedArticleCard from '@/components/RelatedArticleCard.astro'
-
-<RelatedArticleCard collection="columns" id="sound-quality-evaluation-guide" />
+<RelatedArticlesGrid 
+  articles={[
+    { collection: "reviews", id: "synergistic-research-network-router" },
+    { collection: "columns", id: "sound-quality-evaluation-guide" }
+  ]}
+  columns={2}
+  title="関連記事"
+/>
 
 ## **第I部：「静寂な」ネットワークという音響的要請**
 
