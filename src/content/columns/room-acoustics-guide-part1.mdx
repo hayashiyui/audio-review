@@ -2,7 +2,7 @@
 title: "実践的ルームアコースティック完全ガイド【第1部】"
 description: "オーディオ再生における重要要素「部屋」の基礎理論を解説。音の物理学から心理音響学まで、ルームアコースティック改善の理論的基盤を構築。【6部作シリーズ第1部】"
 date: "2025-08-01T09:00:00"
-category: "オーディオノウハウ"
+category: "音質改善"
 tags: ["ルームアコースティック完全ガイド", "ルームアコースティック", "定在波対策"]
 heroImage: "../../assets/images/hero/hakase-guruguru.jpg"
 relatedArticles:
@@ -17,7 +17,6 @@ relatedArticles:
 
 1.  **【第1部】序論・部屋の音響物理学** ← 現在のページ
 
-
 ---
 
 ## **目次（第1部）**
@@ -26,11 +25,17 @@ relatedArticles:
 
 ---
 
-**オーディオ感性評価の基本を知りたい方(ΦωΦ)**
+import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
 
-import RelatedArticleCard from '@/components/RelatedArticleCard.astro'
-
-<RelatedArticleCard collection="columns" id="sound-quality-evaluation-guide" />
+<RelatedArticlesGrid 
+  articles={[
+    { collection: "columns", id: "sound-quality-evaluation-guide" },
+    { collection: "columns", id: "absorber-vs-diffuser" },
+    { collection: "columns", id: "spatial-fidelity-vs-forward-positioning" }
+  ]}
+  columns={3}
+  title="オーディオ音響の基礎知識"
+/>
 
 <h2 id="introduction">**序論：最後の、そして最も重要なコンポーネントとしての「部屋」**</h2>
 
