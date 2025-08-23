@@ -9,6 +9,8 @@ tags: ["DAC", "ネットワークオーディオ", "Aurender", "韓国"]
 heroImage: "../../assets/images/hero/aurender-a1000.jpg"
 relatedArticles:
   - collection: reviews
+    id: aurender-n30sa
+  - collection: reviews
     id: topwing-data-iso-box
   - collection: reviews
     id: synergistic-research-network-router
@@ -26,11 +28,12 @@ import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
 
 <RelatedArticlesGrid 
   articles={[
+    { collection: "reviews", id: "aurender-n30sa" },
     { collection: "reviews", id: "topwing-data-iso-box" },
     { collection: "reviews", id: "synergistic-research-network-router" },
     { collection: "columns", id: "sound-quality-evaluation-guide" },
   ]}
-  columns={3}
+  columns={4}
   title="関連記事"
 />
 
