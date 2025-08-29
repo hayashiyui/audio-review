@@ -9,6 +9,8 @@ tags: ["Abyss", "JPS Labs", "ハイエンドオーディオ", "平面磁界型",
 heroImage: "../../assets/images/hero/abyss-ab1266-phi-tc.jpg"
 relatedArticles:
   - collection: reviews
+    id: hifiman-susvara-unvailed
+  - collection: reviews
     id: focal-utopia-sg
   - collection: reviews
     id: camerton-binom-er
@@ -30,11 +32,12 @@ import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
 
 <RelatedArticlesGrid 
   articles={[
+    { collection: "reviews", id: "hifiman-susvara-unvailed" },   
     { collection: "reviews", id: "focal-utopia-sg" },
     { collection: "reviews", id: "camerton-binom-er" },   
     { collection: "reviews", id: "msb-premier-hpa" },
   ]}
-  columns={3}
+  columns={4}
   title="関連記事"
 />
 

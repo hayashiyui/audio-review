@@ -9,6 +9,8 @@ tags: ["STAX", "静電型", "プレーナー型", "ハイエンドオーディ�
 heroImage: "../../assets/images/hero/stax-srx9000.jpg"
 relatedArticles:
   - collection: reviews
+    id: hifiman-susvara-unvailed
+  - collection: reviews
     id: focal-utopia-sg
   - collection: reviews
     id: camerton-binom-er
@@ -26,11 +28,12 @@ import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
 
 <RelatedArticlesGrid 
   articles={[
+    { collection: "reviews", id: "hifiman-susvara-unvailed" },
     { collection: "reviews", id: "focal-utopia-sg" },
     { collection: "reviews", id: "camerton-binom-er" },   
     { collection: "columns", id: "sound-quality-evaluation-guide" },
   ]}
-  columns={3}
+  columns={4}
   title="関連記事"
 />
 
