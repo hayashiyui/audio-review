@@ -27,7 +27,7 @@ relatedArticles:
     id: sound-quality-evaluation-guide
 ---
 
-import { Picture } from 'astro:assets';
+import ImageWithCitation from '@/components/ImageWithCitation.astro';
 import mesurementGraph from "../../assets/images/contents/yh5000se-graph.png";
 
 音楽再生という行為は、突き詰めれば「再現」という名の翻訳作業に他ならない。演奏家が紡いだ空気の振動を、マイクロフォンが電気信号へと翻訳し、それを記録媒体が保存する。我々オーディオファイルが対峙するのは、その暗号化された情報を再び空気の振動へと翻訳し直す、一連の装置群である。この翻訳の精度、あるいはその「解釈」の美しさにこそ、我々は心血を注ぐのだ。
@@ -100,12 +100,12 @@ YH-5000SEの心臓部であるオルソダイナミック・ドライバーは�
 
 ### **客観的測定値との対話**
 
-<div style="position: relative; display: inline-block; width: 100%;">
-  <a href={mesurementGraph.src} target="_blank" rel="noopener noreferrer">
-    <Picture src={mesurementGraph} formats={['avif', 'webp']} alt="Ansuz Mainz8 Technlogy Table" decoding="async" loading="lazy" />
-  </a>
-  <p style="position: absolute; bottom: 8px; right: 8px; font-size: 0.75rem; color: #666; margin: 0;"><a href="https://www.audiosciencereview.com/forum/index.php?threads/yamaha-yh-5000se-flagship-headphone-review.56209/post-2050635" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">Yamaha YH-5000SE Flagship Headphone Review</a>より</p>
-</div>
+<ImageWithCitation 
+  imagePath={mesurementGraph} 
+  alt="Yamaha YH-5000SE Frequency Response Graph" 
+  sourceTitle="Yamaha YH-5000SE Flagship Headphone Review - ASR" 
+  sourceUrl="https://www.audiosciencereview.com/forum/index.php?threads/yamaha-yh-5000se-flagship-headphone-review.56209/post-2050635" 
+/>
 
 しかし、この意欲的な設計は、客観的な測定データ上ではいくつかの疑問符を投げかける。Audio Science Review (ASR) が公開した測定結果は、極めて特異な周波数特性を示している [12](#ref-12)。特に1-1.5kHz帯の鋭いピークと、それに続く2-5kHz帯の深い谷は、一般的なハイファイヘッドホンの目標カーブから大きく逸脱している。さらに、大音量再生時には歪み率が顕著に増加することも報告されており、軽量設計と引き換えに、ドライバーの物理的な限界が比較的低い可能性を示唆している。これらのデータは、後述する聴感上の印象の「癖」を科学的に裏付けるものであり、無視することはできない。
 
