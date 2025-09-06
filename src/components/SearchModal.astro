@@ -3,6 +3,28 @@
 ---
 <!-- Preload Pagefind UI assets -->
 <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+
+<style>
+  /* Pagefind UI Dark Mode Support - data-theme=dark 属性を使用 */
+  :root[data-theme="dark"] {
+    --pagefind-ui-primary: #e5e7eb;
+    --pagefind-ui-text: #e5e7eb;
+    --pagefind-ui-background: #171717;
+    --pagefind-ui-border: #404040;
+    --pagefind-ui-tag: #262626;
+  }
+
+  /* 追加のダークモード調整 */
+  [data-theme="dark"] #pagefind-ui input {
+    background: rgba(255, 255, 255, 0.05);
+    color: #e5e7eb;
+  }
+
+  [data-theme="dark"] #pagefind-ui mark {
+    background: rgba(250, 204, 21, 0.3);
+    color: inherit;
+  }
+</style>
 <div
   id="search-modal"
   class="fixed inset-0 z-[100] hidden"
