@@ -25,34 +25,36 @@ const years = Object.keys(reviewsByYear).sort((a, b) => parseInt(b) - parseInt(a
 
 <Layout class="max-w-6xl ml-2">
   <PageHead slot="head" title="オーディオ機器レビュー" />
-  <Breadcrumbs
-    items={[
-      { label: 'オーディオレビュー', href: '/reviews', icon: 'lucide:headphones' },
-      { label: `Page ${page.currentPage}`, icon: 'lucide:file-text' },
-    ]}
-  />
+  <div data-pagefind-ignore="all">
+    <Breadcrumbs
+      items={[
+        { label: 'オーディオレビュー', href: '/reviews', icon: 'lucide:headphones' },
+        { label: `Page ${page.currentPage}`, icon: 'lucide:file-text' },
+      ]}
+    />
 
-  <div class="flex min-h-[calc(100vh-18rem)] flex-col gap-y-8">
-    {
-      years.map((year) => (
-        <section class="flex flex-col gap-y-4">
-          <div class="font-medium">{year}</div>
-          <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {reviewsByYear[year].map((review) => (
-              <li>
-                <ReviewsCard entry={review} />
-              </li>
-            ))}
-          </ul>
-        </section>
-      ))
-    }
+    <div class="flex min-h-[calc(100vh-18rem)] flex-col gap-y-8">
+      {
+        years.map((year) => (
+          <section class="flex flex-col gap-y-4">
+            <div class="font-medium">{year}</div>
+            <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {reviewsByYear[year].map((review) => (
+                <li>
+                  <ReviewsCard entry={review} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+
+    <PaginationComponent
+      currentPage={page.currentPage}
+      totalPages={page.lastPage}
+      baseUrl="/reviews/"
+      client:load
+    />
   </div>
-
-  <PaginationComponent
-    currentPage={page.currentPage}
-    totalPages={page.lastPage}
-    baseUrl="/reviews/"
-    client:load
-  />
 </Layout>

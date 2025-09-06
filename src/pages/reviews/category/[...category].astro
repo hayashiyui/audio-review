@@ -33,32 +33,34 @@ const reviewsByYear = groupReviewsByYear(reviews)
     title={`${category} - オーディオレビュー`}
     description={`${category}カテゴリのオーディオ機器レビュー一覧`}
   />
-  <Breadcrumbs
-    items={[
-      { href: '/reviews', label: 'オーディオレビュー', icon: 'lucide:headphones' },
-      { label: category, icon: 'lucide:tag' },
-    ]}
-  />
+  <div data-pagefind-ignore="all">
+    <Breadcrumbs
+      items={[
+        { href: '/reviews', label: 'オーディオレビュー', icon: 'lucide:headphones' },
+        { label: category, icon: 'lucide:tag' },
+      ]}
+    />
 
-  <header class="mb-8">
-    <h1 class="text-3xl font-bold mb-2">{category}</h1>
-    <p class="text-muted-foreground">
-      {reviews.length} 件のレビュー
-    </p>
-  </header>
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold mb-2">{category}</h1>
+      <p class="text-muted-foreground">
+        {reviews.length} 件のレビュー
+      </p>
+    </header>
 
-  {Object.entries(reviewsByYear)
-    .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
-    .map(([year, yearReviews]) => (
-      <section class="mb-8">
-        <h2 class="mb-4 text-xl font-semibold">{year}</h2>
-        <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {yearReviews.map((review) => (
-            <li>
-              <ReviewsCard entry={review} />
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))}
+    {Object.entries(reviewsByYear)
+      .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
+      .map(([year, yearReviews]) => (
+        <section class="mb-8">
+          <h2 class="mb-4 text-xl font-semibold">{year}</h2>
+          <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {yearReviews.map((review) => (
+              <li>
+                <ReviewsCard entry={review} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+  </div>
 </Layout>
