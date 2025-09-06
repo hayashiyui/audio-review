@@ -3,17 +3,18 @@ import { Picture } from 'astro:assets';
 
 export interface Props {
   imagePath: any;
-  alt: string;
+  alt?: string;
   sourceTitle: string;
   sourceUrl: string;
 }
 
 const { imagePath, alt, sourceTitle, sourceUrl } = Astro.props;
+const altText = alt || sourceTitle;
 ---
 
 <div style="position: relative; display: inline-block; width: 100%;">
   <a href={imagePath.src} target="_blank" rel="noopener noreferrer">
-    <Picture src={imagePath} formats={['avif', 'webp']} alt={alt} decoding="async" loading="lazy" />
+    <Picture src={imagePath} formats={['avif', 'webp']} alt={altText} decoding="async" loading="lazy" />
   </a>
   <p style="position: absolute; bottom: 2px; right: 8px; font-size: 0.75rem; color: #666; margin: 0;">
     <a href={sourceUrl} target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
