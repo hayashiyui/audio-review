@@ -71,6 +71,13 @@ if (post.collection === 'blog') {
 <meta property="og:url" content={Astro.url} />
 <meta property="og:author" content={author} />
 
+{post.collection === 'reviews' && (
+  <meta name="pagefind:filters" content="section=reviews" />
+)}
+{post.collection === 'columns' && (
+  <meta name="pagefind:filters" content="section=columns" />
+)}
+
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta property="twitter:image" content={optimizedImageUrl} />

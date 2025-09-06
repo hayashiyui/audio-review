@@ -1,0 +1,174 @@
+---
+// Simple modal to host Pagefind UI. Include this once per page, ideally in the base layout before </body>.
+---
+<!-- Preload Pagefind UI assets -->
+<link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+<div
+  id="search-modal"
+  class="fixed inset-0 z-[100] hidden"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+>
+  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" data-backdrop></div>
+
+  <div class="relative mx-auto mt-24 w-full max-w-3xl rounded-lg bg-white dark:bg-neutral-900 shadow-lg border border-black/10 dark:border-white/10">
+    <div class="flex items-center justify-between px-3 py-2 border-b border-black/10 dark:border-white/10">
+      <h2 class="text-base font-medium">サイト内検索</h2>
+      <div class="flex items-center gap-2 text-xs text-gray-500">
+        <span class="hidden sm:inline">Ctrl/⌘ + K</span>
+        <button class="p-2 rounded hover:bg-black/5 dark:hover:bg-white/10" aria-label="閉じる" data-close>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="p-3 max-h-[80vh] overflow-auto">
+      <div id="pagefind-ui"></div>
+      <p class="mt-2 text-xs text-gray-500">対象: Reviews / Columns</p>
+    </div>
+  </div>
+ </div>
+
+<!-- Load Pagefind UI early so the input is available immediately in preview/prod -->
+<script src="/pagefind/pagefind-ui.js" id="pagefind-ui-script" defer></script>
+
+<script>
+;(() => {
+  let fallbackRendered = false
+  let lastFocused: Element | null = null
+
+  function getModal(): HTMLElement | null {
+    return document.getElementById('search-modal') as HTMLElement | null
+  }
+
+  async function openModal() {
+    const modal = getModal()
+    if (!modal) return
+    modal.classList.remove('hidden')
+    modal.setAttribute('aria-hidden', 'false')
+    lastFocused = document.activeElement
+    // bind close handlers once per modal instance
+    if (!(modal as any)._pagefindBound) {
+      const backdrop = modal.querySelector('[data-backdrop]') as HTMLElement | null
+      const closeBtn = modal.querySelector('[data-close]') as HTMLElement | null
+      backdrop?.addEventListener('click', closeModal)
+      closeBtn?.addEventListener('click', closeModal)
+      ;(modal as any)._pagefindBound = true
+    }
+    try {
+      await ensurePagefind()
+    } catch (e) {
+      renderFallback()
+    }
+    if ((window as any).PagefindUI) {
+      removeFallback()
+      const host = document.getElementById('pagefind-ui') as HTMLElement | null
+      if (host) host.innerHTML = ''
+      new (window as any).PagefindUI({
+        element: '#pagefind-ui',
+        bundlePath: '/pagefind/',
+        showImages: true,
+        showSubResults: true,
+        pageSize: 8,
+        // Limit results to Reviews/Columns using filters defined on pages
+        mergeFilter: { section: ['reviews', 'columns'] },
+        // If you add pagefind filters meta on articles, you can pre-filter:
+        // filters: { section: ['reviews', 'columns'] },
+        translations: {
+          placeholder: 'レビュー・コラムを検索',
+          zero_results: '該当する結果はありません',
+          search_label: 'サイト内検索',
+          clear_search: '検索をクリア',
+          load_more: 'さらに読み込む'
+        }
+      })
+    } else if (!fallbackRendered) {
+      // 読み込み完了してもUIが出ていない場合の保険
+      renderFallback()
+    }
+    requestAnimationFrame(() => {
+      const input = modal.querySelector('input[type="search"], input[type="text"]') as HTMLElement | null | undefined
+      if (input && 'focus' in input && typeof (input as any).focus === 'function') {
+        ;(input as any).focus()
+      }
+    })
+  }
+
+  function closeModal() {
+    const modal = getModal()
+    if (!modal) return
+    modal.classList.add('hidden')
+    modal.setAttribute('aria-hidden', 'true')
+    // restore focus for a11y
+    if (lastFocused && 'focus' in lastFocused && typeof (lastFocused as any).focus === 'function') {
+      ;(lastFocused as any).focus()
+    }
+  }
+
+  function ensurePagefind(): Promise<void> {
+    if ((window as any).PagefindUI) return Promise.resolve()
+    const existing = document.getElementById('pagefind-ui-script') as HTMLScriptElement | null
+    if (existing) {
+      if ((window as any).PagefindUI) return Promise.resolve()
+      return new Promise<void>((resolve, reject) => {
+        existing.addEventListener('load', () => resolve())
+        existing.addEventListener('error', () => reject(new Error('Pagefind UI の読み込みに失敗しました')))
+      })
+    }
+    return new Promise<void>((resolve, reject) => {
+      const el = document.createElement('script')
+      el.id = 'pagefind-ui-script'
+      el.src = '/pagefind/pagefind-ui.js'
+      el.async = true
+      el.onload = () => resolve()
+      el.onerror = () => reject(new Error('Pagefind UI の読み込みに失敗しました'))
+      document.head.appendChild(el)
+    })
+  }
+
+  function renderFallback() {
+    fallbackRendered = true
+    const host = document.getElementById('pagefind-ui')
+    if (!host) return
+    host.innerHTML = ''
+    const wrap = document.createElement('div')
+    wrap.className = 'pagefind-fallback'
+    wrap.innerHTML = `
+      <input type="search" disabled
+        placeholder="検索UIの読み込み待機中です…（ビルド後プレビューで有効）"
+        class="w-full rounded-md border border-black/10 dark:border-white/10 bg-transparent px-3 py-2 text-sm text-foreground/80 placeholder:text-foreground/50" />
+      <p class="mt-2 text-xs text-gray-500">読み込みに失敗する場合は、dist/pagefind/ の存在とネットワークエラー(404)をご確認ください。</p>
+    `
+    host.appendChild(wrap)
+  }
+
+  function removeFallback() {
+    const host = document.getElementById('pagefind-ui')
+    const fb = host?.querySelector('.pagefind-fallback')
+    if (fb) fb.remove()
+    fallbackRendered = false
+  }
+
+  window.addEventListener('open-search', openModal)
+  // When Astro client router swaps pages, ensure modal is hidden and re-initializes next open
+  window.addEventListener('astro:after-swap', () => {
+    const modal = getModal()
+    modal?.classList.add('hidden')
+  })
+
+  document.addEventListener('keydown', e => {
+    const active = document.activeElement as HTMLElement | null
+    const tag = active?.tagName
+    const typing = tag === 'INPUT' || tag === 'TEXTAREA' || !!active?.isContentEditable
+    if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || (!typing && e.key === '/')) {
+      e.preventDefault()
+      openModal()
+    } else if (e.key === 'Escape') {
+      closeModal()
+    }
+  })
+
+})()
+</script>

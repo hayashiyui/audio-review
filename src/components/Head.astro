@@ -50,13 +50,12 @@ const websiteSchema = generateWebsiteSchema()
 
   {import.meta.env.PROD && (
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1JP1QE2GWE"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-1JP1QE2GWE');
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1JP1QE2GWE" is:inline></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || []
+      function gtag(){ window.dataLayer.push(arguments) }
+      gtag('js', new Date())
+      gtag('config', 'G-1JP1QE2GWE')
     </script>
   )}
 

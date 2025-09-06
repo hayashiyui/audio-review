@@ -23,8 +23,11 @@ interface Props {
 const { entry } = Astro.props
 
 // updatedAtがある場合は更新日、ない場合は公開日を表示
-const isUpdated = !!(entry.collection === 'reviews' || entry.collection === 'columns') && entry.data.updatedAt
-const displayDate = isUpdated ? entry.data.updatedAt : entry.data.date
+const updatedAt = (entry.collection === 'reviews' || entry.collection === 'columns')
+  ? entry.data.updatedAt
+  : undefined
+const displayDate = (updatedAt ?? entry.data.date) as Date
+const isUpdated = !!updatedAt
 const formattedDate = formatDate(displayDate)
 const datePrefix = isUpdated ? '更新' : '公開'
 
