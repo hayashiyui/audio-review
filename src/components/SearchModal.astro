@@ -94,16 +94,23 @@
         showSubResults: true,
         pageSize: 8,
         indexWeight: 10,
-        // Limit results to Reviews/Columns using filters defined on pages
-        mergeFilter: { section: ['reviews', 'columns'] },
-        // If you add pagefind filters meta on articles, you can pre-filter:
-        // filters: { section: ['reviews', 'columns'] },
+        // フィルター表示を有効化
+        showFilters: true,
+        // デフォルトで両方のセクションを表示
+        filters: {
+          section: {
+            default: ['reviews', 'columns']
+          }
+        },
         translations: {
           placeholder: 'レビュー・コラムを検索',
           zero_results: '該当する結果はありません',
           search_label: 'サイト内検索',
           clear_search: '検索をクリア',
-          load_more: 'さらに読み込む'
+          load_more: 'さらに読み込む',
+          // フィルター関連の翻訳
+          filters_label: 'フィルター',
+          filters_clear: 'フィルターをクリア'
         }
       })
     } else if (!fallbackRendered) {
