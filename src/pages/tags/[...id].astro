@@ -33,6 +33,7 @@ const { tag, entries } = Astro.props
     title={`Posts tagged with "${tag}"`}
     description={`A collection of posts tagged with ${tag}.`}
   />
+  <meta slot="head" name="pagefind:exclude" content="true" />
   <Breadcrumbs
     items={[
       { href: '/tags', label: 'Tags', icon: 'lucide:tags' },

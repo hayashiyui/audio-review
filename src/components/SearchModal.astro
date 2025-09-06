@@ -26,7 +26,6 @@
     </div>
     <div class="p-3 max-h-[80vh] overflow-auto">
       <div id="pagefind-ui"></div>
-      <p class="mt-2 text-xs text-gray-500">対象: Reviews / Columns</p>
     </div>
   </div>
  </div>
@@ -72,6 +71,7 @@
         showImages: true,
         showSubResults: true,
         pageSize: 8,
+        indexWeight: 10,
         // Limit results to Reviews/Columns using filters defined on pages
         mergeFilter: { section: ['reviews', 'columns'] },
         // If you add pagefind filters meta on articles, you can pre-filter:
