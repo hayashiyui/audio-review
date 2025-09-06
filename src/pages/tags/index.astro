@@ -12,23 +12,24 @@ const sortedTags = await getSortedAllTags()
 
 <Layout class="max-w-6xl ml-2">
   <PageHead slot="head" title="Tags" />
-  <meta slot="head" name="pagefind:exclude" content="true" />
-  <Breadcrumbs items={[{ label: 'Tags', icon: 'lucide:tags' }]} />
+  <div data-pagefind-ignore="all">
+    <Breadcrumbs items={[{ label: 'Tags', icon: 'lucide:tags' }]} />
 
-  <div class="flex flex-col gap-4">
-    <div class="flex flex-wrap gap-2">
-      {
-        sortedTags.map(({ tag, count }) => (
-          <Link
-            href={`/tags/${tag}`}
-            class={badgeVariants({ variant: 'secondary' })}
-          >
-            <Icon name="lucide:hash" class="size-3" />
-            {tag}
-            <span class="text-muted-foreground ml-1.5">({count})</span>
-          </Link>
-        ))
-      }
+    <div class="flex flex-col gap-4">
+      <div class="flex flex-wrap gap-2">
+        {
+          sortedTags.map(({ tag, count }) => (
+            <Link
+              href={`/tags/${tag}`}
+              class={badgeVariants({ variant: 'secondary' })}
+            >
+              <Icon name="lucide:hash" class="size-3" />
+              {tag}
+              <span class="text-muted-foreground ml-1.5">({count})</span>
+            </Link>
+          ))
+        }
+      </div>
     </div>
   </div>
 </Layout>

@@ -33,58 +33,59 @@ const { tag, entries } = Astro.props
     title={`Posts tagged with "${tag}"`}
     description={`A collection of posts tagged with ${tag}.`}
   />
-  <meta slot="head" name="pagefind:exclude" content="true" />
-  <Breadcrumbs
-    items={[
-      { href: '/tags', label: 'Tags', icon: 'lucide:tags' },
-      { label: tag, icon: 'lucide:tag' },
-    ]}
-  />
+  <div data-pagefind-ignore="all">
+    <Breadcrumbs
+      items={[
+        { href: '/tags', label: 'Tags', icon: 'lucide:tags' },
+        { label: tag, icon: 'lucide:tag' },
+      ]}
+    />
 
-  {/* タグ名ヘッダー */}
-  <header class="mb-2">
-    <h1 class="text-3xl font-bold mb-2">#{tag}</h1>
-  </header>
+    {/* タグ名ヘッダー */}
+    <header class="mb-2">
+      <h1 class="text-3xl font-bold mb-2">#{tag}</h1>
+    </header>
 
-  {/* Columns セクション */}
-  {entries.columns.length > 0 && (
-    <section class="mb-8">
-      <h2 class="text-xl font-semibold mb-4">Columns ({entries.columns.length})</h2>
-      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {entries.columns.map((column) => (
-          <li>
-            <BlogCard entry={column} />
-          </li>
-        ))}
-      </ul>
-    </section>
-  )}
+    {/* Columns セクション */}
+    {entries.columns.length > 0 && (
+      <section class="mb-8">
+        <h2 class="text-xl font-semibold mb-4">Columns ({entries.columns.length})</h2>
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {entries.columns.map((column) => (
+            <li>
+              <BlogCard entry={column} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
 
-  {/* Reviews セクション */}
-  {entries.reviews.length > 0 && (
-    <section class="mb-8">
-      <h2 class="text-xl font-semibold mb-4">Reviews ({entries.reviews.length})</h2>
-      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {entries.reviews.map((review) => (
-          <li>
-            <ReviewsCard entry={review} />
-          </li>
-        ))}
-      </ul>
-    </section>
-  )}
+    {/* Reviews セクション */}
+    {entries.reviews.length > 0 && (
+      <section class="mb-8">
+        <h2 class="text-xl font-semibold mb-4">Reviews ({entries.reviews.length})</h2>
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {entries.reviews.map((review) => (
+            <li>
+              <ReviewsCard entry={review} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
 
-  {/* Blog セクション */}
-  {entries.blogs.length > 0 && (
-    <section class="mb-8">
-      <h2 class="text-xl font-semibold mb-4">Blog ({entries.blogs.length})</h2>
-      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {entries.blogs.map((blog) => (
-          <li>
-            <BlogCard entry={blog} />
-          </li>
-        ))}
-      </ul>
-    </section>
-  )}
+    {/* Blog セクション */}
+    {entries.blogs.length > 0 && (
+      <section class="mb-8">
+        <h2 class="text-xl font-semibold mb-4">Blog ({entries.blogs.length})</h2>
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {entries.blogs.map((blog) => (
+            <li>
+              <BlogCard entry={blog} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </div>
 </Layout>
