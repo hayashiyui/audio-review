@@ -6,14 +6,19 @@
       "Bash(ls:*)",
       "Bash(mv:*)",
       "Bash(rm:*)",
-      "Bash(pnpm dev:*)",
       "Bash(pnpm run:*)",
       "Bash(pnpm astro:*)",
       "Bash(git add:*)",
       "Bash(cp:*)",
       "Bash(git commit:*)",
       "Bash(grep:*)",
-      "WebFetch(domain:qiita.com)"
+      "WebFetch(domain:qiita.com)",
+      "Bash(sed:*)",
+      "WebFetch(domain:docs.astro.build)",
+      "Bash(perl:*)",
+      "WebFetch(domain:headphones.com)",
+      "Read(//d/hayas/Picture/Screenshots/**)",
+      "WebFetch(domain:pagefind.app)"
     ],
     "deny": []
   }
