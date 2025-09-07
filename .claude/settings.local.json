@@ -18,7 +18,8 @@
       "Bash(perl:*)",
       "WebFetch(domain:headphones.com)",
       "Read(//d/hayas/Picture/Screenshots/**)",
-      "WebFetch(domain:pagefind.app)"
+      "WebFetch(domain:pagefind.app)",
+      "Bash(pnpm build:*)"
     ],
     "deny": []
   }
