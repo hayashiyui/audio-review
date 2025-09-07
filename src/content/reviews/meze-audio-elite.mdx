@@ -9,6 +9,8 @@ tags: ["Meze Audio", "平面磁界型", "ルーマニア", "ハイエンドオ�
 heroImage: "../../assets/images/hero/meze-audio-elite.jpg"
 relatedArticles:
   - collection: reviews
+    id: austrian-audio-the-composer
+  - collection: reviews
     id: grado-gs3000x
   - collection: reviews
     id: sennheiser-hd800s
@@ -30,9 +32,25 @@ relatedArticles:
     id: sound-quality-evaluation-guide
 ---
 
+import ImageWithCitation from '@/components/ImageWithCitation.astro';
+import mesurementGraph from "../../assets/images/contents/meze-elite-fr_lr_700h.png";
+
 オーディオ機器の頂点を極めようとする時、我々が対峙するのは単なる「機能」の優劣ではない。それは、設計者の哲学、美意識、そして音という現象に対する世界観そのものが凝縮された、一つの工芸品との対話に他ならない。ルーマニアの地から生まれたMeze Audioは、まさにその哲学を体現する稀有なブランドと言えよう。彼らが掲げるのは、流行に左右されない「クラシックの反脆弱性 (antifragility of classics)」であり、世代を超えて受け継がれる「家宝 (heirloom)」としての製品作りである [1](#ref-1)。
 
 今回取り上げるMeze Audio Eliteは、その思想の現時点における最高到達点である。市場には、解像度、駆動力、あるいは特定の周波数帯域の表現力といった、単一の性能指標を極限まで追求する猛者がひしめいている。そのような状況下で、Eliteが提示する価値とは何であろうか。それは、音響性能、装着感、そして所有する喜びという、リスニング体験を構成するあらゆる要素を、極めて高い次元で調和させることにあるのではないか。本稿では、この問いを道標とし、Meze Audio Eliteという作品の深層に迫ってみたい。
+
+import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
+
+<RelatedArticlesGrid 
+  articles={[
+    { collection: "reviews", id: "focal-utopia-sg" },   
+    { collection: "reviews", id: "hifiman-susvara-unvailed" },
+    { collection: "reviews", id: "audeze-lcd5" },   
+    { collection: "reviews", id: "danclarkaudio-expanse" },
+  ]}
+  columns={4}
+  title="関連記事"
+/> 
 
 ## **Meze Audio Elite — Overview**
 
@@ -97,6 +115,29 @@ Mezeの哲学は、ドライバーだけでなく、ヘッドホンを構成す�
 | Yamaha YH-5000SE | オルソダイナミック / 開放 | 34 Ω | 98 dB/mW | 320 g | $4,999 |
 | HEDDphone TWO | AMT / 開放 | 41 Ω | 89 dB/1mW | 550 g | $2,199 |
 | Focal Utopia (2022) | ダイナミック / 開放 | 80 Ω | 104 dB/1mW | 490 g | $4,999 |
+
+
+### **測定データから見る客観的性能**
+
+<ImageWithCitation 
+  imagePath={mesurementGraph} 
+  sourceTitle="Meze Elite frequency response in left(blue) and right(red) channels - SoundStage!" 
+  sourceUrl="https://www.soundstagenetwork.com/index.php?option=com_content&view=article&id=2615:meze-audio-elite-headphones&catid=263&Itemid=203" 
+/>
+
+主観的な聴感印象がオーディオレビューの核心であることは論を俟たないが、客観的な測定データは、その印象を裏付け、議論の出発点となる貴重な羅針盤を提供する。
+
+Meze AudioはEliteの全高調波歪（THD）を全周波数帯域で0.05%未満と公表しており、これは極めてクリーンな再生能力を示唆する野心的な数値である [5](#ref-5)。独立した第三者による測定も、この主張を裏付けている。
+
+*SoundStage\! Solo*誌の測定によれば、Eliteの歪率は「基本的に存在しない」レベルであり、これは高性能な平面磁界型ヘッドホンに典型的な特性である [27](#ref-27)。
+
+周波数特性に目を向けると、Eliteの性格がより鮮明になる。ハイブリッドパッド（レザー／アルカンターラ）装着時の特性は、開放型平面磁界ヘッドホンの標準的な範囲内にあるが、3.5kHz付近に顕著なピークが見られる [27](#ref-27)。この特性は、多くのレビュワーが指摘する「空気感」や「明瞭さ」に寄与している可能性が高い。さらに興味深いのは、330Hz付近に観測される強い共振である。これは、主観的なインプレッションで語られる「パンチの効いた低音」の物理的な裏付けと解釈できるかもしれない [27](#ref-27)。
+
+Eliteの最もユニークな特徴の一つであるイヤーパッド交換の効果は、測定データ上でも劇的である。アルカンターラパッドに交換すると、800Hz以下の低域が大幅に減少し、中高域の特性も変化する [27](#ref-27)。これは、Eliteが単一のサウンドシグネチャーを持つ製品ではなく、ユーザーが物理的に音響特性を調整できる、一種のモジュラーシステムであることを示している。
+
+インピーダンスと位相は、ほぼ完全にフラットな特性を示しており、これも平面磁界型ドライバーの典型である [27](#ref-27)。これは、アンプの出力インピーダンスによる音質変化が極めて少ないことを意味し、安定したパフォーマンスを保証する。
+
+総じて、測定データはEliteが技術的に極めて優秀な基盤の上に成り立っていることを示している。その上で、意図的に特定の周波数帯域を調整し（3.5kHzのピークや330Hzの共振）、イヤーパッドによってその特性を大きく変化させる余地を残すことで、厳密なニュートラリティよりも音楽的な楽しさやユーザーの好みに合わせたカスタマイズ性を優先するという、Mezeの設計哲学が明確に見て取れる [16](#ref-16)。
 
 ## **第三章：魂の響き — リスニング・インプレッション**
 
@@ -178,7 +219,7 @@ Meze Audio Eliteは、万人のためのヘッドホンではない。しかし�
 
 Meze Audio Eliteは、スペックシート上の数値を競うゲームから降り、リスニング体験そのものの質を問い直す。それは、芸術と工学の幸福な邂逅が生んだ、一つの完成された世界観である。音を聴くという行為が、時に知的探求となり、時に精神的な安らぎとなることを知るすべての思索的なリスナーにとって、Eliteとの対話は、計り知れない豊かさをもたらすに違いない。
 
-### **総合評価:** ★★★★☆ (4.0 / 5\)
+### **総合評価:** ★★★★☆ (3.9 / 5\)
 
 ## **引用文献**
 
@@ -207,3 +248,6 @@ Meze Audio Eliteは、スペックシート上の数値を競うゲームから�
 <span id="ref-23">23</span>. Dan Clark Audio \- DCA EXPANSE Review \- Headfonia,  [https://www.headfonia.com/dca-expanse-review/4/](https://www.headfonia.com/dca-expanse-review/4/)  
 <span id="ref-24">24</span>. LCD-5 vs Expanse vs Elite vs Susvara: Flagship planar headphone battle \- YouTube,  [https://www.youtube.com/watch?v=icbnJ1wmtpo](https://www.youtube.com/watch?v=icbnJ1wmtpo)  
 <span id="ref-25">25</span>. Dan Clark Audio EXPANSE Review — Page 3 of 3 \- Headfonics,  [https://headfonics.com/dan-clark-audio-expanse-review/3/](https://headfonics.com/dan-clark-audio-expanse-review/3/)
+<span id="ref-26">26</span>. Meze ELITE Tungsten Planar Magnetic Headphones with 6.35mm Cable \- Audio46, 9月 7, 2025にアクセス、 [https://audio46.com/products/meze-elite-tungsten-planar-magnetic-headphones-with-6-35mm-cable](https://audio46.com/products/meze-elite-tungsten-planar-magnetic-headphones-with-6-35mm-cable)  
+<span id="ref-27">27</span>. Meze Audio Elite ... \- SoundStageNetwork.com | SoundStage.com, 9月 7, 2025にアクセス、 [https://www.soundstagenetwork.com/index.php?option=com\_content\&view=article\&id=2615:meze-audio-elite-headphones\&catid=263\&Itemid=203](https://www.soundstagenetwork.com/index.php?option=com_content&view=article&id=2615:meze-audio-elite-headphones&catid=263&Itemid=203)  
+<span id="ref-28">28</span>. Meze ELITE Open-Back Planar Magnetic Headphones Review \- Fit ..., 9月 7, 2025にアクセス、 [https://www.techpowerup.com/review/meze-elite-open-back-planar-magnetic-headphones/4.html](https://www.techpowerup.com/review/meze-elite-open-back-planar-magnetic-headphones/4.html)
