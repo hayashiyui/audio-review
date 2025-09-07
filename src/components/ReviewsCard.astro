@@ -74,15 +74,15 @@ const datePrefix = isUpdated ? '更新' : '公開'
           <>
             <Separator orientation="vertical" className="h-3!" />
             <div class="flex flex-wrap gap-0.5">
-              {entry.data.tags.slice(0, 2).map((tag) => (
+              {entry.data.tags.slice(0, 5).map((tag) => (
                 <Link href={`/tags/${tag}`} class="no-underline">
                   <Badge variant="secondary" className="text-xs px-1 py-0.5 h-auto hover:bg-secondary/80 transition-colors">
                     #{tag}
                   </Badge>
                 </Link>
               ))}
-              {entry.data.tags.length > 2 && (
-                <span class="text-muted-foreground">+{entry.data.tags.length - 2}</span>
+              {entry.data.tags.length > 5 && (
+                <span class="text-muted-foreground">+{entry.data.tags.length - 5}</span>
               )}
             </div>
           </>
