@@ -1,0 +1,238 @@
+---
+title: "Meitner Audio MA3 vs EMM Labs DA2 V2：20,000ドルの価格差を検証"
+description: "Ed Meitner氏による姉妹ブランドの比較分析。MA3（約9,500ドル）とDA2 V2（約30,000ドル）は同一のMDAC2™コア技術を共有しながら、実装の違いがもたらす音響性能と価値の差を徹底検証。筐体、基板、電源設計の技術的差異と聴感上の影響を詳細解説。"
+date: "2025-09-09T06:00:00+09:00"
+brand: "Meitner Audio"
+model: "MA3"
+category: "DAC"
+tags: ["Meitner Audio", "EMM Labs", "Ed Meitner", "DSD DAC", "カナダ"]
+heroImage: "../../assets/images/hero/meitner-audio-ma3.jpg"
+relatedArticles:
+  - collection: reviews
+    id: emm-labs-da2-v2
+  - collection: reviews
+    id: dcs-varese
+  - collection: columns
+    id: sound-quality-evaluation-guide
+---
+
+## **序論：共通の血統、異なる哲学**
+
+デジタルオーディオの伝説的人物、エド・マイトナー氏によって開拓された同一の設計思想を核としながら、EMM Labsとその姉妹ブランドであるMeitner Audioは、オーディオファイルに対して二つの異なる階層を提示する[1](#ref-1)。EMM Labs DA2 V2は、一切のコストを度外視したリファレンスプラットフォームとして位置づけられる一方、Meitner Audio MA3は、そのフラッグシップ体験のエッセンスをより身近な価格帯で提供するために設計された「トリクルダウン」製品として存在する[1](#ref-1)。
+
+本レポートの中心的な問いは明確である。DA2 V2（市場想定価格約30,000 USドル）とMA3（市場想定価格約8,000〜10,500 USドル）の間に存在する20,000 USドル以上の価格差が、筐体、回路基板、電源、そして最終的な音質における具体的な技術的差異と聴感上の性能向上によって正当化されるのか、という点である[1](#ref-1)。この目的を達成するため、本稿では両機の物理的構造から音響性能に至るまで、細部にわたる比較分析を行う。
+
+import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
+
+<RelatedArticlesGrid 
+  articles={[
+    { collection: "reviews", id: "emm-labs-da2-v2" },
+    { collection: "reviews", id: "dcs-varese" },
+    { collection: "columns", id: "sound-quality-evaluation-guide" },
+  ]}
+  columns={3}
+  title="関連記事"
+/>
+
+まず、読者の理解を助けるため、両モデルの概要を以下の比較表に示す。
+
+**表1：主要仕様および機能の比較**
+
+| 項目 | EMM Labs DA2 V2 | Meitner Audio MA3 |
+| :---- | :---- | :---- |
+| メーカー | EMM Labs | Meitner Audio |
+| モデル | DA2 V2 | MA3 |
+| 市場想定価格 (USD) | 約 $30,000 | 約 $8,000 \- $10,500 |
+| コアDAC技術 | MDAC2™ (ディスクリート1-bit, 16xDSD) | MDAC2™ (ディスクリート1-bit, 16xDSD) |
+| コアDSP技術 | MDAT2™ | MDAT2™ |
+| 筐体構造 | CNC切削加工アルミニウム | 高品位アルミニウム |
+| 主要基板素材 | 航空宇宙グレード・セラミック | 高性能FR4 |
+| 電源アーキテクチャ | 独自開発・自社製造 | カスタム仕様OEM |
+| 内蔵ストリーマー | なし | あり (Roon Ready) |
+| 重量 | 約 17.2 kg (DV2) | 7.43 kg |
+| 寸法 (WxDxH) | 438 x 400 x 161 mm (DV2) | 435 x 400 x 92 mm |
+
+## **第1章：共有された心臓部 — コア変換技術**
+
+両機の比較分析を進めるにあたり、まずその技術的な共通基盤を理解することが不可欠である。驚くべきことに、DA2 V2とMA3は、ブランドの音響的特徴を決定づける心臓部、すなわちデジタルからアナログへの変換プロセスを担う主要技術を完全に共有している。これは、価格差が変換アルゴリズムそのものの優劣によるものではなく、その技術を最大限に活かすための周辺環境の構築に起因することを示唆している。
+
+### **MDAC2™ コンバーター**
+
+両機に搭載されているのは、市販のDACチップではなく、エド・マイトナー氏が独自に設計した完全ディスクリート構成の1-bit D/Aコンバーター、MDAC2™である。このコンバーターは、すべての入力信号を内部で16倍のDSD周波数（DSD1024）に変換して処理する。MA3とフラッグシップモデルであるDA2 V2/DV2に搭載されているモジュールは全く同一であり、これが両者の最も重要な共通点である[1](#ref-1)。
+
+### **MDAT2™ DSP**
+
+MDAC2™コンバーターに信号を渡す前段には、独自のMDAT2™（Meitner Digital Audio Translator）シグナルプロセッシングが配置されている。このDSPは、入力されたすべてのオーディオ信号をリアルタイムで過渡応答検出し、プリリンギングやポストリンギングといったデジタル特有のアーティファクトを抑制しながら、前述の16xDSDへとアップコンバートする役割を担う[2](#ref-2)。このプロセスこそが、ブランド特有の滑らかで自然な音響シグネチャーの根幹を成している。
+
+### **MFAST™ および MCLK2™**
+
+ジッターの排除は、高品位なデジタル再生において極めて重要な要素である。両機は、この課題に対して独自の技術で対応している。MFAST™（Meitner Frequency Acquisition System）は、高速かつ非同期で入力信号を捕捉し、信号の安定性を確保する[2](#ref-2)。そして、カスタムビルドされた超高精度クロックであるMCLK2™が、極めて安定したタイミング基準を提供し、あらゆるデジタルソースからのジッターを効果的に除去する。これらの技術の実装も、両機において基本的に同様である。
+
+これらの共通技術から導き出される結論は、オーディオにおける収穫逓減の法則が、コア技術そのものではなく、その「実装」によって定義されるという事実である。約30,000ドルのDA2 V2と約9,500ドルのMA3が、全く同じデジタル処理・変換エンジンを共有しているという事実は、その莫大な価格差が、より優れた変換アルゴリズムのために支払われるものではないことを意味する。価格差の正当性は、そのエンジンが理論上の最大性能にどれだけ近づけるか、すなわち、コア技術を取り巻く周辺システム（電源、基板、筐体）の最適化によって得られるマージナルゲイン（限界的な利得）に懸かっている。したがって、ユーザーが問うべきは「DA2 V2のDACは優れているか？」ではなく、「*同じ*DACにコスト度外視の実装を施すことで、どれほどの性能が解放され、その追加的な性能向上はコストに見合う価値があるか？」という、より本質的で高度な問いとなる。
+
+## **第2章：コストの解剖学 — 物理的構造の詳細分析**
+
+この章では、両機の物理的な差異を体系的に解き明かし、それぞれの技術的選択がコスト、耐久性、そして最終的なパフォーマンスにどのように結びついているかを検証する。
+
+### **2.1 筐体とケースワーク：共振、シールド、熱管理**
+
+オーディオコンポーネントにおける筐体の役割は、単なる電子部品の保護に留まらない。それは、機械的安定性と電気的安定性を両立させるための積極的な音響部品として機能する。
+
+#### **EMM Labs DA2 V2**
+
+DA2 V2の筐体設計（DV2と類似）は、この哲学を体現している。その構造は、非共振性を追求したCNC（コンピュータ数値制御）による切削加工シャーシを、厚さ1/4インチ（約6.35mm）の重厚なアルミニウム製スラブで覆うという、極めて入念なものである[2](#ref-2)。その結果、重量はMA3の7.43 kgに対して、DV2は約17.2 kg（38ポンド）と倍以上に達する[4](#ref-4)。この質量と剛性は、外部からの振動（空気伝搬および床伝搬）や内部トランスから発生する微細な振動を効果的に減衰させ、敏感な電子部品におけるマイクロフォニックノイズの発生を抑制する。さらに、大きな筐体と質量は優れた熱放散能力をもたらし、動作温度を低く、かつ均一に保つ[9](#ref-9)。これにより、電子部品はより安定した熱環境で動作し、熱ドリフトによる性能のふらつきを低減し、長期的な信頼性と性能の一貫性を向上させる。
+
+#### **Meitner MA3**
+
+一方、MA3の筐体は、よりシンプルで軽量ながらも、依然として高品質な構造を維持している。高品位アルミニウムを使用し、フロントパネルにはビードブラスト加工が施されているが、その構造はDA2 V2ほど複雑ではなく、使用される材料も少なく、組み立てが容易になるよう設計されている[2](#ref-2)。堅牢ではあるものの、DA2 V2と比較して動作温度は著しく高くなり、特に電源部から出力部にかけて顕著な温度勾配が生じる[9](#ref-9)。これはコスト削減設計の直接的な結果であり、長期的な部品寿命やチャンネル間の一貫性において、潜在的な妥協点となりうる。
+
+DA2 V2の筐体設計は、機械的安定性が電気的安定性と同じくらい重要であるという思想を反映している。その巨大なCNC加工構造は、一種の「メカニカル・グラウンド」として機能し、微細な信号を扱う電子部品への悪影響を根本から断ち切る。このレベルの機械的および熱的安定化が、MA3においてはコスト削減の対象となった主要な領域の一つであり、この物理的なプラットフォームの安定性の差が、後述する音響性能の差、特に微細なディテールの再現性や音場の深さに直接的な影響を与えていると考えられる。
+
+### **2.2 回路の基盤：航空宇宙グレード・セラミック vs. 高性能FR4基板**
+
+信号が通過する物理的な媒体であるプリント基板（PCB）の素材選択は、信号の純度を決定づける極めて重要な要素である。
+
+#### **EMM Labs DA2 V2**
+
+DA2 V2（およびDV2）が他の多くのハイエンド製品と一線を画す最大の要因の一つが、主要なDACおよびアナログ回路に、カスタムメイドの航空宇宙グレード・セラミックPCBを採用している点である[1](#ref-1)。Arlon社製などの特殊なセラミック複合材は、一般的なガラスエポキシ樹脂（FR4）基板に比べて製造コストが何倍にも跳ね上がる[12](#ref-12)。しかし、その対価として得られる利点は計り知れない。セラミックは、優れた熱伝導性、高い機械的強度、安定した誘電率による優れた高周波性能、そして素材固有の振動減衰特性を誇る[13](#ref-13)。
+
+#### **Meitner MA3**
+
+対照的に、MA3は高品質なFR4グレードの回路基板を使用している[2](#ref-2)。これは高性能オーディオにおける業界標準であり、優れた性能を発揮するが、セラミックが持つ究極の熱的、機械的、電気的特性には及ばない。この素材選択は、MA3の設計における最大のコスト削減策の一つである。
+
+**表2：回路基板素材の比較分析（セラミック vs. FR4）**
+
+| 特性 | 航空宇宙グレード・セラミック (DA2 V2) | 高性能FR4 (MA3) |
+| :---- | :---- | :---- |
+| 熱伝導率 (W/mK) | 非常に高い (例: Alumina 24-28) | 低い (例: 0.2-0.5) |
+| 誘電率の安定性 | 極めて高い | 良好 |
+| 機械的強度・剛性 | 非常に高い | 標準 |
+| 振動減衰特性 | 優れた固有特性 | 限定的 |
+| 高周波性能（低損失） | 非常に優れる | 良好 |
+| 相対的製造コスト | 極めて高い | 標準 |
+
+DA2 V2におけるセラミック基板の採用は、信号が置かれる微小環境を極限まで制御しようとする設計思想の表れである。セラミックの優れた特性は、基板上を伝わる電気信号が熱変動、高周波での誘電損失、マイクロフォニック振動といった外部要因から受ける影響を最小限に抑えることを意味する。これにより、オーディオ信号にとってより純粋で安定した経路が確保され、ノイズや歪みの低減に直接的に貢献する。MA3のFR4基板も優れた性能を持つが、セラミックに比べればより「反応的」な環境と言える。このマイクロレベルでの差異が、マクロレベルでの音響的な差異、すなわち究極の透明性や低レベルのディテール再現能力における差として現れる、工学的に妥当な説明となる。
+
+### **2.3 電源：独自開発フラッグシップ vs. カスタムOEM設計**
+
+電源部は、オーディオコンポーネント全体の性能を規定する「燃料供給システム」である。その純度と供給能力（ヘッドルーム）は、音質に決定的な影響を与える。
+
+#### **EMM Labs DA2 V2**
+
+DA2 V2は、極めて複雑で、独自に開発・自社製造された無帰還（ノーフィードバック）方式の電源を搭載している[2](#ref-2)。この電源は、MA3に搭載されているものと比較して最大で3倍の電流供給能力を持つとされている[9](#ref-9)。この大電流・低ノイズ設計は、すべてのデジタルおよびアナログ回路に対して、クリーンで揺るぎない電力基盤を提供する。特に、従来の電圧フィードバック方式ではなく、フィードフォワード方式のレギュレーションを採用し、より精密な電圧安定化を回路の直近で行うことで、負荷変動に対する応答性を高めている[9](#ref-9)。
+
+#### **Meitner MA3**
+
+MA3は、よりシンプルな構造のカスタムビルド電源を外部のOEM（相手先ブランド供給）から調達している[2](#ref-2)。この電源は、エド・マイトナー氏の要求する電圧、ノイズ、電流性能を満たすよう特別に仕様が定められているものの、従来の電圧フィードバック方式を用いた、より一般的な設計であり、フラッグシップ機の電源ほど物量が投入されているわけではない[9](#ref-9)。また、MA3が単一の電源であるのに対し、同価格帯の競合製品にはデュアル電源を採用するものもある[3](#ref-3)。
+
+この電源設計の差は、聴感上の性能差に最も大きく寄与する要素の一つである。DA2 V2の巨大で強力な電源は、広大なダイナミックヘッドルームを提供する。ドラムのアタックやシンバルのクラッシュのような、音楽のパッセージが瞬間的な大電力を要求する際、DA2 V2の電源は電圧降下（サギング）を起こすことなく即座に電力を供給し、波形の完全性を維持する。これが、「より速い立ち上がりと立ち下がり（start and stop reflexes）」や「よりダイナミックなサウンド」、そして優れた「低域の権威性（bass authority）」といった音質評価に直接結びつく[9](#ref-9)。MA3の電源もそのクラスでは優れているが、ヘッドルームには限りがあり、これが要求の厳しいダイナミックな負荷のもとで、わずかに「柔らかく」「滑らか」で、インパクトに欠けるプレゼンテーションの一因となっている可能性がある。
+
+## **第3章：音響的評価 — 技術を聴感に翻訳する**
+
+この章では、複数の専門家による試聴レビューから得られた印象を統合し、それらを第2章で詳述した技術的差異と直接的に関連付けて分析する。
+
+### **3.1 空間表現：サウンドステージ、イメージング、奥行き**
+
+#### **DA2 V2**
+
+DA2 V2は、一貫して広大なサウンドステージ、特に奥行きと三次元的な立体感の再現において高く評価されている。それは、より現実的でホログラフィックな音響空間を現出させる[9](#ref-9)。音像定位は極めて正確で、各楽器は明確に輪郭付けられたサイズ感と分離をもって配置される[17](#ref-17)。
+
+#### **MA3**
+
+MA3もまた、スピーカーの外側まで広がるワイドなサウンドステージで賞賛されている[17](#ref-17)。しかし、フラッグシップ機と直接比較した場合、その表現は「スケールダウンしたレプリカ」と評され、DA2 V2が持つ究極の奥行き感やホログラフィックなリアリズムには一歩及ばないとされる[4](#ref-4)。
+
+#### **技術と音響の接続**
+
+DA2 V2の優れた空間表現能力は、その極めて低いノイズフロアの累積効果に起因すると考えられる。不活性な重量級シャーシ、非反応性のセラミック基板、そして超クリーンな電源供給という三位一体の設計が、電気的・機械的なノイズを徹底的に排除する。この静寂な背景の中から、サウンドステージの奥行きやリアリズムを定義する微細なレベルのアンビエントキュー（空間の響き）や残響音の尻尾が浮かび上がり、聴き手はより深い音響空間を体験することができる。
+
+### **3.2 音色と解像度：透明性 vs. 滑らかさ**
+
+#### **DA2 V2**
+
+DA2 V2の音響的特徴は、究極のニュートラリティと透明性によって特徴づけられる。その性能は可聴周波数帯域の極限まで均一に維持される[9](#ref-9)。録音に含まれているならば「破壊的なまでにシャープで尖った」音も、脚色することなくそのまま再現する能力を持つ[11](#ref-11)。
+
+#### **MA3**
+
+MA3は、しばしばわずかに暖かく、滑らかで、丸みを帯びた、より「有機的」なプレゼンテーションを持つと評される[3](#ref-3)。非常に高いディテール再現能力を持ちながらも、DA2 V2と比較すると、最も鋭いトランジェントの先端をわずかに滑らかにする傾向がある[11](#ref-11)。このキャラクターは、一部のリスナーにとってはむしろ好ましいものとなる可能性もある[11](#ref-11)。また、長時間のリスニングでも聴き疲れがなく、古い録音に対しても寛容であると評価されている[19](#ref-19)。
+
+#### **技術と音響の接続**
+
+MA3の「滑らかさ」は、その技術的妥協点の副産物である可能性がある。FR4基板からのわずかに高い熱的・電気的ノイズや、権威性で一歩譲る電源供給が、最も鋭いトランジェントの立ち上がりのエッジを微妙に丸めているのかもしれない。一方、DA2 V2の一切妥協のない設計は、これらのトランジェントをありのままの、時には「痛々しいほど明白な（painfully obvious）」ほどの鮮明さで通過させることを可能にしている[17](#ref-17)。
+
+### **3.3 ダイナミック表現：トランジェント、権威性、制動力**
+
+#### **DA2 V2**
+
+DA2 V2は、「より速い立ち上がりと立ち下がり」と「よりダイナミックなサウンド」で賞賛される[9](#ref-9)。特に低域の制動力と権威性において優れており、主観的により大きな生の力とパワーを感じさせるとされる[3](#ref-3)。
+
+#### **MA3**
+
+MA3も強力な低域再生能力を持つが[11](#ref-11)、より高価な兄弟機が持つ「究極のインパクトと制動力」には欠けると指摘される[17](#ref-17)。直接比較すると、その低域はわずかに緩く感じられることがある[4](#ref-4)。
+
+#### **技術と音響の接続**
+
+このダイナミクス表現の差は、電源部の設計に最も直接的に結びついている。DA2 V2が持つ3倍の電流供給能力は[9](#ref-9)、その優れたダイナミック表現と低域の権威性の技術的基盤である。要求に応じて瞬時に大電流を供給する能力こそが、強力なトランジェントや深々とした低音を、揺るぎない制動力とインパクトをもって再現することを可能にする。
+
+## **第4章：価値の方程式 — 機能性と利便性**
+
+純粋な音響性能の追求とは別に、製品の価値は機能性やシステム構築の柔軟性によっても大きく左右される。この点において、MA3はDA2 V2に対して明確なアドバンテージを持つ。
+
+### **MA3の切り札：統合型デジタルハブ**
+
+MA3の最大の強みは、統合されたオールインワンのデジタルハブとしての機能性にある。本機には、Roon Readyに対応したネットワークストリーマーが内蔵されており、TidalやQobuzといった高解像度ストリーミングサービスに直接接続することが可能である[3](#ref-3)。これにより、ユーザーは別途ストリーマーを用意することなく、シンプルかつ高品質なデジタル再生環境を構築できる。
+
+### **EMM Labsのエコシステム**
+
+DA2 V2で同等の機能を実現するためには、別売りのEMM Labs NS1 Streamer（市場想定価格約4,500 USドル）を追加購入する必要がある[2](#ref-2)。これにより、両ソリューション間の実質的なコスト差はさらに拡大する。
+
+### **VControl™ ボリュームコントロール**
+
+両機ともに、高品質なデジタルボリュームコントロールであるVControl™を搭載しており、パワーアンプに直接接続してプリアンプとして機能させることが可能である[4](#ref-4)。特にMA3の実装は、いかなる音量設定でも解像度の損失がなく、完全に透明であると高く評価されており、高品位なワンボックスソリューションとしての実用性を証明している[4](#ref-4)。
+
+これらの製品設計は、二つの異なるユーザー哲学を浮き彫りにする。DA2 V2は、コンポーネントの分離こそが最高のパフォーマンスを引き出すと信じる純粋主義者（ピュアリスト）を対象としている。この思想では、DACの唯一の仕事は変換であり、他の機能は分離されるべきである。一方、MA3は、高いパフォーマンスを求めつつも、統合性、利便性、そして少ないコンポーネント数を重視する現実主義者（プラグマティスト）に向けられている。MA3にストリーマーが内蔵されていることは単なる機能追加ではなく、その価値提案を再定義する戦略的な決定である。それは単なる「安価なDA2 V2」としてではなく、単一の筐体に収められた、完成度の高いハイエンド・デジタル・フロントエンド・ソリューションとして市場で競争するのである。したがって、ユーザーの選択は、単なるドルあたりの音質だけでなく、自身のシステム構築哲学にも依存する。MA3の価値は、シンプルさと統合性を優先するユーザーにとって最大化され、DA2 V2の価値は、コンポーネントの分離による究極の妥協なき性能を優先するユーザーにとって最も高くなる。
+
+## **第5章：統合と結論 — 価格差は正当化されるか？**
+
+本レポートで展開してきた分析を統合し、最終的な結論を導き出す。
+
+### **証拠の統合**
+
+中核となる変換技術は同一であるにもかかわらず、DA2 V2は「コスト度外視」の実装を体現している。筐体、基板、電源といったすべての周辺システムが、そのコア技術が動作するための最も安定し、純粋な環境を創造するために設計されている。これが両者の本質的な違いである。
+
+### **得られるゲインの性質**
+
+DA2 V2がもたらす音響的な利得、すなわち、より深いサウンドステージ、より速いダイナミクス、究極の透明性、そして周波数帯域の伸長は、高度に解像度の高いシステムにおいては明確に知覚できるものである。それらは、ハイエンドの頂点を定義する、困難の末に勝ち取られたパフォーマンスである。
+
+### **結論**
+
+最終的に、DA2 V2とMA3の価格差は「正当化される」と結論付けられる。しかし、それは特定のタイプのユーザーに対してのみである。
+
+#### **「サミットFi」オーディオファイルにとって**
+
+リファレンスレベルのシステムを所有し、デジタル再生の絶対的なクオリティを追求するリスナー、すなわち、リアリズムと透明性におけるハイレベルでの向上が極めて高い価値を持つと考えるユーザーにとって、DA2 V2の技術的および音響的優位性はそのコストを正当化する。
+
+#### **現実的なハイエンドユーザーにとって**
+
+大多数のユーザーにとって、Meitner MA3は市場で最も魅力的な製品の一つである。本機は、フラッグシップの音響的魂の多くを提供し、内蔵ストリーマーという計り知れない利便性と価値を付加し、それを総システムコストの数分の一で実現する。MA3は妥協したDA2 V2ではなく、並外れた性能、機能、そして価格のバランスを達成するために、インテリジェントな妥協点を見出した、見事に設計された製品である。
+
+## **引用文献**
+
+<span id="ref-1">1</span>. Meitner MA3 Integrated D/A processor | Stereophile.com, 9月 9, 2025にアクセス、 [https://www.stereophile.com/content/meitner-ma3-integrated-da-processor](https://www.stereophile.com/content/meitner-ma3-integrated-da-processor)  
+<span id="ref-2">2</span>. Meitner Audio MA3 DAC-Preamplifier \- SoundStage\! Ultra, 9月 9, 2025にアクセス、 [https://www.soundstageultra.com/index.php/equipment-menu/1060-meitner-audio-ma3-dac-preamplifier](https://www.soundstageultra.com/index.php/equipment-menu/1060-meitner-audio-ma3-dac-preamplifier)  
+<span id="ref-3">3</span>. Meitner MA3 DAC Reviewed \- Future Audiophile, 9月 9, 2025にアクセス、 [https://futureaudiophile.com/meitner-ma3-dac-reviewed/](https://futureaudiophile.com/meitner-ma3-dac-reviewed/)  
+<span id="ref-4">4</span>. Review: Meitner Audio MA3 Integrated D/A Converter \- Twittering Machines, 9月 9, 2025にアクセス、 [https://twitteringmachines.com/review-meitner-audio-ma3-integrated-d-a-converter/](https://twitteringmachines.com/review-meitner-audio-ma3-integrated-d-a-converter/)  
+<span id="ref-5">5</span>. Meitner MA3 Integrated D/A Converter \- EMM Labs, 9月 9, 2025にアクセス、 [https://emmlabs-meitner.com/products/ma3](https://emmlabs-meitner.com/products/ma3)  
+<span id="ref-6">6</span>. Analog versus Digital: We Have a Winner\! \- SoundStage\! Ultra, 9月 9, 2025にアクセス、 [https://www.soundstageultra.com/index.php/features-menu/opinion-menu/1217-analog-versus-digital-we-have-a-winner](https://www.soundstageultra.com/index.php/features-menu/opinion-menu/1217-analog-versus-digital-we-have-a-winner)  
+<span id="ref-7">7</span>. Meitner Audio MA3 Network-Attached DAC \- Hi-Fi News, 9月 9, 2025にアクセス、 [https://www.hifinews.com/content/meitner-audio-ma3-network-attached-dac](https://www.hifinews.com/content/meitner-audio-ma3-network-attached-dac)  
+<span id="ref-8">8</span>. Meitner MA3i | House Of Stereo, 9月 9, 2025にアクセス、 [https://houseofstereo.com/products/meitner-ma3-integrated-d-a-converter-with-streamer](https://houseofstereo.com/products/meitner-ma3-integrated-d-a-converter-with-streamer)  
+<span id="ref-9">9</span>. Meitner Audio MA3 Integrated Hi-Res DAC \- Positive Feedback, 9月 9, 2025にアクセス、 [https://positive-feedback.com/reviews/hardware-reviews/meitner-audio-ma3-integrated-hi-res-dac/](https://positive-feedback.com/reviews/hardware-reviews/meitner-audio-ma3-integrated-hi-res-dac/)  
+<span id="ref-10">10</span>. Meitner Audio MA3 Integrated Hi-Res DAC Review Outstanding performance and value\! Review By Phil Gold \- Enjoy the Music.com, 9月 9, 2025にアクセス、 [https://www.enjoythemusic.com/superioraudio/equipment/1121/Meitner\_Audio\_MA3\_Integrated\_HiRes\_DAC\_Review.htm](https://www.enjoythemusic.com/superioraudio/equipment/1121/Meitner_Audio_MA3_Integrated_HiRes_DAC_Review.htm)  
+<span id="ref-11">11</span>. Meitner Audio MA3 Integrated D/A Converter Review \- PARMENTER SOUND, 9月 9, 2025にアクセス、 [https://www.parmentersound.com/blog/8/2/2023/meitner-audio-ma3-integrated-da-converter-review](https://www.parmentersound.com/blog/8/2/2023/meitner-audio-ma3-integrated-da-converter-review)  
+<span id="ref-12">12</span>. 6moons audio reviews: EMM Labs XDS1 SE & Synergistic Research Tranquility Base, 9月 9, 2025にアクセス、 [https://6moons.com/audioreviews/emm/4.html](https://6moons.com/audioreviews/emm/4.html)  
+<span id="ref-13">13</span>. Ceramic VS PCB board, 9月 9, 2025にアクセス、 [https://www.ipcb.com/pcb-blog/10160.html](https://www.ipcb.com/pcb-blog/10160.html)  
+<span id="ref-14">14</span>. Why ceramic PCB is more excellent than FR4 PCB?, 9月 9, 2025にアクセス、 [https://www.bstceramicpcb.com/news/industry-knowledge/why-ceramic-pcb-is-more-excellent-than-fr4-pcb.html](https://www.bstceramicpcb.com/news/industry-knowledge/why-ceramic-pcb-is-more-excellent-than-fr4-pcb.html)  
+<span id="ref-15">15</span>. Ceramic vs. FR4 Multilayer PCBs: Which One Should You Choose | Twisted Traces, 9月 9, 2025にアクセス、 [https://www.twistedtraces.com/blog/ceramic-vs-fr4-multilayer-pcbs-which-one-should-you-choose](https://www.twistedtraces.com/blog/ceramic-vs-fr4-multilayer-pcbs-which-one-should-you-choose)  
+<span id="ref-16">16</span>. Ceramic PCB: Its Materials, Types, Benefits and Drawbacks, 9月 9, 2025にアクセス、 [https://sfxpcb.com/materials-types-benefits-and-drawbacks-of-ceramic-pcb/](https://sfxpcb.com/materials-types-benefits-and-drawbacks-of-ceramic-pcb/)  
+<span id="ref-17">17</span>. Meitner MA3 Integrated D/A processor Page 2 | Stereophile.com, 9月 9, 2025にアクセス、 [https://www.stereophile.com/content/meitner-ma3-integrated-da-processor-page-2](https://www.stereophile.com/content/meitner-ma3-integrated-da-processor-page-2)  
+<span id="ref-18">18</span>. Meitner MA3 Review \- Mimic-Audio, 9月 9, 2025にアクセス、 [https://www.mimic-audio.com/blogs/reviews/meitner-ma3-review](https://www.mimic-audio.com/blogs/reviews/meitner-ma3-review)  
+<span id="ref-19">19</span>. Meitner Ma3 : r/audiophile \- Reddit, 9月 9, 2025にアクセス、 [https://www.reddit.com/r/audiophile/comments/1ia2d7v/meitner\_ma3/](https://www.reddit.com/r/audiophile/comments/1ia2d7v/meitner_ma3/)
