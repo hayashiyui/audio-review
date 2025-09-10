@@ -10,6 +10,8 @@ tags: ["Austrian Audio", "オーストリア", "AKG", "ハイエンドオーデ�
 heroImage: "../../assets/images/hero/austrian-audio-the-composer.jpg"
 relatedArticles:
   - collection: reviews
+    id: hifiman-susvara
+  - collection: reviews
     id: audio-technica-ath-adx5000
   - collection: reviews
     id: grado-gs3000x
@@ -48,7 +50,7 @@ import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
 <RelatedArticlesGrid 
   articles={[
     { collection: "reviews", id: "focal-utopia-sg" },   
-    { collection: "reviews", id: "hifiman-susvara-unveiled" },
+    { collection: "reviews", id: "hifiman-susvara" },
     { collection: "reviews", id: "audeze-lcd5" },   
     { collection: "reviews", id: "sennheiser-hd800s" },
   ]}
@@ -121,7 +123,8 @@ The Composerの設計で最も物議を醸しているのが、ヘッドホン�
 
 公開されている測定データは、The Composerが極めて意図的に、そして精密にチューニングされたヘッドホンであることを裏付けている。周波数特性や歪率といった客観的データは、我々の聴感を裏付ける羅針盤の役割を果たす。
 
-* **周波数特性:** 全体として「ニュートラルブライト」と形容できる特性は、Sennheiser HD 800 Sとの類似性を示唆する [16](#ref-16)。しかし、細部には明確な設計思想が見て取れる。特筆すべきは、開放型ダイナミック型としては異例の、20Hzまでフラットに伸びる低域特性である [16](#ref-16)。これは重低音域の再現性において平面磁界型に匹敵する性能であり、HD 800 Sに対して明確な優位性を持つ [16](#ref-16)。聴感上の「深く沈み込む歪みのない低音」は、このデータによって裏付けられる [18](#ref-18)。中域には2kHz付近に意図的なディップ（落ち込み）があり、これは音場を広く感じさせる効果を狙った、同社の他モデルにも見られる特徴的なチューニングである可能性が高い 。高域は6kHz付近にピークを持つが、HD 800 Sのそれよりも鋭さが抑えられており、かつてAKG K812が抱えた9kHz付近の共振という課題 [4](#ref-4) を技術的に克服しようとする意志が感じられる 。  
+**周波数特性**  
+全体として「ニュートラルブライト」と形容できる特性は、Sennheiser HD 800 Sとの類似性を示唆する [16](#ref-16)。しかし、細部には明確な設計思想が見て取れる。特筆すべきは、開放型ダイナミック型としては異例の、20Hzまでフラットに伸びる低域特性である [16](#ref-16)。これは重低音域の再現性において平面磁界型に匹敵する性能であり、HD 800 Sに対して明確な優位性を持つ [16](#ref-16)。聴感上の「深く沈み込む歪みのない低音」は、このデータによって裏付けられる [18](#ref-18)。中域には2kHz付近に意図的なディップ（落ち込み）があり、これは音場を広く感じさせる効果を狙った、同社の他モデルにも見られる特徴的なチューニングである可能性が高い 。高域は6kHz付近にピークを持つが、HD 800 Sのそれよりも鋭さが抑えられており、かつてAKG K812が抱えた9kHz付近の共振という課題 [4](#ref-4) を技術的に克服しようとする意志が感じられる 。  
 
 <ImageWithCitation 
   imagePath={mesurementGraph} 
@@ -129,7 +132,8 @@ The Composerの設計で最も物議を醸しているのが、ヘッドホン�
   sourceUrl="https://www.audiosciencereview.com/forum/index.php?threads/austrian-audio-the-composer-headphones-and-full-score-one-headphone-amplifier.48933/page-2#post-1879028" 
 />
 
-* **高調波歪 (Harmonic Distortion):** 通常のリスニングレベル（95dB）では、歪率は全帯域にわたって極めて低く抑えられており、DLCドライバーの優秀さを客観的に示している [16](#ref-16)。ただし、105dBという大音量下では低域の歪率が増加する傾向があり、イコライザーで低域を極端にブーストするような使い方には、一部の平面磁界型ほどの耐性はないかもしれない [16](#ref-16)。とはいえ、メーカー公称値である「THD \< 0.1% (@ 1kHz)」というスペックは、本機のポテンシャルの高さを十分に物語っている [11](#ref-11)。  
+**高調波歪 (Harmonic Distortion)**  
+通常のリスニングレベル（95dB）では、歪率は全帯域にわたって極めて低く抑えられており、DLCドライバーの優秀さを客観的に示している [16](#ref-16)。ただし、105dBという大音量下では低域の歪率が増加する傾向があり、イコライザーで低域を極端にブーストするような使い方には、一部の平面磁界型ほどの耐性はないかもしれない [16](#ref-16)。とはいえ、メーカー公称値である「THD \< 0.1% (@ 1kHz)」というスペックは、本機のポテンシャルの高さを十分に物語っている [11](#ref-11)。  
 
 <ImageWithCitation 
   imagePath={mesurementGraphTHD95} 
@@ -142,7 +146,8 @@ The Composerの設計で最も物議を醸しているのが、ヘッドホン�
   sourceUrl="https://forum.headphones.com/t/austrian-audio-the-composer-official-discussion-thread/22480" 
 />
 
-* **インピーダンス:** 22Ωという低いインピーダンスは測定データからも確認でき、現代の多様な再生環境で駆動しやすい設計であることがわかる [16](#ref-16)。ただし、インピーダンスカーブは完全にフラットではないため、意図されたサウンドを忠実に再現するには、出力インピーダンスの低いソース機器と組み合わせることが望ましいだろう [16](#ref-16)。
+**インピーダンス**  
+22Ωという低いインピーダンスは測定データからも確認でき、現代の多様な再生環境で駆動しやすい設計であることがわかる [16](#ref-16)。ただし、インピーダンスカーブは完全にフラットではないため、意図されたサウンドを忠実に再現するには、出力インピーダンスの低いソース機器と組み合わせることが望ましいだろう [16](#ref-16)。
 
 <ImageWithCitation 
   imagePath={mesurementGraphImpedance} 
@@ -161,7 +166,7 @@ The Composerがどのような市場に投入されたのかを客観的に把�
 | **The Composer (Austrian Audio)** | **開放／ダイナミック (DLC)** | **22Ω** | **112 dBspl/V** | **385 g** | **$2,699** | **超低歪、高効率、DLC振動板** |
 | [Utopia (Focal, 2022)](/reviews/focal-utopia-sg/) [26](#ref-26) | 開放／ダイナミック (Be "M"ドーム) | 80Ω | 104 dB @1mW | 490 g | $4,999 | フラッグシップDD、微細表現と質感 |
 | [HD 800 S (Sennheiser)](/reviews/sennheiser-hd800s/) [27](#ref-27) | 開放／ダイナミック | 300Ω | 102 dB @1V | 330 g | $1,699 | 超広大な音場と解析度 |
-| Empyrean II (Meze) [28](#ref-28) | 開放／プラナー | 32Ω | 105 dB @1V | 385 g | $2,999 | 楕円ハイブリッドアレイ、リッチで聴きやすい |
+| [Empyrean II (Meze)](/reviews/meze-audio-empyrean2) [28](#ref-28) | 開放／プラナー | 32Ω | 105 dB @1V | 385 g | $2,999 | 楕円ハイブリッドアレイ、リッチで聴きやすい |
 | [LCD-5 (Audeze)](/reviews/audeze-lcd5/) | 開放／プラナー | 14Ω | 90 dB/1mW | 420 g | $4,500 | フラッグシップ、精密・高速レスポンス |
 | [SUSVARA (HiFiMAN)](/reviews/hifiman-susvara/) | 開放／プラナー | 60Ω | 83 dB/mW | 450 g | $6,000 | 超ハイエンド、駆動力要求大 |
 | [D8000 Pro (final)](/reviews/final-d8000pro/) | 開放／プラナー (AFDS) | 60Ω | 98 dB/mW | 523 g | $4,299 | プロ志向チューニング、低歪 |
