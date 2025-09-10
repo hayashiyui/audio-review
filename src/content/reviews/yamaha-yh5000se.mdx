@@ -2,7 +2,7 @@
 title: "YAMAHA YH-5000SE レビュー：半世紀の沈黙を破る音、あるいは異端者の凱旋"
 description: "YAMAHA YH-5000SEの包括的レビュー：ORTHODYNAMICと超軽量設計が生む独自の高域表現と二極化する評価を検証"
 date: "2025-08-31T04:00:00+09:00"
-updatedAt: "2025-09-03"
+updatedAt: "2025-09-11T04:30:00+09:00"
 brand: "YAMAHA"
 model: "YH-5000SE"
 category: "ヘッドホン"
@@ -32,7 +32,10 @@ relatedArticles:
 ---
 
 import ImageWithCitation from '@/components/ImageWithCitation.astro';
-import mesurementGraph from "../../assets/images/contents/yh5000se-graph.png";
+import mesurementGraph from "../../assets/images/contents/Yamaha Flagship High-end Headphone YH-5000SE Frequency response Measurement.png";
+import mesurementGraphTHD from "../../assets/images/contents/Yamaha Flagship High-end Headphone YH-5000SE relative THD Distortion Measurement.png";
+import mesurementGraphGD from "../../assets/images/contents/Yamaha Flagship High-end Headphone YH-5000SE Goup Delay Measurement.png";
+import mesurementGraphImpedance from "../../assets/images/contents/Yamaha Flagship High-end Headphone YH-5000SE Impedance Measurement.png";
 
 音楽再生という行為は、突き詰めれば「再現」という名の翻訳作業に他ならない。演奏家が紡いだ空気の振動を、マイクロフォンが電気信号へと翻訳し、それを記録媒体が保存する。我々オーディオファイルが対峙するのは、その暗号化された情報を再び空気の振動へと翻訳し直す、一連の装置群である。この翻訳の精度、あるいはその「解釈」の美しさにこそ、我々は心血を注ぐのだ。
 
@@ -102,7 +105,11 @@ YH-5000SEの心臓部であるオルソダイナミック・ドライバーは�
 
 さらに、ハウジング内部には**日本製圧延平畳織ステンレスフィルター**や**アーチ状の音響リフレクター**といった、緻密な音響制御機構が組み込まれている [20](#ref-20)。これらは、軽量なドライバーと筐体が可能にする素早い応答性を、音楽的に破綻させないための巧みなチューニング機構として機能している。そして、この精緻なアセンブリが、ヤマハが世界に誇るフラッグシップ・グランドピアノと同じ掛川工場で、熟練の職人の手によって行われているという事実が、本機が単なる工業製品ではなく「楽器」として生み出されたことの何よりの証左である [2](#ref-2)。
 
-### **客観的測定値との対話**
+### **客観的測定値との対話：設計思想と物理法則の狭間で**
+
+しかし、この意欲的な設計は、客観的な測定データという冷徹な鏡に映し出された時、いくつかの深刻な疑問符を投げかける。特に、測定値を重視するコミュニティであるAudio Science Review (ASR) が公開したデータは、YH-5000SEの音響特性がいかに異端であるかを浮き彫りにしている [12](#ref-12)。
+
+まず周波数特性だが、これは凡そ「フラット」や「ニュートラル」といった言葉とは無縁の世界を描き出す。1kHzから1.5kHzにかけての鋭いピーク、そしてそれに続く2kHzから5kHzにかけての深く、不規則に刻まれた谷は、一般的なハイファイヘッドホンの目標カーブから著しく逸脱している [12](#ref-12)。この特異な形状こそが、後述する聴感上の「遠いのに近い」と評される奇妙な中域の正体であり、設計上の意図か、あるいは妥協の産物なのか、議論の的となっている。
 
 <ImageWithCitation 
   imagePath={mesurementGraph} 
@@ -111,7 +118,31 @@ YH-5000SEの心臓部であるオルソダイナミック・ドライバーは�
   sourceUrl="https://www.audiosciencereview.com/forum/index.php?threads/yamaha-yh-5000se-flagship-headphone-review.56209/post-2050635" 
 />
 
-しかし、この意欲的な設計は、客観的な測定データ上ではいくつかの疑問符を投げかける。Audio Science Review (ASR) が公開した測定結果は、極めて特異な周波数特性を示している [12](#ref-12)。特に1-1.5kHz帯の鋭いピークと、それに続く2-5kHz帯の深い谷は、一般的なハイファイヘッドホンの目標カーブから大きく逸脱している。さらに、大音量再生時には歪み率が顕著に増加することも報告されており、軽量設計と引き換えに、ドライバーの物理的な限界が比較的低い可能性を示唆している。これらのデータは、後述する聴感上の印象の「癖」を科学的に裏付けるものであり、無視することはできない。
+さらに深刻なのは歪み率（THD）である。94dBSPLという標準的なリスニングレベルですら、2-3kHz帯に共振を示す狭いピークが見られる [12](#ref-12)。そして、114dBSPLという大音量でのスイープテストでは、測定するまでもなくカップの後方から聴き取れるほどの激しい歪みが発生したと報告されている [12](#ref-12)。これは、超軽量振動板が物理的な限界を比較的低いレベルで迎えてしまうことを示唆しており、軽量設計と引き換えにダイナミックレンジの頂点が犠牲になっている可能性を否定できない。この共振点は、乱れたグループディレイの測定結果とも一致しており、複数の音源が混ざり合っていることを示唆している [12](#ref-12)。
+
+<ImageWithCitation 
+  imagePath={mesurementGraphTHD} 
+  alt="Yamaha YH-5000SE Total Harmonic Distortion Graph" 
+  sourceTitle="Yamaha YH-5000SE Flagship Headphone Review - ASR" 
+  sourceUrl="https://www.audiosciencereview.com/forum/index.php?threads/yamaha-yh-5000se-flagship-headphone-review.56209/post-2050635" 
+/>
+<ImageWithCitation 
+  imagePath={mesurementGraphGD} 
+  alt="Yamaha YH-5000SE Group Delay Graph" 
+  sourceTitle="Yamaha YH-5000SE Flagship Headphone Review - ASR" 
+  sourceUrl="https://www.audiosciencereview.com/forum/index.php?threads/yamaha-yh-5000se-flagship-headphone-review.56209/post-2050635" 
+/>
+
+一方で、インピーダンス特性は平面駆動型として非常に典型的であり、低域の共振点を除けば、可聴域全体にわたってほぼフラットな34Ωを維持している。これは、アンプ側からは駆動しやすい負荷であることを意味するが、前述のドライバー自体の機械的な問題点を覆い隠すものではない。
+
+<ImageWithCitation 
+  imagePath={mesurementGraphImpedance} 
+  alt="Yamaha YH-5000SE Impedance Graph" 
+  sourceTitle="Yamaha YH-5000SE Flagship Headphone Review - ASR" 
+  sourceUrl="https://www.audiosciencereview.com/forum/index.php?threads/yamaha-yh-5000se-flagship-headphone-review.56209/post-2050635" 
+/>
+
+結論として、ASRは「客観的に見て、YH-5000SEは音色と透明性（歪み）の両方において非常に欠陥がある」と断じている [12](#ref-12)。これらのデータは、本機が伝統的なハイファイの価値基準、すなわち低歪みと目標カーブへの準拠という観点からは、多くの課題を抱えていることを科学的に裏付けている。この測定結果と、一部のリスナーを魅了してやまない聴感上の魅力との間に横たわる巨大な溝こそが、YH-5000SEという製品の本質を理解する上で最も重要な鍵となるのだ。
 
 ### **競合製品とのスペック比較**
 
@@ -196,8 +227,10 @@ YH-5000SEの独自性は、競合製品との比較によって一層明らか�
   * **プラグアンドプレイを望む人:** システムとの相性を深く考慮せず、手軽に最高の音を楽しみたいユーザー。本機は、その性能を最大限に発揮するために、リスナーに相応の努力と投資を要求する。  
 * **将来の更新・Mod 可能性:**  
   * 基本設計の素性は優れているため、将来的にはサードパーティ製のイヤーパッドやケーブルによって、音質のカスタマイズの幅が広がる可能性は高い。しかし、ドライバー自体の持つ強烈な個性を根本的に変えることは難しいだろう。  
-* **総合評価:** ★★★☆☆  
-  * **類稀なる少数派のための、欠陥を抱いた傑作 (A Flawed Masterpiece for the Fearless Few)**
+
+### 総合評価: ★★★☆☆  
+
+類稀なる少数派のための、欠陥を抱いた傑作 (A Flawed Masterpiece for the Fearless Few)
 
 ## **引用文献**
 
