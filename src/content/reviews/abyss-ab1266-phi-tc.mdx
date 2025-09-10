@@ -2,6 +2,7 @@
 title: "Abyss AB-1266 Phi TC レビュー：ヘッドホン界の異端児、その深淵へ"
 description: "Abyss AB-1266 Phi TCの包括的レビュー：JPS Labs発の究極の平面磁界型ヘッドホンが示す、衝撃的な低音と広大な音場、そして物議を醸す設計哲学の探求"
 date: "2025-08-24"
+updatedAt: "2025-09-11T03:00:00+09:00"
 brand: "Abyss"
 model: "AB-1266 Phi TC"
 category: "ヘッドホン"
@@ -21,6 +22,11 @@ relatedArticles:
   - collection: columns
     id: sound-quality-evaluation-guide
 ---
+
+import ImageWithCitation from '@/components/ImageWithCitation.astro';
+import mesurementGraph from "../../assets/images/contents/Abyss AB-1266 Phi TC Frequency Response Measurements.png";
+import mesurementGraphTHD from "../../assets/images/contents/Abyss AB-1266 Phi TC THD percentage Measurements.png";
+import mesurementGraphTHD94 from "../../assets/images/contents/Abyss AB-1266 Phi TC THD percentage 94 dBSPL Measurements.png";
 
 ハイエンドオーディオの世界には、時として既存の常識を根底から覆すような製品が登場する。米Abyss Headphones社のAB-1266 Phi TCは、まさにそのような存在だ。単なる高級ヘッドホンというカテゴリーに収まらず、その設計思想、人間工学、そしてサウンドチューニングの全てにおいて、オーディオファイルに挑戦状を叩きつけるかのような、大胆不敵なステートメントである [1](#ref-1)。
 
@@ -134,11 +140,36 @@ AB-1266 Phi TCのサウンドは、その外観同様、唯一無二である。
 
 Audio Science Review (ASR) などで公開されている測定データを見ると、AB-1266 Phi TCの周波数特性グラフは極めて特異な形状をしている [18](#ref-18)。一般的なターゲットカーブ（例えばハーマンターゲット）とは全く異なり、特に重要な中高域に大きな落ち込みが見られるなど、グラフ全体に渡って不規則なピークとディップが存在する [18](#ref-18)。
 
+<ImageWithCitation 
+  imagePath={mesurementGraph} 
+  sourceTitle="Abyss AB-1266 Phi TC Review (Headphone) - ASR" 
+  sourceUrl="https://www.audiosciencereview.com/forum/index.php?threads/abyss-ab-1266-phi-tc-review-headphone.23411/" 
+/>
+
 ただし、このヘッドホンの測定には本質的な難しさが伴うことを考慮しなければならない。その開放的な構造と、ユーザーによる調整が前提のフィッティング機構は、標準化された測定機器（イヤーシミュレーター）では、実際のリスニング体験を正確に再現しきれない可能性がある [28](#ref-28)。測定値はあくまで一つの指標であり、その解釈には慎重さが求められる。
 
 ### **パワーの要求**
 
 スペックシートが示す88 dB/mWという低い感度と47Ωという公称インピーダンスは、このヘッドホンが市場で最も駆動が難しい部類に入ることを物語っている [14](#ref-14)。その性能を最大限に引き出すためには、単に音量が取れるだけでなく、大電流を供給できる強力なヘッドホンアンプが不可欠である [1](#ref-1)。一部のユーザーは、ヘッドホン出力ではなく、パワーアンプのスピーカー端子から直接駆動することを好むほどだ [25](#ref-25)。
+
+### **歪率（THD）：潜在能力と限界**
+
+メーカー公称の全高調波歪（THD）は1%未満、さらに耳が最も敏感な帯域では0.2%未満と、スペック上は極めて優秀な数値を誇る [14](#ref-14)。この数値は、ドライバーが持つ基本的なポテンシャルの高さを示唆している。
+
+しかし、第三者による測定では、より複雑な側面が明らかになる。Audio Science Reviewのテストでは、通常の使用範囲を超える非常に高い音量で駆動した場合に、歪みが増加することが報告されている [18](#ref-18)。具体的には、大音量の女性ボーカルで高域が歪み、ブザーのようなノイズが発生したり、ベースが重い楽曲ではピークで「チッキング」音が生じたりするという [18](#ref-18)。また、一部のユーザーからは、EQで低域をブーストして大音量で聴くと歪みが発生するという報告もある [44](#ref-44)。
+
+<ImageWithCitation 
+  imagePath={mesurementGraphTHD} 
+  sourceTitle="Abyss AB-1266 Phi TC Review (Headphone) - ASR" 
+  sourceUrl="https://www.audiosciencereview.com/forum/index.php?threads/abyss-ab-1266-phi-tc-review-headphone.23411/" 
+/>
+<ImageWithCitation 
+  imagePath={mesurementGraphTHD94} 
+  sourceTitle="Abyss AB-1266 Phi TC Review (Headphone) - ASR" 
+  sourceUrl="https://www.audiosciencereview.com/forum/index.php?threads/abyss-ab-1266-phi-tc-review-headphone.23411/" 
+/>
+
+これらの事実は、このヘッドホンの性能の限界点を示していると同時に、その卓越した能力の裏返しでもある。AB-1266 Phi TCは、その巨大なダイナミックレンジを活かすために莫大なパワーを要求する。アンプの限界、あるいはヘッドホン自体の物理的な限界まで追い込んだ時に初めて、歪みという形でその限界が露呈するのだ。重要なのは、これが常軌を逸した条件下での話であり、通常のリスニングレベルでは問題にならないという点である [18](#ref-18)。むしろ、後述するように周波数特性を補正するEQを適用すると、不要なピークが抑えられることで歪み感が減少し、明瞭度が向上するという報告もある [32](#ref-32)。これは、ドライバー自体の歪み特性が本質的に優れている可能性を示していると言えるだろう。
 
 ### **イコライゼーション（EQ）の力**
 
