@@ -43,6 +43,8 @@ import mesurementGraphImpedance from "../../assets/images/contents/HIFIMAN SUSVA
 import mesurementGraphStepResponse from "../../assets/images/contents/HIFIMAN SUSVARA StepResponse.png";
 import mesurementGraphCSD from "../../assets/images/contents/HIFIMAN SUSVARA CSD.png";
 import mesurementGraphFR from "../../assets/images/contents/HIFIMAN SUSVARA FR.png";
+import mesurementGraphDistortion from "../../assets/images/contents/HIFIMAN SUSVARA Distortion.png";
+import mesurementGraphDistortionPercentage from "../../assets/images/contents/HIFIMAN SUSVARA DistortionPercentage.png";
 
 ## **序章：音の探求者、Dr. Fang Bianの軌跡**
 
@@ -129,7 +131,7 @@ Susvaraの技術的特異性は、競合製品との比較によって一層明�
 
 聴感上の印象は主観に依存するが、測定データはSusvaraの音響的挙動を客観的に理解するための羅針盤となる。しかし、その解釈には注意が必要だ。ヘッドホンの測定値は、使用する測定機材（ダミーヘッドの種類など）や装着状態によって変動するため、異なるソース間でグラフの形状が一致しないことは珍しくない。
 
-**周波数特性**  
+#### **周波数特性**  
 多くの測定データが示すのは、1kHzに至るまで極めてフラットな周波数特性である [36](#ref-36)。これは、色付けのないニュートラルな低域と中域という聴感印象を裏付けるものだ。一方で、1-3kHz付近に僅かなディップが見られ、これがボーカルをやや後退させる印象の一因となっている可能性がある [20](#ref-20)。高域に関しては、4kHz付近と7-8kHz付近にピークが観測されることが多く、これがSusvara特有の明瞭さや空気感に寄与していると考えられるが、一部のレビュアーはこれを僅かに鋭いと感じるかもしれない [20](#ref-20)。この特性は、一般的なターゲットカーブとは一線を画しており、まさに方博士の「ライブミュージックの再現」という哲学を反映した意図的なチューニングと言えよう。  
 
 <ImageWithCitation 
@@ -146,10 +148,22 @@ Susvaraの技術的特異性は、競合製品との比較によって一層明�
   sourceUrl="https://www.audiosciencereview.com/forum/index.php?threads/hifiman-susvara-headphone-review.50705/" 
 />
 
-これらの異なる測定結果は、矛盾ではなく、Susvaraの多面的な特性を異なる角度から照らし出していると解釈すべきだろう。「低域の不足」という指摘は、多くのレビュアーが語る「ニュートラルで質を重視した低域」という聴感印象や、方博士が目指す「リニアなサウンド」という設計哲学 21 と完全に一致する。これは欠陥ではなく、意図的なチューニングの結果に他ならない。また、ASRが捉えた中高域の細かな変動は、他の測定では平均化されてしまう微細な音響特性かもしれず、それこそがSusvaraの持つ「電子顕微鏡」22 とも評される圧倒的な解像度と分離能力 20 の物理的な源泉となっている可能性が考えられる。  
+これらの異なる測定結果は、矛盾ではなく、Susvaraの多面的な特性を異なる角度から照らし出していると解釈すべきだろう。「低域の不足」という指摘は、多くのレビュアーが語る「ニュートラルで質を重視した低域」という聴感印象や、方博士が目指す「リニアなサウンド」という設計哲学 [21](#ref-21) と完全に一致する。これは欠陥ではなく、意図的なチューニングの結果に他ならない。また、ASRが捉えた中高域の細かな変動は、他の測定では平均化されてしまう微細な音響特性かもしれず、それこそがSusvaraの持つ「電子顕微鏡」22 とも評される圧倒的な解像度と分離能力 20 の物理的な源泉となっている可能性が考えられる。  
 
-**歪率特性 (THD)**  
-Susvaraの全高調波歪率は、通常のリスニングレベルにおいて極めて低い値を示す [36](#ref-36)。特に低域の歪率は0.5%を下回り、これは平面駆動型として卓越した性能である [36](#ref-36)。しかし、一部の測定では94dBを超える大音量時に歪率が急増し、ドライバーが共振する様子が報告されている [39](#ref-39)。これは、極薄振動板の限界を示すものかもしれないが、通常の音楽鑑賞で経験する音圧レベルを大幅に超えているため、実用上の問題となるかは議論の余地があるだろう [40](#ref-40)。  
+#### **歪率特性 (THD)**  
+Susvaraの全高調波歪率は、通常のリスニングレベルにおいて極めて低い値を示す [36](#ref-36)。特に低域の歪率は0.5%を下回り、これは平面駆動型として卓越した性能である。
+<ImageWithCitation 
+  imagePath={mesurementGraphDistortion} 
+  sourceTitle="the distortion measurements of the Susvara (Right channel) - DIY-AUDIO-HEAVEN" 
+  sourceUrl="https://diyaudioheaven.wordpress.com/headphones/measurements/hifiman/susvara/" 
+/>
+<ImageWithCitation 
+  imagePath={mesurementGraphDistortionPercentage} 
+  sourceTitle="the distortion plot but displayed in percentages - DIY-AUDIO-HEAVEN" 
+  sourceUrl="https://diyaudioheaven.wordpress.com/headphones/measurements/hifiman/susvara/" 
+/>
+
+しかし、一部の測定では94dBを超える大音量時に歪率が急増し、ドライバーが共振する様子が報告されている [39](#ref-39)。これは、極薄振動板の限界を示すものかもしれないが、通常の音楽鑑賞で経験する音圧レベルを大幅に超えているため、実用上の問題となるかは議論の余地があるだろう [40](#ref-40)。  
 
 <ImageWithCitation 
   imagePath={mesurementGraphTHD} 
@@ -157,7 +171,7 @@ Susvaraの全高調波歪率は、通常のリスニングレベルにおいて�
   sourceUrl="https://www.audiosciencereview.com/forum/index.php?threads/hifiman-susvara-headphone-review.50705/" 
 />
 
-**インピーダンス**  
+#### **インピーダンス**  
 Susvaraのインピーダンスカーブは、可聴域全域にわたってほぼ完璧な直線を描き、約60Ωで安定している [36](#ref-36)。これは、アンプの出力インピーダンスによって周波数特性が変化しにくいことを意味し、アンプを選ばない（ただし駆動力は要求する）という音質的な安定性を示唆している [38](#ref-38)。  
 
 <ImageWithCitation 
@@ -166,7 +180,7 @@ Susvaraのインピーダンスカーブは、可聴域全域にわたってほ�
   sourceUrl="https://www.audiosciencereview.com/forum/index.php?threads/hifiman-susvara-headphone-review.50705/" 
 />
 
-**過渡応答と共振**  
+#### **過渡応答と共振**  
 CSD（累積スペクトル減衰）プロットを見ると、複数の共振点が確認できる。特に4-5kHz付近の共振は多くの測定で指摘されており、これが音色に特有のキャラクターを与えている可能性がある [36](#ref-36)。しかし、ステップ応答は非常に高速な立ち上がりと短い減衰を示しており、これがSusvaraの聴感上のスピード感と明瞭さ、そして優れた解像度の物理的な裏付けとなっている [36](#ref-36)。
 
 <ImageWithCitation 
