@@ -21,6 +21,9 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   site: 'https://audiomatome.com',
+  redirects: {
+    '/reviews/hifiman-susvara-unvailed': '/reviews/hifiman-susvara-unveiled'
+  },
   integrations: [
     expressiveCode({
       themes: ['github-light', 'github-dark'],
