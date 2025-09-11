@@ -2,10 +2,11 @@
 title: "B&W 805 D4 レビュー：形態は機能に従う、されど音は魂に従う"
 description: "B&W 800シリーズの最小モデルでありながら、フラッグシップの設計哲学が最も凝縮されたBowers & Wilkins 805 D4。ダイヤモンド・トゥイーター、コンティニュアム・コーン、リバース・ラップ・キャビネットが織りなす音響的達成と、その明瞭で刺激的な音作りの真価を徹底検証。"
 date: "2025-08-18"
+updatedAt: "2025-09-12T06:30:00+09:00"
 brand: "Bowers & Wilkins"
 model: "805 D4"
 category: "スピーカー"
-tags: ["ダイヤモンド振動板", 'B&W', "ハイエンドオーディオ", "ブックシェルフ"]
+tags: ["ダイヤモンド振動板", 'B&W', "ハイエンドオーディオ", "ブックシェルフ", "英国"]
 heroImage: "../../assets/images/hero/bowers-and-wilkins-805d4.jpg"
 relatedArticles:
   - collection: reviews
@@ -15,6 +16,13 @@ relatedArticles:
   - collection: columns
     id: sound-quality-evaluation-guide
 ---
+
+import ImageWithCitation from '@/components/ImageWithCitation.astro';
+import mesurementGraphFR1 from "../../assets/images/contents/BW805fig03-600.jpg";
+import mesurementGraphFR2 from "../../assets/images/contents/BW805fig04-600.jpg";
+import mesurementGraphImpedance from "../../assets/images/contents/BW805fig01-600.jpg";
+import mesurementGraphWaterfall from "../../assets/images/contents/BW805fig10-600.jpg";
+import mesurementGraphSpectralDecay from "../../assets/images/contents/BW805fig02-600.jpg";
 
 オーディオの世界における「リファレンス・モニター」という言葉は、ある種の絶対的な指標を示唆する。それは色付けなく、歪みなく、ただ録音された信号を忠実に空気の振動へと変換する、完璧な測定器としての理想像である。しかし、我々は自問せねばならない。完璧な測定器は、果たして完璧な芸術を生み出すのだろうか。この問いこそ、Bowers & Wilkins（以下B&W）の800 Seriesがその永い歴史を通じて探求し続けてきた根源的なテーマではなかろうか。彼らは、レコーディングスタジオが要求する冷徹な「真実」と、オーディオファイルが希求する官能的な「美」との交差点に、常に立ち続けてきたのである [1](#ref-1)。
 
@@ -141,14 +149,44 @@ import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
 **周波数特性と意図された音作り:**  
 軸上周波数特性は、B\&Wが純粋なフラット特性ではなく、意図的に「調整された (tailored)」音響バランスを目指したことを明確に示している [12](#ref-12)。特に、高域は周波数と共に滑らかに上昇し、9kHzから10kHzにかけてピークを形成する [12](#ref-12)。この特性は、多くのレビューで語られる「空気感 (air)」や「鮮やかさ (vividness)」の物理的根源であり、知覚されるディテールを最大化するための設計思想の表れと言えよう [12](#ref-12)。一方で、中音域には僅かな抑制が見られ、これが一部のリスナーに「Uカーブ」的なサウンドと認識される要因かもしれない [12](#ref-12)。  
 
+<ImageWithCitation 
+  imagePath={mesurementGraphFR2} 
+  sourceTitle="Fig.4 B&W 805 D4 Signature, anechoic response on tweeter axis at 50°, averaged across 30° horizontal window and corrected for microphone response, with the complex sum of the nearfield woofer and port responses plotted below 300Hz - Stereophile" 
+  sourceUrl="https://www.stereophile.com/content/bowers-wilkins-805-d4-signature-loudspeaker-measurements" 
+/>
+<ImageWithCitation 
+  imagePath={mesurementGraphFR1} 
+  sourceTitle="Fig.3 B&W 805 D4 Signature, acoustic crossover on tweeter axis at 50°, corrected for microphone response, with the nearfield responses of the woofer (blue) and port (red), respectively plotted below 350Hz and 1kHz - Stereophile" 
+  sourceUrl="https://www.stereophile.com/content/bowers-wilkins-805-d4-signature-loudspeaker-measurements" 
+/>
+
 **インピーダンスとアンプへの要求:**  
 公称インピーダンスは8Ωとされているが、その実態はより複雑である [5](#ref-5)。Stereophileの測定によれば、実効抵抗（EPDR）は特定の周波数帯で大きく低下し、特に8.9kHzから10kHzの間では2Ωにまで達する [12](#ref-12)。これは、805 D4がアンプに対して「比較的電流を要求する負荷 (relatively current-hungry load)」であることを意味する [12](#ref-12)。質の低いアンプでは、大音量時に音が硬化する可能性があり、このスピーカーの真価を引き出すには、駆動力に余裕のある、安定したパワーアンプが不可欠であることをデータは示唆している [12](#ref-12)。  
+
+<ImageWithCitation 
+  imagePath={mesurementGraphImpedance} 
+  sourceTitle="Fig.1 B&W 805 D4 Signature, electrical impedance (solid) and phase (dashed) (2 ohms/vertical div.) - Stereophile" 
+  sourceUrl="https://www.stereophile.com/content/bowers-wilkins-805-d4-signature-loudspeaker-measurements" 
+/>
 
 **歪みと共振の抑制:**  
 本機の最も卓越した性能の一つが、極めて低い歪み率である。B\&Wの公式スペックでは90Hzから20kHzの帯域で1%未満、120Hz以上では0.3%未満という優れた値が示されている [5](#ref-5)。独立した測定でも、50Hz、90dBという厳しい条件下でさえTHDは0.23%に留まり、高域ではさらに低い値を示す [18](#ref-18)。これは、ダイヤモンド・トゥイーターとコンティニュアム・コーンの素材的優位性、そして何よりもキャビネットの共振を徹底的に排除した結果に他ならない。加速度計による測定では、キャビネットの共振モードは極めて低レベルかつ高Q値であり、聴感上の影響は皆無に近いと結論付けられている [12](#ref-12)。  
 
+<ImageWithCitation 
+  imagePath={mesurementGraphSpectralDecay} 
+  sourceTitle="Fig.2 B&W 805 D4 Signature, cumulative spectral-decay plot calculated from output of accelerometer fastened to the center of a sidewall (MLS driving voltage to speaker, 7.55V; measurement bandwidth, 2kHz) - Stereophile" 
+  sourceUrl="https://www.stereophile.com/content/bowers-wilkins-805-d4-signature-loudspeaker-measurements" 
+/>
+
 **時間領域応答 (CSD/ウォーターフォール):**  
 累積スペクトル減衰（ウォーターフォール）プロットは、805 D4の時間領域における応答がいかにクリーンであるかを物語っている [12](#ref-12)。プロットは、入力信号が停止した後に不要なエネルギー（リンギング）がほとんど残らないことを示しており、これは音の立ち上がりと立ち下がりの速さ、そして音符間の静寂の深さに直結する。1.4kHz付近にコーンの終端処理に起因する可能性のある僅かな遅延エネルギーが見られるものの、全体としては「極めてクリーン (superbly clean)」と評価されており、その明瞭で俊敏な音質の根拠となっている [12](#ref-12)。  
+
+<ImageWithCitation 
+  imagePath={mesurementGraphWaterfall} 
+  sourceTitle="Fig.10 B&W 805 D4 Signature, cumulative spectral-decay plot on tweeter axis at 50° (0.15ms risetime) - Stereophile" 
+  sourceUrl="https://www.stereophile.com/content/bowers-wilkins-805-d4-signature-loudspeaker-measurements" 
+/>
+
 総じて、測定データは805 D4が「教科書通りのニュートラル」なスピーカーではないことを認めつつも、歪み、共振、時間領域応答といった基本的な性能において、現代スピーカー工学の最高水準にあることを証明している。その音響的個性は、偶然の産物ではなく、明確な意図をもって設計された、高度なエンジニアリングの結晶なのである。
 
 ### **ポジティブ/ネガティブ要素の再検証： 「明瞭さ」と「明るさ」の二元論**
