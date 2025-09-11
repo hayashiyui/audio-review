@@ -2,12 +2,29 @@
 title: "Audeze LCD-5 レビュー：継承と訣別、そして純粋なる解像度への探求"
 description: "Audeze LCD-5の包括的レビュー：軽量化と新設計がもたらす正確性と解像度、賛否を生むチューニングの本質に迫る"
 date: "2025-08-30T20:00:00"
+updatedAt: "2025-09-11T21:00:00+09:00"
 brand: "Audeze"
 model: "LCD-5"
 category: "ヘッドホン"
 tags: ["Audeze", "ハイエンドオーディオ", "平面磁界型", "米国"]
 heroImage: "../../assets/images/hero/audeze-lcd5.jpg"
 relatedArticles:
+  - collection: reviews
+    id: focal-utopia-sg
+  - collection: reviews
+    id: hifiman-susvara
+  - collection: reviews
+    id: hifiman-susvara-unveiled
+  - collection: reviews
+    id: meze-audio-elite
+  - collection: reviews
+    id: austrian-audio-the-composer
+  - collection: reviews
+    id: grado-gs3000x
+  - collection: reviews
+    id: sennheiser-hd800s
+  - collection: reviews
+    id: danclarkaudio-expanse
   - collection: reviews
     id: focal-utopia-sg
   - collection: reviews
@@ -22,6 +39,12 @@ relatedArticles:
     id: sound-quality-evaluation-guide
 ---
 
+import ImageWithCitation from '@/components/ImageWithCitation.astro';
+import mesurementGraphFRComparison from "../../assets/images/contents/audeze-lcd5-flagship-hp-battle-edited.png";
+import mesurementGraphFR from "../../assets/images/contents/audeze-lcd5-fr.jpeg";
+import mesurementGraphTHD from "../../assets/images/contents/audeze-lcd5-thd.png";
+import mesurementGraphDecay from "../../assets/images/contents/audeze-lcd5-decay.png";
+
 ある製品が単なる後継機ではなく、ブランドの自己言及的な問いかけとして現れることがある。Audeze LCD-5は、まさしくそのような存在と言えるだろう。それは過去10年以上にわたり同社を定義してきた、重厚で、温かく、そして時に官能的ですらあった「ハウスサウンド」との意図的な訣別であり、同時にフラッグシップヘッドホンの究極的な目的とは何か—心地よい音楽性か、それとも妥協なき正確性か—という根源的な問いを我々に投げかける。
 
 2021年9月に発表されたこのヘッドホンは、単なる技術的進化の産物ではない。それはAudezeという名の哲学の再定義であり、リスニングという行為の本質を巡る思索の結晶である。本稿では、この野心的な製品の技術的深淵を覗き込み、その音響的特性を解剖し、そして現代のハイエンドオーディオ市場におけるその存在意義を問うていきたい。
@@ -31,9 +54,9 @@ import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
 <RelatedArticlesGrid 
   articles={[
     { collection: "reviews", id: "focal-utopia-sg" },   
-    { collection: "reviews", id: "hifiman-susvara-unveiled" },
+    { collection: "reviews", id: "hifiman-susvara" },
     { collection: "reviews", id: "abyss-ab1266-phi-tc" },   
-    { collection: "reviews", id: "camerton-binom-er" },
+    { collection: "reviews", id: "danclarkaudio-expanse" },
   ]}
   columns={4}
   title="関連記事"
@@ -114,6 +137,58 @@ LCD-5の設計は、独立した改良点の集合体ではなく、相互に関
 | [Dan Clark Audio EXPANSE](/reviews/danclarkaudio-expanse/) | Planar Magnetic | 418g | 23Ω | \~87dB/1mW |
 | [Focal Utopia (2022)](/reviews/focal-utopia-sg/) | Dynamic | 490g | 80Ω | 104dB/1mW |
 | [ABYSS AB-1266 Phi TC](/reviews/abyss-ab1266-phi-tc/) | Planar Magnetic | 640g | 47Ω | 88dB/1mW |
+
+## **測定データから見る音響特性**
+
+聴感上の印象は主観的なものだが、測定データはその背後にある客観的な物理特性を明らかにする。LCD-5の各種測定値は、その設計思想とユニークな音響特性が、いかに密接に結びついているかを雄弁に物語っている。
+
+### **周波数特性 (Frequency Response)**
+
+LCD-5の周波数特性は、伝統的なAudezeサウンドからの明確な脱却を示している。複数の第三者機関による測定は、細部に違いはあれど、一貫した傾向を描き出す。
+
+<ImageWithCitation 
+  imagePath={mesurementGraphFR} 
+  sourceTitle="LCD-5 ALL SPL Raw - SOUND NEWS" 
+  sourceUrl="https://soundnews.net/headphones/full-size/audeze-lcd-5-a-statement-review/" 
+/>
+
+* **低域から中域:** 多くの測定で、20Hzから1.5kHz付近までほぼフラットな直線を描くことが確認されている [3](#ref-3)。これは「ruler to the mids（中域まで定規で引いたような）」と表現される特性であり [3](#ref-3)、色付けのない正確な低音と中音域の再生能力を示唆する。  
+* **中高域:** 最も特徴的なのは、1.5kHzから上の帯域である。多くのAudeze製品が意図的に抑えていた3kHzから6kHzの領域に、明確な盛り上がり（ear gain）が設けられている [14](#ref-14)。これは、より現代的なターゲットカーブ（Harmanターゲットなど）に近づけるチューニングであり、ボーカルや楽器の明瞭度と存在感を高める効果がある [14](#ref-14)。しかし、この領域の強調は諸刃の剣でもあり、一部の測定では+6dBにも達する急峻なピークとして現れ、これが一部のリスナーにとって「ブライトすぎる」「シャウティ（叫ぶよう）」と感じられる原因となっている可能性がある [37](#ref-37)。  
+* **高域:** 6kHz以降は、ピークやディップが少なく、スムーズに減衰する傾向にある [15](#ref-15)。これは、刺々しさや過度な輝きを避け、長時間のリスニングでも疲れにくい、洗練された高音域を目指した結果と言えよう [38](#ref-38)。
+
+<ImageWithCitation 
+  imagePath={mesurementGraphFRComparison} 
+  sourceTitle="ALL SPL Flagship HP Battle - SOUND NEWS" 
+  sourceUrl="https://soundnews.net/headphones/full-size/audeze-lcd-5-a-statement-review/" 
+/>
+
+### **全高調波歪 (Total Harmonic Distortion \- THD)**
+
+LCD-5の技術的卓越性を最も端的に示すのが、その驚異的に低い歪率である。Audezeの公称スペックは100dB SPLで0.1%未満という極めて低い値だが [2](#ref-2)、これは第三者の測定によっても裏付けられている。ある測定では、高音圧下でも歪率は概ね0.1%から0.5%の範囲に収まり、これはフラッグシップ機として傑出した性能である [15](#ref-15)。
+
+<ImageWithCitation 
+  imagePath={mesurementGraphTHD} 
+  sourceTitle="LCD-5 THD - SOUND NEWS" 
+  sourceUrl="https://soundnews.net/headphones/full-size/audeze-lcd-5-a-statement-review/" 
+/>
+
+この低歪み特性こそが、LCD-5を比類なき「プラットフォーム」たらしめている核心である。ドライバーは、18dBもの極端なローシェルフ・ブーストをかけても破綻することなく、クリーンな信号を維持する能力を持つ [9](#ref-9)。これは、イコライゼーションによってサウンドを劇的に変化させても、音の純粋さが損なわれないことを意味し、ユーザーに広範な音作りの自由度を与えている。
+
+### **過渡応答特性 (Transient Response)**
+
+周波数特性が音の「色」を決めるとすれば、過渡応答特性は音の「輪郭」や「スピード」を定義する。この点において、LCD-5は最高峰の性能を誇る。  
+スペクトル減衰（Spectral Decay）の測定では、信号停止後の音の消え際の速さが驚異的であることが示されている。ある詳細な分析によれば、LCD-5はHIFIMAN SusvaraやAbyss AB-1266 Phi TCといった名だたる競合機をも凌駕する、測定史上最速の過渡応答を記録したという [15](#ref-15)。この物理的な速さが、聴感上の圧倒的な解像度、音の立ち上がりの鋭さ、そして複雑なパッセージにおける完璧な分離感の源泉となっているのである。
+
+<ImageWithCitation 
+  imagePath={mesurementGraphDecay} 
+  sourceTitle="LCD-5 Spectral Decay - SOUND NEWS" 
+  sourceUrl="https://soundnews.net/headphones/full-size/audeze-lcd-5-a-statement-review/" 
+/>
+
+### **考察**
+
+測定データは、LCD-5が偶然の産物ではなく、明確な設計目標—すなわち、伝統的なハウスサウンドとの訣別と、客観的な技術的理想の追求—の論理的帰結であることを示している。フラットな低域、意図的に設けられた中高域のゲイン、そしてスムーズな高域は、分析的な正確性を目指したチューニングである。そして、それを支えるのが、ほぼ測定限界に近い低歪みと、世界最速クラスの過渡応答特性を持つ、技術的に完成されたドライバーシステムだ。この揺るぎない基礎があるからこそ、LCD-5はストックのままで高解像度なリファレンス機として機能し、同時にイコライゼーションという名の絵筆を受け入れる完璧なキャンバスにもなり得るのである。
+
 
 ## **音響の顕微鏡 — リスニング・インプレッション**
 
@@ -235,5 +310,6 @@ Audeze LCD-5は、ヘッドホンエンジニアリングにおける記念碑�
 <span id="ref-33"></span> 33. Audeze LCD 5 Headphones vs Focal Utopia Headphones; The King of flagship headphones? \- YouTube, [https://www.youtube.com/watch?v=VicZyCLXdaw](https://www.youtube.com/watch?v=VicZyCLXdaw)  
 <span id="ref-34"></span> 34. The Audeze LCD-5 Is the BEST Headphone in the World. \- YouTube, [https://www.youtube.com/watch?v=BNjfYxyz35s](https://www.youtube.com/watch?v=BNjfYxyz35s)  
 <span id="ref-35"></span> 35. Ultimate Headphone Showdown: Focal Utopia 2022 vs. DCA ..., [https://thesourceav.com/blogs/news/ultimate-headphone-showdown-focal-utopia-2022-vs-dca-expanse-vs-meze-elite-vs-audeze-lcd-5-flagship](https://thesourceav.com/blogs/news/ultimate-headphone-showdown-focal-utopia-2022-vs-dca-expanse-vs-meze-elite-vs-audeze-lcd-5-flagship)  
-<span id="ref-36"></span> 36. Audeze LCD-5-Reference/Mixing/Mastering Sound BUT at a Hefty Price \- Honest Audiophile Impressions \- YouTube, [https://www.youtube.com/watch?v=wCU5kxkqxf8](https://www.youtube.com/watch?v=wCU5kxkqxf8)
-<span id="ref-37"></span> 37. LCD-5 OPEN-BACK HP | 新品 通販フジヤエービック, [https://www.fujiya-avic.co.jp/shop/g/g200000061411/)
+<span id="ref-36"></span> 36. Audeze LCD-5-Reference/Mixing/Mastering Sound BUT at a Hefty Price \- Honest Audiophile Impressions \- YouTube, [https://www.youtube.com/watch?v=wCU5kxkqxf8](https://www.youtube.com/watch?v=wCU5kxkqxf8)  
+<span id="ref-37"></span> 37. LCD-5 OPEN-BACK HP | 新品 通販フジヤエービック, [https://www.fujiya-avic.co.jp/shop/g/g200000061411/)  
+<span id="ref-38"></span> 38. SoundStageSolo.com \- Audeze LCD-5 Headphones, [https://www.soundstagesolo.com/index.php/equipment/headphones/379-audeze-lcd-5-headphones](https://www.soundstagesolo.com/index.php/equipment/headphones/379-audeze-lcd-5-headphones)
