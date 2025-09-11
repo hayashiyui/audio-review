@@ -9,11 +9,25 @@ tags: ["Sennheiser", "ハイエンドオーディオ", "ダイナミック型", 
 heroImage: "../../assets/images/hero/sennheiser-hd800s.jpg"
 relatedArticles:
   - collection: reviews
-    id: audeze-lcd5
+    id: yamaha-yh5000se
   - collection: reviews
     id: focal-utopia-sg
   - collection: reviews
+    id: hifiman-susvara
+  - collection: reviews
+    id: hifiman-susvara-unveiled
+  - collection: reviews
+    id: meze-audio-elite
+  - collection: reviews
+    id: austrian-audio-the-composer
+  - collection: reviews
+    id: grado-gs3000x
+  - collection: reviews
     id: camerton-binom-er
+  - collection: reviews
+    id: danclarkaudio-expanse
+  - collection: reviews
+    id: audeze-lcd5
   - collection: reviews
     id: abyss-ab1266-phi-tc
   - collection: reviews
@@ -23,6 +37,10 @@ relatedArticles:
   - collection: columns
     id: sound-quality-evaluation-guide
 ---
+
+import ImageWithCitation from '@/components/ImageWithCitation.astro';
+import mesurementGraphFR from "../../assets/images/contents/Sennheiser HD800S Measurements Frequency Response.png";
+import mesurementGraphTHD from "../../assets/images/contents/Sennheiser HD800S Measurements Distortion THD Measurements.png";
 
 ## **第1章 序論：現代のクラシックを再検証する**
 
@@ -50,7 +68,7 @@ import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
 <RelatedArticlesGrid 
   articles={[
     { collection: "reviews", id: "focal-utopia-sg" },   
-    { collection: "reviews", id: "hifiman-susvara-unveiled" },
+    { collection: "reviews", id: "hifiman-susvara" },
     { collection: "reviews", id: "audeze-lcd5" },   
     { collection: "reviews", id: "stax-srx9000" },
   ]}
@@ -127,6 +145,12 @@ HD 800 Sの最も称賛され、かつ象徴的な特徴は、その広大無辺
 
 測定データと主観的なレビューを総合すると、HD 800 Sの周波数特性はニュートラルとは言い難い、独特のバランスを持っている [27](#ref-27)。
 
+<ImageWithCitation 
+  imagePath={mesurementGraphFR} 
+  sourceTitle="Sennheiser HD800S Measurements Frequency Response - ASR" 
+  sourceUrl="https://www.audiosciencereview.com/forum/index.php?threads/sennheiser-hd800s-review-headphone.18424/" 
+/>
+
 #### **4.2.1 低音域 (Bass)**
 
 HD 800 Sの低音は、クリーンで、速く、明瞭であり、解像度が非常に高いと評価される [12](#ref-12)。しかし、サブベース（超低域）の伸びやかさと、身体に響くようなインパクト（「スラム」）には欠ける [13](#ref-13)。測定データでは、100 Hz 以下からのロールオフが確認されており、低域における歪み率の上昇も見られる [24](#ref-24)。これは、EDMやヒップホップのようなジャンルに求められる深い響きや力強さを表現するには不向きであることを示唆している。
@@ -143,9 +167,19 @@ HD 800 Sの低音は、クリーンで、速く、明瞭であり、解像度が
 
 音調バランスの課題とは裏腹に、HD 800 Sの技術的な性能は世界クラスである。微細な音を拾い上げるディテール再現能力、楽器を明確に分離する能力、音源の情報をありのままに伝える透明性、そして微小な音量変化を表現するマイクロダイナミクスは、他の追随を許さないレベルにある [4](#ref-4)。
 
-ここで極めて重要になるのが、イコライゼーション（EQ）の役割である。HD 800 Sのストックチューニングが持つ「欠点」は、逆説的にその究極的なポテンシャルの鍵となっている。その分析的な性質と技術的な純粋さは、本機をEQにとって理想的な「プラットフォーム」たらしめている [27](#ref-27)。
+ここで重要になるのが、イコライゼーション（EQ）の役割である。HD 800 Sのストックチューニングが持つ「欠点」は、逆説的にその究極的なポテンシャルの鍵となっている。その分析的な性質と技術的な純粋さは、本機をEQにとって理想的な「プラットフォーム」たらしめている [27](#ref-27)。
 
-歪みが極めて少ないということは、特定の周波数帯域（特に低域）を大幅にブーストしても、音が破綻したり、歪みっぽくなったりすることがないことを意味する [27](#ref-27)。つまり、HD 800 Sの弱点は主にチューニングにあり、これはEQによって容易に修正可能である。単純なベースシェルフEQを適用するだけで、不足していた低域のインパクトを補い、より多才なヘッドホンへと変貌させることができる [31](#ref-31)。この際、本機が元来持つディテール再現能力や空間表現能力が損なわれることはない。EQを積極的に活用するユーザーにとって、HD 800 Sは単なるヘッドホンではなく、好みに合わせて音を彫刻できる、高解像度な音のキャンバスなのである。
+歪みが少ないということは、特定の周波数帯域（特に低域）をブーストしても、音が破綻したり、歪みっぽくなったりすることがないことを意味する [27](#ref-27)。
+
+<ImageWithCitation 
+  imagePath={mesurementGraphTHD} 
+  sourceTitle="Sennheiser HD800S Measurements Distortion THD Measurements - ASR" 
+  sourceUrl="https://www.audiosciencereview.com/forum/index.php?threads/sennheiser-hd800s-review-headphone.18424/" 
+/>
+
+> 注: 多くのヘッドホンやスピーカーと同様、大音量になると低音域の歪みが急激に増加するため、リスニング時の音量レベルを考慮したEQの調整が必要である。
+
+つまり、HD 800 Sの弱点は主にチューニングにあり、これはEQによって修正可能である。単純なベースシェルフEQを適用するだけで、不足していた低域のインパクトを補い、より多才なヘッドホンへと変貌させることができる [31](#ref-31)。この際、本機が元来持つディテール再現能力や空間表現能力が損なわれることはない。EQを積極的に活用するユーザーにとって、HD 800 Sは単なるヘッドホンではなく、好みに合わせて音を彫刻できる、高解像度な音のキャンバスなのである。
 
 ## **第5章 シナジーの芸術：アンプとソースの組み合わせ**
 

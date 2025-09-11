@@ -2,6 +2,7 @@
 title: "Dan Clark Audio EXPANSE レビュー：静寂の建築家、音の風景を描く"
 description: "Dan Clark Audio EXPANSEの包括的レビュー：AMTSとHarman準拠のチューニングがもたらす静謐な透明性と、システム依存の音楽性を解剖"
 date: "2025-08-31T01:00:00+09:00"
+updatedAt: "2025-09-12T05:00:00+09:00"
 brand: "Dan Clark Audio"
 model: "EXPANSE"
 category: "ヘッドホン"
@@ -9,11 +10,25 @@ tags: ["Dan Clark Audio", "ハイエンドオーディオ", "平面磁界型", "
 heroImage: "../../assets/images/hero/danclarkaudio-expanse.jpg"
 relatedArticles:
   - collection: reviews
-    id: audeze-lcd5
+    id: yamaha-yh5000se
   - collection: reviews
     id: focal-utopia-sg
   - collection: reviews
+    id: hifiman-susvara
+  - collection: reviews
+    id: hifiman-susvara-unveiled
+  - collection: reviews
+    id: meze-audio-elite
+  - collection: reviews
+    id: austrian-audio-the-composer
+  - collection: reviews
+    id: grado-gs3000x
+  - collection: reviews
+    id: sennheiser-hd800s
+  - collection: reviews
     id: camerton-binom-er
+  - collection: reviews
+    id: audeze-lcd5
   - collection: reviews
     id: abyss-ab1266-phi-tc
   - collection: reviews
@@ -24,6 +39,12 @@ relatedArticles:
     id: sound-quality-evaluation-guide
 ---
 
+import ImageWithCitation from '@/components/ImageWithCitation.astro';
+import mesurementGraphFR from "../../assets/images/contents/Dan Clark Expanse Open Back Planar Headphone Frequency Response Measurement.png";
+import mesurementGraphGD from "../../assets/images/contents/Dan Clark Expanse Open Back Planar Headphone Group Delay Response Measurement.png";
+import mesurementGraphImpedance from "../../assets/images/contents/Dan Clark Expanse Open Back Planar Headphone Impedance Response Measurement.png";
+import mesurementGraphTHD from "../../assets/images/contents/Dan Clark Expanse Open Back Planar Headphone Relative THD Distortion Measurement.png";
+
 オーディオ機器を評価する際、我々は何を基準とするのだろうか。それは単なる周波数特性のグラフか、あるいは再生される音楽がもたらす感情の深さか。サンディエゴの陽光の下、一人のエンジニアがその問いに対する一つの答えを提示した。Dan Clark Audio EXPANSE。それは、音楽に何かを「加える」のではなく、音楽から不要なものを徹底的に「取り除く」という哲学の結晶である。本機は、音響工学という名の鑿（のみ）で、静寂の中から音の彫像を削り出すかのような、極めて思索的なアプローチによって生み出された。これは単なるヘッドホンのレビューではない。音響再生における純粋性とは何かを巡る、一つの探求の記録である。
 
 import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
@@ -33,7 +54,7 @@ import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
     { collection: "reviews", id: "focal-utopia-sg" },   
     { collection: "reviews", id: "hifiman-susvara-unveiled" },
     { collection: "reviews", id: "audeze-lcd5" },   
-    { collection: "reviews", id: "camerton-binom-er" },
+    { collection: "reviews", id: "meze-audio-elite" },
   ]}
   columns={4}
   title="関連記事"
@@ -110,7 +131,49 @@ DCA製品のもう一つの特徴は、その卓越した工業デザインと�
 | **重量** | 約 418 g | 約 420 g | 約 430 g | 約 490 g |
 | **参考価格 (USD)** | $3,999 | $4,500 | $8,000 | $4,999 |
 
-## **3\. 音の探求：リスニング・インプレッション**
+## **3\. 客観的指標：測定データから見るEXPANSE**
+
+EXPANSEは、その主観的な聴感印象だけでなく、客観的な測定データにおいても優れた特性を示すことで知られている。これは、DCAの工学的な設計思想を裏付ける重要な要素である。
+
+### 周波数特性とHarmanターゲット 
+EXPANSEの最も特筆すべき点の一つは、その周波数特性がHarmanターゲットカーブに極めて近いことである [25](#ref-25)。The HEADPHONE CommunityのResolve氏による測定でも、この全体的な準拠性の高さは確認されている [16](#ref-16)。具体的には、100-200Hzにかけての僅かなミッドベースの上昇と、3kHz付近の強調が見られる [16](#ref-16)。このミッドベースのチューニングが、前作Stealthと比較してよりパンチのある低域に貢献していると分析されている [18](#ref-18)。  
+
+<ImageWithCitation 
+  imagePath={mesurementGraphFR} 
+  sourceTitle="Dan Clark Expanse Frequency Response Measurement - ASR" 
+  sourceUrl="https://www.audiosciencereview.com/forum/index.php?threads/dan-clark-expanse-headphone-review.37332/" 
+/>
+
+### 低歪率 (THD)
+公式スペックが示す通り、全高調波歪は20Hzから20kHzの可聴帯域全域において0.03%未満という、極めて低い数値を達成している [1](#ref-1)。このクラス最高水準の低歪率が、EXPANSEの持つ高い解像度と透明感の根幹を成していることは間違いない。  
+
+<ImageWithCitation 
+  imagePath={mesurementGraphTHD} 
+  sourceTitle="Dan Clark Expanse Relative THD Distortion Measurement - ASR" 
+  sourceUrl="https://www.audiosciencereview.com/forum/index.php?threads/dan-clark-expanse-headphone-review.37332/" 
+/>
+
+### インピーダンス特性
+一般的に平面駆動型ヘッドホンのインピーダンスは周波数に対してフラットな特性を示すが、EXPANSEは低域でインピーダンスが上昇するというユニークなカーブを描く。これは、低域のレスポンスを調整するために、意図的にパッシブフィルター回路が組み込まれていることを示唆している [26](#ref-26)。  
+
+<ImageWithCitation 
+  imagePath={mesurementGraphImpedance} 
+  sourceTitle="Dan Clark Expanse Impedance Response Measurement - ASR" 
+  sourceUrl="https://www.audiosciencereview.com/forum/index.php?threads/dan-clark-expanse-headphone-review.37332/" 
+/>
+
+### 測定と聴感のパラドックス
+非常に興味深いのは、この優れた測定結果と、一部の熟練したレビュアーの主観的評価との間に見られる乖離である。Resolve氏は、測定上はほぼ完璧であるにもかかわらず、自身の耳には「側方の解像度が少し欠けている」と感じ、別の測定器（B\&K 5128）では中域がフラットに測定されているにもかかわらず「よりシャウトに（shouty）聞こえる」と報告している [16](#ref-16)。これは、AMTSの複雑な音響導波管と個人の耳介の形状（HRTF）との相互作用により、知覚に個人差が生じやすい可能性を示唆している [16](#ref-16)。
+
+総じて、測定データはEXPANSEが現代ヘッドホン工学の粋を集めた、技術的に極めて完成度の高い製品であることを証明している。しかし、その客観的な「正しさ」が、必ずしも全てのリスナーにとっての主観的な「最適解」と一致するわけではないという、オーディオの深遠なる一面をも浮き彫りにしていると言えよう。
+
+<ImageWithCitation 
+  imagePath={mesurementGraphGD} 
+  sourceTitle="Dan Clark Expanse Group Delay Response Measurement - ASR" 
+  sourceUrl="https://www.audiosciencereview.com/forum/index.php?threads/dan-clark-expanse-headphone-review.37332/" 
+/>
+
+## **4\. 音の探求：リスニング・インプレッション**
 
 技術的な解説がいかに優れていようとも、最終的な審判は我々の耳によって下される。EXPANSEが描く音の風景は、果たしてどのようなものか。
 
@@ -131,7 +194,7 @@ DCA製品のもう一つの特徴は、その卓越した工業デザインと�
 **EDM / ロック**  
 EXPANSEは、そのニュートラルな特性にもかかわらず、エレクトロニックミュージックやロックとも良好な相性を示す。これは、Headfonicsが指摘するように、前作Stealthよりも中低域（100-200Hz）が意図的に持ち上げられているためだ [15](#ref-15)。このチューニングにより、キックドラムには十分な重量感とインパクトが与えられ、ベースラインは力強くグルーヴを牽引する。Daft Punkの "Motherboard" のような複雑なプロダクションでは、その優れた分離性能が遺憾なく発揮され、幾重にも重なるシンセサイザーのレイヤーが、それぞれ独立した存在として明確に描き分けられる [17](#ref-17)。ただし、[Focal Utopia](/reviews/focal-utopia-sg/)のようなダイナミックドライバーが持つ、腹の底に響くような物理的な「スラム」を期待するべきではないだろう。EXPANSEの低音は、あくまで高速かつタイトであり、量感よりも質感とコントロールを重視したものである。
 
-## **4\. 価値の天秤：多角的評価**
+## **5\. 価値の天秤：多角的評価**
 
 あらゆる製品は、その価値を多角的な視点から問われなければならない。EXPANSEもまた、その例外ではない。
 
@@ -143,7 +206,7 @@ EXPANSEは、そのニュートラルな特性にもかかわらず、エレク�
 | **価格対価値** | ★★★☆☆ | \$4,000という価格は、ヘッドホン市場における最激戦区に位置する。その性能は疑いようもなくトップクラスだが、この価格帯では収穫逓減の法則が色濃く影響する。EXPANSEが提供する「工学的な正しさ」とは異なる価値観を持つ、強力な競合製品が多数存在する。一部のレビュアーが「\$4,000の価値があるか？」と問うように [8](#ref-8)、その価値を絶対的なものとして断じることは難しい。 |
 | **将来性 / 修理性** | ★★★★☆ | Dan Clark Audioは、手厚い顧客サポートで定評がある [20](#ref-20)。AMTSは今後数年にわたり同社の技術的優位性を担保するだろう。唯一の懸念点は、独自規格のヒロセコネクタを採用している点だ。これにより、サードパーティ製ケーブルの選択肢が制限され、長期的なエコシステムにおいてやや不利に働く可能性がある [5](#ref-5)。 |
 
-## **5\. 座標軸上の存在意義：市場における俯瞰的分析**
+## **6\. 座標軸上の存在意義：市場における俯瞰的分析**
 
 Dan Clark Audio EXPANSEは、真空中に孤立して存在するわけではない。それは、数多の思想と哲学が交錯するハイエンドオーディオ市場という座標軸の上に、明確な一点としてプロットされるべき存在である。
 
@@ -158,7 +221,7 @@ EXPANSEの最大の特質は、Harmanターゲットカーブという科学的�
 
 結論として、EXPANSEはハイエンド市場において「工学的中立主義」の旗手として屹立している。それは、特定の音楽的イデオロギーを押し付けるのではなく、リスナーと録音物の間に介在する物理的な障壁を、技術の力で限りなくゼロに近づけようとする試みなのである。
 
-## **6\. 結論と、その音を求めるべき者**
+## **7\. 結論と、その音を求めるべき者**
 
 Dan Clark Audio EXPANSEは、一つの哲学の表明である。それは、最高の忠実度とは、足し算ではなく引き算によって達成されるという信念だ。AMTSによる音響的な純化、極限まで低減された歪み、そして装着していることを忘れさせるほどの快適性。これらすべてが、リスナーを録音された音楽の、ありのままの姿へと導くために奉仕している。
 
@@ -207,4 +270,7 @@ EXPANSEは、間違いなく現代のヘッドホン技術が生んだ一つの�
 <span id="ref-21"></span> 21. Thoughts on the new Dan Clark Expanse? : r/headphones \- Reddit, [https://www.reddit.com/r/headphones/comments/xeet0f/thoughts\_on\_the\_new\_dan\_clark\_expanse/](https://www.reddit.com/r/headphones/comments/xeet0f/thoughts_on_the_new_dan_clark_expanse/)  
 <span id="ref-22"></span> 22. Is EXPANSE the best open back headphone?? Or... \- YouTube, [https://www.youtube.com/watch?v=8hxxM6N5hNI](https://www.youtube.com/watch?v=8hxxM6N5hNI)  
 <span id="ref-23"></span> 23. Dan Clark Audio \- DCA EXPANSE Review \- Headfonia, [https://www.headfonia.com/dca-expanse-review/4/](https://www.headfonia.com/dca-expanse-review/4/)  
-<span id="ref-24"></span> 24. Got re acquainted with Susvara today, this is why it's the best headphone \- Reddit, [https://www.reddit.com/r/headphones/comments/1b6nbdf/got\_re\_acquainted\_with\_susvara\_today\_this\_is\_why/](https://www.reddit.com/r/headphones/comments/1b6nbdf/got_re_acquainted_with_susvara_today_this_is_why/)
+<span id="ref-24"></span> 24. Got re acquainted with Susvara today, this is why it's the best headphone \- Reddit, [https://www.reddit.com/r/headphones/comments/1b6nbdf/got\_re\_acquainted\_with\_susvara\_today\_this\_is\_why/](https://www.reddit.com/r/headphones/comments/1b6nbdf/got_re_acquainted_with_susvara_today_this_is_why/)  
+<span id="ref-25"></span> 25. Endgame Reached \- DCA Expanse Impressions : r/headphones \- Reddit, 9月 12, 2025にアクセス、 [https://www.reddit.com/r/headphones/comments/163wrc7/endgame\_reached\_dca\_expanse\_impressions/](https://www.reddit.com/r/headphones/comments/163wrc7/endgame_reached_dca_expanse_impressions/)  
+<span id="ref-26"></span> 26. Weird Impedance graph from Dan Clark Audio EXPANSE, any guesses why? \- Reddit, 9月 12, 2025にアクセス、 [https://www.reddit.com/r/headphones/comments/xeta7o/weird\_impedance\_graph\_from\_dan\_clark\_audio/](https://www.reddit.com/r/headphones/comments/xeta7o/weird_impedance_graph_from_dan_clark_audio/)  
+<span id="ref-27"></span> 27. Dan Clark Audio EXPANSE \- Flagship Open-Back Planar ..., 9月 12, 2025にアクセス、 [https://forum.headphones.com/t/dan-clark-audio-expanse-flagship-open-back-planar-headphones-official-discussion-thread/18715/26](https://forum.headphones.com/t/dan-clark-audio-expanse-flagship-open-back-planar-headphones-official-discussion-thread/18715/26)

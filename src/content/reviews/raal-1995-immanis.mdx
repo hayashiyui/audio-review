@@ -2,6 +2,7 @@
 title: "RAAL 1995 Immanis レビュー：秩序と混沌の狭間で鳴る至高"
 description: "RAAL 1995 Immanisの包括的レビュー：トゥルーリボン R³ トリプルドライバーが描く広大な音場と圧倒的技術性能"
 date: "2025-08-30T16:00:00"
+updatedAt: "2025-09-12T04:00:00+09:00"
 brand: "RAAL 1995"
 model: "Immanis"
 category: "ヘッドホン"
@@ -9,13 +10,27 @@ tags: ["RAAL 1995", "リボン振動板", "ハイエンドオーディオ", "セ
 heroImage: "../../assets/images/hero/raal-1995-immanis.jpg"
 relatedArticles:
   - collection: reviews
+    id: focal-utopia-sg
+  - collection: reviews
+    id: hifiman-susvara
+  - collection: reviews
     id: hifiman-susvara-unveiled
+  - collection: reviews
+    id: meze-audio-elite
+  - collection: reviews
+    id: austrian-audio-the-composer
+  - collection: reviews
+    id: grado-gs3000x
+  - collection: reviews
+    id: sennheiser-hd800s
+  - collection: reviews
+    id: danclarkaudio-expanse
+  - collection: reviews
+    id: audeze-lcd5
   - collection: reviews
     id: camerton-binom-er
   - collection: reviews
     id: abyss-ab1266-phi-tc
-  - collection: reviews
-    id: focal-utopia-sg
   - collection: reviews
     id: stax-srx9000
   - collection: reviews
@@ -23,6 +38,11 @@ relatedArticles:
   - collection: columns
     id: sound-quality-evaluation-guide
 ---
+
+import ImageWithCitation from '@/components/ImageWithCitation.astro';
+import mesurementGraph1 from "../../assets/images/contents/RAAL-1995-Immanis-frequency-response-Red-measured-Green-corrected.jpg";
+import mesurementGraph2 from "../../assets/images/contents/raal-immanis-measurements-credit-to-listener-v0-9gb21418hlsd1.png";
+
 
 音楽再生という行為は、突き詰めれば、秩序ある信号の中から芸術という名の混沌を、いかに忠実に、そして美しく取り出すかという試みではなかろうか。我々オーディオファイルは、その矛盾を孕んだ命題に対し、技術という名のメスを手に、絶え間ない探求を続ける。そして2024年、セルビアの工房から、その探求の歴史に新たな一石を投じるであろう、恐るべきヘッドホンが登場した。RAAL 1995 Immanis。その名はラテン語で「巨大」「広大」を意味する。本稿では、この新たなる巨人が、ヘッドホンオーディオの地平にどのような景色を描き出すのか、その核心に迫りたい。
 
@@ -32,7 +52,7 @@ import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
   articles={[
     { collection: "reviews", id: "hifiman-susvara-unveiled" },
     { collection: "reviews", id: "abyss-ab1266-phi-tc" },   
-    { collection: "reviews", id: "camerton-binom-er" },
+    { collection: "reviews", id: "audeze-lcd5" },
     { collection: "reviews", id: "stax-srx9000" },   
   ]}
   columns={4}
@@ -112,9 +132,38 @@ Immanisを語る上で避けて通れないのが、その駆動方式の特異�
 | **[Focal Utopia (2022)](/reviews/focal-utopia-sg/)** | ダイナミック | 80Ω / 104dB | 比較的容易 (高効率) | \~$4,999 |
 | **[STAX SR-X9000](/reviews/stax-srx9000/)** | 静電型 | 145kΩ / 100dB | **必須:** 専用静電型アンプ (Energizer) | \~$6,200 (本体のみ) |
 
-出典: 1
+## **3\. 測定データに基づく客観的分析**
 
-## **3\. 聴感上の探求**
+メーカーから詳細な測定グラフは公開されていないものの、サードパーティによる測定データは、Immanisの音響特性を客観的に理解する上で貴重な手がかりとなる。
+
+### **周波数特性**
+
+Accurate Soundによる測定では、Immanisの周波数特性は全体として「明るく、やや凹凸がある」と報告されている。これは意図的なチューニングの結果と見られ、その特徴は以下の通りである [35](#ref-35)。
+
+<ImageWithCitation 
+  imagePath={mesurementGraph1} 
+  sourceTitle="Frequency Response Measurement & Correction - ACCURATE SOUND" 
+  sourceUrl="https://accuratesound.ca/product/raal-1995-immanis-filterset/" 
+/>
+
+* **低域:** 80Hz以下に約2dBの緩やかな盛り上がりがあり、これが聴感上のパワフルさや量感に寄与していると考えられる。  
+* **中域:** 150Hz、300Hzに小さなピーク、そして400Hzから1.5kHzにかけてより広範な盛り上がりが見られる。一方で、1.5kHzから2.5kHzにかけては明確な落ち込み（ディップ）が存在する。この中高域手前のディップは、音場の広がりや奥行き感を演出するための意図的なチューニングである可能性が指摘されている [36](#ref-36)。  
+* **高域:** 最も顕著な特徴は、3kHzから6kHzの間に見られる+6dBという大きなピークである [35](#ref-35)。この帯域は人間の聴覚が最も敏感な部分であり、Immanisの「鮮やか」で「前方定位的」なサウンドシグネチャーを決定づける最大の要因と言えるだろう [35](#ref-35)。このピークが、一部のリスナーや環境下で「明るすぎる」「刺さる」と感じられる原因にもなりうる [11](#ref-11)。
+
+<ImageWithCitation 
+  imagePath={mesurementGraph2} 
+  sourceTitle="a measurement of the RAAL Immanis on my clone 43AG (KB006x clone + clone 711 coupler), displayed against the DF HRTF of the fixture with Harman 2018 filters on it. - Headphones.com" 
+  sourceUrl="https://forum.headphones.com/t/raal-1995-immanis/23669/3" 
+/>
+
+総じて、Immanisの周波数特性はフラットなモニターサウンドとは一線を画す。一見「アンバランス」に見えるこの特性は、広大な音場と卓越したディテール感を両立させるための、計算された音響デザインの結果である可能性が高い [35](#ref-35)。
+
+### **歪率と過渡応答**
+
+* **歪率 (THD):** Immanis本体のTHD測定データは乏しいが、システムの中核をなすRCDI（インターフェース）の歪率は-100dBと極めて低い値が報告されている [19](#ref-19)。リボンドライバー自体の質量が極めて小さく、駆動に対する追従性が高いことから、ドライバーの歪みも非常に低いレベルに抑えられていると推測される。これは、多くのレビューで賞賛される音の透明度や解像度の高さと一致する。  
+* **過渡応答 (Impulse Response):** 測定グラフはないものの、リボンドライバーの物理的特性から、極めて高速なインパルス応答が期待できる。多くのレビューが「稲妻のようなスピード」「驚異的な過渡応答性能」と表現しているように [2](#ref-2)、音の立ち上がりと立ち下がりの速さはImmanisの最大の武器の一つであり、これが複雑なパッセージでも音が混濁しない明瞭さや、微細なニュアンスの再現性に繋がっているに違いない。
+
+## **4\. 聴感上の探求**
 
 技術的仕様の羅列は、再生される音楽の魂に触れることはない。ここからは、Immanisが紡ぎ出す音の世界へと深く分け入っていくことにしよう。
 
@@ -137,7 +186,7 @@ Immanisを語る上で避けて通れないのが、その駆動方式の特異�
 ロック / 電子音楽 (Opeth 「Blackwater Park」 / Daft Punk 「Random Access Memories」):  
 ここで問われるのは、低域の量感、スピード、そして過渡応答性能だ。多くのレビューが証明するように、Immanisの低域はSR1aのかつての弱点を完全に克服している [5](#ref-5)。それは単に量が多いだけでなく、極めてタイトで、音の立ち上がりと立ち下がりが驚異的に速い。多くのレビュアーが平面駆動型の「スラム」と評する物理的な衝撃を伴いながらも [8](#ref-8)、決して中域をマスキングすることがない。Opethの複雑なギターリフや高速なドラムフィルが、一切の混濁なく分離して聴こえる様は圧巻の一言に尽きる。これは、[Susvara](/reviews/hifiman-susvara/)の豊かで芳醇な低域とは異なり、より引き締まり、制御された、アスリートのような低音と言えるだろう [8](#ref-8)。
 
-## **4\. 総合評価とバイアスチェック**
+## **5\. 総合評価とバイアスチェック**
 
 あらゆる側面からImmanisを評価し、その光と影を公平に描き出す。
 
@@ -149,7 +198,7 @@ Immanisを語る上で避けて通れないのが、その駆動方式の特異�
 | **価格対価値** | **2.5** | 約1万ドルという価格は、絶対性能を追求する者にとっては正当化されうるが、客観的なコストパフォーマンスの観点からは極めて低い。[Susvara Unveiled](/reviews/hifiman-susvara-unveiled/)や[Utopia](/reviews/focal-utopia-sg/)など、半額以下で極めて高い満足度を提供する競合が存在する。さらに、性能を最大限に引き出すには同等クラスのアンプが必須であり、システム総額は青天井となる [5](#ref-5)。 |
 | **将来性 / 修理性** | **4.0** | 5年間の譲渡可能な保証は手厚い [1](#ref-1)。ヘッドバンドなどの部品交換も考慮されているようだ [12](#ref-12)。しかし、独自のRCDIやリボンドライバーという特殊性から、長期的なサポート体制と部品供給には一抹の不安が残る。 |
 
-## **5\. オーディオ哲学における Immanis の位置付け**
+## **6\. オーディオ哲学における Immanis の位置付け**
 
 Immanisは単なる高性能なヘッドホンではない。それは、ハイエンドオーディオの在り方そのものに、根源的な問いを投げかける存在である。
 
@@ -165,7 +214,7 @@ Immanisは、この前提を覆す存在かもしれない。多くの評者が�
 
 Immanisのもう一つの側面は、その徹底した「透明性」である。それは上流にある機器の個性、録音の質、さらには電源ケーブル一本の違いまでをも、容赦なく露わにする。これは美徳であると同時に、使い手にとっては絶え間ない挑戦を意味する。システム全体がImmanisという「検鏡」に耐えうるレベルでなければ、その真価は発揮されないどころか、欠点が拡大されてしまうだろう [31](#ref-31)。Immanisを所有することは、オーディオという終わりのない探求の道を選ぶことと同義なのかもしれない。
 
-## **6\. 結論 ＆ 推奨ユーザー**
+## **7\. 結論 ＆ 推奨ユーザー**
 
 ### **おすすめしたい人**
 
@@ -224,4 +273,6 @@ RAAL 1995 Immanisは、間違いなく歴史に名を刻むであろう傑作機
 <span id="ref-31"></span> 31. RAAL 1995 Immanis Headphone Review \- Always Impressive. Is It "The Best\!"? \- YouTube,  [https://www.youtube.com/watch?v=anTb5JlunuA](https://www.youtube.com/watch?v=anTb5JlunuA)  
 <span id="ref-32"></span> 32. The Golden King: RAAL 1995 Immanis Review,  [https://zpreviews.com/2024/07/19/the-golden-king-raal-1995-immanis-review/](https://zpreviews.com/2024/07/19/the-golden-king-raal-1995-immanis-review/)  
 <span id="ref-33"></span> 33. Unmasking the Raal Immanis Critics: Rushed Judgments and Hidden Agendas \- Reddit,  [https://www.reddit.com/r/headphones/comments/1fzgz8l/unmasking\_the\_raal\_immanis\_critics\_rushed/](https://www.reddit.com/r/headphones/comments/1fzgz8l/unmasking_the_raal_immanis_critics_rushed/)  
-<span id="ref-34"></span> 34. Raal 1995 Immanis Review \- Headfonia,  [https://www.headfonia.com/raal-1995-immanis-review/3/](https://www.headfonia.com/raal-1995-immanis-review/3/)
+<span id="ref-34"></span> 34. Raal 1995 Immanis Review \- Headfonia,  [https://www.headfonia.com/raal-1995-immanis-review/3/](https://www.headfonia.com/raal-1995-immanis-review/3/)  
+<span id="ref-35"></span> 35. RAAL 1995 Immanis FilterSet \- Accurate Sound,  [https://accuratesound.ca/product/raal-1995-immanis-filterset/](https://accuratesound.ca/product/raal-1995-immanis-filterset/)  
+<span id="ref-36"></span> 36. RAAL Immanis measurements (credit to listener) : r/headphones,  [https://www.reddit.com/r/headphones/comments/1fvge8l/raal\_immanis\_measurements\_credit\_to\_listener/](https://www.reddit.com/r/headphones/comments/1fvge8l/raal_immanis_measurements_credit_to_listener/)
