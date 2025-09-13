@@ -79,6 +79,9 @@ const reviews = defineCollection({
         collection: z.enum(['reviews', 'columns']),
         id: z.string()
       })).optional(),
+      // i18n fields
+      locale: z.enum(['ja', 'en']).default('ja'),
+      translationKey: z.string().optional(),
     }),
 })
 
@@ -108,6 +111,9 @@ const columns = defineCollection({
         collection: z.enum(['reviews', 'columns']),
         id: z.string()
       })).optional(),
+      // i18n fields
+      locale: z.enum(['ja', 'en']).default('ja'),
+      translationKey: z.string().optional(),
     }),
 })
 

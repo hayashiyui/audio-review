@@ -1,0 +1,57 @@
+---
+import BlogCard from '@/components/BlogCard.astro'
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import PageHead from '@/components/PageHead.astro'
+import PaginationComponent from '@/components/ui/pagination'
+import { SITE } from '@/consts'
+import Layout from '@/layouts/Layout.astro'
+import { getAllColumns, groupColumnsByYear } from '@/lib/data-utils'
+import type { PaginateFunction } from 'astro'
+
+export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
+  const all = await getAllColumns()
+  const enOnly = all.filter((e) => (e.data.locale ?? 'ja') === 'en')
+  return paginate(enOnly, { pageSize: SITE.postsPerPage })
+}
+
+const { page } = Astro.props
+const columnsByYear = groupColumnsByYear(page.data)
+const years = Object.keys(columnsByYear).sort((a, b) => parseInt(b) - parseInt(a))
+---
+
+<Layout class="max-w-6xl ml-2" lang="en-US">
+  <PageHead slot="head" title="Audio Columns" lang="en-US" />
+  <div data-pagefind-ignore="all">
+    <Breadcrumbs
+      items={[
+        { label: 'Audio Columns', href: '/en/columns', icon: 'lucide:pen-tool' },
+        { label: `Page ${page.currentPage}`, icon: 'lucide:file-text' },
+      ]}
+    />
+
+    <div class="flex min-h-[calc(100vh-18rem)] flex-col gap-y-8">
+      {
+        years.map((year) => (
+          <section class="flex flex-col gap-y-4">
+            <div class="font-medium">{year}</div>
+            <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {columnsByYear[year].map((column) => (
+                <li>
+                  <BlogCard entry={column} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+
+    <PaginationComponent
+      currentPage={page.currentPage}
+      totalPages={page.lastPage}
+      baseUrl="/en/columns/"
+      client:load
+    />
+  </div>
+</Layout>
+

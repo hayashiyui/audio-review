@@ -8,9 +8,10 @@ import defaultOgImage from '@/assets/images/default-og.png'
 
 interface Props {
   post: CollectionEntry<'blog'> | CollectionEntry<'reviews'> | CollectionEntry<'columns'>
+  lang?: string
 }
 
-const { post } = Astro.props
+const { post, lang } = Astro.props
 
 const title = post.data.title || SITE.title
 const description = post.data.description || SITE.description
@@ -66,7 +67,7 @@ if (post.collection === 'blog') {
 <meta property="og:image" content={optimizedImageUrl} />
 <meta property="og:image:alt" content={title} />
 <meta property="og:type" content="website" />
-<meta property="og:locale" content={SITE.locale} />
+<meta property="og:locale" content={lang ?? SITE.locale} />
 <meta property="og:site_name" content={SITE.title} />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:author" content={author} />

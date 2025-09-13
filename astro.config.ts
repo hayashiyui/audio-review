@@ -22,7 +22,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   site: 'https://audiomatome.com',
   redirects: {
-    '/reviews/hifiman-susvara-unvailed': '/reviews/hifiman-susvara-unveiled'
+    '/reviews/hifiman-susvara-unvailed': '/reviews/hifiman-susvara-unveiled',
   },
   integrations: [
     expressiveCode({
@@ -71,10 +71,14 @@ export default defineConfig({
     mdx(),
     react(),
     sitemap({
-      filter: (page) => 
-        !page.includes('/about') && 
-        !page.includes('/authors') && 
-        !page.includes('/blog')
+      filter: (page) =>
+        !page.includes('/about') &&
+        !page.includes('/authors') &&
+        !page.includes('/blog'),
+      i18n: {
+        defaultLocale: 'ja',
+        locales: { ja: 'ja-JP', en: 'en-US' },
+      },
     }),
     icon(),
   ],

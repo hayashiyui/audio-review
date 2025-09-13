@@ -1,0 +1,58 @@
+---
+import ReviewsCard from '@/components/ReviewsCard.astro'
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import PageHead from '@/components/PageHead.astro'
+import PaginationComponent from '@/components/ui/pagination'
+import { SITE } from '@/consts'
+import Layout from '@/layouts/Layout.astro'
+import { getAllReviews, groupReviewsByYear } from '@/lib/data-utils'
+import type { PaginateFunction } from 'astro'
+
+export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
+  const all = await getAllReviews()
+  const enOnly = all.filter((e) => (e.data.locale ?? 'ja') === 'en')
+  return paginate(enOnly, { pageSize: SITE.postsPerPage })
+}
+
+const { page } = Astro.props
+const reviewsByYear = groupReviewsByYear(page.data)
+const years = Object.keys(reviewsByYear).sort((a, b) => parseInt(b) - parseInt(a))
+---
+
+<Layout class="max-w-6xl ml-2" lang="en-US">
+  <PageHead slot="head" title="Audio Reviews" lang="en-US" />
+  <div data-pagefind-ignore="all">
+    <Breadcrumbs
+      items={[
+        { label: 'Audio Reviews', href: '/en/reviews', icon: 'lucide:headphones' },
+        { label: `Page ${page.currentPage}`, icon: 'lucide:file-text' },
+      ]}
+    />
+
+    <div class="flex min-h-[calc(100vh-18rem)] flex-col gap-y-8">
+      {
+        years.map((year) => (
+          <section class="flex flex-col gap-y-4">
+            <div class="font-medium">{year}</div>
+            <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {reviewsByYear[year].map((review) => (
+                <li>
+                  <ReviewsCard entry={review} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+
+    <PaginationComponent
+      currentPage={page.currentPage}
+      totalPages={page.lastPage}
+      baseUrl="/en/reviews/"
+      client:load
+    />
+  </div>
+  
+</Layout>
+

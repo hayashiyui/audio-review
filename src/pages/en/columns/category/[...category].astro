@@ -1,0 +1,70 @@
+---
+import BlogCard from '@/components/BlogCard.astro'
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import PageHead from '@/components/PageHead.astro'
+import Layout from '@/layouts/Layout.astro'
+import { getAllColumns, getColumnsByCategory, groupColumnsByYear } from '@/lib/data-utils'
+
+export async function getStaticPaths() {
+  const all = await getAllColumns()
+  const en = all.filter((e) => (e.data.locale ?? 'ja') === 'en')
+  const categories = Array.from(
+    en.reduce((map, c) => {
+      if (c.data.category) map.set(c.data.category, true)
+      return map
+    }, new Map<string, boolean>()).keys(),
+  )
+
+  return Promise.all(
+    categories.map(async (category) => {
+      const allInCat = await getColumnsByCategory(category)
+      const columns = allInCat.filter((c) => (c.data.locale ?? 'ja') === 'en')
+      return {
+        params: { category },
+        props: { category, columns },
+      }
+    }),
+  )
+}
+
+const { category, columns } = Astro.props
+const columnsByYear = groupColumnsByYear(columns)
+---
+
+<Layout class="max-w-6xl ml-2" lang="en-US">
+  <PageHead
+    slot="head"
+    title={`${category} - Audio Columns`}
+    description={`Audio columns in category: ${category}`}
+    lang="en-US"
+  />
+  <div data-pagefind-ignore="all">
+    <Breadcrumbs
+      items={[
+        { href: '/en/columns', label: 'Audio Columns', icon: 'lucide:pen-tool' },
+        { label: category, icon: 'lucide:tag' },
+      ]}
+    />
+
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold mb-2">{category}</h1>
+      <p class="text-muted-foreground">{columns.length} columns</p>
+    </header>
+
+    {Object.entries(columnsByYear)
+      .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
+      .map(([year, yearColumns]) => (
+        <section class="mb-8">
+          <h2 class="mb-4 text-xl font-semibold">{year}</h2>
+          <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {yearColumns.map((column) => (
+              <li>
+                <BlogCard entry={column} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+  </div>
+</Layout>
+

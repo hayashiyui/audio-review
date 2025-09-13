@@ -1,0 +1,70 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import PageHead from '@/components/PageHead.astro'
+import ReviewsCard from '@/components/ReviewsCard.astro'
+import Layout from '@/layouts/Layout.astro'
+import { getAllReviews, getReviewsByCategory, groupReviewsByYear } from '@/lib/data-utils'
+
+export async function getStaticPaths() {
+  const all = await getAllReviews()
+  const en = all.filter((e) => (e.data.locale ?? 'ja') === 'en')
+  const categories = Array.from(
+    en.reduce((map, r) => {
+      if (r.data.category) map.set(r.data.category, true)
+      return map
+    }, new Map<string, boolean>()).keys(),
+  )
+
+  return Promise.all(
+    categories.map(async (category) => {
+      const reviewsAll = await getReviewsByCategory(category)
+      const reviews = reviewsAll.filter((r) => (r.data.locale ?? 'ja') === 'en')
+      return {
+        params: { category },
+        props: { category, reviews },
+      }
+    }),
+  )
+}
+
+const { category, reviews } = Astro.props
+const reviewsByYear = groupReviewsByYear(reviews)
+---
+
+<Layout class="max-w-6xl ml-2" lang="en-US">
+  <PageHead
+    slot="head"
+    title={`${category} - Audio Reviews`}
+    description={`Audio reviews in category: ${category}`}
+    lang="en-US"
+  />
+  <div data-pagefind-ignore="all">
+    <Breadcrumbs
+      items={[
+        { href: '/en/reviews', label: 'Audio Reviews', icon: 'lucide:headphones' },
+        { label: category, icon: 'lucide:tag' },
+      ]}
+    />
+
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold mb-2">{category}</h1>
+      <p class="text-muted-foreground">{reviews.length} reviews</p>
+    </header>
+
+    {Object.entries(reviewsByYear)
+      .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
+      .map(([year, yearReviews]) => (
+        <section class="mb-8">
+          <h2 class="mb-4 text-xl font-semibold">{year}</h2>
+          <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {yearReviews.map((review) => (
+              <li>
+                <ReviewsCard entry={review} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+  </div>
+</Layout>
+

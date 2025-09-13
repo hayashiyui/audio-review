@@ -87,6 +87,27 @@
       removeFallback()
       const host = document.getElementById('pagefind-ui') as HTMLElement | null
       if (host) host.innerHTML = ''
+      const lang = (document.documentElement.lang || '').toLowerCase().startsWith('en') ? 'en' : 'ja'
+      const translations = lang === 'en'
+        ? {
+            placeholder: 'Search reviews & columns',
+            zero_results: 'No results',
+            search_label: 'Search',
+            clear_search: 'Clear',
+            load_more: 'Load more',
+            filters_label: 'Filters',
+            filters_clear: 'Clear filters',
+          }
+        : {
+            placeholder: 'レビュー・コラムを検索',
+            zero_results: '該当する結果はありません',
+            search_label: 'サイト内検索',
+            clear_search: '検索をクリア',
+            load_more: 'さらに読み込む',
+            filters_label: 'フィルター',
+            filters_clear: 'フィルターをクリア',
+          }
+
       new (window as any).PagefindUI({
         element: '#pagefind-ui',
         bundlePath: '/pagefind/',
@@ -131,16 +152,7 @@
           
           return normalizedTerm
         },
-        translations: {
-          placeholder: 'レビュー・コラムを検索',
-          zero_results: '該当する結果はありません',
-          search_label: 'サイト内検索',
-          clear_search: '検索をクリア',
-          load_more: 'さらに読み込む',
-          // フィルター関連の翻訳
-          filters_label: 'フィルター',
-          filters_clear: 'フィルターをクリア'
-        }
+        translations,
       })
     } else if (!fallbackRendered) {
       // 読み込み完了してもUIが出ていない場合の保険

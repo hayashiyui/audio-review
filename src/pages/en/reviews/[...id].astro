@@ -1,0 +1,173 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import PostHead from '@/components/PostHead.astro'
+import RelatedArticles from '@/components/RelatedArticles.astro'
+import ReviewsNavigation from '@/components/ReviewsNavigation.astro'
+import TOCHeader from '@/components/TOCHeader.astro'
+import TOCSidebar from '@/components/TOCSidebar.astro'
+import { badgeVariants } from '@/components/ui/badge'
+import Layout from '@/layouts/Layout.astro'
+import { getAdjacentReviews, getPostTOCSections } from '@/lib/data-utils'
+import { formatDate } from '@/lib/utils'
+import { Icon } from 'astro-icon/components'
+import { Picture } from 'astro:assets'
+import { getCollection, render } from 'astro:content'
+
+export async function getStaticPaths() {
+  const reviews = await getCollection('reviews', ({ data }) => !data.draft && (data.locale ?? 'ja') === 'en')
+  return reviews.map((review) => ({
+    params: { id: review.id },
+    props: review,
+  }))
+}
+
+const review = Astro.props
+const currentReviewId = Astro.params.id
+const { Content, headings } = await render(review)
+
+const tocSections = await getPostTOCSections(currentReviewId)
+const navigation = await getAdjacentReviews(currentReviewId)
+---
+
+<Layout lang="en-US">
+  <PostHead slot="head" post={review} lang="en-US" />
+  {
+    headings?.length > 0 && (
+      <TOCHeader slot="table-of-contents" headings={headings} />
+    )
+  }
+
+  <section
+    class="grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6"
+    data-pagefind-filter="section:reviews"
+  >
+    <div class="col-start-2">
+      <Breadcrumbs
+        items={[
+          { href: '/en/reviews', label: 'Audio Reviews', icon: 'lucide:headphones' },
+          { href: `/en/reviews/${review.id}`, label: review.data.title, icon: 'lucide:file-text' },
+        ]}
+      />
+    </div>
+
+    {review.data.heroImage && (
+      <div class="col-span-full mx-auto w-full max-w-5xl">
+        <Picture
+          src={review.data.heroImage}
+          alt={review.data.title}
+          widths={[640, 828, 960, 1080, 1200, 1280]}
+          sizes="(min-width: 1280px) 1280px, 100vw"
+          formats={['avif', 'webp']}
+          fit="cover"
+          position="center"
+          priority
+          class="w-full rounded-lg object-cover aspect-video"
+          data-pagefind-meta="image[src], image_alt[alt]"
+        />
+      </div>
+    )}
+
+
+    <section class="col-start-2 flex flex-col gap-y-6 text-center">
+      <div class="flex flex-col">
+        <h1
+          class="mb-2 scroll-mt-31 text-3xl leading-tight font-medium sm:text-4xl"
+          id="post-title"
+        >
+          {review.data.title}
+        </h1>
+
+        <div
+          class="text-muted-foreground divide-border mb-4 flex flex-col items-center justify-center divide-y text-xs sm:flex-row sm:flex-wrap sm:divide-x sm:divide-y-0 sm:text-sm"
+        >
+          <div
+            class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
+          >
+            <span class="flex items-center gap-1">
+              <Icon name="lucide:calendar" class="size-3" />
+              {formatDate(review.data.date)}
+            </span>
+          </div>
+          
+          {review.data.updatedAt && (
+            <div
+              class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
+            >
+              <span class="flex items-center gap-1">
+                <Icon name="lucide:refresh-cw" class="size-3" />
+                {formatDate(review.data.updatedAt)}
+              </span>
+            </div>
+          )}
+
+          {review.data.brand && (
+            <div
+              class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
+            >
+              <span>{review.data.brand}</span>
+            </div>
+          )}
+          
+          {review.data.model && (
+            <div
+              class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
+            >
+              <span>{review.data.model}</span>
+            </div>
+          )}
+          
+          {review.data.category && (
+            <div
+              class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
+            >
+              <a href={`/en/reviews/category/${review.data.category}`} class="hover:underline">
+                {review.data.category}
+              </a>
+            </div>
+          )}
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-2">
+          {
+            review.data.tags &&
+              review.data.tags.length > 0 &&
+              review.data.tags.map((tag) => (
+                <a
+                  href={`/en/tags/${tag}`}
+                  class={badgeVariants({ variant: 'secondary' })}
+                >
+                  <Icon name="lucide:hash" class="size-3" />
+                  {tag}
+                </a>
+              ))
+          }
+        </div>
+      </div>
+
+      <ReviewsNavigation
+        newerPost={navigation.newer}
+        olderPost={navigation.older}
+      />
+    </section>
+
+    {
+      tocSections.length > 0 && (
+        <TOCSidebar sections={tocSections} currentPostId={currentReviewId} />
+      )
+    }
+
+    <article class="prose col-start-2 max-w-none">
+      <Content />
+    </article>
+
+    <div class="col-start-2">
+      <RelatedArticles collection="reviews" articleId={currentReviewId} />
+    </div>
+
+    <ReviewsNavigation
+      newerPost={navigation.newer}
+      olderPost={navigation.older}
+    />
+  </section>
+</Layout>
+

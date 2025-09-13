@@ -9,6 +9,7 @@ interface Props {
   description?: string
   noindex?: boolean
   image?: ImageMetadata
+  lang?: string
 }
 
 const {
@@ -16,6 +17,7 @@ const {
   description = SITE.description,
   noindex = false,
   image,
+  lang,
 } = Astro.props
 
 // 最適化画像のURL取得
@@ -46,7 +48,7 @@ try {
 <meta property="og:image" content={optimizedImageUrl} />
 <meta property="og:image:alt" content={title} />
 <meta property="og:type" content="website" />
-<meta property="og:locale" content={SITE.locale} />
+<meta property="og:locale" content={lang ?? SITE.locale} />
 <meta property="og:site_name" content={SITE.title} />
 <meta property="og:url" content={Astro.url} />
 
