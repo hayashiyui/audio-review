@@ -17,6 +17,14 @@
 - `category` はスキーマが日本語列挙のため、英語記事でも日本語値（例: `ヘッドホン`）のままにしてください（必須）。
 - 検索（Pagefind）は `<html lang>` に基づき言語別インデックスが自動生成されます。`/` は日本語のみ、`/en/` は英語のみがヒットします。
 
+### 画像の参照ルール（重要）
+
+- 画像は `src/assets/images/{hero,contents}` を共用し、参照は Vite エイリアス `@assets` を使います。
+  - Frontmatter: `heroImage: "@assets/images/hero/<file>.jpg"`
+  - 本文: `import img from "@assets/images/contents/<file>.png"`
+    - 画像を表示する際は、MDX なので `<img src={img} alt="..." />` もしくは既存の `ImageWithCitation` を使用してください。
+- Markdown の素の画像記法（`![...](../../assets/...)`）は、`@assets` の解決対象外になることがあります。可能な限り `import` 方式に統一してください。
+
 ---
 
 ## 作業フロー（最小）
@@ -34,7 +42,7 @@
   - `category` は日本語列挙のまま（例: `ヘッドホン`）
 - そのほか（必要に応じて）
   - `brand` `model` は機種名表記を維持
-  - `heroImage` はそのまま再利用（相対パス: `../../assets/images/hero/...`）
+  - `heroImage` はそのまま再利用（相対パス: `@assets/images/hero/...`）
 
 補足: 対になる日本語記事（例: `src/content/reviews/hifiman-susvara.mdx`）にも、同じ `translationKey` を追記してください。
 ```mdx
@@ -49,6 +57,10 @@ translationKey: reviews-hifiman-susvara
 - 日本語記事へ意図的に誘導したい場合はそのまま `/reviews/...` 等を使用可。
 - MDX コンポーネント（`ImageWithCitation` 等）はそのまま利用できます。
 - **省略せず全文を翻訳すること!!**
+
+補足（内部リンクの作法）
+- EN 詳細ページの URL は `/en/reviews/<slug>` / `/en/columns/<slug>` です。
+- 対応する `id` は Content Collection 上では `en/<slug>` ですが、リンク先は `<slug>` のみで問題ありません。
 
 4) ビルド確認（任意）
 ```bash
@@ -128,6 +140,18 @@ heroImage: "@assets/images/hero/default.jpg"
   - A: EN ページのタグ一覧は EN 記事のタグだけで生成されます。英語タグを推奨します（JA 側とは独立運用）。
 - Q: 画像は別に用意する？
   - A: 既存の `src/assets/images/{hero,contents}` を共有してください。必要に応じて差し替え可。
+  - 備考: `@assets` エイリアスで参照してください。相対パス（`../../assets/...`）は使用しません。
+
+---
+
+## トラブルシューティング（よくあるミス）
+
+- ImageNotFound / 参照解決エラー
+  - `heroImage` や本文の画像が相対パスのままになっていないか確認（`@assets` に修正）。
+  - Markdown 直書きの画像は `import` 方式へ置換。
+- タグ/カテゴリが表示されない
+  - `category` が日本語列挙の値かを確認（例: `ヘッドホン`）。
+  - タグは EN 側は英語推奨。カンマ区切りのスペルミスに注意。
 
 ---
 

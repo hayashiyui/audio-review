@@ -239,7 +239,7 @@ export async function getReviewTOCSections(reviewId: string): Promise<TOCSection
 **解決**: 
 1. `src/content.config.ts`のreviewsコレクションで`heroImage: image().optional()`に変更
 2. 画像を`public/images/`から`src/assets/images/`に移動
-3. MDXファイルで相対パス（`../../assets/images/hero/taiko-olympus.jpg`）を使用
+3. MDXファイルでエイリアス+パス（`@assets/images/hero/taiko-olympus.jpg`）を使用
 4. コンポーネントで`<img>`タグを`<Image>`コンポーネント（astro:assetsから）に変更
 5. **効果**: 119KB → 9KB（92%削減）のWebP自動生成に成功
 
@@ -482,7 +482,7 @@ src/
 - **自動変換**: JPG/PNG → WebP自動変換（92%以上のサイズ削減）
 - **レスポンシブ対応**: 複数サイズの画像を自動生成
 - **Imageコンポーネント**: `<img>`の代わりに`<Image>`を使用
-- **相対パス使用**: MDXから`../../assets/images/`形式で参照
+- **相対パス使用**: MDXから`@assets/images/`形式で参照
 
 ### MDXファイルでの引用リンク実装
 - **リンク形式**: `[1](#ref-1)` でページ内リンクを作成

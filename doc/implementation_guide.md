@@ -128,7 +128,7 @@ brand: "Sennheiser"
 model: "HD 800 S"
 category: "ヘッドホン"
 tags: ["Sennheiser","ダイナミック型"]
-heroImage: "../../assets/images/hero/sennheiser-hd800s.jpg"
+heroImage: "@assets/images/hero/sennheiser-hd800s.jpg"
 relatedArticles:
   - collection: reviews
     id: yamaha-yh5000se
@@ -148,7 +148,7 @@ description: "測定では捉えにくい差異の読み解きと用語の整理
 date: "2025-08-05T09:00:00"
 category: "オーディオ基礎知識"
 tags: ["音質評価"]
-heroImage: "../../assets/images/hero/default.jpg"
+heroImage: "@assets/images/hero/default.jpg"
 draft: false
 ---
 ```
@@ -159,8 +159,8 @@ draft: false
 
 | 用途          | 置き場所                                      | 記述例                                                  |
 | ----------- | ----------------------------------------- | ----------------------------------------------------- |
-| hero 画像     | `src/assets/images/hero/...`               | `heroImage: "../../assets/images/hero/xxx.jpg"`      |
-| 記事内図版       | `src/assets/images/contents/...` または記事近傍 | `![図版](../../assets/images/contents/graph.png)`     |
+| hero 画像     | `src/assets/images/hero/...`               | `heroImage: "@assets/images/hero/xxx.jpg"`      |
+| 記事内図版       | `src/assets/images/contents/...` または記事近傍 | `![図版](@assets/images/contents/graph.png)`     |
 | 公開用DL/固定物   | `public/files/...`, `public/images/...`      | `<a href="/files/spec.pdf">ダウンロード</a>`         |
 
 メモ：`src/assets` 配下は Astro のアセット最適化の対象です。配布前処理が必要な場合は `scripts/optimize-images.js` を利用して `public/` に出力してください。
