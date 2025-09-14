@@ -76,7 +76,7 @@ brand: "HiFiMAN"
 model: "Susvara"
 category: "ヘッドホン" # ← 日本語の列挙（必須）
 tags: ["planar magnetic", "flagship", "China"]
-heroImage: "../../../assets/images/hero/hifiman-susvara.jpg"
+heroImage: "@assets/images/hero/hifiman-susvara.jpg"
 relatedArticles:
   - collection: reviews
     id: hifiman-susvara-unveiled
@@ -98,7 +98,7 @@ description: "Shared vocabulary, listening techniques, and the science behind di
 date: "2025-08-05T09:00:00"
 category: "オーディオ基礎知識" # ← 日本語の列挙（必須）
 tags: ["listening", "evaluation"]
-heroImage: "../../../assets/images/hero/default.jpg"
+heroImage: "@assets/images/hero/default.jpg"
 ---
 
 <!-- 本文（英語） -->

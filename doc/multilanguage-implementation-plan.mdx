@@ -31,6 +31,7 @@
   - `locale: z.enum(['ja','en']).default('ja')`
   - `translationKey: z.string()`（対訳の同一キー、規約: `{collection}-{slug}`）
 - 対訳はサブディレクトリ `en/` に配置し、ファイル名は元記事と同一（例: `src/content/reviews/en/foo.mdx`、`src/content/columns/en/bar.mdx`）。
+ - 画像参照は Vite alias を採用（`@assets/images/...`）。相対パスの `../../` 差は不要。
 
 3) ページ（/ と /en/）
 - 既存テンプレートを流用し、`src/pages/en/**` に薄いラッパーページを作成。中で `getCollection(...).filter(e => e.data.locale==='en')` を適用。
@@ -49,7 +50,9 @@
 ## 成果物（Deliverables）
 
 - 更新済 `astro.config.ts`（i18n と sitemap i18n 追加、既存設定は維持）
+- 追加: `vite.resolve.alias` に `@` / `@assets` を定義
 - 更新済 `src/content.config.ts`（`locale`/`translationKey` を `reviews`/`columns` に追加）
+- 更新済 `tsconfig.json` の `paths`（`@assets/*` を追加）
 - 追加 `src/lib/i18n.ts`（小ヘルパ: `type Locale`, `altLocale`, `localizePath`）
 - 追加 `src/pages/en/**`（一覧/詳細/タグ/カテゴリ/著者の薄いラッパー）
 - 更新 `src/components/SearchModal.astro`（UI文言の言語切替）

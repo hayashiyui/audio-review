@@ -1,4 +1,6 @@
 import { defineConfig } from 'astro/config'
+import { fileURLToPath } from 'node:url'
+import { URL } from 'node:url'
 
 import mdx from '@astrojs/mdx'
 import react from '@astrojs/react'
@@ -84,6 +86,12 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+        '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
+      },
+    },
   },
   server: {
     port: 1234,
