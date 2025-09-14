@@ -6,19 +6,24 @@ import { Icon } from 'astro-icon/components'
 import { Picture } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 import Link from './Link.astro'
+import { categoryLabel } from '@/lib/i18n'
 
 interface Props {
   entry: CollectionEntry<'reviews'>
 }
 
 const { entry } = Astro.props
+const locale = (entry.data.locale ?? 'ja') as 'ja' | 'en'
+const base = locale === 'en' ? '/en' : ''
 
 // updatedAtがある場合は更新日、ない場合は公開日を表示
 const updatedAt = entry.data.updatedAt
 const displayDate = (updatedAt ?? entry.data.date) as Date
 const isUpdated = !!updatedAt
 const formattedDate = formatDate(displayDate)
-const datePrefix = isUpdated ? '更新' : '公開'
+const datePrefix = isUpdated
+  ? (locale === 'en' ? 'Updated' : '更新')
+  : (locale === 'en' ? 'Published' : '公開')
 ---
 
 <div
@@ -28,13 +33,13 @@ const datePrefix = isUpdated ? '更新' : '公開'
   <div class="block sm:hidden">
     <!-- 1行目: タイトル + サムネイル -->
     <div class="flex items-start justify-between gap-2 mb-1">
-      <Link href={`/reviews/${entry.id}`} class="flex-1 no-underline hover:underline">
+      <Link href={`${base}/reviews/${entry.id}`} class="flex-1 no-underline hover:underline">
         <h3 class="text-base font-medium leading-tight line-clamp-3">{entry.data.title}</h3>
       </Link>
       
       {
         entry.data.heroImage && (
-          <Link href={`/reviews/${entry.id}`} class="shrink-0">
+          <Link href={`${base}/reviews/${entry.id}`} class="shrink-0">
             <Picture
               src={entry.data.heroImage}
               alt={entry.data.title}
@@ -62,9 +67,9 @@ const datePrefix = isUpdated ? '更新' : '公開'
       {entry.data.category && (
         <>
           <Separator orientation="vertical" className="h-3!" />
-          <Link href={`/reviews/category/${entry.data.category}`} class="flex items-center gap-1 no-underline hover:underline">
+          <Link href={`${base}/reviews/category/${entry.data.category}`} class="flex items-center gap-1 no-underline hover:underline">
             <Icon name="lucide:folder" class="size-2.5" />
-            {entry.data.category}
+            {categoryLabel(entry.data.category, (entry.data.locale ?? 'ja') as 'ja' | 'en')}
           </Link>
         </>
       )}
@@ -75,7 +80,7 @@ const datePrefix = isUpdated ? '更新' : '公開'
             <Separator orientation="vertical" className="h-3!" />
             <div class="flex flex-wrap gap-0.5">
               {entry.data.tags.slice(0, 5).map((tag) => (
-                <Link href={`/tags/${tag}`} class="no-underline">
+                <Link href={`${base}/tags/${tag}`} class="no-underline">
                   <Badge variant="secondary" className="text-xs px-1 py-0.5 h-auto hover:bg-secondary/80 transition-colors">
                     #{tag}
                   </Badge>
@@ -95,7 +100,7 @@ const datePrefix = isUpdated ? '更新' : '公開'
   <div class="hidden sm:flex sm:flex-col sm:gap-3">
     {
       entry.data.heroImage && (
-        <Link href={`/reviews/${entry.id}`} class="block">
+        <Link href={`${base}/reviews/${entry.id}`} class="block">
           <Picture
             src={entry.data.heroImage}
             alt={entry.data.title}
@@ -113,7 +118,7 @@ const datePrefix = isUpdated ? '更新' : '公開'
     }
 
     <div class="grow">
-      <Link href={`/reviews/${entry.id}`} class="block no-underline hover:underline">
+      <Link href={`${base}/reviews/${entry.id}`} class="block no-underline hover:underline">
         <h3 class="mb-1 text-lg font-medium">{entry.data.title}</h3>
       </Link>
       
@@ -134,9 +139,9 @@ const datePrefix = isUpdated ? '更新' : '公開'
         {entry.data.category && (
           <>
             <Separator orientation="vertical" className="h-4!" />
-            <Link href={`/reviews/category/${entry.data.category}`} class="flex items-center gap-1 no-underline hover:underline">
+            <Link href={`${base}/reviews/category/${entry.data.category}`} class="flex items-center gap-1 no-underline hover:underline">
               <Icon name="lucide:folder" class="size-3" />
-              {entry.data.category}
+              {categoryLabel(entry.data.category, (entry.data.locale ?? 'ja') as 'ja' | 'en')}
             </Link>
           </>
         )}
@@ -146,7 +151,7 @@ const datePrefix = isUpdated ? '更新' : '公開'
         entry.data.tags && (
           <div class="flex flex-wrap gap-2">
             {entry.data.tags.map((tag) => (
-              <Link href={`/tags/${tag}`} class="no-underline">
+              <Link href={`${base}/tags/${tag}`} class="no-underline">
                 <Badge variant="secondary" className="flex items-center gap-x-1 hover:bg-secondary/80 transition-colors">
                   <Icon name="lucide:hash" class="size-3" />
                   {tag}

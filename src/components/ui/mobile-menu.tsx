@@ -27,6 +27,23 @@ const MobileMenu = () => {
     }
   }, [])
 
+  const isEn = typeof window !== 'undefined' && window.location.pathname.startsWith('/en/')
+  const mapLabel = (href: string, label: string) => {
+    if (!isEn) return label
+    switch (href) {
+      case '/reviews':
+        return 'Reviews'
+      case '/columns':
+        return 'Columns'
+      case '/tags':
+        return 'Tags'
+      default:
+        return label
+    }
+  }
+
+  const linkHref = (href: string) => (isEn ? `/en${href}` : href)
+
   return (
     <DropdownMenu open={isOpen} onOpenChange={(val) => setIsOpen(val)}>
       <DropdownMenuTrigger
@@ -49,11 +66,11 @@ const MobileMenu = () => {
         {NAV_LINKS.map((item) => (
           <DropdownMenuItem key={item.href} asChild>
             <a
-              href={item.href}
+              href={linkHref(item.href)}
               className="w-full text-lg font-medium capitalize"
               onClick={() => setIsOpen(false)}
             >
-              {item.label}
+              {mapLabel(item.href, item.label)}
             </a>
           </DropdownMenuItem>
         ))}

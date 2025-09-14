@@ -2,6 +2,7 @@
 import BlogCard from '@/components/BlogCard.astro'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
+import { categoryLabel } from '@/lib/i18n'
 import Layout from '@/layouts/Layout.astro'
 import { getAllColumns, getColumnsByCategory, groupColumnsByYear } from '@/lib/data-utils'
 
@@ -28,26 +29,27 @@ export async function getStaticPaths() {
 }
 
 const { category, columns } = Astro.props
+const categoryEn = categoryLabel(category, 'en')
 const columnsByYear = groupColumnsByYear(columns)
 ---
 
 <Layout class="max-w-6xl ml-2" lang="en-US">
   <PageHead
     slot="head"
-    title={`${category} - Audio Columns`}
-    description={`Audio columns in category: ${category}`}
+    title={`${categoryEn} - Audio Columns`}
+    description={`Audio columns in category: ${categoryEn}`}
     lang="en-US"
   />
   <div data-pagefind-ignore="all">
     <Breadcrumbs
       items={[
         { href: '/en/columns', label: 'Audio Columns', icon: 'lucide:pen-tool' },
-        { label: category, icon: 'lucide:tag' },
+        { label: categoryEn, icon: 'lucide:tag' },
       ]}
     />
 
     <header class="mb-8">
-      <h1 class="text-3xl font-bold mb-2">{category}</h1>
+      <h1 class="text-3xl font-bold mb-2">{categoryEn}</h1>
       <p class="text-muted-foreground">{columns.length} columns</p>
     </header>
 
@@ -67,4 +69,3 @@ const columnsByYear = groupColumnsByYear(columns)
       ))}
   </div>
 </Layout>
-

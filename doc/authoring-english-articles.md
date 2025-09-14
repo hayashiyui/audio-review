@@ -1,6 +1,6 @@
 # 英語版記事追加ハンドブック（Authoring EN Articles）
 
-最終更新: 2025-09-13 / 対象ブランチ: main（想定）
+最終更新: 2025-09-13
 
 本書は、既存の日本語サイトに英語版記事（/en/ 配下）を追加・公開するための実務手順です。現行実装は Astro v5 + Content Collections（`reviews`/`columns`）+ Pagefind を前提としています。
 
@@ -11,7 +11,7 @@
 - 生成対象コレクションは `reviews` と `columns`。
 - 英語記事は、元記事と同じ場所に `*.en.mdx` を併置します（例: `src/content/reviews/hifiman-susvara.en.mdx`）。
 - Frontmatter に `locale: en` を必ず追加します（既定は `ja`）。
-- `translationKey` は今後の `hreflang` 相互リンクで使用予定のため、可能なら付与してください（推奨規約: `{collection}-{slug}` 例: `reviews-hifiman-susvara`）。
+- `translationKey` は今後の `hreflang` 相互リンクで使用予定のため、付与してください（推奨規約: `{collection}-{slug}` 例: `reviews-hifiman-susvara`）。
 - `category` はスキーマが日本語列挙のため、英語記事でも日本語値（例: `ヘッドホン`）のままにしてください（必須）。
 - 検索（Pagefind）は `<html lang>` に基づき言語別インデックスが自動生成されます。`/` は日本語のみ、`/en/` は英語のみがヒットします。
 
@@ -19,30 +19,36 @@
 
 ## 作業フロー（最小）
 
-1) ブランチ作成
-- `git checkout -b feat/add-en-articles`（任意）
-
-2) 元記事を複製して `.en.mdx` を作成
+1) 元記事を複製して `.en.mdx` を作成
 - 例（レビュー）: `src/content/reviews/hifiman-susvara.mdx` → `src/content/reviews/hifiman-susvara.en.mdx`
 - 例（コラム）: `src/content/columns/sound-quality-evaluation-guide.mdx` → `.../sound-quality-evaluation-guide.en.mdx`
 
-3) Frontmatter を英語化
+2) Frontmatter を英語化（日本語側にも同一 translationKey を追記）
 - 最低限の変更項目
   - `locale: en`（必須）
   - `title` / `description`（英語に）
   - `translationKey: reviews-hifiman-susvara`（推奨）
-  - `tags`（英語にするかは任意。EN タグだけで EN 側のタグ一覧が生成されます）
+  - `tags`（英語に。EN タグだけで EN 側のタグ一覧が生成されます）
   - `category` は日本語列挙のまま（例: `ヘッドホン`）
 - そのほか（必要に応じて）
   - `brand` `model` は機種名表記を維持
   - `heroImage` はそのまま再利用（相対パス: `../../assets/images/hero/...`）
 
-4) 本文を翻訳
+補足: 対になる日本語記事（例: `src/content/reviews/hifiman-susvara.mdx`）にも、同じ `translationKey` を追記してください。
+```mdx
+---
+locale: ja
+translationKey: reviews-hifiman-susvara
+---
+```
+
+3) 本文を翻訳
 - 内部リンクは `/en/...` に差し替え（EN 記事へのリンク）。
 - 日本語記事へ意図的に誘導したい場合はそのまま `/reviews/...` 等を使用可。
 - MDX コンポーネント（`ImageWithCitation` 等）はそのまま利用できます。
+- **省略せず全文を翻訳すること!!**
 
-5) ビルド確認
+4) ビルド確認（任意）
 ```bash
 pnpm build && pnpm preview
 # http://localhost:4321/en/ へアクセス
@@ -50,10 +56,6 @@ pnpm build && pnpm preview
 - `/en/` トップに EN の最新 Column/Review が並ぶ
 - `/en/reviews/...` と `/en/columns/...` が表示される
 - `⌘/Ctrl + K` の検索は EN ページ内では英語結果のみ
-
-6) レビュー／コミット
-- コミット例: `Add EN: hifiman-susvara review`
-- PR にはスクリーンショット（/en/ トップ・詳細・検索結果）を添付
 
 ---
 
@@ -108,6 +110,8 @@ heroImage: "../../assets/images/hero/default.jpg"
 - 技術用語は一般的な英語表現に統一（"planar magnetic", "dynamic driver" 等）。
 - 数字・単位は SI/IEEE 表記（例: 1 kHz, 83 dB）。
 - 地の文は能動態・簡潔・並行構造を意識（サイト全体のトーンを維持）。
+- ドル記号はエスケープ（\）すること
+- 引用文献のリストは改行されるように注意（マークダウンでスペース2つ）
 
 ---
 
@@ -116,7 +120,7 @@ heroImage: "../../assets/images/hero/default.jpg"
 - Q: カテゴリも英語化できますか？
   - A: いいえ。現行スキーマは日本語列挙です。将来 UI 側で表示名を翻訳する方針です。
 - Q: `translationKey` は必須？
-  - A: 現状は任意ですが、今後の `hreflang` 相互リンク自動化に備え、付与を推奨します。
+  - A: 今後の `hreflang` 相互リンク自動化に備え、付与を強く推奨します。
 - Q: タグは英語にすべき？
   - A: EN ページのタグ一覧は EN 記事のタグだけで生成されます。英語タグを推奨します（JA 側とは独立運用）。
 - Q: 画像は別に用意する？
@@ -130,7 +134,7 @@ heroImage: "../../assets/images/hero/default.jpg"
 - [ ] `category` は日本語列挙のまま（ビルドエラー無し）
 - [ ] `title`/`description`/本文が英語化されている
 - [ ] 内部リンクは `/en/...` へ向いている（意図があれば JA でも可）
-- [ ] `pnpm build && pnpm preview` で `/en/` 配下のページ表示と検索を確認
+- [ ] `pnpm build` で `/en/` 配下のページ表示と検索を確認
 
 ---
 
@@ -138,4 +142,3 @@ heroImage: "../../assets/images/hero/default.jpg"
 
 - 多言語設計の全体計画: `doc/multilanguage-implementation-plan.mdx`
 - 実装ガイド（本リポジトリ版）: `doc/implementation_guide.md`
-

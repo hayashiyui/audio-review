@@ -1,6 +1,7 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
+import { categoryLabel } from '@/lib/i18n'
 import ReviewsCard from '@/components/ReviewsCard.astro'
 import Layout from '@/layouts/Layout.astro'
 import { getAllReviews, getReviewsByCategory, groupReviewsByYear } from '@/lib/data-utils'
@@ -28,26 +29,27 @@ export async function getStaticPaths() {
 }
 
 const { category, reviews } = Astro.props
+const categoryEn = categoryLabel(category, 'en')
 const reviewsByYear = groupReviewsByYear(reviews)
 ---
 
 <Layout class="max-w-6xl ml-2" lang="en-US">
   <PageHead
     slot="head"
-    title={`${category} - Audio Reviews`}
-    description={`Audio reviews in category: ${category}`}
+    title={`${categoryEn} - Audio Reviews`}
+    description={`Audio reviews in category: ${categoryEn}`}
     lang="en-US"
   />
   <div data-pagefind-ignore="all">
     <Breadcrumbs
       items={[
         { href: '/en/reviews', label: 'Audio Reviews', icon: 'lucide:headphones' },
-        { label: category, icon: 'lucide:tag' },
+        { label: categoryEn, icon: 'lucide:tag' },
       ]}
     />
 
     <header class="mb-8">
-      <h1 class="text-3xl font-bold mb-2">{category}</h1>
+      <h1 class="text-3xl font-bold mb-2">{categoryEn}</h1>
       <p class="text-muted-foreground">{reviews.length} reviews</p>
     </header>
 
@@ -67,4 +69,3 @@ const reviewsByYear = groupReviewsByYear(reviews)
       ))}
   </div>
 </Layout>
-

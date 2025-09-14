@@ -8,6 +8,7 @@ import TOCSidebar from '@/components/TOCSidebar.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import Layout from '@/layouts/Layout.astro'
 import { getAdjacentReviews, getPostTOCSections } from '@/lib/data-utils'
+import { categoryLabel } from '@/lib/i18n'
 import { formatDate } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
 import { Picture } from 'astro:assets'
@@ -26,7 +27,7 @@ const currentReviewId = Astro.params.id
 const { Content, headings } = await render(review)
 
 const tocSections = await getPostTOCSections(currentReviewId)
-const navigation = await getAdjacentReviews(currentReviewId)
+const navigation = await getAdjacentReviews(currentReviewId, 'en')
 ---
 
 <Layout lang="en-US">
@@ -121,7 +122,7 @@ const navigation = await getAdjacentReviews(currentReviewId)
               class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
             >
               <a href={`/en/reviews/category/${review.data.category}`} class="hover:underline">
-                {review.data.category}
+                {categoryLabel(review.data.category, 'en')}
               </a>
             </div>
           )}
@@ -147,6 +148,7 @@ const navigation = await getAdjacentReviews(currentReviewId)
       <ReviewsNavigation
         newerPost={navigation.newer}
         olderPost={navigation.older}
+        locale="en"
       />
     </section>
 
@@ -161,13 +163,13 @@ const navigation = await getAdjacentReviews(currentReviewId)
     </article>
 
     <div class="col-start-2">
-      <RelatedArticles collection="reviews" articleId={currentReviewId} />
+      <RelatedArticles collection="reviews" articleId={currentReviewId} locale="en" />
     </div>
 
     <ReviewsNavigation
       newerPost={navigation.newer}
       olderPost={navigation.older}
+      locale="en"
     />
   </section>
 </Layout>
-
