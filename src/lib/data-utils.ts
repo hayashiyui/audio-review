@@ -645,6 +645,12 @@ export async function getRelatedArticles(
           const altId = relatedRef.id.endsWith('.en') ? relatedRef.id : `${relatedRef.id}.en`
           const alt = all.find((e) => e.id === altId)
           if (alt) relatedEntry = alt
+          // ディレクトリ方式 en/<id> も探索
+          if (!alt) {
+            const base = relatedRef.id.replace(/\.en$/, '').replace(/^en\//, '')
+            const altDir = all.find((e) => e.id === `en/${base}`)
+            if (altDir) relatedEntry = altDir
+          }
         }
       }
     } else if (relatedRef.collection === 'columns') {
@@ -660,6 +666,12 @@ export async function getRelatedArticles(
           const altId = relatedRef.id.endsWith('.en') ? relatedRef.id : `${relatedRef.id}.en`
           const alt = all.find((e) => e.id === altId)
           if (alt) relatedEntry = alt
+          // ディレクトリ方式 en/<id> も探索
+          if (!alt) {
+            const base = relatedRef.id.replace(/\.en$/, '').replace(/^en\//, '')
+            const altDir = all.find((e) => e.id === `en/${base}`)
+            if (altDir) relatedEntry = altDir
+          }
         }
       }
     }

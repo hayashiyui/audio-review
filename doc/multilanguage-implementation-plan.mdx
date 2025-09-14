@@ -30,7 +30,7 @@
 - `src/content.config.ts` の `reviews`/`columns` スキーマへ以下を追加：
   - `locale: z.enum(['ja','en']).default('ja')`
   - `translationKey: z.string()`（対訳の同一キー、規約: `{collection}-{slug}`）
-- 対訳は同じ場所に `*.en.mdx` を併置（例: `foo.mdx` と `foo.en.mdx`）。
+- 対訳はサブディレクトリ `en/` に配置し、ファイル名は元記事と同一（例: `src/content/reviews/en/foo.mdx`、`src/content/columns/en/bar.mdx`）。
 
 3) ページ（/ と /en/）
 - 既存テンプレートを流用し、`src/pages/en/**` に薄いラッパーページを作成。中で `getCollection(...).filter(e => e.data.locale==='en')` を適用。
@@ -76,7 +76,7 @@ Phase 2：ページ実装
 - [ ] ヘッダーに言語トグル（対訳があれば直リンク、なければトップ）
 
 Phase 3：コンテンツ整備
-- [ ] 代表記事を `.en.mdx` へ複製・翻訳し `locale: en` と `translationKey` を付与
+- [ ] 代表記事を `en/` サブディレクトリへ複製・翻訳し `locale: en` と `translationKey` を付与
 - [ ] 未翻訳の英語詳細は 302 で日本語へ誘導（または非公開）
 
 Phase 4：検索（Pagefind）
@@ -351,4 +351,3 @@ for (const p of await glob('src/content/{columns,reviews}/**/*.mdx', { ignore: '
   }
 }
 ```
-

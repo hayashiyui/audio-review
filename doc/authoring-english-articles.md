@@ -1,6 +1,6 @@
 # 英語版記事追加ハンドブック（Authoring EN Articles）
 
-最終更新: 2025-09-13
+最終更新: 2025-09-14
 
 本書は、既存の日本語サイトに英語版記事（/en/ 配下）を追加・公開するための実務手順です。現行実装は Astro v5 + Content Collections（`reviews`/`columns`）+ Pagefind を前提としています。
 
@@ -9,7 +9,9 @@
 ## 前提と重要ポイント
 
 - 生成対象コレクションは `reviews` と `columns`。
-- 英語記事は、元記事と同じ場所に `*.en.mdx` を併置します（例: `src/content/reviews/hifiman-susvara.en.mdx`）。
+- 英語記事は、`en/` サブディレクトリに配置し、ファイル名は元記事と同一にします。
+  - 例（レビュー）: `src/content/reviews/en/hifiman-susvara.mdx`
+  - 例（コラム）: `src/content/columns/en/sound-quality-evaluation-guide.mdx`
 - Frontmatter に `locale: en` を必ず追加します（既定は `ja`）。
 - `translationKey` は今後の `hreflang` 相互リンクで使用予定のため、付与してください（推奨規約: `{collection}-{slug}` 例: `reviews-hifiman-susvara`）。
 - `category` はスキーマが日本語列挙のため、英語記事でも日本語値（例: `ヘッドホン`）のままにしてください（必須）。
@@ -19,9 +21,9 @@
 
 ## 作業フロー（最小）
 
-1) 元記事を複製して `.en.mdx` を作成
-- 例（レビュー）: `src/content/reviews/hifiman-susvara.mdx` → `src/content/reviews/hifiman-susvara.en.mdx`
-- 例（コラム）: `src/content/columns/sound-quality-evaluation-guide.mdx` → `.../sound-quality-evaluation-guide.en.mdx`
+1) 元記事を複製して `en/` に配置（ファイル名は同一）
+- 例（レビュー）: `src/content/reviews/hifiman-susvara.mdx` → `src/content/reviews/en/hifiman-susvara.mdx`
+- 例（コラム）: `src/content/columns/sound-quality-evaluation-guide.mdx` → `src/content/columns/en/sound-quality-evaluation-guide.mdx`
 
 2) Frontmatter を英語化（日本語側にも同一 translationKey を追記）
 - 最低限の変更項目
@@ -61,7 +63,7 @@ pnpm build
 
 ## テンプレ（Frontmatter）
 
-レビュー（`src/content/reviews/*.en.mdx`）
+レビュー（`src/content/reviews/en/*.mdx`）
 ```mdx
 ---
 locale: en
@@ -74,7 +76,7 @@ brand: "HiFiMAN"
 model: "Susvara"
 category: "ヘッドホン" # ← 日本語の列挙（必須）
 tags: ["planar magnetic", "flagship", "China"]
-heroImage: "../../assets/images/hero/hifiman-susvara.jpg"
+heroImage: "../../../assets/images/hero/hifiman-susvara.jpg"
 relatedArticles:
   - collection: reviews
     id: hifiman-susvara-unveiled
@@ -85,7 +87,7 @@ relatedArticles:
 <!-- 本文（英語） -->
 ```
 
-コラム（`src/content/columns/*.en.mdx`）
+コラム（`src/content/columns/en/*.mdx`）
 ```mdx
 ---
 locale: en
@@ -96,7 +98,7 @@ description: "Shared vocabulary, listening techniques, and the science behind di
 date: "2025-08-05T09:00:00"
 category: "オーディオ基礎知識" # ← 日本語の列挙（必須）
 tags: ["listening", "evaluation"]
-heroImage: "../../assets/images/hero/default.jpg"
+heroImage: "../../../assets/images/hero/default.jpg"
 ---
 
 <!-- 本文（英語） -->
@@ -131,7 +133,7 @@ heroImage: "../../assets/images/hero/default.jpg"
 
 ## 仕上げチェックリスト
 
-- [ ] `*.en.mdx` が正しい場所にあり、`locale: en` が設定されている
+- [ ] `src/content/{reviews,columns}/en/*.mdx` が正しい場所にあり、`locale: en` が設定されている
 - [ ] `category` は日本語列挙のまま（ビルドエラー無し）
 - [ ] `title`/`description`/本文が英語化されている
 - [ ] 内部リンクは `/en/...` へ向いている（意図があれば JA でも可）

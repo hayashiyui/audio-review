@@ -12,14 +12,20 @@ import { getCollection, render } from 'astro:content'
 
 export async function getStaticPaths() {
   const columns = await getCollection('columns', ({ data }) => !data.draft && (data.locale ?? 'ja') === 'en')
-  return columns.map((column) => ({
-    params: { id: column.id },
-    props: column,
-  }))
+  return columns.map((column) => {
+    const slug = column.id.replace(/^en\//, '').replace(/\.en$/, '')
+    return {
+      params: { id: slug },
+      props: column,
+    }
+  })
 }
 
 const column = Astro.props
-const currentId = Astro.params.id
+// Content API 実ID
+const currentId = column.id
+// 表示用のURLスラッグ
+const pageSlug = Astro.params.id
 const { Content, headings } = await render(column)
 const tocSections = await getColumnTOCSections(currentId)
 ---
@@ -40,7 +46,7 @@ const tocSections = await getColumnTOCSections(currentId)
       <Breadcrumbs
         items={[
           { href: '/en/columns', label: 'Audio Columns', icon: 'lucide:pen-tool' },
-          { href: `/en/columns/${column.id}`, label: column.data.title, icon: 'lucide:file-text' },
+          { href: `/en/columns/${pageSlug}`, label: column.data.title, icon: 'lucide:file-text' },
         ]}
       />
     </div>

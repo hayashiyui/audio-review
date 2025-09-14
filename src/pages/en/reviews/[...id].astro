@@ -16,14 +16,20 @@ import { getCollection, render } from 'astro:content'
 
 export async function getStaticPaths() {
   const reviews = await getCollection('reviews', ({ data }) => !data.draft && (data.locale ?? 'ja') === 'en')
-  return reviews.map((review) => ({
-    params: { id: review.id },
-    props: review,
-  }))
+  return reviews.map((review) => {
+    const slug = review.id.replace(/^en\//, '').replace(/\.en$/, '')
+    return {
+      params: { id: slug },
+      props: review,
+    }
+  })
 }
 
 const review = Astro.props
-const currentReviewId = Astro.params.id
+// Content API 上の実ID（en ディレクトリ or .en サフィックスを含む）
+const currentReviewId = review.id
+// 表示用のURLスラッグ
+const pageSlug = Astro.params.id
 const { Content, headings } = await render(review)
 
 const tocSections = await getPostTOCSections(currentReviewId)
@@ -46,7 +52,7 @@ const navigation = await getAdjacentReviews(currentReviewId, 'en')
       <Breadcrumbs
         items={[
           { href: '/en/reviews', label: 'Audio Reviews', icon: 'lucide:headphones' },
-          { href: `/en/reviews/${review.id}`, label: review.data.title, icon: 'lucide:file-text' },
+          { href: `/en/reviews/${pageSlug}`, label: review.data.title, icon: 'lucide:file-text' },
         ]}
       />
     </div>
