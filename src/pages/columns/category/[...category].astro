@@ -11,7 +11,8 @@ export async function getStaticPaths() {
 
   return Promise.all(
     categories.map(async (category) => {
-      const columns = await getColumnsByCategory(category)
+      const all = await getColumnsByCategory(category)
+      const columns = all.filter((c) => (c.data.locale ?? 'ja') === 'ja')
       return {
         params: { category },
         props: {

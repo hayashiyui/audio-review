@@ -5,12 +5,16 @@ import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
 import { buttonVariants } from '@/components/ui/button'
 import Layout from '@/layouts/Layout.astro'
-import { getRecentReviews, getRecentColumns } from '@/lib/data-utils'
+import { getAllReviews, getAllColumns } from '@/lib/data-utils'
 
-const allReviews = await getRecentReviews(18)
-const allColumns = await getRecentColumns(3)
-const reviews = allReviews.filter((e) => (e.data.locale ?? 'ja') === 'en')
-const columns = allColumns.filter((e) => (e.data.locale ?? 'ja') === 'en')
+const allReviews = await getAllReviews()
+const allColumns = await getAllColumns()
+const reviews = allReviews
+  .filter((e) => (e.data.locale ?? 'ja') === 'en')
+  .slice(0, 18)
+const columns = allColumns
+  .filter((e) => (e.data.locale ?? 'ja') === 'en')
+  .slice(0, 3)
 ---
 
 <Layout class="max-w-6xl ml-2" lang="en-US">
@@ -76,4 +80,3 @@ const columns = allColumns.filter((e) => (e.data.locale ?? 'ja') === 'en')
     </section>
   </div>
 </Layout>
-

@@ -11,7 +11,8 @@ export async function getStaticPaths() {
 
   return Promise.all(
     categories.map(async (category) => {
-      const reviews = await getReviewsByCategory(category)
+      const all = await getReviewsByCategory(category)
+      const reviews = all.filter((r) => (r.data.locale ?? 'ja') === 'ja')
       return {
         params: { category },
         props: {

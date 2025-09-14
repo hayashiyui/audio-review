@@ -50,7 +50,7 @@ translationKey: reviews-hifiman-susvara
 
 4) ビルド確認（任意）
 ```bash
-pnpm build && pnpm preview
+pnpm build
 # http://localhost:4321/en/ へアクセス
 ```
 - `/en/` トップに EN の最新 Column/Review が並ぶ
@@ -110,15 +110,16 @@ heroImage: "../../assets/images/hero/default.jpg"
 - 技術用語は一般的な英語表現に統一（"planar magnetic", "dynamic driver" 等）。
 - 数字・単位は SI/IEEE 表記（例: 1 kHz, 83 dB）。
 - 地の文は能動態・簡潔・並行構造を意識（サイト全体のトーンを維持）。
-- ドル記号はエスケープ（\）すること
+- ドル記号"$"や"<"はエスケープ"\"すること
 - 引用文献のリストは改行されるように注意（マークダウンでスペース2つ）
+- 日本国内価格についての情報は省略可
 
 ---
 
 ## よくある質問（EN 追加）
 
 - Q: カテゴリも英語化できますか？
-  - A: いいえ。現行スキーマは日本語列挙です。将来 UI 側で表示名を翻訳する方針です。
+  - A: いいえ。現行スキーマは日本語列挙です。UI 側で表示名が翻訳されます。
 - Q: `translationKey` は必須？
   - A: 今後の `hreflang` 相互リンク自動化に備え、付与を強く推奨します。
 - Q: タグは英語にすべき？
