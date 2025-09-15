@@ -10,7 +10,7 @@
     "astro": "astro",
     "prettier": "prettier --write **/*.{ts,tsx,css,astro} --ignore-path .gitignore",
     "postinstall": "patch-package",
-    "postbuild": "pagefind --site dist --exclude-selectors \"pre, code, .expressive-code, .ec-line, script, style, .pagefind-exclude\""
+    "postbuild": "pagefind --site dist --exclude-selectors \"pre, code, .expressive-code, .ec-line, script, style, .pagefind-exclude\" --root-selector html"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
