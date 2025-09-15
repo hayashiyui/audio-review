@@ -1,6 +1,18 @@
 ---
 import { SOCIAL_LINKS } from '@/consts'
 import SocialIcons from './SocialIcons.astro'
+
+// 言語を検出してRSSリンクを動的に設定
+const isEn = Astro.url.pathname.startsWith('/en/')
+const socialLinks = SOCIAL_LINKS.map(link => {
+  if (link.label === 'RSS') {
+    return {
+      ...link,
+      href: isEn ? '/en/rss.xml' : '/rss.xml'
+    }
+  }
+  return link
+})
 ---
 
 <footer class="py-4">
@@ -12,6 +24,6 @@ import SocialIcons from './SocialIcons.astro'
         &copy; audiomatome.com
       </span>
     </div>
-    <SocialIcons links={SOCIAL_LINKS} />
+    <SocialIcons links={socialLinks} />
   </div>
 </footer>
