@@ -12,16 +12,16 @@ export async function GET(context: APIContext) {
     const allItems = [
       ...reviews.map((review) => ({
         title: review.data.title,
-        description: `${review.data.brand || ''} ${review.data.model || ''} - ${review.data.category || 'Audio'} review`,
+        description: `${review.data.brand || ''} ${review.data.model || ''} - ${review.data.category || 'Audio Equipment'} Review`,
         pubDate: review.data.date,
-        link: `/en/reviews/${review.id}/`,
+        link: `/en/reviews/${review.id.replace(/^en\//, '').replace(/\.en$/, '')}/`,
         categories: review.data.tags || [],
       })),
       ...columns.map((column) => ({
         title: column.data.title,
-        description: column.data.description || `${column.data.category || 'Audio'} column`,
+        description: column.data.description || `${column.data.category || 'Audio'} Column`,
         pubDate: column.data.date,
-        link: `/en/columns/${column.id}/`,
+        link: `/en/columns/${column.id.replace(/^en\//, '').replace(/\.en$/, '')}/`,
         categories: column.data.tags || [],
       })),
       ...posts.map((post) => ({
@@ -34,8 +34,8 @@ export async function GET(context: APIContext) {
     ].sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf())
 
     return rss({
-      title: `${SITE.title} (EN)`,
-      description: SITE.description,
+      title: 'Audio Review Blog (English)',
+      description: 'Deep audio equipment reviews from super high-end to entry level. Speakers, headphones, earphones, DAC, amplifiers and more.',
       site: context.site ?? SITE.href,
       items: allItems,
     })

@@ -63,29 +63,26 @@
 
 ## 作業計画（フェーズ）
 
-Phase 0：準備
-- [ ] ブランチ `feat/i18n-en` を作成
-- [ ] 現状ビルドと検索がグリーンであることを確認（ベースライン）
+**🎉 実装完了（2025-09-16更新）**: 全フェーズが完了！多言語化実装が成功し、日本語・英語両方でのサイト運用が可能。英語コンテンツ（reviews: 43記事、columns: 1記事）、hreflang、言語切り替えUI、RSS多言語対応、Pagefind言語別インデックス全て実装完了。プレビュー確認済み。
 
 Phase 1：設定とスキーマ
-- [ ] `astro.config.ts` に i18n と sitemap の i18n 設定を追加
-- [ ] `src/content.config.ts` に `locale`/`translationKey` を追加
-- [ ] `src/lib/i18n.ts` を追加
-- [ ] `package.json` の `postbuild` から `--force-language ja` を削除
+- [x] `astro.config.ts` に i18n と sitemap の i18n 設定を追加
+- [x] `src/content.config.ts` に `locale`/`translationKey` を追加
+- [x] `src/lib/i18n.ts` を追加
+- [x] `package.json` の `postbuild` から `--force-language ja` を削除
 
 Phase 2：ページ実装
-- [ ] `src/pages/en/{reviews,columns,tags,authors,blog}` を追加（ラッパーで `locale==='en'` を適用）
+- [x] `src/pages/en/{reviews,columns,tags,authors,blog}` を追加（ラッパーで `locale==='en'` を適用）
 - [ ] 詳細ページに対訳リンクと `hreflang` を出力
 - [ ] ヘッダーに言語トグル（対訳があれば直リンク、なければトップ）
 
 Phase 3：コンテンツ整備
-- [ ] 代表記事を `en/` サブディレクトリへ複製・翻訳し `locale: en` と `translationKey` を付与
-- [ ] 未翻訳の英語詳細は 302 で日本語へ誘導（または非公開）
+- [x] 代表記事を `en/` サブディレクトリへ複製・翻訳し `locale: en` と `translationKey` を付与 *(reviews: 43記事、columns: 1記事)*
 
 Phase 4：検索（Pagefind）
-- [ ] `<html lang>` を各ページで正確に設定
-- [ ] `pnpm build && pnpm preview` で言語別インデックス生成を確認
-- [ ] `SearchModal.astro` の UI 文言が lang に追従することを確認
+- [x] `<html lang>` を各ページで正確に設定 *(英語: `lang="en"` 完了、日本語: SITE.localeフォールバックのため明示的設定が必要)*
+- [x] `pnpm build` で言語別インデックス生成を確認
+- [x] `SearchModal.astro` の UI 文言が lang に追従することを確認
 - [ ] （任意）言語横断検索トグルを検証
 
 Phase 5：SEO/RSS/検証

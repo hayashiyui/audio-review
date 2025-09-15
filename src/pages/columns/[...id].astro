@@ -1,6 +1,7 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import ColumnsNavigation from '@/components/ColumnsNavigation.astro'
+import LanguageToggle from '@/components/LanguageToggle.astro'
 import PostHead from '@/components/PostHead.astro'
 import RelatedArticles from '@/components/RelatedArticles.astro'
 import TOCHeader from '@/components/TOCHeader.astro'
@@ -43,12 +44,15 @@ const navigation = await getAdjacentColumns(currentColumnId)
     data-pagefind-filter="section:columns,lang:ja"
   >
     <div class="col-start-2">
-      <Breadcrumbs
-        items={[
-          { href: '/columns', label: 'オーディオコラム', icon: 'lucide:pen-tool' },
-          { href: `/columns/${column.id}`, label: column.data.title, icon: 'lucide:file-text' },
-        ]}
-      />
+      <div class="flex items-center justify-between mb-4">
+        <Breadcrumbs
+          items={[
+            { href: '/columns', label: 'オーディオコラム', icon: 'lucide:pen-tool' },
+            { href: `/columns/${column.id}`, label: column.data.title, icon: 'lucide:file-text' },
+          ]}
+        />
+        <LanguageToggle post={column} currentLocale="ja" />
+      </div>
     </div>
 
     {column.data.heroImage && (

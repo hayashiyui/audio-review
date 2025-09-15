@@ -2,6 +2,7 @@
 import Link from '@/components/Link.astro'
 import ThemeToggle from '@/components/ThemeToggle.astro'
 import SearchButton from '@/components/SearchButton.astro'
+import GlobalLanguageToggle from '@/components/GlobalLanguageToggle.astro'
 import MobileMenu from '@/components/ui/mobile-menu'
 import { NAV_LINKS, SITE } from '@/consts'
 import { Image } from 'astro:assets'
@@ -23,7 +24,7 @@ const mapLabel = (href: string, label: string) => {
 }
 const linkHref = (href: string) => (isEn ? `/en${href}` : href)
 ---
-<header transition:persist>
+<header>
   <div
     class="flex max-w-6xl items-center justify-between gap-4 px-4 py-3 ml-0 mr-auto"
   >
@@ -46,6 +47,7 @@ const linkHref = (href: string) => (isEn ? `/en${href}` : href)
       </nav>
       <MobileMenu client:load transition:persist />
       <SearchButton />
+      <GlobalLanguageToggle />
       <ThemeToggle transition:persist />
     </div>
   </div>

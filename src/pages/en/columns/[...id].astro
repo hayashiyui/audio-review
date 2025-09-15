@@ -1,5 +1,6 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import LanguageToggle from '@/components/LanguageToggle.astro'
 import PostHead from '@/components/PostHead.astro'
 import RelatedArticles from '@/components/RelatedArticles.astro'
 import TOCHeader from '@/components/TOCHeader.astro'
@@ -43,12 +44,15 @@ const tocSections = await getColumnTOCSections(currentId)
     data-pagefind-filter="section:columns,lang:en"
   >
     <div class="col-start-2">
-      <Breadcrumbs
-        items={[
-          { href: '/en/columns', label: 'Audio Columns', icon: 'lucide:pen-tool' },
-          { href: `/en/columns/${pageSlug}`, label: column.data.title, icon: 'lucide:file-text' },
-        ]}
-      />
+      <div class="flex items-center justify-between mb-4">
+        <Breadcrumbs
+          items={[
+            { href: '/en/columns', label: 'Audio Columns', icon: 'lucide:pen-tool' },
+            { href: `/en/columns/${pageSlug}`, label: column.data.title, icon: 'lucide:file-text' },
+          ]}
+        />
+        <LanguageToggle post={column} currentLocale="en" />
+      </div>
     </div>
 
     {column.data.heroImage && (

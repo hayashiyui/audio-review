@@ -1,0 +1,26 @@
+---
+import { Icon } from 'astro-icon/components'
+
+// 現在のパスから言語を判定
+const currentPath = Astro.url.pathname
+const isEn = currentPath.startsWith('/en/')
+const currentLocale = isEn ? 'en' : 'ja'
+const targetLocale = isEn ? 'ja' : 'en'
+
+// URLパスを変換（単純なトップページ間の切り替え）
+const toggleUrl = isEn ? '/' : '/en/'
+const targetLabel = targetLocale === 'en' ? 'EN' : 'JP'
+const ariaLabel = `Switch to ${targetLocale === 'en' ? 'English' : 'Japanese'}`
+---
+
+<a
+  href={toggleUrl}
+  class="inline-flex items-center gap-1.5 rounded-md border border-border/50 bg-background/50 px-2.5 py-1.5 text-sm font-medium text-foreground/70 transition-colors hover:bg-background hover:text-foreground hover:border-border"
+  title={ariaLabel}
+  aria-label={ariaLabel}
+>
+  <Icon name="lucide:globe" class="size-3.5" />
+  <span class="text-xs font-medium">
+    {targetLabel}
+  </span>
+</a>

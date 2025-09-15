@@ -22,6 +22,11 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   site: 'https://audiomatome.com',
+  i18n: {
+    locales: ['ja', 'en'],
+    defaultLocale: 'ja',
+    routing: { prefixDefaultLocale: false },
+  },
   redirects: {
     '/reviews/hifiman-susvara-unvailed': '/reviews/hifiman-susvara-unveiled',
   },

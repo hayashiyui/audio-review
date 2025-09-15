@@ -1,0 +1,86 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
+import { getTranslation, altLocale, type Locale } from '@/lib/i18n'
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  post: CollectionEntry<'reviews'> | CollectionEntry<'columns'>
+  currentLocale: Locale
+}
+
+const { post, currentLocale } = Astro.props
+const targetLocale = altLocale(currentLocale)
+
+// 対訳記事を探す
+let translation: { slug: string; title: string } | null = null
+
+// Method 1: translationKeyベースの検索
+if (post.data.translationKey) {
+  translation = await getTranslation(post.data.translationKey, targetLocale, post.collection)
+}
+
+// Method 2: translationKeyが見つからない場合、ファイル名ベースで検索
+if (!translation) {
+  // 現在のファイル名から基本スラッグを抽出
+  const baseSlug = currentLocale === 'ja'
+    ? post.id
+    : post.id.replace(/^en\//, '')
+
+  // 対象言語のファイルを直接探す
+  try {
+    const allEntries = await getCollection(post.collection)
+    const targetEntry = allEntries.find((entry: CollectionEntry<'reviews'> | CollectionEntry<'columns'>) => {
+      if (targetLocale === 'en') {
+        // 英語版を探す: en/baseSlug の形式
+        return entry.id === `en/${baseSlug}` && (entry.data.locale ?? 'ja') === 'en'
+      } else {
+        // 日本語版を探す: baseSlug の形式
+        return entry.id === baseSlug && (entry.data.locale ?? 'ja') === 'ja'
+      }
+    })
+
+    if (targetEntry) {
+      translation = {
+        slug: targetLocale === 'en' ? baseSlug : targetEntry.id,
+        title: targetEntry.data.title
+      }
+    }
+  } catch (error) {
+    console.error('Fallback translation search error:', error)
+  }
+}
+
+const targetUrl = translation
+  ? (targetLocale === 'en'
+      ? `/en/${post.collection}/${translation.slug}/`
+      : `/${post.collection}/${translation.slug}/`)
+  : (targetLocale === 'en' ? '/en/' : '/')
+
+const targetLabel = targetLocale === 'en' ? 'EN' : 'JP'
+---
+
+{translation ? (
+  <a
+    href={targetUrl}
+    class="inline-flex items-center gap-2 rounded-md border border-border bg-background/50 px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-background hover:text-foreground"
+    title={`${targetLabel}版を読む`}
+  >
+    <Icon name="lucide:globe" class="size-4" />
+    {targetLabel}
+  </a>
+) : (
+  <a
+    href={targetUrl}
+    class="inline-flex items-center gap-2 rounded-md border border-border/50 bg-background/30 px-3 py-2 text-sm text-foreground/50 opacity-60"
+    title={translation ? `${targetLabel}版を読む` : `${targetLabel}版は準備中です`}
+  >
+    <Icon name="lucide:globe" class="size-4" />
+    {targetLabel}
+    {!translation && (
+      <span class="text-xs">
+        (準備中)
+      </span>
+    )}
+  </a>
+)}

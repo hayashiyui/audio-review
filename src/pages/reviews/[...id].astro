@@ -1,5 +1,6 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import LanguageToggle from '@/components/LanguageToggle.astro'
 import PostHead from '@/components/PostHead.astro'
 import RelatedArticles from '@/components/RelatedArticles.astro'
 import ReviewsNavigation from '@/components/ReviewsNavigation.astro'
@@ -42,12 +43,15 @@ const navigation = await getAdjacentReviews(currentReviewId)
     data-pagefind-filter="section:reviews,lang:ja"
   >
     <div class="col-start-2">
-      <Breadcrumbs
-        items={[
-          { href: '/reviews', label: 'オーディオレビュー', icon: 'lucide:headphones' },
-          { href: `/reviews/${review.id}`, label: review.data.title, icon: 'lucide:file-text' },
-        ]}
-      />
+      <div class="flex items-center justify-between mb-4">
+        <Breadcrumbs
+          items={[
+            { href: '/reviews', label: 'オーディオレビュー', icon: 'lucide:headphones' },
+            { href: `/reviews/${review.id}`, label: review.data.title, icon: 'lucide:file-text' },
+          ]}
+        />
+        <LanguageToggle post={review} currentLocale="ja" />
+      </div>
     </div>
 
     {review.data.heroImage && (
