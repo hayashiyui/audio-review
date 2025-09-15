@@ -1,5 +1,8 @@
 # Repository Guidelines
 
+## Global Instruction
+**Reason in English. reply to the user in Japanese.**
+
 ## Project Structure & Module Organization
 - `src/pages`: Astro pages and routes.
 - `src/components`: Reusable UI (`*.astro`, `*.tsx`).
@@ -11,10 +14,10 @@
 - `doc/`: Additional documentation and templates.
 
 ## Build, Test, and Development Commands
-- `npm run dev` (or `pnpm dev`): Start local dev server with HMR.
-- `npm run build`: Type-check (`astro check`) then build static site to `dist/`.
-- `npm run preview`: Serve the built site from `dist/` for verification.
-- `npm run prettier`: Format `ts/tsx/css/astro` files using project Prettier config.
+- `pnpm dev` (or `pnpm dev`): Start local dev server with HMR.
+- `pnpm build`: Type-check (`astro check`) then build static site to `dist/`.
+- `pnpm preview`: Serve the built site from `dist/` for verification.
+- `pnpm prettier`: Format `ts/tsx/css/astro` files using project Prettier config.
 
 ## Coding Style & Naming Conventions
 - **Formatting**: Prettier enforced (no semicolons, single quotes). Run before commits.
@@ -25,7 +28,7 @@
 
 ## Testing Guidelines
 - No formal test runner is configured. Validate changes by:
-  - Running `npm run build` and `npm run preview` locally.
+  - Running `pnpm build` and `pnpm preview` locally.
   - Checking `astro check` output for type/content issues.
   - Verifying pages render and MDX content (TOC, code blocks, images) behaves as expected.
 
@@ -33,7 +36,7 @@
 - **Commits**: Imperative, concise, and scoped (e.g., "Add ReviewsCard layout").
 - **Branches**: Short, kebab-case (`feature/related-articles-grid`).
 - **PRs**: Include summary, motivation, screenshots for UI changes, and manual-test notes. Link related issues.
-- **Checks**: Ensure `npm run prettier`, `npm run build`, and local preview pass before requesting review.
+- **Checks**: Ensure `pnpm prettier`, `pnpm build`, and local preview pass before requesting review.
 
 ## Architecture & Tips
 - **Stack**: Astro + MDX + React islands, Tailwind CSS v4, TypeScript.

@@ -19,7 +19,16 @@
       "WebFetch(domain:headphones.com)",
       "Read(//d/hayas/Picture/Screenshots/**)",
       "WebFetch(domain:pagefind.app)",
-      "Bash(pnpm build:*)"
+      "Bash(pnpm build:*)",
+      "Bash(for i in {1..39})",
+      "Bash(do echo -n \"[$i](#ref-$i): \")",
+      "Bash(done)",
+      "Bash(pnpm preview:*)",
+      "Bash(npx pagefind:*)",
+      "Bash(find:*)",
+      "Bash(cat:*)",
+      "Bash(python:*)",
+      "Bash(xargs:*)"
     ],
     "deny": []
   }
