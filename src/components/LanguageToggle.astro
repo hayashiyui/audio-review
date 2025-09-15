@@ -60,7 +60,7 @@ const targetUrl = translation
 const targetLabel = targetLocale === 'en' ? 'EN' : 'JP'
 ---
 
-{translation ? (
+{translation && (
   <a
     href={targetUrl}
     class="inline-flex items-center gap-2 rounded-md border border-border bg-background/50 px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-background hover:text-foreground"
@@ -68,19 +68,5 @@ const targetLabel = targetLocale === 'en' ? 'EN' : 'JP'
   >
     <Icon name="lucide:globe" class="size-4" />
     {targetLabel}
-  </a>
-) : (
-  <a
-    href={targetUrl}
-    class="inline-flex items-center gap-2 rounded-md border border-border/50 bg-background/30 px-3 py-2 text-sm text-foreground/50 opacity-60"
-    title={translation ? `${targetLabel}版を読む` : `${targetLabel}版は準備中です`}
-  >
-    <Icon name="lucide:globe" class="size-4" />
-    {targetLabel}
-    {!translation && (
-      <span class="text-xs">
-        (In preparation)
-      </span>
-    )}
   </a>
 )}
