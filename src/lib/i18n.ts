@@ -9,35 +9,35 @@ export const localizePath = (path: string, locale: Locale) => {
   return locale === 'ja' ? p : `/en${p}`
 }
 
-// Category labels (JA -> EN)
-const CATEGORY_JA_TO_EN: Record<string, string> = {
+// Category labels (EN -> JA)
+const CATEGORY_EN_TO_JA: Record<string, string> = {
   // reviews
-  'スピーカー': 'Speakers',
-  'ヘッドホン': 'Headphones',
-  'イヤホン': 'Earphones',
-  'デジタルプレーヤー': 'Digital Player',
-  DAC: 'DAC',
-  'パワーアンプ': 'Power Amplifier',
-  'プリアンプ': 'Preamplifier',
-  'プリメインアンプ': 'Integrated Amplifier',
-  'ヘッドホンアンプ': 'Headphone Amplifier',
-  'アナログ': 'Analog',
-  'ケーブル': 'Cables',
-  'アクセサリ': 'Accessories',
+  'Speakers': 'スピーカー',
+  'Headphones': 'ヘッドホン',
+  'Earphones': 'イヤホン',
+  'Digital Player': 'デジタルプレーヤー',
+  'DAC': 'DAC',
+  'Power Amplifier': 'パワーアンプ',
+  'Preamplifier': 'プリアンプ',
+  'Integrated Amplifier': 'プリメインアンプ',
+  'Headphone Amplifier': 'ヘッドホンアンプ',
+  'Analog': 'アナログ',
+  'Cables': 'ケーブル',
+  'Accessories': 'アクセサリ',
   // columns
-  'オーディオ基礎知識': 'Basics',
-  'セットアップ': 'Setup',
-  '音質改善': 'Sound Improvement',
-  '業界動向': 'Industry Trends',
-  '技術解説': 'Technical',
-  'エッセイ': 'Essay',
-  '購入ガイド': 'Buying Guide',
-  'その他': 'Others',
+  'Basics': 'オーディオ基礎知識',
+  'Setup': 'セットアップ',
+  'Sound Improvement': '音質改善',
+  'Industry Trends': '業界動向',
+  'Technical': '技術解説',
+  'Essay': 'エッセイ',
+  'Buying Guide': '購入ガイド',
+  'Others': 'その他',
 }
 
 export function categoryLabel(category: string | undefined, locale: Locale): string {
   if (!category) return ''
-  if (locale === 'en') return CATEGORY_JA_TO_EN[category] ?? category
+  if (locale === 'ja') return CATEGORY_EN_TO_JA[category] ?? category
   return category
 }
 

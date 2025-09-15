@@ -9,6 +9,7 @@ import TOCSidebar from '@/components/TOCSidebar.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import Layout from '@/layouts/Layout.astro'
 import { getAdjacentColumns, getColumnTOCSections } from '@/lib/data-utils'
+import { categoryLabel } from '@/lib/i18n'
 import { formatDate } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
 import { Picture } from 'astro:assets'
@@ -109,7 +110,7 @@ const navigation = await getAdjacentColumns(currentColumnId)
               class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
             >
               <a href={`/columns/category/${column.data.category}`} class="hover:underline">
-                {column.data.category}
+                {categoryLabel(column.data.category, 'ja')}
               </a>
             </div>
           )}
