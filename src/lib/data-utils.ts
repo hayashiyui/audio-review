@@ -296,6 +296,8 @@ export async function hasSubposts(postId: string): Promise<boolean> {
 }
 
 export function isSubpost(postId: string): boolean {
+  // ロケール接頭辞（例: en/<slug>）はサブポストではない
+  if (/^(en|ja)\//.test(postId)) return false
   return postId.includes('/')
 }
 

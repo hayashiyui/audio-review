@@ -33,12 +33,12 @@ const categoryEn = categoryLabel(category, 'en')
 const reviewsByYear = groupReviewsByYear(reviews)
 ---
 
-<Layout class="max-w-6xl ml-2" lang="en-US">
+<Layout class="max-w-6xl ml-2" lang="en">
   <PageHead
     slot="head"
     title={`${categoryEn} - Audio Reviews`}
     description={`Audio reviews in category: ${categoryEn}`}
-    lang="en-US"
+    lang="en"
   />
   <div data-pagefind-ignore="all">
     <Breadcrumbs

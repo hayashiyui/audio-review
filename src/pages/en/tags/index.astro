@@ -19,8 +19,8 @@ const sortedTags = [...tagCounts.entries()]
   .sort((a, b) => (b.count - a.count) || a.tag.localeCompare(b.tag))
 ---
 
-<Layout class="max-w-6xl ml-2" lang="en-US">
-  <PageHead slot="head" title="Tags" lang="en-US" />
+<Layout class="max-w-6xl ml-2" lang="en">
+  <PageHead slot="head" title="Tags" lang="en" />
   <div data-pagefind-ignore="all">
     <Breadcrumbs items={[{ label: 'Tags', icon: 'lucide:tags' }]} />
 

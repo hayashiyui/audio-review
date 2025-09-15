@@ -31,8 +31,7 @@ pnpm install
 pnpm dev                    # http://localhost:4321
 
 # ビルド関連
-npx astro build             # 本番用ビルド
-npx astro preview           # ビルド結果のプレビュー
+pnpm build             # 本番用ビルド
 
 # Cloudflareアダプター追加（SSR/ODR用）
 pnpm astro add cloudflare
@@ -95,14 +94,14 @@ public/
 1. GitHub/GitLabにプッシュ
 2. Cloudflare PagesでリポジトリをConnect
 3. Framework preset: Astro
-4. Build command: `npx astro build`
+4. Build command: `pnpm build`
 5. Output directory: `dist`
 6. 環境変数でNODE_VERSION=20を設定
 
 ### 手動デプロイ
 ```bash
 npm install -D wrangler
-npx astro build
+pnpm build
 npx wrangler pages deploy ./dist
 ```
 
@@ -230,12 +229,8 @@ export async function getReviewTOCSections(reviewId: string): Promise<TOCSection
 **問題**: PCでTOCが表示されない（TOCHeaderをモバイル用に実装していた）
 **解決**: blogと同じTOCSidebar（PC用）とTOCHeader（モバイル用）両方実装
 
-### 5. ビルドコマンド問題
-**問題**: `pnpm run build`が動作しない
-**解決**: `npx astro build`が正しいコマンド
-
 ### 6. astro:assets画像最適化が機能しない問題
-**問題**: `npx astro build`してもWebP画像が生成されない
+**問題**: `pnpm build`してもWebP画像が生成されない
 **解決**: 
 1. `src/content.config.ts`のreviewsコレクションで`heroImage: image().optional()`に変更
 2. 画像を`public/images/`から`src/assets/images/`に移動

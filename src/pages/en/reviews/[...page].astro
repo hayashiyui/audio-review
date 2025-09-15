@@ -19,8 +19,8 @@ const reviewsByYear = groupReviewsByYear(page.data)
 const years = Object.keys(reviewsByYear).sort((a, b) => parseInt(b) - parseInt(a))
 ---
 
-<Layout class="max-w-6xl ml-2" lang="en-US">
-  <PageHead slot="head" title="Audio Reviews" lang="en-US" />
+<Layout class="max-w-6xl ml-2" lang="en">
+  <PageHead slot="head" title="Audio Reviews" lang="en" />
   <div data-pagefind-ignore="all">
     <Breadcrumbs
       items={[

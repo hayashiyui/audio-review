@@ -78,6 +78,8 @@ if (post.collection === 'blog') {
 {post.collection === 'columns' && (
   <meta name="pagefind:filters" content="section=columns" />
 )}
+<!-- 言語フィルターを常に付与（Pagefind UIの既定フィルターと連動） -->
+<meta name="pagefind:filters" content={`lang=${lang ?? SITE.locale}`} />
 {post.collection === 'reviews' && (
   <meta name="pagefind:weight" content="100" />
 )}

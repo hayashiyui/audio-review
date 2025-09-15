@@ -36,8 +36,8 @@ const tocSections = await getPostTOCSections(currentReviewId)
 const navigation = await getAdjacentReviews(currentReviewId, 'en')
 ---
 
-<Layout lang="en-US">
-  <PostHead slot="head" post={review} lang="en-US" />
+<Layout lang="en">
+  <PostHead slot="head" post={review} lang="en" />
   {
     headings?.length > 0 && (
       <TOCHeader slot="table-of-contents" headings={headings} />
@@ -46,7 +46,7 @@ const navigation = await getAdjacentReviews(currentReviewId, 'en')
 
   <section
     class="grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6"
-    data-pagefind-filter="section:reviews"
+    data-pagefind-filter="section:reviews,lang:en"
   >
     <div class="col-start-2">
       <Breadcrumbs

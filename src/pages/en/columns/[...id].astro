@@ -30,8 +30,8 @@ const { Content, headings } = await render(column)
 const tocSections = await getColumnTOCSections(currentId)
 ---
 
-<Layout lang="en-US">
-  <PostHead slot="head" post={column} lang="en-US" />
+<Layout lang="en">
+  <PostHead slot="head" post={column} lang="en" />
   {
     headings?.length > 0 && (
       <TOCHeader slot="table-of-contents" headings={headings} />
@@ -40,7 +40,7 @@ const tocSections = await getColumnTOCSections(currentId)
 
   <section
     class="grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6"
-    data-pagefind-filter="section:columns"
+    data-pagefind-filter="section:columns,lang:en"
   >
     <div class="col-start-2">
       <Breadcrumbs

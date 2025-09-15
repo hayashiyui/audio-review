@@ -16,8 +16,12 @@ export async function getStaticPaths() {
   const { getAllReviews, getAllColumns } = await import('@/lib/data-utils')
   const allReviews = await getAllReviews()
   const allColumns = await getAllColumns()
-  for (const r of allReviews) r.data.tags?.forEach((t) => tags.add(t))
-  for (const c of allColumns) c.data.tags?.forEach((t) => tags.add(t))
+  // Only collect tags from English entries
+  const enReviews = allReviews.filter((r) => (r.data.locale ?? 'ja') === 'en')
+  const enColumns = allColumns.filter((c) => (c.data.locale ?? 'ja') === 'en')
+  for (const r of enReviews) r.data.tags?.forEach((t) => tags.add(t))
+
+  for (const c of enColumns) c.data.tags?.forEach((t) => tags.add(t))
 
   return Array.from(tags).map((tag) => ({
     params: { id: tag },
@@ -31,12 +35,12 @@ const columns = entries.columns.filter((c) => (c.data.locale ?? 'ja') === 'en')
 const reviews = entries.reviews.filter((r) => (r.data.locale ?? 'ja') === 'en')
 ---
 
-<Layout class="max-w-6xl ml-2" lang="en-US">
+<Layout class="max-w-6xl ml-2" lang="en">
   <PageHead
     slot="head"
     title={`Posts tagged with "${tag}"`}
     description={`A collection of posts tagged with ${tag}.`}
-    lang="en-US"
+    lang="en"
   />
   <div data-pagefind-ignore="all">
     <Breadcrumbs

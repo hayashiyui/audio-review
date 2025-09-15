@@ -108,15 +108,13 @@
             filters_clear: 'フィルターをクリア',
           }
 
-      new (window as any).PagefindUI({
+      const ui = new (window as any).PagefindUI({
         element: '#pagefind-ui',
         bundlePath: '/pagefind/',
         showImages: true,
         showSubResults: true,
         pageSize: 8,
         indexWeight: 10,
-        // フィルター表示を有効化
-        showFilters: true,
         // デフォルトで両方のセクションを表示
         filters: {
           section: {
@@ -129,27 +127,27 @@
           let normalizedTerm = term.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s: string): string {
             return String.fromCharCode(s.charCodeAt(0) - 0xFEE0)
           })
-          
+
           // 複合語のパターンを処理
           // 1. キャメルケース（HifiMan → Hifi Man）
           normalizedTerm = normalizedTerm.replace(/([a-z])([A-Z])/g, '$1 $2')
-          
+
           // 2. 全大文字の複合語（TOPWING → TOP WING）
           // 大文字が続く場合、最後の大文字から次の語が始まると判定
           normalizedTerm = normalizedTerm.replace(/([A-Z]{2,})([A-Z][a-z])/g, function(match: string, p1: string, p2: string): string {
             return p1.slice(0, -1) + ' ' + p1.slice(-1) + p2.slice(1)
           })
-          
+
           // 3. 数字と文字の境界（HD600 → HD 600, ATH-M50x → ATH M50x）
           normalizedTerm = normalizedTerm.replace(/([A-Za-z])(\d)/g, '$1 $2')
           normalizedTerm = normalizedTerm.replace(/(\d)([A-Za-z])/g, '$1 $2')
-          
+
           // ハイフンをスペースに変換（Audio-Technica → Audio Technica）
           normalizedTerm = normalizedTerm.replace(/-/g, ' ')
-          
+
           // 余分なスペースを除去
           normalizedTerm = normalizedTerm.replace(/\s+/g, ' ').trim()
-          
+
           return normalizedTerm
         },
         translations,

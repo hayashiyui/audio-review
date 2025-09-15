@@ -14,7 +14,7 @@ import { Picture } from 'astro:assets'
 import { getCollection, render } from 'astro:content'
 
 export async function getStaticPaths() {
-  const columns = await getCollection('columns', ({ data }) => !data.draft)
+  const columns = await getCollection('columns', ({ data }) => !data.draft && (data.locale ?? 'ja') === 'ja')
   return columns.map((column) => ({
     params: { id: column.id },
     props: column,
@@ -40,7 +40,7 @@ const navigation = await getAdjacentColumns(currentColumnId)
 
   <section
     class="grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6"
-    data-pagefind-filter="section:columns"
+    data-pagefind-filter="section:columns,lang:ja"
   >
     <div class="col-start-2">
       <Breadcrumbs

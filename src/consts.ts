@@ -6,7 +6,7 @@ export const SITE: Site = {
     'スーパーハイエンドからエントリーまで。スピーカー、ヘッドホン、イヤホン、DAC、アンプ等オーディオ機器の忖度なき深層レビュー。そっとポエムを添えて',
   href: 'https://audiomatome.com',
   author: '哲学的なNEKO',
-  locale: 'ja-JP',
+  locale: 'ja',
   featuredPostCount: 20,
   postsPerPage: 20,
 }
