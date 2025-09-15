@@ -9,18 +9,91 @@ const targetLocale = isEn ? 'ja' : 'en'
 
 // URLパスを変換（単純なトップページ間の切り替え）
 const toggleUrl = isEn ? '/' : '/en/'
-const targetLabel = targetLocale === 'en' ? 'EN' : 'JP'
-const ariaLabel = `Switch to ${targetLocale === 'en' ? 'English' : 'Japanese'}`
+const currentLabel = currentLocale === 'ja' ? '日本語' : 'English'
+const targetLabel = targetLocale === 'en' ? 'English' : '日本語'
 ---
 
-<a
-  href={toggleUrl}
-  class="inline-flex items-center gap-1.5 rounded-md border border-border/50 bg-background/50 px-2.5 py-1.5 text-sm font-medium text-foreground/70 transition-colors hover:bg-background hover:text-foreground hover:border-border"
-  title={ariaLabel}
-  aria-label={ariaLabel}
->
-  <Icon name="lucide:globe" class="size-3.5" />
-  <span class="text-xs font-medium">
-    {targetLabel}
-  </span>
-</a>
+<div class="relative" data-global-language-menu>
+  <button
+    type="button"
+    class="inline-flex items-center gap-1.5 rounded-md border border-border/50 bg-background/50 px-2.5 py-1.5 text-sm font-medium text-foreground/70 transition-colors hover:bg-background hover:text-foreground hover:border-border"
+    aria-label="言語を選択"
+    aria-expanded="false"
+  >
+    <Icon name="lucide:globe" class="size-3.5" />
+    <span class="text-xs font-medium">
+      {currentLabel}
+    </span>
+    <Icon name="lucide:chevron-down" class="size-3" />
+  </button>
+
+  <div class="absolute right-0 z-10 mt-2 hidden min-w-[120px] rounded-md border border-border bg-background shadow-lg" data-global-language-dropdown>
+    <a
+      href={toggleUrl}
+      class="flex items-center gap-2 px-3 py-2 text-sm text-foreground hover:bg-muted"
+    >
+      {targetLabel}
+    </a>
+  </div>
+</div>
+
+<script>
+  function initGlobalLanguageToggle() {
+    const menus = document.querySelectorAll('[data-global-language-menu]')
+
+    menus.forEach(menu => {
+      const button = menu.querySelector('button')
+      const dropdown = menu.querySelector('[data-global-language-dropdown]')
+
+      if (button && dropdown) {
+        // Remove existing listeners to prevent duplicates
+        button.removeEventListener('click', button._clickHandler)
+
+        const clickHandler = (e) => {
+          e.stopPropagation()
+          const isOpen = dropdown.classList.contains('hidden')
+
+          // Close all language menus
+          document.querySelectorAll('[data-global-language-dropdown], [data-language-dropdown]').forEach(d => {
+            d.classList.add('hidden')
+          })
+          document.querySelectorAll('[data-global-language-menu] button, [data-language-menu] button').forEach(b => {
+            b.setAttribute('aria-expanded', 'false')
+          })
+
+          if (isOpen) {
+            dropdown.classList.remove('hidden')
+            button.setAttribute('aria-expanded', 'true')
+          } else {
+            dropdown.classList.add('hidden')
+            button.setAttribute('aria-expanded', 'false')
+          }
+        }
+
+        button._clickHandler = clickHandler
+        button.addEventListener('click', clickHandler)
+      }
+    })
+
+    // Click outside to close
+    const outsideClickHandler = () => {
+      document.querySelectorAll('[data-global-language-dropdown]').forEach(dropdown => {
+        dropdown.classList.add('hidden')
+      })
+      document.querySelectorAll('[data-global-language-menu] button').forEach(button => {
+        button.setAttribute('aria-expanded', 'false')
+      })
+    }
+
+    // Remove existing listener to prevent duplicates
+    document.removeEventListener('click', document._globalLanguageOutsideClickHandler)
+    document._globalLanguageOutsideClickHandler = outsideClickHandler
+    document.addEventListener('click', outsideClickHandler)
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', initGlobalLanguageToggle)
+
+  // Re-initialize after view transitions (for Astro View Transitions)
+  document.addEventListener('astro:after-swap', initGlobalLanguageToggle)
+</script>
