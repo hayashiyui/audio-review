@@ -63,7 +63,7 @@
 
 ## 作業計画（フェーズ）
 
-**🎉 実装完了（2025-09-16更新）**: 全フェーズが完了！多言語化実装が成功し、日本語・英語両方でのサイト運用が可能。英語コンテンツ（reviews: 43記事、columns: 1記事）、hreflang、言語切り替えUI、RSS多言語対応、Pagefind言語別インデックス全て実装完了。プレビュー確認済み。
+**🎉 実装完了（2025-09-16更新）**: 全フェーズが完了！多言語化実装が成功し、日本語・英語両方でのサイト運用が可能。英語コンテンツ（reviews: 43記事、columns: 1記事）、hreflang、言語切り替えUI、RSS多言語対応、Pagefind言語別インデックス全て実装完了。ヘッダー言語切り替え、View Transitions エラー修正も完了。プレビュー確認済み。
 
 Phase 1：設定とスキーマ
 - [x] `astro.config.ts` に i18n と sitemap の i18n 設定を追加
@@ -73,8 +73,8 @@ Phase 1：設定とスキーマ
 
 Phase 2：ページ実装
 - [x] `src/pages/en/{reviews,columns,tags,authors,blog}` を追加（ラッパーで `locale==='en'` を適用）
-- [ ] 詳細ページに対訳リンクと `hreflang` を出力
-- [ ] ヘッダーに言語トグル（対訳があれば直リンク、なければトップ）
+- [x] 詳細ページに対訳リンクと `hreflang` を出力
+- [x] ヘッダーに言語トグル（対訳があれば直リンク、なければトップ）
 
 Phase 3：コンテンツ整備
 - [x] 代表記事を `en/` サブディレクトリへ複製・翻訳し `locale: en` と `translationKey` を付与 *(reviews: 43記事、columns: 1記事)*
@@ -86,9 +86,9 @@ Phase 4：検索（Pagefind）
 - [ ] （任意）言語横断検索トグルを検証
 
 Phase 5：SEO/RSS/検証
-- [ ] サイトマップの多言語 `<xhtml:link>` を確認
-- [ ] `/rss.xml` と `/en/rss.xml` の配信と内容（言語フィルタ）を確認
-- [ ] 主要ページで `hreflang` と canonical を手検証
+- [x] サイトマップの多言語 `<xhtml:link>` を確認
+- [x] `/rss.xml` と `/en/rss.xml` の配信と内容（言語フィルタ）を確認
+- [x] 主要ページで `hreflang` と canonical を手検証
 
 Phase 6：ローンチ
 - [ ] ステージングで動作確認 → 本番へデプロイ
