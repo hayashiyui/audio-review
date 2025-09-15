@@ -1,0 +1,45 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import Link from '@/components/Link.astro'
+import PageHead from '@/components/PageHead.astro'
+import { badgeVariants } from '@/components/ui/badge'
+import Layout from '@/layouts/Layout.astro'
+import { getAllReviews, getAllColumns } from '@/lib/data-utils'
+import { Icon } from 'astro-icon/components'
+
+const reviews = (await getAllReviews()).filter((r) => (r.data.locale ?? 'ja') === 'en')
+const columns = (await getAllColumns()).filter((c) => (c.data.locale ?? 'ja') === 'en')
+
+const tagCounts = new Map<string, number>()
+for (const r of reviews) r.data.tags?.forEach((t) => tagCounts.set(t, (tagCounts.get(t) || 0) + 1))
+for (const c of columns) c.data.tags?.forEach((t) => tagCounts.set(t, (tagCounts.get(t) || 0) + 1))
+
+const sortedTags = [...tagCounts.entries()]
+  .map(([tag, count]) => ({ tag, count }))
+  .sort((a, b) => (b.count - a.count) || a.tag.localeCompare(b.tag))
+---
+
+<Layout class="max-w-6xl ml-2" lang="en">
+  <PageHead slot="head" title="Tags" lang="en" />
+  <div data-pagefind-ignore="all">
+    <Breadcrumbs items={[{ label: 'Tags', icon: 'lucide:tags' }]} />
+
+    <div class="flex flex-col gap-4">
+      <div class="flex flex-wrap gap-2">
+        {
+          sortedTags.map(({ tag, count }) => (
+            <Link
+              href={`/en/tags/${tag}`}
+              class={badgeVariants({ variant: 'secondary' })}
+            >
+              <Icon name="lucide:hash" class="size-3" />
+              {tag}
+              <span class="text-muted-foreground ml-1.5">({count})</span>
+            </Link>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Layout>
+

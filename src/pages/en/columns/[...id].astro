@@ -1,0 +1,83 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import LanguageToggle from '@/components/LanguageToggle.astro'
+import PostHead from '@/components/PostHead.astro'
+import RelatedArticles from '@/components/RelatedArticles.astro'
+import TOCHeader from '@/components/TOCHeader.astro'
+import TOCSidebar from '@/components/TOCSidebar.astro'
+import Layout from '@/layouts/Layout.astro'
+import { getColumnTOCSections } from '@/lib/data-utils'
+import { Icon } from 'astro-icon/components'
+import { Picture } from 'astro:assets'
+import { getCollection, render } from 'astro:content'
+
+export async function getStaticPaths() {
+  const columns = await getCollection('columns', ({ data }) => !data.draft && (data.locale ?? 'ja') === 'en')
+  return columns.map((column) => {
+    const slug = column.id.replace(/^en\//, '').replace(/\.en$/, '')
+    return {
+      params: { id: slug },
+      props: column,
+    }
+  })
+}
+
+const column = Astro.props
+// Content API 実ID
+const currentId = column.id
+// 表示用のURLスラッグ
+const pageSlug = Astro.params.id
+const { Content, headings } = await render(column)
+const tocSections = await getColumnTOCSections(currentId)
+---
+
+<Layout lang="en">
+  <PostHead slot="head" post={column} lang="en" />
+  {
+    headings?.length > 0 && (
+      <TOCHeader slot="table-of-contents" headings={headings} />
+    )
+  }
+
+  <section
+    class="grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6"
+    data-pagefind-filter="section:columns,lang:en"
+  >
+    <div class="col-start-2">
+      <div class="flex items-center justify-between mb-4">
+        <Breadcrumbs
+          items={[
+            { href: '/en/columns', label: 'Audio Columns', icon: 'lucide:pen-tool' },
+            { href: `/en/columns/${pageSlug}`, label: column.data.title, icon: 'lucide:file-text' },
+          ]}
+        />
+        <LanguageToggle post={column} currentLocale="en" />
+      </div>
+    </div>
+
+    {column.data.heroImage && (
+      <div class="col-span-full mx-auto w-full max-w-5xl">
+        <Picture
+          src={column.data.heroImage}
+          alt={column.data.title}
+          widths={[640, 828, 960, 1080, 1200, 1280]}
+          sizes="(min-width: 1280px) 1280px, 100vw"
+          formats={['avif', 'webp']}
+          fit="cover"
+          position="center"
+          priority
+          class="w-full rounded-lg object-cover aspect-video"
+          data-pagefind-meta="image[src], image_alt[alt]"
+        />
+      </div>
+    )}
+
+    <article class="prose col-start-2 max-w-none">
+      <Content />
+    </article>
+
+    <div class="col-start-2">
+      <RelatedArticles collection="columns" articleId={currentId} locale="en" />
+    </div>
+  </section>
+</Layout>

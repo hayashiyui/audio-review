@@ -1,6 +1,7 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import ColumnsNavigation from '@/components/ColumnsNavigation.astro'
+import LanguageToggle from '@/components/LanguageToggle.astro'
 import PostHead from '@/components/PostHead.astro'
 import RelatedArticles from '@/components/RelatedArticles.astro'
 import TOCHeader from '@/components/TOCHeader.astro'
@@ -8,13 +9,14 @@ import TOCSidebar from '@/components/TOCSidebar.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import Layout from '@/layouts/Layout.astro'
 import { getAdjacentColumns, getColumnTOCSections } from '@/lib/data-utils'
+import { categoryLabel } from '@/lib/i18n'
 import { formatDate } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
 import { Picture } from 'astro:assets'
 import { getCollection, render } from 'astro:content'
 
 export async function getStaticPaths() {
-  const columns = await getCollection('columns', ({ data }) => !data.draft)
+  const columns = await getCollection('columns', ({ data }) => !data.draft && (data.locale ?? 'ja') === 'ja')
   return columns.map((column) => ({
     params: { id: column.id },
     props: column,
@@ -40,15 +42,18 @@ const navigation = await getAdjacentColumns(currentColumnId)
 
   <section
     class="grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6"
-    data-pagefind-filter="section:columns"
+    data-pagefind-filter="section:columns,lang:ja"
   >
     <div class="col-start-2">
-      <Breadcrumbs
-        items={[
-          { href: '/columns', label: 'オーディオコラム', icon: 'lucide:pen-tool' },
-          { href: `/columns/${column.id}`, label: column.data.title, icon: 'lucide:file-text' },
-        ]}
-      />
+      <div class="flex items-center justify-between mb-4">
+        <Breadcrumbs
+          items={[
+            { href: '/columns', label: 'オーディオコラム', icon: 'lucide:pen-tool' },
+            { href: `/columns/${column.id}`, label: column.data.title, icon: 'lucide:file-text' },
+          ]}
+        />
+        <LanguageToggle post={column} currentLocale="ja" />
+      </div>
     </div>
 
     {column.data.heroImage && (
@@ -105,7 +110,7 @@ const navigation = await getAdjacentColumns(currentColumnId)
               class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
             >
               <a href={`/columns/category/${column.data.category}`} class="hover:underline">
-                {column.data.category}
+                {categoryLabel(column.data.category, 'ja')}
               </a>
             </div>
           )}

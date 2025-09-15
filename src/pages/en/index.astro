@@ -1,0 +1,82 @@
+---
+import BlogCard from '@/components/BlogCard.astro'
+import ReviewsCard from '@/components/ReviewsCard.astro'
+import Link from '@/components/Link.astro'
+import PageHead from '@/components/PageHead.astro'
+import { buttonVariants } from '@/components/ui/button'
+import Layout from '@/layouts/Layout.astro'
+import { getAllReviews, getAllColumns } from '@/lib/data-utils'
+
+const allReviews = await getAllReviews()
+const allColumns = await getAllColumns()
+const reviews = allReviews
+  .filter((e) => (e.data.locale ?? 'ja') === 'en')
+  .slice(0, 18)
+const columns = allColumns
+  .filter((e) => (e.data.locale ?? 'ja') === 'en')
+  .slice(0, 3)
+---
+
+<Layout class="max-w-6xl ml-2" lang="en">
+  <PageHead slot="head" title="Home" lang="en" />
+  <div data-pagefind-ignore="all">
+    {
+      columns.length > 0 && (
+        <section class="flex flex-col gap-y-4">
+          <div class="w-full text-left">
+            <Link href="/en/columns" class="no-underline">
+              <h2 class="text-lg font-medium hover:text-foreground/80 transition-colors cursor-pointer">Latest Columns</h2>
+            </Link>
+          </div>
+          <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {
+              columns.map((column) => (
+                <li>
+                  <BlogCard entry={column} />
+                </li>
+              ))
+            }
+          </ul>
+          <div class="flex justify-center">
+            <Link
+              href="/en/columns"
+              class={buttonVariants({ variant: 'ghost' }) + ' group'}
+            >
+              See all columns <span
+                class="ml-1.5 transition-transform group-hover:translate-x-1"
+                >&rarr;</span
+              >
+            </Link>
+          </div>
+        </section>
+      )
+    }
+    <section class="flex flex-col gap-y-4">
+      <div class="w-full text-left">
+        <Link href="/en/reviews" class="no-underline">
+          <h2 class="text-lg font-medium hover:text-foreground/80 transition-colors cursor-pointer">Latest Reviews</h2>
+        </Link>
+      </div>
+      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {
+          reviews.map((review) => (
+            <li>
+              <ReviewsCard entry={review} />
+            </li>
+          ))
+        }
+      </ul>
+      <div class="flex justify-center">
+        <Link
+          href="/en/reviews"
+          class={buttonVariants({ variant: 'ghost' }) + ' group'}
+        >
+          See all reviews <span
+            class="ml-1.5 transition-transform group-hover:translate-x-1"
+            >&rarr;</span
+          >
+        </Link>
+      </div>
+    </section>
+  </div>
+</Layout>

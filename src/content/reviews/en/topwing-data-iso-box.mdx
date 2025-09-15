@@ -1,0 +1,246 @@
+---
+locale: en
+translationKey: reviews-topwing-data-iso-box
+
+title: "TOP WING DATA ISO BOX Review: Democratizing Network Isolation"
+description: "Network isolation realized for ¥55,000. A thorough examination of the market significance of TOP WING DATA ISO BOX, bridging the gap between DIY complexity and high-end price barriers."
+date: "2025-07-27"
+brand: "TOP WING"
+model: "DATA ISO BOX"
+category: "Accessories"
+tags: ["network equipment", "TOP WING", "network audio", "Japan"]
+heroImage: "@assets/images/hero/topwing-data-iso-box.jpg"
+relatedArticles:
+  - collection: reviews
+    id: synergistic-research-network-router
+  - collection: columns
+    id: sound-quality-evaluation-guide
+---
+
+import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
+
+<RelatedArticlesGrid
+  articles={[
+    { collection: "reviews", id: "synergistic-research-network-router" },
+    { collection: "columns", id: "sound-quality-evaluation-guide" }
+  ]}
+  columns={2}
+  title="Related Articles"
+/>
+
+## **Part I: The Acoustic Imperative of "Silent" Networks**
+
+### **1.1 The Invisible Enemy in Digital Audio Chains: Network Noise**
+
+In modern network audio, the pursuit of ultimate sound quality inevitably encounters the challenge of "network noise." This noise is not merely electrical interference. Rather, it has more complex characteristics: the torrent of data packets unrelated to audio reproduction and the processing load generated within audio equipment to handle them.
+
+A typical home network is a chaotic environment where numerous devices like PCs, smartphones, and IoT appliances constantly communicate through unicast, multicast, and broadcast formats. Particularly, the constant "calls (multicasts)" from IoT devices and broadcast packets sent across the entire network sometimes create saturation conditions called "broadcast storms," generating noisy data environments.
+
+Network audio players (streamers) connected to this network receive these massive amounts of unnecessary packets along with music data. The OS and CPU inside the player are constantly forced to actively process and discard this unwanted data [14](#ref-14). This data processing activity is the fundamental mechanism of sound quality degradation. CPU load and memory access cause minute current fluctuations in the player's digital circuits. These fluctuations become high-frequency electrical noise, contaminating the delicate power supplies and ground planes shared with the DAC (Digital-to-Analog Converter) and analog output stages.
+
+Therefore, the primary cause of sound quality degradation lies not so much in noise itself entering through LAN cables, but rather in the "noise generated internally" by audio equipment struggling to process "dirty" network streams. Networks don't just carry noise—they force audio equipment to generate noise themselves. The consistent evaluation in reviews of network-isolated equipment as having "quieter backgrounds" and "improved S/N ratios" [22](#ref-22) stems from this reduction in internally generated noise. By preventing unnecessary packets from reaching the player, CPU processing load is dramatically reduced, resulting in a quiet internal environment where the DAC can exhibit its maximum performance.
+
+### **1.2 The Principle of Isolation: Creating Audio-Dedicated Sanctuaries**
+
+The solution to this problem is the concept of "network isolation (segmentation)"—logically or physically separating audio networks from general home networks. The purpose is to construct a "pure network space" exclusively for audio equipment [3](#ref-3).
+
+This isolation is achieved through "dual router" configurations that install a second dedicated router, or more advanced technologies like Virtual LANs (VLANs) and port isolation [3](#ref-3). This approach is like preparing a "soundproof room" isolated from household commotion specifically for audio data [16](#ref-16). By preventing unnecessary traffic from reaching audio equipment altogether, it eliminates the need for noisy filtering processes on the equipment side.
+
+This concept of network isolation is actually not new in audio history. Rather, it can be viewed as applying the philosophy of "component separation" long cultivated by traditional hi-fi audio—such as separate preamp and power amp chassis, or separate power supplies—to modern network environments [11](#ref-11). Just as physically isolating power amplifier sections handling high current from preamp sections handling delicate signals prevents mutual interference, data isolation in network audio logically separates audio data streams from other household traffic "noise sources." This is the legitimate evolution of hi-fi audio's core principle of "high-quality through separation" into the data-centric domain.
+
+## **Part II: Pioneer Approaches - Utilizing Generic Routers for Audio Purification**
+
+### **2.1 DIY Exploration: Finding Solutions in IT Hardware**
+
+Before network isolation was established as audio-specific products, enthusiastic audio hobbyists discovered that high-function routers represented by YAMAHA's RTX and NVR series could become powerful tools for purifying audio networks.
+
+This DIY approach wasn't a single method but consisted of two major streams. One was the "dual router" configuration adding physical network layers, the other was "port isolation" and "VLANs" building logical walls within a single router.
+
+### **2.2 Method 1: Dual Router Configuration (Physical Separation)**
+
+The most intuitive and understandable approach is dual router configuration [3](#ref-3). This method connects from the LAN port of an existing home router (parent) to the WAN port of a second router (child) prepared exclusively for audio.
+
+This configuration places audio equipment groups (network players, NAS, etc.) in a completely new, independent network segment (e.g., 192.168.100.x) created by the child router. Meanwhile, PCs, smartphones, IoT appliances remain on the parent router's network (e.g., 192.168.1.x).
+
+The greatest advantage of this method is its conceptual clarity due to physical network separation through wiring. The child router appears as a single device from the parent router's perspective, so broadcast packet storms occurring on the parent side generally don't reach the child side's audio network. This enables relatively easy "sanctification" of audio networks even with routers lacking special features.
+
+### **2.3 Method 2: Logical Separation with Single Router**
+
+A more elegant method explored logical network division within a single high-function router. This utilized features like "port isolation" and "VLANs" found in YAMAHA routers.
+
+Port Isolation Function:
+This feature treats multiple LAN ports on the same router as if they were separate networks. For example, on a router with LAN1-4 ports, direct communication between port 1 (audio equipment) and ports 2-4 (general equipment) can be prohibited. This prevents unnecessary traffic generated by general equipment from flowing into ports connected to audio equipment. While less flexible than VLANs (especially tagged VLANs), this was an effective means of simply building walls between ports. Models like YAMAHA NVR510 also included this port isolation feature.
+
+VLAN (Virtual LAN):
+VLAN is a more powerful and flexible technology further developing port isolation [3](#ref-3). Regardless of physical connections, logical network groups (VLANs) are created through router or switch settings. For example, tagged VLAN (IEEE 802.1Q) compatible models like YAMAHA RTX810 could create "VLAN 10" for audio equipment and "VLAN 20" for general equipment, assigning VLAN membership by port [21](#ref-21).
+
+The true value of this method lies in the ability to strictly control inter-VLAN communication with firewalls. For example, detailed rule settings like "allow smartphone operation from VLAN 20 to VLAN 10 players (Roon, etc.) but block all broadcasts from VLAN 20 to VLAN 10" were possible [22](#ref-22).
+
+### **2.4 Acoustic Benefits and Practical Challenges**
+
+These DIY approaches brought significant acoustic benefits when successful, but also presented high hurdles.
+
+As benefits, users who successfully implemented these settings reported noticeable sound quality improvements: perceived spatial expansion, improved vocal and instrument texture, and better separation between musical elements [22](#ref-22). These subjective evaluations were also confirmed by packet capture analysis, showing dramatic reductions in unnecessary packets reaching audio players [22](#ref-22).
+
+However, the greatest challenge was technical complexity. Particularly, detailed VLAN and port isolation settings were only accessible to users well-versed in network technology, creating high barriers for general audio enthusiasts [22](#ref-22). Configuration errors could not only fail to improve sound quality but potentially cause serious situations like complete network connectivity loss.
+
+This DIY approach, despite its effectiveness, created a significant "knowledge gap" within the audio enthusiast community. While a powerful technique, its benefits were limited to users with specialized knowledge. This situation created market opportunities for products like the later TOP WING DATA ISO BOX that eliminate the need for specialized knowledge while allowing everyone to enjoy similar benefits.
+
+## **Part III: Modern Solutions - TOP WING DATA ISO BOX**
+
+### **3.1 New Paradigm: The Emergence of Dedicated Network Isolation Devices**
+
+As the effectiveness of DIY network isolation gained recognition among some users, a product designed to eliminate this complexity and allow everyone to benefit from high-quality audio emerged. This is TOP WING's "DATA ISO BOX."
+
+This product was introduced to the market as an "audio-dedicated router" or, more precisely, a "network separator" [8](#ref-8). Its sole purpose is creating a "quiet network space" isolated from noise for audio equipment [8](#ref-8). This packages the core principle of network isolation that pioneers achieved using high-function routers into a user-friendly chassis designed specifically for audio [8](#ref-8).
+
+Its greatest feature is installation simplicity. Network isolation is completed simply by connecting between existing home routers and audio equipment, requiring no complex configuration [8](#ref-8). This stands diametrically opposed to DIY approaches that required battling command lines and cryptic configuration screens.
+
+### **3.2 Design Philosophy and Technical Architecture**
+
+DATA ISO BOX's design philosophy fundamentally differs from generic routers. Its value lies not in versatility but in "minimalism" specialized for audio reproduction.
+
+Hardware-wise, it's designed around reliable CPUs with proven track records in enterprise routers, but intentionally avoids the highest-spec CPUs. This is a sound-quality-first decision recognizing that overly powerful CPUs can themselves become noise sources, choosing processors with "just right" processing power for the task [8](#ref-8). Memory uses reliable SK hynix industrial DRAM [8](#ref-8).
+
+Software is thoroughly optimized exclusively for audio under the philosophy of "add nothing, subtract nothing" [8](#ref-8). All functions unnecessary for audio reproduction found in generic routers are eliminated, preventing DATA ISO BOX itself from becoming a new noise source or operating unstably.
+
+Physical port configuration clearly reflects this function. Input provides one "ROUTER" port for connecting upstream routers, output provides three "Audio" ports for connecting audio equipment and one "AP" port for connecting dedicated access points [8](#ref-8). This physical port distinction helps users intuitively understand the logical network isolation occurring internally.
+
+This design philosophy contrast is important. If enterprise high-function routers derive value from power and flexibility (versatility), DATA ISO BOX derives value from functional "absence" and "specialization" for purpose. This represents evolution from powerful but unwieldy "tools" to refined single-purpose "instruments," indicating the maturation of network isolation concepts.
+
+### **3.3 Ecosystem Power: OPT AP and OPT ISO BOX Integration**
+
+TOP WING understands that network isolation isn't a problem completed by a single device and has built a comprehensive ecosystem.
+
+Using DATA ISO BOX alone isolates wired-connected audio equipment from noisy home networks. However, Wi-Fi connection is necessary for operating these devices via smartphone or tablet apps, and connecting to home Wi-Fi would render the carefully constructed isolation meaningless.
+
+The solution to this challenge is the dedicated audio Wi-Fi access point "OPT AP." OPT AP connects to DATA ISO BOX's dedicated "AP" port, constructing a clean, independent Wi-Fi network exclusively for audio operation. This achieves both complete isolation maintenance and convenient operability ("balancing sound quality and convenience"). OPT AP is also designed to eliminate unnecessary functions and suppress noise generation like DATA ISO BOX.
+
+For users seeking even more advanced isolation, TOP WING provides the "OPT ISO BOX" optical LAN isolator. This device converts standard RJ45 LAN signals to optical signals, transmits through short fiber optic cables, then converts back to electrical signals. This completely severs electrical connections between upstream networks and audio equipment, eradicating ground loops and conducted noise. For ultimate performance, combined use with DATA ISO BOX is recommended.
+
+This ecosystem's existence reveals TOP WING's multi-layered problem-solving approach:
+
+1. **Logical Separation (What):** DATA ISO BOX separates audio "data traffic."
+2. **Control Path Separation (How):** OPT AP solves the problem of "controlling" isolated systems without reintroducing noise.
+3. **Electrical Separation (Physically):** OPT ISO BOX addresses the related but separate problem of "electrical noise" traveling through physical cables.
+
+This system-wide approach is a deeply considered solution not easily achievable through DIY router configuration alone, demonstrating TOP WING's extremely multifaceted and essential understanding of network-caused sound quality degradation factors.
+
+### **3.4 Sound Brought by Silence: Integrating Critic and User Reviews**
+
+The sound quality improvement effects brought by DATA ISO BOX and its ecosystem are consistently highly evaluated by many critics and users.
+
+Most commonly reported is dramatic S/N ratio improvement—"background silence." From this silence, previously inaudible minute details emerge, and the overall sound becomes clear and transparent "as if fog has lifted" or "like a camera coming into focus."
+
+In spatial expression, soundstages develop broader, deeper, and more three-dimensionally, with individual instrument and vocal positioning and separation becoming markedly clearer.
+
+In terms of tonality and realism, sound becomes more "solid" and "core-like," with increased organic, vivid texture. Reviews use metaphors like "practice swords becoming real swords" and expressions like "so real it gave me goosebumps," with effects appealing to music's fundamental reality.
+
+However, caveats are also noted. Some users might find the solid, uncolored sound somewhat analytical or fatiguing, potentially requiring cable adjustments according to preference. Also, final sound quality is heavily influenced by the power supply used, with the included AC adapter being merely a starting point, and opinions suggest true worth is revealed by upgrading to high-quality linear power supplies [3](#ref-3).
+
+## **Part IV: Comparative Analysis and Market Positioning**
+
+### **4.1 Direct Confrontation: DIY Ingenuity vs. Dedicated Design Engineering**
+
+To clarify differences between DIY approaches and dedicated products, the following comparison table summarizes their characteristics. This table highlights how both approach the same problem with vastly different philosophies and approaches. One is a powerful generic tool requiring professional configuration, while the other is specialized dedicated equipment pursuing ease of use and acoustic purity.
+
+**Table 1: Generic Router Utilization (DIY) vs. TOP WING DATA ISO BOX Philosophy and Feature Comparison**
+
+| Item/Aspect | Generic Router Utilization (DIY Approach) | TOP WING DATA ISO BOX (Dedicated Solution) |
+| :---- | :---- | :---- |
+| **Basic Concept** | Repurposing enterprise/high-function routers for audio use | "Network separator" or "transport" designed exclusively for audio |
+| **Primary Technology** | Manual configuration of dual router setups, VLANs (port-based/tagged), port isolation features | Pre-configured, software-optimized network segmentation |
+| **Hardware Philosophy** | Powerful, feature-rich hardware designed for enterprise IT reliability and versatility | Minimalist hardware using specially selected components (specific CPUs, industrial RAM, etc.) for low-noise audio performance |
+| **Software Philosophy** | Complex, highly configurable OS with vast network capabilities | "Add nothing, subtract nothing" philosophy. Simplified, optimized software eliminating all unnecessary processes |
+| **Ease of Use** | Requires some network knowledge (CLI, Web GUI, IP schemes, firewalls) | Plug-and-play. Pursues simplicity and usability for general audio enthusiasts |
+| **Cost** | Used hardware very affordable (¥4,000 - ¥8,000). "Cost" in time and knowledge | Moderate initial investment (main unit ¥55,000, bundle set ¥77,000) |
+| **Ecosystem** | Ad hoc. Users must procure and configure switches and access points themselves | Integrated ecosystem designed for seamless cooperation (OPT AP, OPT ISO BOX) |
+| **Target Users** | Budget-conscious, technically proficient DIY enthusiasts and experimenters | Serious audio enthusiasts prioritizing performance, convenience, and manufacturer support |
+
+### **4.2 High-End Market Trends: DATA ISO BOX's Positioning**
+
+To understand DATA ISO BOX's significance and pricing, grasping broader market context is essential. The audio-grade network equipment market leads in high-end territories.
+
+For example, products like Taiko Audio's "Extreme Router" (approximately ¥1,771,000) and Synergistic Research's "Network Router UEF" (approximately ¥726,000) exist. These products are manufactured through extreme engineering regardless of cost: chassis machined from copper billets, mounting massive linear power supplies, developing proprietary PCBs.
+
+Synergistic Research is an alchemist. They wield secret spells and proprietary field theories. Taiko Audio is an absolute performance seeker. They build impregnable fortresses called digital reproduction ideals from heavy copper masses.
+
+DATA ISO BOX's existence presents a third option. It argues that sufficient acoustic benefits can be obtained by simply and correctly applying network architecture fundamentals.
+
+However, viewing Taiko Audio as merely a physical quantity embodiment would misunderstand its essence. Their approach exists not in a world governed by diminishing returns but in a realm outside that law's application—"absolute performance pursuit." This is like questioning F1 machines about family car fuel efficiency—the evaluation grounds differ fundamentally. The "transformative" experiences reported by Taiko users embody ultra-high-end world logic that doesn't hesitate at exponential costs to extract the final 1%.
+
+TOP WING's claims are understandable and verifiable. Synergistic Research's claims, spoken outside conventional physics frameworks, require some faith. Taiko's claims are based on robust engineering principles pushed to extremes—logically grounded but theatrically scaled. If DATA ISO BOX is equipment for skeptics and engineers, Synergistic Research is for believers, and Taiko Audio for seekers willing to spare no cost to reach digital peaks.
+
+**Table 2: Audio Network Router/Separator Market Positioning**
+
+| Tier | Representative Products | Reference Price Range (JPY) | Key Features |
+| :---- | :---- | :---- | :---- |
+| **DIY/Entry** | YAMAHA RTX810 / NVR510 (used) | ¥4,000 - ¥10,000 | High technical skills required. Repurposed hardware. Results vary by implementation. |
+| **Enthusiast/Middle** | TOP WING DATA ISO BOX (+ OPT AP) | ¥55,000 - ¥77,000 | Dedicated design, plug-and-play, optimized software, integrated ecosystem. |
+| **High-End** | Synergistic Research Network Router UEF | ~¥726,000 | Extensive modifications to third-party hardware. Multiple proprietary noise/resonance countermeasures. |
+| **Ultra High-End/Statement** | Taiko Audio Extreme Router | ~¥1,771,000 | Cost-regardless design. Custom hardware (copper machined chassis, etc.), extreme power supplies. |
+
+This market map clearly shows the unique niche DATA ISO BOX occupies. More expensive than DIY solutions but orders of magnitude more affordable than high-end products, it potentially represents a "sweet spot" for serious audio enthusiasts.
+
+<RelatedArticlesGrid
+  articles={[
+    { collection: "reviews", id: "synergistic-research-network-router" },
+  ]}
+  columns={2}
+  title="Related Articles"
+/>
+
+## **Part V: Conclusions and Recommendations**
+
+### **5.1 From Niche Workaround to Product Category**
+
+Network audio isolation practice has evolved from "workarounds" by some pioneers (DIY generic router utilization) to an established legitimate "product category." TOP WING DATA ISO BOX symbolizes this maturation. It captures basic principles from early DIY while significantly improving implementation and accessibility, providing refined, reliable, user-friendly solutions. It successfully transforms early adopter insights into productization.
+
+### **5.2 Three Paths for Silence Seekers**
+
+The path to audio network purification is not singular. It branches into three different paths based on what listeners seek from audio and how much investment they consider acceptable.
+
+### **Path 1: Pragmatic Purification (TOP WING DATA ISO BOX)**
+
+This path is for **realistic explorers prioritizing logic and cost-performance**. You theoretically understand network noise's impact on sound quality and want to elegantly solve that problem without specialized knowledge or excessive effort. Rather than dramatically changing system tonality, you want to first solidify digital signal foundations, reliably improving basic performance like S/N and transparency. You'll find clear value in the fact that ¥55,000 investment can achieve "network isolation" benefits previously enjoyed only by some DIY users. **DATA ISO BOX is equipment for you.**
+
+### **Path 2: Artisanal Pursuit (DIY with YAMAHA Routers, etc.)**
+
+This path is for **practical artisans who build systems with their own hands and find joy in the process itself**. You don't shy away from learning network mechanisms, want to acquire used high-function routers at low cost, and challenge yourself to achieve maximum returns with minimum cost through trial and error. You're undaunted by terms like VLAN and port isolation, believing your knowledge and time are the greatest audio accessories. For you, **winning "silence" with your own hands** has more value than buying finished products.
+
+### **Path 3: Absolute Performance/Mysticism Pilgrimage (Taiko Audio / Synergistic Research)**
+
+This path is for **seekers freed from price constraints, pursuing digital reproduction ideals**. For you, audio transcends hobbies and entertainment—it's an artistic exploration journey itself.
+
+* If you **view networks not as mere infrastructure but as core components governing musical expression, willing to invest unhesitatingly in their absolute control**, you should knock on **Taiko Audio's** door. The "absolute silence" brought by chassis machined from 15kg copper billets and powerful brains executing even virtual machines will surely be an irreplaceable experience.
+
+* If you **view network equipment as "acoustic components" actively creating overall system tonality and resonance**, **Synergistic Research's** world awaits you. The unique house sound and musical coloration brought by proprietary field theories and materials engineering might be the final magical piece for your system.
+
+### **Overall Rating (DATA ISO BOX): ★★★★☆ (4.5/5)**
+
+This product is groundbreaking, redefining price-to-performance ratios in its category. It attempts to build a robust, logical bridge between DIY complexity and ultra-high-end price barriers. The half-star short of perfection stems from aftermarket power supplies being recommended to fully unleash its potential, and its physical form being purely functional rather than inspiring ownership desire.
+
+#### **References**
+
+<span id="ref-1">1</span>. ネットワークオーディオ向けにVLANを設定 | こいけいろぐ KoikeiLog - FC2, [https://surf2koike.blog.fc2.com/blog-entry-416.html](https://surf2koike.blog.fc2.com/blog-entry-416.html)
+<span id="ref-2">2</span>. NVR500（YAMAHA製ルータ）に050のIP電話（VoIP）を設定する方法 | デジタルな出来事, [https://www-blog.aobaclub.com/nvr500_voip_050](https://www-blog.aobaclub.com/nvr500_voip_050)
+<span id="ref-3">3</span>. 『音質改善にチャレンジ』ネットワークオーディオ沼入門（二重 ..., [https://audiocolumn.com/netaudio/11077/](https://audiocolumn.com/netaudio/11077/)
+<span id="ref-4">4</span>. OPT ISO BOX を色々と試してみた感想③電源の変更&まとめ, [https://ameblo.jp/t-tahoe-t/entry-12880402919.html](https://ameblo.jp/t-tahoe-t/entry-12880402919.html)
+<span id="ref-5">5</span>. Synergistic Research Ethernet Switch - Positive Feedback, [https://positive-feedback.com/reviews/hardware-reviews/synergistic-research-ethernet-switch-uef/](https://positive-feedback.com/reviews/hardware-reviews/synergistic-research-ethernet-switch-uef/)
+<span id="ref-6">6</span>. Extreme Router and DC Power Distributor User Feedback – Taiko ..., [https://taikoaudio.com/taiko-2020/news/extreme-router-and-dc-power-distributor-user-feedback/](https://taikoaudio.com/taiko-2020/news/extreme-router-and-dc-power-distributor-user-feedback/)
+<span id="ref-7">7</span>. 新製品情報 TAIKO AUDIOのEXTREME ROUTERとDC POWER DISTRIBUTORが凄い！常設展示も決定！！, [https://sisaudio.blogspot.com/2024/04/taiko-audioextreme-routerdc-power.html](https://sisaudio.blogspot.com/2024/04/taiko-audioextreme-routerdc-power.html)
+<span id="ref-8">8</span>. ルーター「DATA ISO BOX」＋アクセスポイント「OPT-AP」セット | トップウィング - ジョーシン, [https://joshinweb.jp/av/309/4589631464956.html](https://joshinweb.jp/av/309/4589631464956.html)
+<span id="ref-9">9</span>. ネットワーク・アタッチト・レシーバー(NAR) 〜ネットワークオーディオにおけるセパレート化 - Sonore, [https://sonore-audio.jp/Network_Attached_Receiver.html](https://sonore-audio.jp/Network_Attached_Receiver.html)
+<span id="ref-10">10</span>. 「今までの音はなんだったんだ」39600円の"光アイソレーション"「TOP WING OPT ISO BOX」を試す, [https://av.watch.impress.co.jp/docs/review/review/1655377.html](https://av.watch.impress.co.jp/docs/review/review/1655377.html)
+<span id="ref-11">11</span>. ネット・オーディオ対応！ ピュアオーディオを超えるセパレート, [http://www.ippinkan.co.jp/airbow/product/pdf/AV-MM7005.pdf](http://www.ippinkan.co.jp/airbow/product/pdf/AV-MM7005.pdf)
+<span id="ref-12">12</span>. 【中古】YAMAHA ギガアクセスVPNルーター RTX810, [https://nwkoubou.jp/SHOP/RTX810.html](https://nwkoubou.jp/SHOP/RTX810.html)
+<span id="ref-13">13</span>. 「VLAN無しのスイッチによるルーティング」（1） Master of IP Network - ITmedia, [https://atmarkit.itmedia.co.jp/bbs/phpBB/viewtopic.php?topic=19739&forum=11](https://atmarkit.itmedia.co.jp/bbs/phpBB/viewtopic.php?topic=19739&forum=11)
+<span id="ref-14">14</span>. オーディオルーター【二重ルーター】音質評価（１）バッファロー製でオーディオ専用セグメント化, [https://ameblo.jp/hirano2828/entry-12885228074.html](https://ameblo.jp/hirano2828/entry-12885228074.html)
+<span id="ref-15">15</span>. 部門ごとに社内ネットワークを構成する(LAN1ポートをポート別に分ける) - ヤマハネットワーク製品, [https://network.yamaha.com/setting/router_firewall/security/lan_side/divide_network-rtx1200](https://network.yamaha.com/setting/router_firewall/security/lan_side/divide_network-rtx1200)
+<span id="ref-16">16</span>. Yamaha RTX ルータのポート分離(Private VLAN)設定例 ..., [https://changineer.info/network/yamaha_router_rtx/yamaha_router_rtx_vlan_private_example.html](https://changineer.info/network/yamaha_router_rtx/yamaha_router_rtx_vlan_private_example.html)
+<span id="ref-17">17</span>. ヤマハ NVR510 レビュー評価・評判 - 価格.com, [https://review.kakaku.com/review/K0000880251/](https://review.kakaku.com/review/K0000880251/)
+<span id="ref-18">18</span>. 無線機能ポートセパレート - NTT東日本 Web116.jp, [https://web116.jp/shop/hikari_r/guide/600ki/7-a-l/m01_m42.html](https://web116.jp/shop/hikari_r/guide/600ki/7-a-l/m01_m42.html)
+<span id="ref-19">19</span>. ポート分離機能 - RTpro, [https://www.rtpro.yamaha.co.jp/RT/docs/port-split/index.html](https://www.rtpro.yamaha.co.jp/RT/docs/port-split/index.html)
+<span id="ref-20">20</span>. NVR700W NVR510 - ヤマハネットワーク製品, [https://network.yamaha.com/support/download/catalog/nvr700w_nvr510.pdf](https://network.yamaha.com/support/download/catalog/nvr700w_nvr510.pdf)
+<span id="ref-21">21</span>. RTX810 特長 - ヤマハネットワーク製品 - Yamaha Corporation, [https://network.yamaha.com/products/routers/rtx810](https://network.yamaha.com/products/routers/rtx810)
+<span id="ref-22">22</span>. ルーターによるネットワークオーディオ向けセグメント分離の効果 ..., [https://surf2koike.blog.fc2.com/blog-entry-423.html](https://surf2koike.blog.fc2.com/blog-entry-423.html)

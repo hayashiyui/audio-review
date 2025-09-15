@@ -4,6 +4,7 @@ import PageHead from '@/components/PageHead.astro'
 import ReviewsCard from '@/components/ReviewsCard.astro'
 import Layout from '@/layouts/Layout.astro'
 import { getAllReviewCategories, getReviewsByCategory, groupReviewsByYear } from '@/lib/data-utils'
+import { categoryLabel } from '@/lib/i18n'
 
 export async function getStaticPaths() {
   const categoryMap = await getAllReviewCategories()
@@ -11,7 +12,8 @@ export async function getStaticPaths() {
 
   return Promise.all(
     categories.map(async (category) => {
-      const reviews = await getReviewsByCategory(category)
+      const all = await getReviewsByCategory(category)
+      const reviews = all.filter((r) => (r.data.locale ?? 'ja') === 'ja')
       return {
         params: { category },
         props: {
@@ -30,19 +32,19 @@ const reviewsByYear = groupReviewsByYear(reviews)
 <Layout class="max-w-6xl ml-2">
   <PageHead
     slot="head"
-    title={`${category} - オーディオレビュー`}
-    description={`${category}カテゴリのオーディオ機器レビュー一覧`}
+    title={`${categoryLabel(category, 'ja')} - オーディオレビュー`}
+    description={`${categoryLabel(category, 'ja')}カテゴリのオーディオ機器レビュー一覧`}
   />
   <div data-pagefind-ignore="all">
     <Breadcrumbs
       items={[
         { href: '/reviews', label: 'オーディオレビュー', icon: 'lucide:headphones' },
-        { label: category, icon: 'lucide:tag' },
+        { label: categoryLabel(category, 'ja'), icon: 'lucide:tag' },
       ]}
     />
 
     <header class="mb-8">
-      <h1 class="text-3xl font-bold mb-2">{category}</h1>
+      <h1 class="text-3xl font-bold mb-2">{categoryLabel(category, 'ja')}</h1>
       <p class="text-muted-foreground">
         {reviews.length} 件のレビュー
       </p>

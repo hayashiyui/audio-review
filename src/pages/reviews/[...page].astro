@@ -14,7 +14,8 @@ export async function getStaticPaths({
   paginate: PaginateFunction
 }) {
   const allReviews = await getAllReviews()
-  return paginate(allReviews, { pageSize: SITE.postsPerPage })
+  const jaOnly = allReviews.filter((e) => (e.data.locale ?? 'ja') === 'ja')
+  return paginate(jaOnly, { pageSize: SITE.postsPerPage })
 }
 
 const { page } = Astro.props

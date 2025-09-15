@@ -11,13 +11,14 @@ import { cn } from '@/lib/utils'
 
 interface Props {
   class?: string
+  lang?: string
 }
 
-const { class: className } = Astro.props
+const { class: className, lang } = Astro.props
 ---
 
 <!doctype html>
-<html class="bg-background text-foreground" lang={SITE.locale} transition:animate="none">
+<html class="bg-background text-foreground" lang={lang ?? SITE.locale} transition:animate="none">
   <Head>
     <slot name="head" />
   </Head>

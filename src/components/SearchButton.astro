@@ -4,14 +4,17 @@ interface Props {
 }
 
 const { class: className }: Props = Astro.props as any
+const isEn = Astro.url.pathname.startsWith('/en/')
+const label = isEn ? 'Search' : '検索'
+const title = isEn ? 'Search (Ctrl/⌘+K)' : '検索 (Ctrl/⌘+K)'
 ---
 <button
   type="button"
   class={`inline-flex items-center justify-center rounded-md p-2 text-foreground/70 hover:bg-foreground/5 hover:text-foreground/90 dark:hover:bg-foreground/10 ${
     className ?? ''
   }`}
-  aria-label="検索"
-  title="検索 (Ctrl/⌘+K)"
+  aria-label={label}
+  title={title}
   onclick="window.dispatchEvent(new CustomEvent('open-search'))"
 >
   <svg
@@ -27,4 +30,3 @@ const { class: className }: Props = Astro.props as any
     <path d="m21 21-4.3-4.3"></path>
   </svg>
 </button>
-

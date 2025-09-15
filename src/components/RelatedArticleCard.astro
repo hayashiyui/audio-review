@@ -1,6 +1,6 @@
 ---
 import BlogCard from '@/components/BlogCard.astro'
-import { getReviewById, getColumnById } from '@/lib/data-utils'
+import { getReviewById, getColumnById, getAllReviews, getAllColumns } from '@/lib/data-utils'
 import type { CollectionEntry } from 'astro:content'
 
 interface Props {
@@ -9,6 +9,7 @@ interface Props {
 }
 
 const { collection, id } = Astro.props
+const locale: 'ja' | 'en' = Astro.url.pathname.startsWith('/en/') ? 'en' : 'ja'
 
 let article: CollectionEntry<'reviews'> | CollectionEntry<'columns'> | null = null
 
@@ -18,7 +19,26 @@ if (collection === 'reviews') {
   article = await getColumnById(id)
 }
 
-if (!article || article.data.draft) {
+// 言語不一致なら英訳を探索
+if (article && (article.data.locale ?? 'ja') !== locale) {
+  if (collection === 'reviews') {
+    const all = await getAllReviews()
+    const byKey = article.data.translationKey
+      ? all.find((e) => e.data.translationKey === article!.data.translationKey && (e.data.locale ?? 'ja') === locale)
+      : undefined
+    const bySuffix = !byKey && locale === 'en' ? all.find((e) => e.id === `${id}.en`) : undefined
+    article = byKey ?? bySuffix ?? null
+  } else if (collection === 'columns') {
+    const all = await getAllColumns()
+    const byKey = article.data.translationKey
+      ? all.find((e) => e.data.translationKey === article!.data.translationKey && (e.data.locale ?? 'ja') === locale)
+      : undefined
+    const bySuffix = !byKey && locale === 'en' ? all.find((e) => e.id === `${id}.en`) : undefined
+    article = byKey ?? bySuffix ?? null
+  }
+}
+
+if (!article || article.data.draft || (article.data.locale ?? 'ja') !== locale) {
   return null
 }
 ---

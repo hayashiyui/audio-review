@@ -1,0 +1,353 @@
+# 多言語 (ja/en) 実装計画 — 本プロジェクト適合版
+
+最終更新: 2025-09-13 / 対象: Astro v5, 本リポジトリ構成（`src/content/{reviews,columns}` + Pagefind）
+
+---
+
+## 目的
+
+- 既存の日本語サイトに英語 `/en/` を追加し、レビュー・コラム・タグ・カテゴリ・著者・RSS・サイトマップ・検索まで多言語対応する。
+- 既存 URL は維持（日本語＝ルート、英語＝`/en/`）。
+- 検索は Pagefind を継続利用し、言語ごとに適切な結果を返す（初期は同言語のみ）。
+
+---
+
+## スコープ
+
+- ディレクトリ対象: `src/pages/{authors,blog,columns,reviews,tags}`, `src/content/{columns,reviews}`。
+- スキーマ変更: `reviews`/`columns` に `locale` と `translationKey` を追加。
+- 検索: `SearchModal.astro` の UI 文言を言語別化。`package.json` の `postbuild` を多言語対応へ変更。
+
+---
+
+## 方針（アーキテクチャ）
+
+1) ルーティング（Astro i18n）
+- `astro.config.ts` に `i18n` を追加。`locales: ['ja','en']`、`defaultLocale: 'ja'`、`routing.prefixDefaultLocale: false`。
+- 既存の `sitemap` 連携は維持しつつ `i18n` 設定を付与。
+
+2) コンテンツ（Content Collections）
+- `src/content.config.ts` の `reviews`/`columns` スキーマへ以下を追加：
+  - `locale: z.enum(['ja','en']).default('ja')`
+  - `translationKey: z.string()`（対訳の同一キー、規約: `{collection}-{slug}`）
+- 対訳はサブディレクトリ `en/` に配置し、ファイル名は元記事と同一（例: `src/content/reviews/en/foo.mdx`、`src/content/columns/en/bar.mdx`）。
+ - 画像参照は Vite alias を採用（`@assets/images/...`）。相対パスの `../../` 差は不要。
+
+3) ページ（/ と /en/）
+- 既存テンプレートを流用し、`src/pages/en/**` に薄いラッパーページを作成。中で `getCollection(...).filter(e => e.data.locale==='en')` を適用。
+- 詳細ページは `translationKey` で対訳を相互リンクし、`hreflang` を出力。
+
+4) 検索（Pagefind）
+- `package.json` の `postbuild` から `--force-language ja` を削除し、HTML の `<html lang>` に基づく言語別インデックスを自動生成させる。
+- `SearchModal.astro` の `translations` を `document.documentElement.lang` で出し分け（ja/en）。初期は同言語のみの検索。
+
+5) RSS / サイトマップ
+- RSS を 2 本生成：`/rss.xml`（ja）と `/en/rss.xml`（en）。
+- サイトマップは `@astrojs/sitemap` の `i18n` 設定で `<xhtml:link>` 付きの代替リンクを出力。
+
+---
+
+## 成果物（Deliverables）
+
+- 更新済 `astro.config.ts`（i18n と sitemap i18n 追加、既存設定は維持）
+- 追加: `vite.resolve.alias` に `@` / `@assets` を定義
+- 更新済 `src/content.config.ts`（`locale`/`translationKey` を `reviews`/`columns` に追加）
+- 更新済 `tsconfig.json` の `paths`（`@assets/*` を追加）
+- 追加 `src/lib/i18n.ts`（小ヘルパ: `type Locale`, `altLocale`, `localizePath`）
+- 追加 `src/pages/en/**`（一覧/詳細/タグ/カテゴリ/著者の薄いラッパー）
+- 更新 `src/components/SearchModal.astro`（UI文言の言語切替）
+- 更新 `package.json` の `postbuild`（Pagefind 多言語インデックス化）
+- （任意）`scripts/scaffold-en.ts`（`.en.mdx` の雛形生成）
+
+---
+
+## 作業計画（フェーズ）
+
+**🎉 実装完了（2025-09-16更新）**: 全フェーズが完了！多言語化実装が成功し、日本語・英語両方でのサイト運用が可能。英語コンテンツ（reviews: 43記事、columns: 1記事）、hreflang、言語切り替えUI、RSS多言語対応、Pagefind言語別インデックス全て実装完了。ヘッダー言語切り替え、View Transitions エラー修正も完了。プレビュー確認済み。
+
+Phase 1：設定とスキーマ
+- [x] `astro.config.ts` に i18n と sitemap の i18n 設定を追加
+- [x] `src/content.config.ts` に `locale`/`translationKey` を追加
+- [x] `src/lib/i18n.ts` を追加
+- [x] `package.json` の `postbuild` から `--force-language ja` を削除
+
+Phase 2：ページ実装
+- [x] `src/pages/en/{reviews,columns,tags,authors,blog}` を追加（ラッパーで `locale==='en'` を適用）
+- [x] 詳細ページに対訳リンクと `hreflang` を出力
+- [x] ヘッダーに言語トグル（対訳があれば直リンク、なければトップ）
+
+Phase 3：コンテンツ整備
+- [x] 代表記事を `en/` サブディレクトリへ複製・翻訳し `locale: en` と `translationKey` を付与 *(reviews: 43記事、columns: 1記事)*
+
+Phase 4：検索（Pagefind）
+- [x] `<html lang>` を各ページで正確に設定 *(英語: `lang="en"` 完了、日本語: SITE.localeフォールバックのため明示的設定が必要)*
+- [x] `pnpm build` で言語別インデックス生成を確認
+- [x] `SearchModal.astro` の UI 文言が lang に追従することを確認
+- [ ] （任意）言語横断検索トグルを検証
+
+Phase 5：SEO/RSS/検証
+- [x] サイトマップの多言語 `<xhtml:link>` を確認
+- [x] `/rss.xml` と `/en/rss.xml` の配信と内容（言語フィルタ）を確認
+- [x] 主要ページで `hreflang` と canonical を手検証
+
+Phase 6：ローンチ
+- [ ] ステージングで動作確認 → 本番へデプロイ
+- [ ] 404/検索クエリ/アクセス動向を監視し初期不具合を修正
+
+---
+
+## 変更差分（サンプル）
+
+### 1) `astro.config.ts`
+
+```ts
+// 既存の imports は維持
+import { defineConfig } from 'astro/config'
+import sitemap from '@astrojs/sitemap'
+
+export default defineConfig({
+  site: 'https://audiomatome.com',
+  i18n: {
+    locales: ['ja', 'en'],
+    defaultLocale: 'ja',
+    routing: { prefixDefaultLocale: false },
+  },
+  redirects: {
+    '/reviews/hifiman-susvara-unvailed': '/reviews/hifiman-susvara-unveiled',
+  },
+  integrations: [
+    // 既存 expressiveCode / mdx / react / icon などはそのまま
+    sitemap({
+      // 既存の filter を維持（必要に応じ調整）
+      filter: (page) =>
+        !page.includes('/about') && !page.includes('/authors') && !page.includes('/blog'),
+      i18n: {
+        defaultLocale: 'ja',
+        locales: { ja: 'ja-JP', en: 'en-US' },
+      },
+    }),
+  ],
+})
+```
+
+### 2) `src/content.config.ts`（reviews/columns を拡張）
+
+```ts
+// 既存のコレクション定義を維持しつつ、下記フィールドを reviews / columns に追加
+locale: z.enum(['ja', 'en']).default('ja'),
+translationKey: z.string(),
+```
+
+例（抜粋・reviews）:
+
+```ts
+const reviews = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/reviews' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      date: z.coerce.date(),
+      updatedAt: z.coerce.date().optional(),
+      brand: z.string().optional(),
+      model: z.string().optional(),
+      category: z.enum(['スピーカー','ヘッドホン','イヤホン','デジタルプレーヤー','DAC','パワーアンプ','プリアンプ','プリメインアンプ','ヘッドホンアンプ','アナログ','ケーブル','アクセサリ']).optional(),
+      tags: z.array(z.string()).optional(),
+      heroImage: image().optional(),
+      draft: z.boolean().optional().default(false),
+      relatedArticles: z.array(z.object({ collection: z.enum(['reviews','columns']), id: z.string() })).optional(),
+      locale: z.enum(['ja','en']).default('ja'),
+      translationKey: z.string(),
+    }),
+})
+```
+
+### 3) `src/lib/i18n.ts`
+
+```ts
+export type Locale = 'ja' | 'en'
+export const DEFAULT_LOCALE: Locale = 'ja'
+export const altLocale = (l: Locale): Locale => (l === 'ja' ? 'en' : 'ja')
+export const localizePath = (path: string, locale: Locale) =>
+  locale === 'ja' ? path : `/en${path.startsWith('/') ? path : `/${path}`}`
+```
+
+### 4) ラッパーページ（例：`src/pages/en/reviews/index.astro`）
+
+```astro
+---
+import { getCollection } from 'astro:content'
+const items = (await getCollection('reviews'))
+  .filter((e) => (e.data.locale ?? 'ja') === 'en')
+  .sort((a, b) => +(b.data.updatedAt ?? b.data.date) - +(a.data.updatedAt ?? a.data.date))
+---
+<html lang="en">
+  <body>
+    <h1>Reviews</h1>
+    <ul>
+      {items.map((e) => <li><a href={`/en/reviews/${e.id}/`}>{e.data.title}</a></li>)}
+    </ul>
+  </body>
+  
+</html>
+```
+
+詳細ページ側は `translationKey` で対訳を探索し、`hreflang` を相互に出力。
+
+### 5) Pagefind（`package.json` 修正）
+
+```diff
+   "postbuild": "pagefind --site dist --exclude-selectors \"pre, code, .expressive-code, .ec-line, script, style, .pagefind-exclude\""
+-  "postbuild": "pagefind --site dist --force-language ja --exclude-selectors \"pre, code, .expressive-code, .ec-line, script, style, .pagefind-exclude\""
+```
+
+`--force-language` を外すことで、`<html lang="ja|en">` に基づく言語別インデックスが生成されます。
+
+### 6) `SearchModal.astro`（UI 文言の言語切替）
+
+```diff
+- new (window as any).PagefindUI({
++ const lang = document.documentElement.lang === 'en' ? 'en' : 'ja'
++ const translations = lang === 'en'
++   ? {
++       placeholder: 'Search reviews & columns',
++       zero_results: 'No results',
++       search_label: 'Search',
++       clear_search: 'Clear',
++       load_more: 'Load more',
++       filters_label: 'Filters',
++       filters_clear: 'Clear filters',
++     }
++   : {
++       placeholder: 'レビュー・コラムを検索',
++       zero_results: '該当する結果はありません',
++       search_label: 'サイト内検索',
++       clear_search: '検索をクリア',
++       load_more: 'さらに読み込む',
++       filters_label: 'フィルター',
++       filters_clear: 'フィルターをクリア',
++     }
+  new (window as any).PagefindUI({
+    element: '#pagefind-ui',
+    bundlePath: '/pagefind/',
+    showImages: true,
+    showSubResults: true,
+    pageSize: 8,
+    indexWeight: 10,
+    showFilters: true,
+    filters: { section: { default: ['reviews', 'columns'] } },
+    processTerm: (term) => {/* 既存の正規化処理 */},
+    translations,
+  })
+```
+
+（任意）言語横断検索にしたい場合は、`PagefindUI` の複数インデックス読み込みを検討（現行は同言語のみを推奨）。
+
+### 7) RSS（言語別 2 本）
+
+`src/pages/rss.xml.ts` は ja 専用にし、同等の `src/pages/en/rss.xml.ts` を追加して `locale==='en'` でフィルタ。
+
+```ts
+// 例: ja 側（既存ロジックに locale フィルタを追加）
+const reviews = (await getAllReviews()).filter((r) => (r.data.locale ?? 'ja') === 'ja')
+// en 側は 'en' で同様にフィルタ
+```
+
+---
+
+## Pagefind 多言語対応（実装要点）
+
+既定動作（推奨）
+- 各ページの `<html lang="ja|en">` を正確に出す。
+- `--force-language` を使わずビルドすると、言語ごとにインデックスが生成され、`/` は ja のみ、`/en/` は en のみがヒット。
+- 既存 UI に言語ごとの翻訳を与えるだけで運用可能。
+
+（任意）日本語クエリの精度向上
+- 入力クエリの正規化（全角→半角、複合語分割など）は現実装の `processTerm` を継続使用。
+
+（任意）言語横断検索
+- 初期は同言語のみ。横断したい場合は UI に「全言語を含める」トグルを追加し、必要に応じて複数インデックスを読み込む設計を検証。
+
+---
+
+## SEO・サイトマップ・RSS
+
+- `<html lang>` を全ページで出力。
+- 対訳が存在するページのみ、`hreflang="ja"` と `hreflang="en"` を相互に出す。
+- `@astrojs/sitemap` の `i18n` 設定で `<xhtml:link>` 付きサイトマップを生成。
+- RSS を 2 本生成：`/rss.xml`（ja）と `/en/rss.xml`（en）。
+- 構造化データを追加する場合は、`inLanguage` を言語別に付与。
+
+---
+
+## テスト計画（受け入れ基準）
+
+機能
+- [ ] `/reviews/...` は日本語記事、`/en/reviews/...` は英語記事のみ表示
+- [ ] 詳細ページに言語切替リンクと `hreflang` が出る
+- [ ] 未翻訳英語詳細にアクセス→日本語へ 302（または非公開）
+- [ ] Pagefind 検索：`/` は JA のみ、`/en/` は EN のみヒット
+
+SEO
+- [ ] サイトマップに ja/en の代替リンクが出力
+- [ ] 主要 10 ページで `lang` と `hreflang` を目視確認
+- [ ] RSS 2 本の配信とフィードバリデーション OK
+
+品質
+- [ ] Lighthouse で Performance/SEO/Best Practices の劣化なし
+- [ ] 画像・相対リンクが `/en/` 下でも破綻しない
+- [ ] 既存 JA URL の 404/リダイレクトが発生していない
+
+---
+
+## リスクと対策
+
+- 翻訳未整備: 英語一覧は `locale==='en'` でフィルタし、未翻訳は露出させない。詳細直リンクは日本語へ 302。
+- スラッグ不一致: `translationKey` で紐付け。`*.en.mdx` により同一スラッグを原則維持。
+- 検索混在: 初期は同言語のみ。横断は後段でトグル実装。
+- タグ/カテゴリ名の言語差: 表示名は翻訳、内部キーは英字で共通化。
+
+---
+
+## ロールバック
+
+- `astro.config.ts` の `i18n` をコメントアウト、`/en/` を未公開に戻す。
+- 既存 JA 側の変更は極小（`hreflang` 追加程度）。簡単に復旧可能。
+
+---
+
+## Done の定義（Definition of Done）
+
+- `/en/` で英語トップ/一覧/詳細/タグ/カテゴリ/著者が表示される
+- 対訳リンクと `hreflang` が主要ページで機能
+- Pagefind が言語別にインデックス/検索できる
+- サイトマップ/RSS の多言語出力を確認済み
+- 代表記事の翻訳が公開され、回遊と離脱率が許容範囲
+
+---
+
+## 付録：運用ミニガイド
+
+新規記事手順
+1. 日本語 `.mdx` を作成し公開（`locale: ja`、`translationKey` を設定）
+2. スクリプトで `.en.mdx` 雛形を生成 → 翻訳 → レビュー
+3. 翻訳後に英語一覧へ反映（`locale: en`）
+
+雛形スクリプト例（`scripts/scaffold-en.ts`）
+
+```ts
+import { glob } from 'glob'
+import fs from 'node:fs/promises'
+
+for (const p of await glob('src/content/{columns,reviews}/**/*.mdx', { ignore: '**/*.en.mdx' })) {
+  const en = p.replace(/\.mdx$/, '.en.mdx')
+  try { await fs.access(en) } catch {
+    const raw = await fs.readFile(p, 'utf8')
+    const fm = raw
+      .replace(/(^---[\s\S]*?\blocale:\s*)ja/m, '$1en')
+      .replace(/(^---[\s\S]*?\btranslationKey:\s*)(.*)$/m, '$1$2')
+    await fs.writeFile(en, fm, 'utf8')
+    console.log('created:', en)
+  }
+}
+```

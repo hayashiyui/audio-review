@@ -296,6 +296,8 @@ export async function hasSubposts(postId: string): Promise<boolean> {
 }
 
 export function isSubpost(postId: string): boolean {
+  // ロケール接頭辞（例: en/<slug>）はサブポストではない
+  if (/^(en|ja)\//.test(postId)) return false
   return postId.includes('/')
 }
 
@@ -442,11 +444,17 @@ export async function getPostTOCSections(postId: string): Promise<TOCSection[]> 
   }]
 }
 
-export async function getAdjacentReviews(currentId: string): Promise<{
+export async function getAdjacentReviews(
+  currentId: string,
+  locale?: 'ja' | 'en',
+): Promise<{
   newer: CollectionEntry<'reviews'> | null
   older: CollectionEntry<'reviews'> | null
 }> {
-  const allReviews = await getAllReviews()
+  let allReviews = await getAllReviews()
+  if (locale) {
+    allReviews = allReviews.filter((r) => (r.data.locale ?? 'ja') === locale)
+  }
   const currentIndex = allReviews.findIndex((review) => review.id === currentId)
 
   if (currentIndex === -1) {
@@ -459,11 +467,17 @@ export async function getAdjacentReviews(currentId: string): Promise<{
   }
 }
 
-export async function getAdjacentColumns(currentId: string): Promise<{
+export async function getAdjacentColumns(
+  currentId: string,
+  locale?: 'ja' | 'en',
+): Promise<{
   newer: CollectionEntry<'columns'> | null
   older: CollectionEntry<'columns'> | null
 }> {
-  const allColumns = await getAllColumns()
+  let allColumns = await getAllColumns()
+  if (locale) {
+    allColumns = allColumns.filter((c) => (c.data.locale ?? 'ja') === locale)
+  }
   const currentIndex = allColumns.findIndex((column) => column.id === currentId)
 
   if (currentIndex === -1) {
@@ -600,6 +614,7 @@ export async function getSortedAllTags(): Promise<
 export async function getRelatedArticles(
   collection: 'reviews' | 'columns',
   articleId: string,
+  locale?: 'ja' | 'en',
 ): Promise<(CollectionEntry<'reviews'> | CollectionEntry<'columns'>)[]> {
   let currentArticle: CollectionEntry<'reviews'> | CollectionEntry<'columns'> | null = null
 
@@ -616,15 +631,54 @@ export async function getRelatedArticles(
   const relatedEntries: (CollectionEntry<'reviews'> | CollectionEntry<'columns'>)[] = []
 
   for (const relatedRef of currentArticle.data.relatedArticles) {
-    let relatedEntry = null
-    
+    let relatedEntry: any = null
+
     if (relatedRef.collection === 'reviews') {
       relatedEntry = await getReviewById(relatedRef.id)
+      // ロケールが合わない場合のフォールバック（translationKey または .en サフィックス）
+      if (locale && relatedEntry && (relatedEntry.data.locale ?? 'ja') !== locale) {
+        const all = await getAllReviews()
+        if (relatedEntry.data.translationKey) {
+          const alt = all.find(
+            (e) => e.data.translationKey === relatedEntry.data.translationKey && (e.data.locale ?? 'ja') === locale,
+          )
+          if (alt) relatedEntry = alt
+        } else if (locale === 'en') {
+          const altId = relatedRef.id.endsWith('.en') ? relatedRef.id : `${relatedRef.id}.en`
+          const alt = all.find((e) => e.id === altId)
+          if (alt) relatedEntry = alt
+          // ディレクトリ方式 en/<id> も探索
+          if (!alt) {
+            const base = relatedRef.id.replace(/\.en$/, '').replace(/^en\//, '')
+            const altDir = all.find((e) => e.id === `en/${base}`)
+            if (altDir) relatedEntry = altDir
+          }
+        }
+      }
     } else if (relatedRef.collection === 'columns') {
       relatedEntry = await getColumnById(relatedRef.id)
+      if (locale && relatedEntry && (relatedEntry.data.locale ?? 'ja') !== locale) {
+        const all = await getAllColumns()
+        if (relatedEntry.data.translationKey) {
+          const alt = all.find(
+            (e) => e.data.translationKey === relatedEntry.data.translationKey && (e.data.locale ?? 'ja') === locale,
+          )
+          if (alt) relatedEntry = alt
+        } else if (locale === 'en') {
+          const altId = relatedRef.id.endsWith('.en') ? relatedRef.id : `${relatedRef.id}.en`
+          const alt = all.find((e) => e.id === altId)
+          if (alt) relatedEntry = alt
+          // ディレクトリ方式 en/<id> も探索
+          if (!alt) {
+            const base = relatedRef.id.replace(/\.en$/, '').replace(/^en\//, '')
+            const altDir = all.find((e) => e.id === `en/${base}`)
+            if (altDir) relatedEntry = altDir
+          }
+        }
+      }
     }
 
-    if (relatedEntry && !relatedEntry.data.draft) {
+    if (relatedEntry && !relatedEntry.data.draft && (!locale || (relatedEntry.data.locale ?? 'ja') === locale)) {
       relatedEntries.push(relatedEntry)
     }
   }

@@ -14,7 +14,8 @@ export async function getStaticPaths({
   paginate: PaginateFunction
 }) {
   const allColumns = await getAllColumns()
-  return paginate(allColumns, { pageSize: SITE.postsPerPage })
+  const jaOnly = allColumns.filter((e) => (e.data.locale ?? 'ja') === 'ja')
+  return paginate(jaOnly, { pageSize: SITE.postsPerPage })
 }
 
 const { page } = Astro.props

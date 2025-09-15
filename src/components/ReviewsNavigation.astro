@@ -4,7 +4,18 @@ import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
 
-const { newerPost, olderPost } = Astro.props
+interface Props {
+  newerPost: any
+  olderPost: any
+  locale?: 'ja' | 'en'
+}
+
+const { newerPost, olderPost, locale } = Astro.props as Props
+const base = locale === 'en' ? '/en' : ''
+const toSlug = (p: any) => {
+  const id = p?.id ?? ''
+  return locale === 'en' ? id.replace(/^en\//, '').replace(/\.en$/, '') : id
+}
 ---
 
 <nav class={cn(
@@ -15,7 +26,7 @@ const { newerPost, olderPost } = Astro.props
 )}>
   {olderPost && (
     <Link
-      href={`/reviews/${olderPost.id}#post-title`}
+      href={`${base}/reviews/${toSlug(olderPost)}#post-title`}
       class={cn(
         buttonVariants({ variant: 'outline' }),
         'rounded-lg group flex items-center justify-start size-full',
@@ -38,7 +49,7 @@ const { newerPost, olderPost } = Astro.props
 
   {newerPost && (
     <Link
-      href={`/reviews/${newerPost.id}#post-title`}
+      href={`${base}/reviews/${toSlug(newerPost)}#post-title`}
       class={cn(
         buttonVariants({ variant: 'outline' }),
         'rounded-lg group flex items-center justify-end size-full',

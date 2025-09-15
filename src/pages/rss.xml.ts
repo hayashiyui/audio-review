@@ -6,10 +6,10 @@ import { getAllPosts, getAllReviews, getAllColumns } from '@/lib/data-utils'
 export async function GET(context: APIContext) {
   try {
     const posts = await getAllPosts()
-    const reviews = await getAllReviews()
-    const columns = await getAllColumns()
+    const reviews = (await getAllReviews()).filter((e) => (e.data.locale ?? 'ja') === 'ja')
+    const columns = (await getAllColumns()).filter((e) => (e.data.locale ?? 'ja') === 'ja')
 
-    // レビュー、ブログ記事、コラムを結合してソート
+    // レビュー、ブログ記事、コラムを結合してソート（日本語のみ）
     const allItems = [
       ...reviews.map((review) => ({
         title: review.data.title,

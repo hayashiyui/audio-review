@@ -4,11 +4,19 @@ import ReviewsCard from '@/components/ReviewsCard.astro'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
-import { getAllCombinedTags, getEntriesByTag } from '@/lib/data-utils'
+import { getAllReviews, getAllColumns, getAllPosts, getEntriesByTag } from '@/lib/data-utils'
 
 export async function getStaticPaths() {
-  const tagMap = await getAllCombinedTags()
-  const uniqueTags = Array.from(tagMap.keys())
+  // JA のみのタグ一覧を作成
+  const reviews = (await getAllReviews()).filter((r) => (r.data.locale ?? 'ja') === 'ja')
+  const columns = (await getAllColumns()).filter((c) => (c.data.locale ?? 'ja') === 'ja')
+  const blogs = await getAllPosts()
+  const tagSet = new Set<string>()
+  for (const r of reviews) r.data.tags?.forEach((t) => tagSet.add(t))
+  for (const c of columns) c.data.tags?.forEach((t) => tagSet.add(t))
+  for (const b of blogs) b.data.tags?.forEach((t) => tagSet.add(t))
+
+  const uniqueTags = Array.from(tagSet)
 
   return Promise.all(
     uniqueTags.map(async (tag) => {
@@ -25,6 +33,11 @@ export async function getStaticPaths() {
 }
 
 const { tag, entries } = Astro.props
+const filtered = {
+  blogs: entries.blogs,
+  reviews: entries.reviews.filter((r) => (r.data.locale ?? 'ja') === 'ja'),
+  columns: entries.columns.filter((c) => (c.data.locale ?? 'ja') === 'ja'),
+}
 ---
 
 <Layout class="max-w-6xl ml-2">
@@ -47,11 +60,11 @@ const { tag, entries } = Astro.props
     </header>
 
     {/* Columns セクション */}
-    {entries.columns.length > 0 && (
+    {filtered.columns.length > 0 && (
       <section class="mb-8">
-        <h2 class="text-xl font-semibold mb-4">Columns ({entries.columns.length})</h2>
+        <h2 class="text-xl font-semibold mb-4">Columns ({filtered.columns.length})</h2>
         <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {entries.columns.map((column) => (
+          {filtered.columns.map((column) => (
             <li>
               <BlogCard entry={column} />
             </li>
@@ -61,11 +74,11 @@ const { tag, entries } = Astro.props
     )}
 
     {/* Reviews セクション */}
-    {entries.reviews.length > 0 && (
+    {filtered.reviews.length > 0 && (
       <section class="mb-8">
-        <h2 class="text-xl font-semibold mb-4">Reviews ({entries.reviews.length})</h2>
+        <h2 class="text-xl font-semibold mb-4">Reviews ({filtered.reviews.length})</h2>
         <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {entries.reviews.map((review) => (
+          {filtered.reviews.map((review) => (
             <li>
               <ReviewsCard entry={review} />
             </li>
@@ -75,11 +88,11 @@ const { tag, entries } = Astro.props
     )}
 
     {/* Blog セクション */}
-    {entries.blogs.length > 0 && (
+    {filtered.blogs.length > 0 && (
       <section class="mb-8">
-        <h2 class="text-xl font-semibold mb-4">Blog ({entries.blogs.length})</h2>
+        <h2 class="text-xl font-semibold mb-4">Blog ({filtered.blogs.length})</h2>
         <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {entries.blogs.map((blog) => (
+          {filtered.blogs.map((blog) => (
             <li>
               <BlogCard entry={blog} />
             </li>

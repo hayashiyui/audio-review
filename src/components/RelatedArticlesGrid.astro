@@ -1,6 +1,6 @@
 ---
 import BlogCard from '@/components/BlogCard.astro'
-import { getReviewById, getColumnById } from '@/lib/data-utils'
+import { getReviewById, getColumnById, getAllReviews, getAllColumns } from '@/lib/data-utils'
 import type { CollectionEntry } from 'astro:content'
 
 interface ArticleRef {
@@ -14,20 +14,52 @@ interface Props {
   title?: string
 }
 
-const { articles, columns = 3, title = '関連記事' } = Astro.props
+const locale: 'ja' | 'en' = Astro.url.pathname.startsWith('/en/') ? 'en' : 'ja'
+
+const { articles, columns = 3, title = locale === 'en' ? 'Related Articles' : '関連記事' } = Astro.props
 
 const fetchedArticles: (CollectionEntry<'reviews'> | CollectionEntry<'columns'>)[] = []
 
+const allReviews = await getAllReviews()
+const allColumns = await getAllColumns()
+
 for (const ref of articles) {
   let article: CollectionEntry<'reviews'> | CollectionEntry<'columns'> | null = null
-  
+
   if (ref.collection === 'reviews') {
     article = await getReviewById(ref.id)
+    // 言語が一致しない場合は対訳を探索
+    if (article && (article.data.locale ?? 'ja') !== locale) {
+      const byKey = article.data.translationKey
+        ? allReviews.find(
+            (e) => e.data.translationKey === article!.data.translationKey && (e.data.locale ?? 'ja') === locale,
+          )
+        : undefined
+      const bySuffix = !byKey && locale === 'en'
+        ? allReviews.find((e) => e.id === `${ref.id}.en`)
+        : undefined
+      if (byKey) article = byKey
+      else if (bySuffix) article = bySuffix
+      else article = null // ロケール不一致のままは表示しない
+    }
   } else if (ref.collection === 'columns') {
     article = await getColumnById(ref.id)
+    if (article && (article.data.locale ?? 'ja') !== locale) {
+      const byKey = article.data.translationKey
+        ? allColumns.find(
+            (e) => e.data.translationKey === article!.data.translationKey && (e.data.locale ?? 'ja') === locale,
+          )
+        : undefined
+      const bySuffix = !byKey && locale === 'en'
+        ? allColumns.find((e) => e.id === `${ref.id}.en`)
+        : undefined
+      if (byKey) article = byKey
+      else if (bySuffix) article = bySuffix
+      else article = null
+    }
   }
-  
-  if (article && !article.data.draft) {
+
+  if (article && !article.data.draft && (article.data.locale ?? 'ja') === locale) {
     fetchedArticles.push(article)
   }
 }

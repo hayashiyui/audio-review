@@ -1,5 +1,6 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import LanguageToggle from '@/components/LanguageToggle.astro'
 import PostHead from '@/components/PostHead.astro'
 import RelatedArticles from '@/components/RelatedArticles.astro'
 import ReviewsNavigation from '@/components/ReviewsNavigation.astro'
@@ -8,13 +9,14 @@ import TOCSidebar from '@/components/TOCSidebar.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import Layout from '@/layouts/Layout.astro'
 import { getAdjacentReviews, getPostTOCSections } from '@/lib/data-utils'
+import { categoryLabel } from '@/lib/i18n'
 import { formatDate } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
 import { Picture } from 'astro:assets'
 import { getCollection, render } from 'astro:content'
 
 export async function getStaticPaths() {
-  const reviews = await getCollection('reviews', ({ data }) => !data.draft)
+  const reviews = await getCollection('reviews', ({ data }) => !data.draft && (data.locale ?? 'ja') === 'ja')
   return reviews.map((review) => ({
     params: { id: review.id },
     props: review,
@@ -39,15 +41,18 @@ const navigation = await getAdjacentReviews(currentReviewId)
 
   <section
     class="grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-md)-2rem),100%)_minmax(0px,1fr)] gap-y-6"
-    data-pagefind-filter="section:reviews"
+    data-pagefind-filter="section:reviews,lang:ja"
   >
     <div class="col-start-2">
-      <Breadcrumbs
-        items={[
-          { href: '/reviews', label: 'オーディオレビュー', icon: 'lucide:headphones' },
-          { href: `/reviews/${review.id}`, label: review.data.title, icon: 'lucide:file-text' },
-        ]}
-      />
+      <div class="flex items-center justify-between mb-4">
+        <Breadcrumbs
+          items={[
+            { href: '/reviews', label: 'オーディオレビュー', icon: 'lucide:headphones' },
+            { href: `/reviews/${review.id}`, label: review.data.title, icon: 'lucide:file-text' },
+          ]}
+        />
+        <LanguageToggle post={review} currentLocale="ja" />
+      </div>
     </div>
 
     {review.data.heroImage && (
@@ -121,7 +126,7 @@ const navigation = await getAdjacentReviews(currentReviewId)
               class="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0"
             >
               <a href={`/reviews/category/${review.data.category}`} class="hover:underline">
-                {review.data.category}
+                {categoryLabel(review.data.category, 'ja')}
               </a>
             </div>
           )}

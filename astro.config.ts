@@ -1,4 +1,6 @@
 import { defineConfig } from 'astro/config'
+import { fileURLToPath } from 'node:url'
+import { URL } from 'node:url'
 
 import mdx from '@astrojs/mdx'
 import react from '@astrojs/react'
@@ -12,7 +14,6 @@ import rehypeKatex from 'rehype-katex'
 import rehypePrettyCode from 'rehype-pretty-code'
 import remarkEmoji from 'remark-emoji'
 import remarkMath from 'remark-math'
-import rehypeDocument from 'rehype-document'
 
 import { pluginCollapsibleSections } from '@expressive-code/plugin-collapsible-sections'
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
@@ -21,8 +22,13 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   site: 'https://audiomatome.com',
+  i18n: {
+    locales: ['ja', 'en'],
+    defaultLocale: 'ja',
+    routing: { prefixDefaultLocale: false },
+  },
   redirects: {
-    '/reviews/hifiman-susvara-unvailed': '/reviews/hifiman-susvara-unveiled'
+    '/reviews/hifiman-susvara-unvailed': '/reviews/hifiman-susvara-unveiled',
   },
   integrations: [
     expressiveCode({
@@ -71,15 +77,25 @@ export default defineConfig({
     mdx(),
     react(),
     sitemap({
-      filter: (page) => 
-        !page.includes('/about') && 
-        !page.includes('/authors') && 
-        !page.includes('/blog')
+      filter: (page) =>
+        !page.includes('/about') &&
+        !page.includes('/authors') &&
+        !page.includes('/blog'),
+      i18n: {
+        defaultLocale: 'ja',
+        locales: { ja: 'ja', en: 'en' },
+      },
     }),
     icon(),
   ],
   vite: {
     plugins: [tailwindcss()],
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+        '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
+      },
+    },
   },
   server: {
     port: 1234,
@@ -94,12 +110,6 @@ export default defineConfig({
       excludeLangs: ['mermaid', 'js'],
     },
     rehypePlugins: [
-      [
-        rehypeDocument,
-        {
-          css: 'https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css',
-        },
-      ],
       [
         rehypeExternalLinks,
         {

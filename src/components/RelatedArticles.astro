@@ -6,16 +6,17 @@ import type { CollectionEntry } from 'astro:content'
 interface Props {
   collection: 'reviews' | 'columns'
   articleId: string
+  locale?: 'ja' | 'en'
 }
 
-const { collection, articleId } = Astro.props
+const { collection, articleId, locale } = Astro.props
 
-const relatedArticles = await getRelatedArticles(collection, articleId)
+const relatedArticles = await getRelatedArticles(collection, articleId, locale)
 ---
 
 {relatedArticles.length > 0 && (
   <section class="mt-12 border-t pt-8 pagefind-exclude">
-    <h2 class="mb-6 text-2xl font-bold">関連記事</h2>
+    <h2 class="mb-6 text-2xl font-bold">{locale === 'en' ? 'Related Articles' : '関連記事'}</h2>
     <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {relatedArticles.map((article) => (
         <div class="rounded-lg">

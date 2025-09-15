@@ -5,12 +5,14 @@ import { generateBlogPostingSchema, generateReviewSchema, generateArticleSchema 
 import { getImage } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 import defaultOgImage from '@/assets/images/default-og.png'
+import { getTranslation, altLocale, type Locale } from '@/lib/i18n'
 
 interface Props {
   post: CollectionEntry<'blog'> | CollectionEntry<'reviews'> | CollectionEntry<'columns'>
+  lang?: string
 }
 
-const { post } = Astro.props
+const { post, lang } = Astro.props
 
 const title = post.data.title || SITE.title
 const description = post.data.description || SITE.description
@@ -52,12 +54,42 @@ if (post.collection === 'blog') {
 } else if (post.collection === 'columns') {
   structuredData = generateArticleSchema(post as CollectionEntry<'columns'>)
 }
+
+// 対訳記事の情報を取得（hreflang用）
+let translation: { slug: string; title: string } | null = null
+const currentLocale = (lang ?? SITE.locale) as Locale
+const targetLocale = altLocale(currentLocale)
+
+if ((post.collection === 'reviews' || post.collection === 'columns') && post.data.translationKey) {
+  translation = await getTranslation(post.data.translationKey, targetLocale, post.collection)
+}
 ---
 
 <title>{`${title} | ${SITE.title}`}</title>
 <meta name="title" content={`${title} | ${SITE.title}`} />
 <meta name="description" content={description} />
 <link rel="canonical" href={Astro.url} />
+
+<!-- hreflang tags for alternate languages -->
+{translation && (
+  <>
+    <link
+      rel="alternate"
+      hreflang={currentLocale}
+      href={Astro.url}
+    />
+    <link
+      rel="alternate"
+      hreflang={targetLocale}
+      href={new URL(
+        targetLocale === 'en'
+          ? `/en/${post.collection}/${translation.slug}/`
+          : `/${post.collection}/${translation.slug}/`,
+        Astro.site
+      )}
+    />
+  </>
+)}
 
 {isSubpost(post.id) && <meta name="robots" content="noindex" />}
 
@@ -66,7 +98,7 @@ if (post.collection === 'blog') {
 <meta property="og:image" content={optimizedImageUrl} />
 <meta property="og:image:alt" content={title} />
 <meta property="og:type" content="website" />
-<meta property="og:locale" content={SITE.locale} />
+<meta property="og:locale" content={lang ?? SITE.locale} />
 <meta property="og:site_name" content={SITE.title} />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:author" content={author} />
@@ -77,6 +109,8 @@ if (post.collection === 'blog') {
 {post.collection === 'columns' && (
   <meta name="pagefind:filters" content="section=columns" />
 )}
+<!-- 言語フィルターを常に付与（Pagefind UIの既定フィルターと連動） -->
+<meta name="pagefind:filters" content={`lang=${lang ?? SITE.locale}`} />
 {post.collection === 'reviews' && (
   <meta name="pagefind:weight" content="100" />
 )}

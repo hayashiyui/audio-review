@@ -6,10 +6,16 @@ import PageHead from '@/components/PageHead.astro'
 import { buttonVariants } from '@/components/ui/button'
 import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
-import { getRecentReviews, getRecentColumns } from '@/lib/data-utils'
+import { getAllReviews, getAllColumns } from '@/lib/data-utils'
 
-const reviews = await getRecentReviews(18) // PC向けグリッド表示で18件表示（3列×6行）
-const columns = await getRecentColumns(3) // グリッド表示で3件表示
+const reviewsAll = await getAllReviews()
+const columnsAll = await getAllColumns()
+const reviews = reviewsAll
+  .filter((e) => (e.data.locale ?? 'ja') === 'ja')
+  .slice(0, 18) // PC向けグリッド表示で18件表示（3列×6行）
+const columns = columnsAll
+  .filter((e) => (e.data.locale ?? 'ja') === 'ja')
+  .slice(0, 3) // グリッド表示で3件表示
 ---
 
 <Layout class="max-w-6xl ml-2">

@@ -58,18 +58,18 @@ const reviews = defineCollection({
       brand: z.string().optional(),
       model: z.string().optional(),
       category: z.enum([
-        'スピーカー',
-        'ヘッドホン',
-        'イヤホン',
-        'デジタルプレーヤー',
+        'Speakers',
+        'Headphones',
+        'Earphones',
+        'Digital Player',
         'DAC',
-        'パワーアンプ',
-        'プリアンプ',
-        'プリメインアンプ',
-        'ヘッドホンアンプ',
-        'アナログ',
-        'ケーブル',
-        'アクセサリ'
+        'Power Amplifier',
+        'Preamplifier',
+        'Integrated Amplifier',
+        'Headphone Amplifier',
+        'Analog',
+        'Cables',
+        'Accessories'
       ]).optional(),
       tags: z.array(z.string()).optional(),
       authors: z.array(z.string()).optional().default([SITE.author]),
@@ -79,6 +79,9 @@ const reviews = defineCollection({
         collection: z.enum(['reviews', 'columns']),
         id: z.string()
       })).optional(),
+      // i18n fields
+      locale: z.enum(['ja', 'en']).default('ja'),
+      translationKey: z.string().optional(),
     }),
 })
 
@@ -91,14 +94,14 @@ const columns = defineCollection({
       date: z.coerce.date(),
       updatedAt: z.coerce.date().optional(),
       category: z.enum([
-        'オーディオ基礎知識',
-        'セットアップ',
-        '音質改善',
-        '業界動向',
-        '技術解説',
-        'エッセイ',
-        '購入ガイド',
-        'その他'
+        'Basics',
+        'Setup',
+        'Sound Improvement',
+        'Industry Trends',
+        'Technical',
+        'Essay',
+        'Buying Guide',
+        'Others'
       ]).optional(),
       tags: z.array(z.string()).optional(),
       authors: z.array(z.string()).optional().default([SITE.author]),
@@ -108,6 +111,9 @@ const columns = defineCollection({
         collection: z.enum(['reviews', 'columns']),
         id: z.string()
       })).optional(),
+      // i18n fields
+      locale: z.enum(['ja', 'en']).default('ja'),
+      translationKey: z.string().optional(),
     }),
 })
 

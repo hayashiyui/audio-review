@@ -4,10 +4,22 @@ import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import Layout from '@/layouts/Layout.astro'
-import { getSortedAllTags } from '@/lib/data-utils'
+import { getAllReviews, getAllColumns, getAllPosts } from '@/lib/data-utils'
 import { Icon } from 'astro-icon/components'
 
-const sortedTags = await getSortedAllTags()
+// JA のみでタグ集計（blog はロケール無しのため全件含める）
+const reviews = (await getAllReviews()).filter((r) => (r.data.locale ?? 'ja') === 'ja')
+const columns = (await getAllColumns()).filter((c) => (c.data.locale ?? 'ja') === 'ja')
+const blogs = await getAllPosts()
+
+const tagCounts = new Map<string, number>()
+for (const r of reviews) r.data.tags?.forEach((t) => tagCounts.set(t, (tagCounts.get(t) || 0) + 1))
+for (const c of columns) c.data.tags?.forEach((t) => tagCounts.set(t, (tagCounts.get(t) || 0) + 1))
+for (const b of blogs) b.data.tags?.forEach((t) => tagCounts.set(t, (tagCounts.get(t) || 0) + 1))
+
+const sortedTags = [...tagCounts.entries()]
+  .map(([tag, count]) => ({ tag, count }))
+  .sort((a, b) => (b.count - a.count) || a.tag.localeCompare(b.tag))
 ---
 
 <Layout class="max-w-6xl ml-2">
