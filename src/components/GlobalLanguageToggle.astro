@@ -38,6 +38,10 @@ const targetLabel = targetLocale === 'en' ? 'English' : '日本語'
 </div>
 
 <script>
+  // Store handlers using WeakMap to avoid TypeScript errors
+  const buttonHandlers = new WeakMap()
+  let outsideClickHandler: (() => void) | null = null
+
   function initGlobalLanguageToggle() {
     const menus = document.querySelectorAll('[data-global-language-menu]')
 
@@ -47,9 +51,12 @@ const targetLabel = targetLocale === 'en' ? 'English' : '日本語'
 
       if (button && dropdown) {
         // Remove existing listeners to prevent duplicates
-        button.removeEventListener('click', button._clickHandler)
+        const existingHandler = buttonHandlers.get(button)
+        if (existingHandler) {
+          button.removeEventListener('click', existingHandler)
+        }
 
-        const clickHandler = (e) => {
+        const clickHandler = (e: Event) => {
           e.stopPropagation()
           const isOpen = dropdown.classList.contains('hidden')
 
@@ -70,13 +77,13 @@ const targetLabel = targetLocale === 'en' ? 'English' : '日本語'
           }
         }
 
-        button._clickHandler = clickHandler
+        buttonHandlers.set(button, clickHandler)
         button.addEventListener('click', clickHandler)
       }
     })
 
     // Click outside to close
-    const outsideClickHandler = () => {
+    const newOutsideClickHandler = () => {
       document.querySelectorAll('[data-global-language-dropdown]').forEach(dropdown => {
         dropdown.classList.add('hidden')
       })
@@ -86,8 +93,10 @@ const targetLabel = targetLocale === 'en' ? 'English' : '日本語'
     }
 
     // Remove existing listener to prevent duplicates
-    document.removeEventListener('click', document._globalLanguageOutsideClickHandler)
-    document._globalLanguageOutsideClickHandler = outsideClickHandler
+    if (outsideClickHandler) {
+      document.removeEventListener('click', outsideClickHandler)
+    }
+    outsideClickHandler = newOutsideClickHandler
     document.addEventListener('click', outsideClickHandler)
   }
 
