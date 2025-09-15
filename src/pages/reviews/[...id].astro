@@ -28,7 +28,7 @@ const currentReviewId = Astro.params.id
 const { Content, headings } = await render(review)
 
 const tocSections = await getPostTOCSections(currentReviewId)
-const navigation = await getAdjacentReviews(currentReviewId)
+const navigation = await getAdjacentReviews(currentReviewId, 'ja')
 ---
 
 <Layout>
@@ -152,6 +152,7 @@ const navigation = await getAdjacentReviews(currentReviewId)
       <ReviewsNavigation
         newerPost={navigation.newer}
         olderPost={navigation.older}
+        locale="ja"
       />
     </section>
 
@@ -172,6 +173,7 @@ const navigation = await getAdjacentReviews(currentReviewId)
     <ReviewsNavigation
       newerPost={navigation.newer}
       olderPost={navigation.older}
+      locale="ja"
     />
   </section>
 </Layout>

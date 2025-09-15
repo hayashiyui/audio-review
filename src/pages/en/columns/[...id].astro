@@ -1,12 +1,13 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import ColumnsNavigation from '@/components/ColumnsNavigation.astro'
 import LanguageToggle from '@/components/LanguageToggle.astro'
 import PostHead from '@/components/PostHead.astro'
 import RelatedArticles from '@/components/RelatedArticles.astro'
 import TOCHeader from '@/components/TOCHeader.astro'
 import TOCSidebar from '@/components/TOCSidebar.astro'
 import Layout from '@/layouts/Layout.astro'
-import { getColumnTOCSections } from '@/lib/data-utils'
+import { getAdjacentColumns, getColumnTOCSections } from '@/lib/data-utils'
 import { Icon } from 'astro-icon/components'
 import { Picture } from 'astro:assets'
 import { getCollection, render } from 'astro:content'
@@ -29,6 +30,7 @@ const currentId = column.id
 const pageSlug = Astro.params.id
 const { Content, headings } = await render(column)
 const tocSections = await getColumnTOCSections(currentId)
+const navigation = await getAdjacentColumns(currentId, 'en')
 ---
 
 <Layout lang="en">
@@ -79,5 +81,11 @@ const tocSections = await getColumnTOCSections(currentId)
     <div class="col-start-2">
       <RelatedArticles collection="columns" articleId={currentId} locale="en" />
     </div>
+
+    <ColumnsNavigation
+      newerPost={navigation.newer}
+      olderPost={navigation.older}
+      locale="en"
+    />
   </section>
 </Layout>

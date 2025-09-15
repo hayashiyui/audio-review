@@ -29,7 +29,7 @@ const { Content, headings } = await render(column)
 
 const tocSections = await getColumnTOCSections(currentColumnId)
 
-const navigation = await getAdjacentColumns(currentColumnId)
+const navigation = await getAdjacentColumns(currentColumnId, 'ja')
 ---
 
 <Layout>
@@ -136,6 +136,7 @@ const navigation = await getAdjacentColumns(currentColumnId)
       <ColumnsNavigation
         newerPost={navigation.newer}
         olderPost={navigation.older}
+        locale="ja"
       />
     </section>
 
@@ -156,6 +157,7 @@ const navigation = await getAdjacentColumns(currentColumnId)
     <ColumnsNavigation
       newerPost={navigation.newer}
       olderPost={navigation.older}
+      locale="ja"
     />
   </section>
 </Layout>
