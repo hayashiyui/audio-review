@@ -6,15 +6,16 @@ import PageHead from '@/components/PageHead.astro'
 import { buttonVariants } from '@/components/ui/button'
 import Layout from '@/layouts/Layout.astro'
 import { getAllReviews, getAllColumns } from '@/lib/data-utils'
+import { HOME_LISTING_COUNTS } from '@/lib/display-limits'
 
 const allReviews = await getAllReviews()
 const allColumns = await getAllColumns()
 const reviews = allReviews
   .filter((e) => (e.data.locale ?? 'ja') === 'en')
-  .slice(0, 18)
+  .slice(0, HOME_LISTING_COUNTS.en.reviews)
 const columns = allColumns
   .filter((e) => (e.data.locale ?? 'ja') === 'en')
-  .slice(0, 3)
+  .slice(0, HOME_LISTING_COUNTS.en.columns)
 ---
 
 <Layout class="max-w-6xl ml-2" lang="en">

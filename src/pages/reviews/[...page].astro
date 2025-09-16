@@ -3,7 +3,7 @@ import ReviewsCard from '@/components/ReviewsCard.astro'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
 import PaginationComponent from '@/components/ui/pagination'
-import { SITE } from '@/consts'
+import { LISTING_PAGE_SIZES } from '@/lib/display-limits'
 import Layout from '@/layouts/Layout.astro'
 import { getAllReviews, groupReviewsByYear } from '@/lib/data-utils'
 import type { PaginateFunction } from 'astro'
@@ -15,7 +15,7 @@ export async function getStaticPaths({
 }) {
   const allReviews = await getAllReviews()
   const jaOnly = allReviews.filter((e) => (e.data.locale ?? 'ja') === 'ja')
-  return paginate(jaOnly, { pageSize: SITE.postsPerPage })
+  return paginate(jaOnly, { pageSize: LISTING_PAGE_SIZES.reviews.ja })
 }
 
 const { page } = Astro.props

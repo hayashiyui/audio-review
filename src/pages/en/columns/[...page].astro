@@ -3,7 +3,7 @@ import BlogCard from '@/components/BlogCard.astro'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
 import PaginationComponent from '@/components/ui/pagination'
-import { SITE } from '@/consts'
+import { LISTING_PAGE_SIZES } from '@/lib/display-limits'
 import Layout from '@/layouts/Layout.astro'
 import { getAllColumns, groupColumnsByYear } from '@/lib/data-utils'
 import type { PaginateFunction } from 'astro'
@@ -11,7 +11,7 @@ import type { PaginateFunction } from 'astro'
 export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
   const all = await getAllColumns()
   const enOnly = all.filter((e) => (e.data.locale ?? 'ja') === 'en')
-  return paginate(enOnly, { pageSize: SITE.postsPerPage })
+  return paginate(enOnly, { pageSize: LISTING_PAGE_SIZES.columns.en })
 }
 
 const { page } = Astro.props
@@ -54,4 +54,3 @@ const years = Object.keys(columnsByYear).sort((a, b) => parseInt(b) - parseInt(a
     />
   </div>
 </Layout>
-

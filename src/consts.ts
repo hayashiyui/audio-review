@@ -1,4 +1,5 @@
 import type { IconMap, SocialLink, Site } from '@/types'
+import { LISTING_PAGE_SIZES } from '@/lib/display-limits'
 
 export const SITE: Site = {
   title: 'Audio Review Blog',
@@ -8,7 +9,7 @@ export const SITE: Site = {
   author: '哲学的なNEKO',
   locale: 'ja',
   featuredPostCount: 20,
-  postsPerPage: 20,
+  postsPerPage: LISTING_PAGE_SIZES.reviews.ja,
 }
 
 export const NAV_LINKS: SocialLink[] = [
