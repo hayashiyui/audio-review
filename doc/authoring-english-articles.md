@@ -86,7 +86,7 @@ description: "A deep-dive into the planar flagship's technical prowess and music
 date: "2025-09-11T05:00:00+09:00"
 brand: "HiFiMAN"
 model: "Susvara"
-category: "ヘッドホン" # ← 日本語の列挙（必須）
+category: "Headphones"
 tags: ["planar magnetic", "flagship", "China"]
 heroImage: "@assets/images/hero/hifiman-susvara.jpg"
 relatedArticles:
@@ -108,7 +108,7 @@ translationKey: columns-sound-quality-evaluation-guide
 title: "A Practical Guide to Critical Listening"
 description: "Shared vocabulary, listening techniques, and the science behind differences you feel but can't always measure."
 date: "2025-08-05T09:00:00"
-category: "オーディオ基礎知識" # ← 日本語の列挙（必須）
+category: "Basics"
 tags: ["listening", "evaluation"]
 heroImage: "@assets/images/hero/default.jpg"
 ---
@@ -126,18 +126,16 @@ heroImage: "@assets/images/hero/default.jpg"
 - 地の文は能動態・簡潔・並行構造を意識（サイト全体のトーンを維持）。
 - ドル記号"$"や"<"はエスケープ"\"すること
 - 引用文献のリストは改行されるように注意（マークダウンでスペース2つ）
-- 日本国内価格についての情報は省略可
+- 英語圏ユーザーにとって興味の対象になりにくい日本国内価格や日本国内向けの情報は省略する
 
 ---
 
 ## よくある質問（EN 追加）
 
-- Q: カテゴリも英語化できますか？
-  - A: いいえ。現行スキーマは日本語列挙です。UI 側で表示名が翻訳されます。
 - Q: `translationKey` は必須？
-  - A: 今後の `hreflang` 相互リンク自動化に備え、付与を強く推奨します。
+  - A: 必須です。
 - Q: タグは英語にすべき？
-  - A: EN ページのタグ一覧は EN 記事のタグだけで生成されます。英語タグを推奨します（JA 側とは独立運用）。
+  - A: EN ページのタグ一覧は EN 記事のタグだけで生成されます。英語タグ必須です（JA 側とは独立運用）。
 - Q: 画像は別に用意する？
   - A: 既存の `src/assets/images/{hero,contents}` を共有してください。必要に応じて差し替え可。
   - 備考: `@assets` エイリアスで参照してください。相対パス（`../../assets/...`）は使用しません。
@@ -158,7 +156,6 @@ heroImage: "@assets/images/hero/default.jpg"
 ## 仕上げチェックリスト
 
 - [ ] `src/content/{reviews,columns}/en/*.mdx` が正しい場所にあり、`locale: en` が設定されている
-- [ ] `category` は日本語列挙のまま（ビルドエラー無し）
 - [ ] `title`/`description`/本文が英語化されている
 - [ ] 内部リンクは `/en/...` へ向いている（意図があれば JA でも可）
 - [ ] `pnpm build` で `/en/` 配下のページ表示と検索を確認
