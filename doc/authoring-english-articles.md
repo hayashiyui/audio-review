@@ -13,7 +13,7 @@
   - 例（レビュー）: `src/content/reviews/en/hifiman-susvara.mdx`
   - 例（コラム）: `src/content/columns/en/sound-quality-evaluation-guide.mdx`
 - Frontmatter に `locale: en` を必ず追加します（既定は `ja`）。
-- `translationKey` は今後の `hreflang` 相互リンクで使用予定のため、付与してください（推奨規約: `{collection}-{slug}` 例: `reviews-hifiman-susvara`）。
+- `translationKey` は今後の `hreflang` 相互リンクで使用するため、付与してください（推奨規約: `{collection}-{slug}` 例: `reviews-hifiman-susvara`）。
 - `category` はスキーマが日本語列挙のため、英語記事でも日本語値（例: `ヘッドホン`）のままにしてください（必須）。
 - 検索（Pagefind）は `<html lang>` に基づき言語別インデックスが自動生成されます。`/` は日本語のみ、`/en/` は英語のみがヒットします。
 

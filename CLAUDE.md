@@ -60,21 +60,43 @@ public/
 `src/content/content.config.ts`でコンテンツ用メタデータを定義：
 
 ### reviewsコレクション（オーディオ機器レビュー）
+- `locale`: ja / en (必須)
+- `translationKey`: hreflangによる相互リンク用キー(必須)
 - `title`: 文字列（必須）
 - `description`: 文字列（必須）
 - `date`: 日付（必須）
 - `brand`: 文字列（オプション）- 機器ブランド
 - `model`: 文字列（オプション）- 機器モデル
-- `category`: 列挙型（オプション）- 'スピーカー','ヘッドホン','イヤホン','デジタルプレーヤー','DAC','パワーアンプ','プリアンプ','プリメインアンプ','ヘッドホンアンプ','アナログ','ケーブル','アクセサリ'
+- `category`: 列挙型（オプション）- 'Speakers',
+        'Headphones',
+        'Earphones',
+        'Digital Player',
+        'DAC',
+        'Power Amplifier',
+        'Preamplifier',
+        'Integrated Amplifier',
+        'Headphone Amplifier',
+        'Analog',
+        'Cables',
+        'Accessories'
 - `tags`: 文字列配列（オプション）
 - `heroImage`: image（オプション）- ヒーロー画像
 - `draft`: 真偽値（オプション、デフォルト: false）- 下書き状態
 
 ### columnsコレクション（オーディオコラム）
+- `locale`: ja / en (必須)
+- `translationKey`: hreflangによる相互リンク用キー(必須)
 - `title`: 文字列（必須）
 - `description`: 文字列（必須）
 - `date`: 日付（必須）
-- `category`: 列挙型（オプション）- 'オーディオ基礎知識','セットアップ','音楽論','業界動向','技術解説','エッセイ','その他'
+- `category`: 列挙型（オプション）- 'Basics',
+        'Setup',
+        'Sound Improvement',
+        'Industry Trends',
+        'Technical',
+        'Essay',
+        'Buying Guide',
+        'Others'
 - `tags`: 文字列配列（オプション）
 - `heroImage`: image（オプション）- ヒーロー画像
 - `draft`: 真偽値（オプション、デフォルト: false）- 下書き状態
