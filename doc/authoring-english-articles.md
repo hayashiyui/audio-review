@@ -14,7 +14,6 @@
   - 例（コラム）: `src/content/columns/en/sound-quality-evaluation-guide.mdx`
 - Frontmatter に `locale: en` を必ず追加します（既定は `ja`）。
 - `translationKey` は今後の `hreflang` 相互リンクで使用するため、付与してください（推奨規約: `{collection}-{slug}` 例: `reviews-hifiman-susvara`）。
-- `category` はスキーマが日本語列挙のため、英語記事でも日本語値（例: `ヘッドホン`）のままにしてください（必須）。
 - 検索（Pagefind）は `<html lang>` に基づき言語別インデックスが自動生成されます。`/` は日本語のみ、`/en/` は英語のみがヒットします。
 
 ### 画像の参照ルール（重要）
@@ -39,7 +38,6 @@
   - `title` / `description`（英語に）
   - `translationKey: reviews-hifiman-susvara`（推奨）
   - `tags`（英語に。EN タグだけで EN 側のタグ一覧が生成されます）
-  - `category` は日本語列挙のまま（例: `ヘッドホン`）
 - そのほか（必要に応じて）
   - `brand` `model` は機種名表記を維持
   - `heroImage` はそのまま再利用（相対パス: `@assets/images/hero/...`）
@@ -148,7 +146,6 @@ heroImage: "@assets/images/hero/default.jpg"
   - `heroImage` や本文の画像が相対パスのままになっていないか確認（`@assets` に修正）。
   - Markdown 直書きの画像は `import` 方式へ置換。
 - タグ/カテゴリが表示されない
-  - `category` が日本語列挙の値かを確認（例: `ヘッドホン`）。
   - タグは EN 側は英語推奨。カンマ区切りのスペルミスに注意。
 
 ---

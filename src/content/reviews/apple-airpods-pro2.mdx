@@ -7,8 +7,15 @@ date: "2025-07-26"
 brand: "Apple"
 model: "AirPods Pro 2"
 category: "Earphones"
-tags: ["イヤホン", "ワイヤレス", "Apple", "ノイズキャンセリング", "米国"]
+tags: ["イヤホン", "ワイヤレス", "Apple", "ノイズキャンセリング", "空間オーディオ", "米国"]
 heroImage: "@assets/images/hero/apple-airpods-pro2.jpg"
+relatedArticles:
+  - collection: reviews
+    id: bose-quietcomfort-ultra-headphones
+  - collection: reviews
+    id: sennheiser-momentum4-wireless
+  - collection: reviews
+    id: apple-airpods-max
 ---
 
 大量生産され、世界中の人々の耳に収まることが運命づけられた製品は、果たして真の卓越性を求めるオーディオファイルの厳しい審美眼に耐えうる「一流品」となり得るのだろうか。この問いは、現代のパーソナルオーディオを語る上で避けては通れない、根源的なジレンマである。そして、その議論の中心に位置するのが、AppleのAirPods Pro 2に他ならない。
@@ -17,11 +24,18 @@ heroImage: "@assets/images/hero/apple-airpods-pro2.jpg"
 
 本稿では、AirPods Pro 2を単なる機能の集合体としてではなく、その設計思想、すなわち「哲学」の域で分析を試みる。その心臓部であるH2チップが織りなす計算音響（computational audio）の深淵を覗き込み、それがもたらす静寂と音の粒子を解き明かす。同時に、その驚くべき技術的達成と、製品自体が内包する「使い捨て」という構造的矛盾との間に横たわる緊張関係にも、鋭いメスを入れていきたい。これは、AirPods Pro 2という一つの製品を通じて、現代における「良い音」とは何か、「一流品」とは何かを再定義する試みでもあるのだ。
 
-**関連記事**
+import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
 
-import RelatedArticleCard from '@/components/RelatedArticleCard.astro'
-
-<RelatedArticleCard collection="columns" id="sound-quality-evaluation-guide" />
+<RelatedArticlesGrid
+  articles={[
+    { collection: "reviews", id: "apple-airpods-max" },
+    { collection: "reviews", id: "bose-quietcomfort-ultra-headphones" },
+    { collection: "reviews", id: "sony-wh1000xm6" },
+    { collection: "reviews", id: "sennheiser-momentum4-wireless" },
+  ]}
+  columns={4}
+  title="Related Articles"
+/>
 
 ## **Apple AirPods Pro 2 — 概観**
 

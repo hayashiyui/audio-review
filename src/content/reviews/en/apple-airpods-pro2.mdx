@@ -9,6 +9,13 @@ model: "AirPods Pro 2"
 category: "Earphones"
 tags: ["earphones", "wireless", "Apple", "noise cancelling", "USA"]
 heroImage: "@assets/images/hero/apple-airpods-pro2.jpg"
+relatedArticles:
+  - collection: reviews
+    id: bose-quietcomfort-ultra-headphones
+  - collection: reviews
+    id: sennheiser-momentum4-wireless
+  - collection: reviews
+    id: apple-airpods-max
 ---
 
 Can a product destined for mass production and global ear placement truly become a "first-class item" that withstands the demanding aesthetic judgment of audiophiles seeking genuine excellence? This question represents a fundamental dilemma we cannot avoid when discussing modern personal audio. And at the center of that debate stands none other than Apple's AirPods Pro 2.
@@ -17,11 +24,18 @@ These small white earphones have penetrated our lives deeply not merely as elect
 
 This article attempts to analyze the AirPods Pro 2 not merely as an aggregation of functions but at the level of its design philosophy. We'll peer into the depths of computational audio woven by its heart—the H2 chip—and unravel the silence and particles of sound it brings forth. Simultaneously, we'll apply a sharp scalpel to the tension between its remarkable technical achievements and the structural contradiction of "disposability" inherent in the product itself. This is also an attempt to redefine what constitutes "good sound" and "first-class products" in our era through the lens of a single product: the AirPods Pro 2.
 
-**Related Articles**
+import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
 
-import RelatedArticleCard from '@/components/RelatedArticleCard.astro'
-
-<RelatedArticleCard collection="columns" id="sound-quality-evaluation-guide" />
+<RelatedArticlesGrid
+  articles={[
+    { collection: "reviews", id: "apple-airpods-max" },
+    { collection: "reviews", id: "bose-quietcomfort-ultra-headphones" },
+    { collection: "reviews", id: "sony-wh1000xm6" },
+    { collection: "reviews", id: "sennheiser-momentum4-wireless" },
+  ]}
+  columns={4}
+  title="Related Articles"
+/>
 
 ## **Apple AirPods Pro 2 — Overview**
 
