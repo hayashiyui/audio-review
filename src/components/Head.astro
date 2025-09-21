@@ -5,6 +5,9 @@ import Favicons from './Favicons.astro'
 import { ClientRouter } from 'astro:transitions'
 
 const websiteSchema = generateWebsiteSchema()
+const siteBase = Astro.site ?? SITE.href
+const rssJaHref = new URL('rss.xml', siteBase).toString()
+const rssEnHref = new URL('en/rss.xml', siteBase).toString()
 ---
 
 <head>
@@ -41,8 +44,14 @@ const websiteSchema = generateWebsiteSchema()
   <link
     rel="alternate"
     type="application/rss+xml"
-    title={SITE.title}
-    href={new URL('rss.xml', Astro.site)}
+    title="Audio Review Blog (日本語)"
+    href={rssJaHref}
+  />
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title="Audio Review Blog (English)"
+    href={rssEnHref}
   />
 
   <Favicons />

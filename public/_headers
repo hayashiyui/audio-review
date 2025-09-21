@@ -2,8 +2,12 @@
   Link: <https://pubsubhubbub.appspot.com/>; rel="hub"
   Link: <https://websub.superfeedr.com/>; rel="hub"
   Link: <https://audiomatome.com/rss.xml>; rel="self"
+  Content-Type: application/rss+xml; charset=utf-8
+  Cache-Control: public, max-age=600
 
 /en/rss.xml
   Link: <https://pubsubhubbub.appspot.com/>; rel="hub"
   Link: <https://websub.superfeedr.com/>; rel="hub"
   Link: <https://audiomatome.com/en/rss.xml>; rel="self"
+  Content-Type: application/rss+xml; charset=utf-8
+  Cache-Control: public, max-age=600
