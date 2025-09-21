@@ -7,9 +7,11 @@ date: "2025-09-21T19:00:00+09:00"
 brand: "Bowers & Wilkins"
 model: "Px8"
 category: "Headphones"
-tags: ["B&W", "ノイズキャンセリング", "ワイヤレス", "英国"]
+tags: ["B&W", "ノイズキャンセリング", "ワイヤレス", "aptX", "英国"]
 heroImage: "@assets/images/hero/bowers-and-wilkins-px8.jpg"
 relatedArticles:
+  - collection: reviews
+    id: focal-bathys
   - collection: reviews
     id: bang-and-olufsen-beoplay-h100
   - collection: reviews
@@ -57,7 +59,7 @@ import RelatedArticlesGrid from '@/components/RelatedArticlesGrid.astro'
   articles={[
     { collection: "reviews", id: "bose-quietcomfort-ultra-headphones" },
     { collection: "reviews", id: "sony-wh1000xm6" },
-    { collection: "reviews", id: "sennheiser-momentum4-wireless" },
+    { collection: "reviews", id: "focal-bathys" },
     { collection: "reviews", id: "bang-and-olufsen-beoplay-h100" },
   ]}
   columns={4}
@@ -98,7 +100,7 @@ Px8 が市場に登場して以来、その評価は専門メディアから熱�
 | [SoundGuys](https://www.soundguys.com/bowers-and-wilkins-px8-review-116184/) | 「頭のためのレザーソファのよう。快適だが高価」 "Like a leather couch for your head, these headphones are comfortable — and pricy." | 8.3/10 |
 | [WIRED](https://www.bowerswilkins.com/en/product/over-ear-headphones/px8/FP42951P.html) | 「活気に満ち、説得力があり、無限に聴き続けられるサウンド。贅沢な素材から巧みに作られている」 "Spirited, convincing, and endlessly listenable sound. Expertly made from indulgent materials." | 9/10 |
 | [YouTube (SoundGuys)](https://www.youtube.com/watch?v=vKFmEBe2bPo) | 「バスを馬鹿げたレベルまで強調する」 "...they do get a fairly low tamper score which our testing supports it emphasizes bass to an absolutely silly degree." (01:10–01:16) | N/A |
-| [YouTube (Immersive Sound Tech)](https://forum.headphones.com/t/bowers-and-wilkins-px8-official-thread/19225) | 「Px8は、より『楽しい』リスニング体験を提供し、より快適」（Bathysとの比較において） "Px8...are more 'fun' to listen to and more comfortable to wear." | N/A |
+| [YouTube (Immersive Sound Tech)](https://forum.headphones.com/t/bowers-and-wilkins-px8-official-thread/19225) | 「Px8は、より『楽しい』リスニング体験を提供し、より快適」（[Bathys](/reviews/focal-bathys)との比較において） "Px8...are more 'fun' to listen to and more comfortable to wear." | N/A |
 | [Reddit User (r/headphones)](https://www.reddit.com/r/headphones/comments/xum91z/bowers_wilkins_px8_impressions/) | 「[Momentum 4](/reviews/sennheiser-momentum4-wireless)の低音は重いが形のないアッパーカットのようで、Px8はアリの重いジャブのよう。機敏で正確だ」 "As compared to the Momentum 4's you can feel the tightness of the bass. It doesn't hit as hard...but it's infinitely more refined and punchy..." | N/A |
 
 **集計:** 約12の主要な情報源を調査した結果、評価の比率はおおよそ **肯定的75%、賛否両論/否定的25%** となった。この評価の分岐は、レビュアーが何を重視するかによって明確に分かれる傾向がある。ライフスタイルや主観的な音楽体験を重視するメディアはビルドクオリティと魅力的なサウンドを高く評価する一方、客観的な測定データやコストパフォーマンスを重視するメディアやフォーラムでは、価格設定やANC性能に批判的な見方が強い [19](#ref-19)。
@@ -136,7 +138,7 @@ Px8 が競合製品と一線を画すもう一つの要素は、その素材選�
 
 しかし、この「ラグジュアリーな作り込み」という物語には、無視できない矛盾点が存在する。複数の長期ユーザーから、ヘッドバンドのナッパレザーが接着部から剥がれてくるという報告が上がっているのだ [27](#ref-27)。これは、製品が掲げる高級感と長期的な価値に対する信頼を揺るがす、重大な欠点と言わざるを得ない。
 
-| Feature | Bowers & Wilkins Px8 | Focal Bathys | [Sony WH-1000XM5](/reviews/sony-wh1000xm6) | [Bose QuietComfort Ultra](/reviews/bose-quietcomfort-ultra-headphones) |
+| Feature | Bowers & Wilkins Px8 | [Focal Bathys](/reviews/focal-bathys) | [Sony WH-1000XM5](/reviews/sony-wh1000xm6) | [Bose QuietComfort Ultra](/reviews/bose-quietcomfort-ultra-headphones) |
 | :---- | :---- | :---- | :---- | :---- |
 | **ドライバー (Driver)** | 40mm カーボンコーン | 40mm アルミニウム・マグネシウム 'M'シェイプ・ドーム | 30mm カーボンファイバー複合材 | ダイナミック (サイズ非公表) |
 | **重量 (Weight)** | 320g | 350g | 249g | 250g |
@@ -203,7 +205,7 @@ Px8のANC性能は、その価格帯とポジショニングを考えると、�
 測定グラフを詳細に分析すると、Px8のノイズキャンセリング戦略と、[Sony WH-1000XM5](/reviews/sony-wh1000xm6)や[Bose QuietComfort Ultra](/reviews/bose-quietcomfort-ultra-headphones)といったクラスリーダーとの明確な違いが浮かび上がる。
 
 * **低周波数域 (～300Hz):** この領域はANCの主戦場であり、Px8は航空機のエンジン音や電車の走行音といった持続的な低周波ノイズに対して有能な性能を発揮する。特に100Hz付近では最大で約30dBの騒音低減効果を示している [22](#ref-22)。しかし、競合との比較でその弱点も露呈する。100Hz以下のサブベース領域において、Px8の減衰性能は急激に低下する傾向がある [22](#ref-22)。対照的に、[Sony WH-1000XM5](/reviews/sony-wh1000xm6)や特に[Bose QuietComfort Ultra](/reviews/bose-quietcomfort-ultra-headphones)は、この最も低い周波数帯域においてもより安定して高い減衰性能を維持しており、地響きのような極低周波ノイズの抑制において明確な優位性を持っている [58](#ref-58)。  
-* **中周波数域 (300Hz～2kHz):** 人の声や一般的なオフィスノイズが含まれるこの帯域では、Px8の性能は非常に競争力がある。測定データ上、そのノイズ減衰能力は[Sony WH-1000XM5](/reviews/sony-wh1000xm6)とほぼ遜色ないレベルに達しており、[Bose](/reviews/bose-quietcomfort-ultra-headphones)に対しても大きく引けを取らない 57。これは、Px8が単に低音ノイズだけでなく、より幅広い環境音に対して効果的であることを示している。  
+* **中周波数域 (300Hz～2kHz):** 人の声や一般的なオフィスノイズが含まれるこの帯域では、Px8の性能は非常に競争力がある。測定データ上、そのノイズ減衰能力は[Sony WH-1000XM5](/reviews/sony-wh1000xm6)とほぼ遜色ないレベルに達しており、[Bose](/reviews/bose-quietcomfort-ultra-headphones)に対しても大きく引けを取らない [57](#ref-57)。これは、Px8が単に低音ノイズだけでなく、より幅広い環境音に対して効果的であることを示している。  
 * **高周波数域 (2kHz以上):** この帯域では、アクティブなキャンセルよりもイヤーカップによる物理的な遮音（パッシブアイソレーション）が支配的となる。Px8は、ナッパレザー製のイヤーパッドが耳をしっかりと密閉することで、高周波の鋭い音を効果的にブロックし、優れた遮音性を発揮する [22](#ref-22)。
 
 結論として、Px8のANCは「音楽性を損なわない」というBowers & Wilkinsの哲学を色濃く反映した、意図的なチューニングの結果である 3。絶対的な静寂の追求においては、特に100Hz以下のサブベース領域でSonyやBoseに一歩譲る。しかし、中域のノイズに対しては競合と肩を並べる性能を持ち、多くの日常的な状況で十分以上の静寂を提供する。これは、ANCをあくまで高音質のための補助機能と位置づけ、音質への影響を最小限に抑えようとする設計思想の現れであり、Px8のキャラクターを定義する重要な要素と言える。
@@ -262,7 +264,7 @@ $400以下のプレミアムANC市場は、Sony ([WH-1000XM5](/reviews/sony-wh10
 
 そこでB\&Wが取った戦略は、Px8を$699という、さらに上の価格帯へと引き上げることだった。これにより、製品の価値提案の軸が「技術的機能」から「触知可能なラグジュアリーと音響的個性」へとシフトした。彼らが販売しているのは、単なる電子機器ではなく、高級腕時計やハンドバッグのように、所有する喜びやステータスを感じさせる「体験」そのものである。
 
-その証拠に、マーケティングはナッパレザーやアルミニウムといった素材 [3](#ref-3)、McLarenとのコラボレーション [7](#ref-7)、そして「True Sound」というブランドの伝統 [2](#ref-2) に焦点を当てている。この戦略においては、ANC性能が最高でないことや、EQがシンプルであるといった技術的なトレードオフは許容される。なぜなら、ターゲットとなる顧客は、絶対的な静寂や10バンドEQよりも、手にした時のレザーの感触や、音楽を聴いた時の胸を打つような低音のパンチを優先する層だからだ。Px8は、マスマーケットのフラッグシップ機から「卒業」し、より高い威信、優れた素材、そして（機能的な利便性を多少犠牲にしてでも）より個性的でオーディオファイル寄りのサウンドを求める消費者に向けた、巧みな製品なのである。その真の競合は[Sony XM5](/reviews/sony-wh1000xm6)ではなく、Focal Bathys [29](#ref-29) や Mark Levinson No. 5909 [51](#ref-51) なのだ。
+その証拠に、マーケティングはナッパレザーやアルミニウムといった素材 [3](#ref-3)、McLarenとのコラボレーション [7](#ref-7)、そして「True Sound」というブランドの伝統 [2](#ref-2) に焦点を当てている。この戦略においては、ANC性能が最高でないことや、EQがシンプルであるといった技術的なトレードオフは許容される。なぜなら、ターゲットとなる顧客は、絶対的な静寂や10バンドEQよりも、手にした時のレザーの感触や、音楽を聴いた時の胸を打つような低音のパンチを優先する層だからだ。Px8は、マスマーケットのフラッグシップ機から「卒業」し、より高い威信、優れた素材、そして（機能的な利便性を多少犠牲にしてでも）より個性的でオーディオファイル寄りのサウンドを求める消費者に向けた、巧みな製品なのである。その真の競合は[Sony XM5](/reviews/sony-wh1000xm6)ではなく、[Focal Bathys](/reviews/focal-bathys) [29](#ref-29) や Mark Levinson No. 5909 [51](#ref-51) なのだ。
 
 <RelatedArticlesGrid
   articles={[

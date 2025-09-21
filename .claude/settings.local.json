@@ -28,7 +28,12 @@
       "Bash(find:*)",
       "Bash(cat:*)",
       "Bash(python:*)",
-      "Bash(xargs:*)"
+      "Bash(xargs:*)",
+      "Bash(while read file)",
+      "Bash(do if grep -q '[^#\\[\\]ref-][0-9][。、）]' \"$file\")",
+      "Bash(! grep -q '\\[[0-9]\\](#ref-[0-9]\\)' \"$file\")",
+      "Bash(then echo \"$file\")",
+      "Bash(fi)"
     ],
     "deny": []
   }
