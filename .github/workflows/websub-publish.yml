@@ -1,0 +1,26 @@
+name: Notify WebSub Hubs
+
+on:
+  deployment_status: {}
+
+jobs:
+  ping-websub:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'production'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Cloudflare Pages ping endpoint
+        env:
+          PING_ENDPOINT: ${{ secrets.WEBSUB_PING_ENDPOINT }}
+          PING_SECRET: ${{ secrets.WEBSUB_PING_SECRET }}
+        run: |
+          if [ -z "$PING_ENDPOINT" ]; then
+            echo "WEBSUB_PING_ENDPOINT secret is required" >&2
+            exit 1
+          fi
+
+          EXTRA_HEADERS=()
+          if [ -n "$PING_SECRET" ]; then
+            EXTRA_HEADERS+=("-H" "x-websub-secret: $PING_SECRET")
+          fi
+
+          curl -fsS -X POST "$PING_ENDPOINT" "${EXTRA_HEADERS[@]}"

@@ -3,13 +3,17 @@ import rss from '@astrojs/rss'
 import type { APIContext } from 'astro'
 import { getAllPosts, getAllReviews, getAllColumns } from '@/lib/data-utils'
 
+const HUBS = [
+  'https://pubsubhubbub.appspot.com/',
+  'https://websub.superfeedr.com/',
+]
+
 export async function GET(context: APIContext) {
   try {
     const posts = await getAllPosts()
-    const reviews = (await getAllReviews()).filter((e) => (e.data.locale ?? 'ja') === 'ja')
-    const columns = (await getAllColumns()).filter((e) => (e.data.locale ?? 'ja') === 'ja')
+    const reviews = (await getAllReviews()).filter((entry) => (entry.data.locale ?? 'ja') === 'ja')
+    const columns = (await getAllColumns()).filter((entry) => (entry.data.locale ?? 'ja') === 'ja')
 
-    // レビュー、ブログ記事、コラムを結合してソート（日本語のみ）
     const allItems = [
       ...reviews.map((review) => ({
         title: review.data.title,
@@ -34,11 +38,18 @@ export async function GET(context: APIContext) {
       })),
     ].sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf())
 
+    const siteOrigin = context.site?.origin ?? SITE.href
+    const customData = [
+      ...HUBS.map((hub) => `<link rel="hub" href="${hub}"/>`),
+      `<link rel="self" href="${new URL('/rss.xml', siteOrigin).toString()}"/>`,
+    ].join('\n')
+
     return rss({
       title: SITE.title,
       description: SITE.description,
       site: context.site ?? SITE.href,
       items: allItems,
+      customData,
     })
   } catch (error) {
     console.error('Error generating RSS feed:', error)
