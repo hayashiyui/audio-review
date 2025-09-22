@@ -1,0 +1,115 @@
+# Taskfile.yml
+version: '3'
+
+vars:
+  INCOMING: src/content/reviews/ja/_incoming
+  HERO_DIR: public/hero
+  GRAPHS_DIR: public/graphs
+  TARGETS_CMD: "node scripts/targets.mjs"
+
+tasks:
+  setup:
+    desc: 依存導入＋Playwright 準備
+    cmds:
+      - pnpm i
+      - pnpm exec playwright install chromium --with-deps
+
+  watch:
+    desc: _incoming を監視して全自動パイプライン実行
+    cmds:
+      - pnpm exec chokidar "{{.INCOMING}}/**/*.{docx,html,md}" -c "task pipeline"
+    silent: true
+
+  pipeline:
+    desc: 変換→アセット→AI→最終整形
+    deps: [convert, assets, ai, postprocess]
+
+  convert:
+    desc: Google Doc のエクスポート(HTML/Docx)を MD へ統一（Pandoc）
+    cmds:
+      - node scripts/gdoc_to_md.mjs
+
+  assets:
+    desc: ヒーロー画像取得/変換＋測定グラフ収集
+    cmds:
+      - node scripts/prepare_assets.mjs
+      - node scripts/fetch_graphs.mjs
+
+  ai:frontmatter:
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_claude.mjs doc/playbooks/01_frontmatter.md $FILES
+
+  ai:table:
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_claude.mjs doc/playbooks/02_table_shorten.md $FILES
+
+  ai:citations:
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_claude.mjs doc/playbooks/03_citations_linking.md $FILES
+
+  ai:internal:
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_claude.mjs doc/playbooks/04_internal_links.md $FILES
+
+  ai:graphs:
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_claude.mjs doc/playbooks/05_insert_graphs.md $FILES
+
+  ai:translate:
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_claude.mjs doc/playbooks/06_translate_en.md $FILES
+
+  codex:validate-frontmatter:
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/10_validate_frontmatter.md $FILES
+
+  codex:fix-tables:
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/11_fix_tables.md $FILES
+
+  codex:fix-links:
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/12_fix_links_footnotes.md $FILES
+
+  codex:lint:
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/13_lint.md $FILES
+
+  debug:targets:
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); echo "$FILES"; echo "count=$(echo $FILES | wc -w)"
+
+  codex:normalize-refs:
+    desc: Step 2a - 事前正規化（H1削除 / 引用H2 / アクセス日削除）
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/20_normalize_refs_and_headings.md $FILES
+
+  codex:escape-symbols:
+    desc: Step 2b - 記号エスケープ（< → &lt;、& → &amp;、$ → \$）
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/21_escape_symbols.md $FILES
+
+  fallback:normalize-refs:
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/normalize_refs_deterministic.mjs $FILES
+
+  codex:table-shorten:
+    desc: Step 3 - テーブル短縮（1列目リンク化＋出典URL列削除）
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/30_table_shorten.md $FILES
+
+  codex:link-citations:
+    desc: Step 4 - 引用番号 ↔ 文献の相互リンク化（Codex）
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/40_link_citations.md $FILES
+
+  postprocess:
+    desc: ASTベースで決定論整形（AI残りの微調整を確実化）
+    cmds:
+      - node scripts/md_postprocess.mjs
+      - node scripts/related.mjs
+
+  build:
+    desc: Astro のビルド
+    cmds:
+      - pnpm build

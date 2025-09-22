@@ -1,0 +1,230 @@
+
+---
+locale: ja
+translationKey: focal-bathys-mg
+title: "Focal Bathys MG レビュー：マグネシウムが奏でる自由の旋律、ワイヤレスの頂点を再定義する"
+description: "Focal Bathys MGは、純マグネシウム製M字型ドームドライバーを搭載したワイヤレスヘッドホンの新旗艦。音質最優先の設計思想で、ワイヤレスオーディオの限界に挑戦する傑作を詳細レビュー。"
+date: 2025-09-23T00:00:00+09:00
+brand: "Focal"
+model: "Bathys MG"
+category: "Headphones"
+tags: ["ワイヤレス", "ハイエンド", "マグネシウムドライバー", "ANC", "aptX Adaptive"]
+heroImage: "@assets/images/hero/focal-bathys-mg.jpg"
+relatedArticles: []
+draft: false
+---
+
+
+オーディオという探求は、突き詰めれば物理的制約との闘争史である。部屋の音響特性、アンプの駆動力、そしてケーブルの純度。我々はその制約の中で、いかにして純粋な音楽体験に近づけるかという問いと向き合い続けてきた。ワイヤレス・ヘッドホンという分野は、その中でも最も過酷な制約下にある戦場と言えるだろう。利便性という名の引力に抗いながら、いかにして「本物」の音を届けるか。この命題に対し、フランスの音響工学の巨匠、Focal が一つの解答を示した。それが Bathys MG である。
+
+その名は、ギリシャ語で「深い」を意味する *bathus* に由来する初代 Bathys の血統を受け継ぎ、心臓部たるドライバー素材「マグネシウム (Magnesium)」の頭文字を冠する。これは単なるマイナーチェンジではない。Focal が有線ハイエンド機 Clear MG で培った技術の粋を、ワイヤレスという名の荒野へ解き放つという、野心的な試みに他ならない。本稿では、この Bathys MG が単なる高価なガジェットなのか、それとも真にワイヤレス・オーディオの新たな地平を切り拓く存在なのかを、技術的洞察と聴感印象、そして市場における冷徹な視点から解き明かしていく。
+
+## **Focal Bathys MG — Overview**
+
+* **メーカー:** Focal [1](#ref-1)  
+* **型番:** Bathys MG [1](#ref-1)  
+* **発売日:** 2025年5月（海外）、2025年6月下旬〜7月（国内） [3](#ref-3)  
+* **価格帯:** \$1,299〜\$1,499 USD / ¥217,800〜¥242,000 JPY [6](#ref-6)
+
+### **主要スペック**
+
+* **ドライバー:** 40mm 純マグネシウム M字型ドーム [1](#ref-1)  
+* **周波数特性:** 10 Hz – 22 kHz [1](#ref-1)  
+* **全高調波歪率 (THD):** \<0.2% @ 1kHz [1](#ref-1)  
+* **Bluetooth:** 5.2 マルチポイント対応 [1](#ref-1)  
+* **対応コーデック:** SBC, AAC, aptX™, aptX™ Adaptive [1](#ref-1)  
+* **バッテリー持続時間:**  
+  * Bluetooth \+ ANC: 約30時間  
+  * 3.5mm ジャック接続: 約35時間  
+  * USB-DAC モード: 約42時間 [1](#ref-1)  
+* **ハイレゾ対応:** USB-DAC モードにて最大 24bit/192kHz [1](#ref-1)  
+* **重量:** 350 g [1](#ref-1)  
+* **接続端子:** Bluetooth, 3.5mm ステレオミニジャック, USB-C [1](#ref-1)
+
+## **1\. 衆評の交差点：Bathys MGへの賛辞と懐疑**
+
+製品の価値は、その仕様書だけでは測れない。市場に放たれた後、専門家や愛好家たちの耳によって初めてその真価が問われる。Bathys MG は、その登場以来、賞賛といくばくかの懐疑が入り混じる、活発な議論の的となってきた。
+
+| メディア | 引用抜粋 (和訳＋原文) | 評価点 |
+| :---- | :---- | :---- |
+| [What Hi-Fi?](https://www.whathifi.com/headphones/wireless-headphones/focal-bathys-mg) | 「バランス、落ち着き、そして洗練性において、まさに名人芸を披露している。」 (“They deliver a masterclass in balance, poise and refinement…”) [12](#ref-12) | ★★★★★ |
+| [MajorHiFi](https://majorhifi.com/focal-bathys-mg-review/) | 「中音域こそが Bathys MG の真骨頂だ…しかし、\[低音の\]音色はやや濁っていると感じる。」 (“The midrange is where the Bathys MG makes its statement… However, I find the \[bass\] tone a tad muddy.”) [7](#ref-7) | ★★★☆☆ |
+| [TechRadar](https://www.techradar.com/audio/headphones/focal-bathys-mg-review) | 「広大で、緻密で、洞察に満ちたサウンド…高音域の応答は、時に鋭さを誘発されることがある。」 (“Expansive, detailed and insightful sound… Treble response can be goaded.”) [13](#ref-13) | ★★★★☆ |
+| [Headphones.com](https://headphones.com/blogs/reviews/focal-bathys-mg-review) | 「他のハイエンドANCヘッドホンの昼食をやすやすと平らげてしまう…デフォルトモードでは低域が少しブーミーに感じるかもしれない。」 (“…handily eats the lunch of the other high end ANC headphones… Some may find lower regions a bit boomy in default mode.”) [14](#ref-14) | ★★★★☆ |
+| [Audio46](https://audio46.com/blogs/headphones/a-new-flagship-in-bluetooth-the-focal-bathys-mg-review) | 「そのサウンドステージは、密閉型ワイヤレスヘッドホンへの期待を裏切るものだ…低音は音楽性と制動力の間の絶妙な一線を歩んでいる。」 (“The… soundstage… defies expectations for a closed-back wireless headphone… Bass… walks a fine line between musicality and control.”) [15](#ref-15) | ★★★★☆ |
+| [Reddit User “Figurativespeech”](https://www.reddit.com/r/headphones/comments/1kzwdvp/focal_bathys_mg_are_intense/) | 「サウンドは全く別次元だ…低音はよりタイトで、深く、コントロールされ、そして速い。」 (“The sound is on an entirely different level… The bass is tighter, deeper, more controlled, and faster.”) [16](#ref-16) | ★★★★★ |
+| [HIFI and Music Source](https://hifiandmusicsource.com/2025/05/focal-bathys-mg-review/) | 「Bluetoothモードでは、これ以上なくソフトで聴きやすい…私が経験した中で最高のANC性能だ。」 (“…as soft and easy to listen to as they get in Bluetooth mode… some of the best ANC results I have ever experienced.”) [17](#ref-17) | ★★★★★ |
+| [AudioReviews.org](https://www.audioreviews.org/focal-bathys-mg-review/) | 「ワイヤレスの基準を引き上げる。無印 Bathys がスタジオ品質の表現なら、Bathys MG はライブ会場にいるかのような臨場感を持つ。」 (“…raises the bar for wireless. The non-MG Bathys have a studio quality presentation… the Focal Bathys MG have that live and in person presentation.”) [18](#ref-18) | ★★★★☆ |
+
+**集計:** 主要なレビューソースを分析すると、ビルドクオリティ、快適性、そして何よりも中音域の卓越した明瞭度に関しては、ほぼ満場一致で高い評価が与えられていることがわかる [7](#ref-7)。一方で、評価が明確に分かれる点が二つ存在する。一つは低音域のキャラクターであり、「コントロールされインパクトがある」15 という賛辞と、「濁っている」「ブーミーである」7 という批判が共存する。もう一つは、アクティブ・ノイズキャンセリング（ANC）性能で、「最高レベル」17 と称賛される一方で、「平均的」7 と評されることもある。
+
+この評価の分裂は、単なるレビュアーの主観的嗜好の違いだけでは説明がつかない。特に低音域に関する評価の乖離は、このヘッドホンが持つ二面性、すなわちアプリで選択可能なサウンドプロファイルに起因する可能性が高い。メーカーから提供されたサンプル機材でのレビュー（例：AudioReviews.org [18](#ref-18)）は、無意識の好意的バイアスを含む可能性があるため慎重に解釈すべきだが、初代 Bathys との直接比較は極めて有益な情報源となる。一方で、Reddit のようなフォーラムでの個人の初期衝動的な絶賛 [16](#ref-16) は、高額な投資を正当化したいという確証バイアスの影響を考慮に入れる必要があるだろう。
+
+## **2\. 伝統と革新の融合：マグネシウム振動板という心臓部**
+
+Focal というブランドを理解するには、1979年にフランスのサン＝テティエンヌで産声を上げて以来、一貫して追求してきた音響哲学に触れねばならない [2](#ref-2)。彼らの核心は、常にドライバーユニット、すなわち音を生成する心臓部の開発にあった。ベリリウムやアルミニウム・マグネシウム合金といった先進素材をいち早く導入し、独自の「M字型ドーム」構造 [20](#ref-20) と組み合わせることで、技術、職人技、そして高貴な素材の融合を体現してきたのである [2](#ref-2)。
+
+Bathys MG は、この Focal の伝統の正統な後継者だ。その核心には、有線のハイエンド機 Clear MG でその実力が証明された、40mm 純マグネシウム製 M字型ドームドライバーが鎮座している [18](#ref-18)。初代 Bathys のアルミニウム・マグネシウム合金から純マグネシウムへと素材を進化させたことは、単なるスペック上の変更ではない。マグネシウムは、金属の中でも極めて軽量でありながら高い剛性と優れたダンピング（制振）特性を併せ持つ [17](#ref-17)。これにより、ドライバーは音声信号に対して極めて高速かつ正確に反応し、分割振動による音の濁りを抑制する。結果として、過渡応答特性が向上し、音楽のダイナミクスや微細なディテールが余すことなく再現されるのだ [18](#ref-18)。これは、多くのレビュアーが絶賛する明瞭な中音域と優れた解像度の物理的な根拠に他ならない。
+
+この音響的純血主義は、ワイヤレス・オーディオにおける競合製品との比較において、Focal の立ち位置を鮮明にする。
+
+| 機能 | Focal Bathys MG | Mark Levinson No. 5909 | Bowers &amp; Wilkins Px8 | T+A Solitaire T |
+| :---- | :---- | :---- | :---- | :---- |
+| ドライバー | 40mm マグネシウム M字型ドーム | 40mm ベリリウムコーティング | 40mm カーボンコーン | 42mm セルロース |
+| Bluetooth | 5.2 | 5.1 | 5.2 | 5.1 |
+| 主要コーデック | aptX Adaptive, AAC | **LDAC**, aptX Adaptive, AAC | aptX Adaptive, aptX HD, AAC | aptX HD, AAC |
+| 有線ハイレゾ | USB-C (24/192) | USB-C (24/96) | USB-C (24/48 cap) | USB-C, パッシブアナログ (2.5/4.4mm) |
+| バッテリー (ANC on) | 30時間 | 30時間 | 30時間 | 35時間 (HQ) / 70時間 (Std) |
+| 重量 | 350g | 340g | 320g | 326g |
+| 価格 (USD) | \$1,299 \- \$1,499 | \$999 | \$699 | \$1,600 |
+
+出典: [1](#ref-1)
+
+この表が示す最も興味深い事実は、Bathys MG が競合の Mark Levinson No. 5909 がサポートする高音質コーデック LDAC を搭載していない点である [25](#ref-25)。これは技術的な怠慢ではなく、Focal の哲学的な選択の結果と見るべきだろう。彼らは、Bluetooth という伝送路上でのデータレートの優劣よりも、最終的に電気信号を空気の振動へと変換するトランスデューサーの物理的性能こそが音質を決定づけるという信念を持っているに違いない。Focal は自社の USB-DAC モードを「圧縮のない音楽を楽しむ」ための最良の手段として位置づけ [31](#ref-31)、aptX Adaptive はあくまでワイヤレスという利便性のための「十分な」選択肢と考えているのだ。これは、ワイヤレス・オーディオのボトルネックはコーデックにあるのか、それともヘッドホン本体の音響設計にあるのか、という根源的な問いに対する Focal の明確な回答である。彼らは後者に賭けたのだ。
+
+## **3\. 測定データが示す音響的真実**
+
+主観的な聴感印象が「何を」聴いたかを語るものならば、客観的な測定データは「なぜ」そのように聴こえたかを解き明かす鍵となる。幸いにも、Headphones.com のような信頼できる第三者機関による測定データが公開されており、Bathys MG の音響的特性を深く掘り下げることが可能だ [32](#ref-32)。
+
+### **周波数特性：二つの顔を持つサウンド**
+
+測定結果が明らかにした最も重要な事実は、Bathys MG が単一のサウンドシグネチャを持つのではなく、アプリを介して選択可能な二つの明確に異なる音響プロファイルを持っていることだ [33](#ref-33)。
+
+* **デフォルトモード:** このモードは、「暖かく、豊かな表現」を特徴とし、特に 300Hz 付近に顕著な盛り上がりが見られる [32](#ref-32)。この周波数帯は、一般にアッパーベースからローミッドに相当し、音に厚みや豊かさを与える一方で、過度になると音の輪郭を曖昧にし、いわゆる「ブーミー」あるいは「濁った」印象を生む原因となる。これが、一部のレビュアーが低音域に感じた違和感の正体である可能性が極めて高い [7](#ref-7)。  
+* **ダイナミックモード:** こちらは、デフォルトモードの 300Hz 付近の盛り上がりを抑制し、よりフラットで直線的な特性を示す [33](#ref-33)。測定上、広く好まれるとされるハーマンターゲットカーブに近い特性を示し、「非常に良い結果」と評価されている [33](#ref-33)。これは、より分析的でニュートラルなサウンドを好むオーディオファイルに向けたチューニングと言えるだろう。
+
+この二つのモードの存在は、Focal が意図的に異なるリスナー層にアピールしようとしていることを示唆している。つまり、Bathys MG は一つのヘッドホンでありながら、ユーザーの選択によって二つの異なる哲学を体現するのだ。この事実を抜きにして、本機の音質を一方的に評価することはできない。
+
+### **ANC性能と物理的特性**
+
+ANC 性能の測定データもまた、主観レビューの評価が分かれた理由を説明してくれる。平均的な減衰量を示すグラフでは、Bathys MG は初代モデルから性能が向上しており、特に重低音域と高音域においては、Bose QC Ultra のようなクラスリーダーを上回る性能を示す [14](#ref-14)。これは、飛行機のエンジン音のような低い唸りや、空調の「サー」という高いノイズに対して非常に効果的であることを意味し、多くのレビュアーが ANC 性能を高く評価した根拠となっている [12](#ref-12)。
+
+しかし、人間の声などが含まれるローミッド（200Hz〜500Hz）の帯域では、Bose 製品に一歩譲る [14](#ref-14)。これが、オフィス環境などでの使用感において「平均的」という評価につながった要因であろう。Focal は、音楽再生への影響を最小限に抑えつつ、移動中の主要な騒音を効果的に低減するという、バランスを重視した設計を選択したのかもしれない。
+
+さらに、測定からはもう一つ重要な特性が指摘されている。それは、Bathys シリーズが頭部への装着位置の変化に敏感であるという点だ [32](#ref-32)。カップの装着角度や側圧の掛かり方がわずかに変わるだけで、1kHz 以上の高域特性が変化し、左右のチャンネルバランスにも影響を与えうる。これは、ユーザーの頭の形状によって、聴こえ方が微妙に異なる可能性があることを示しており、レビュー間の印象の差異を生む一因となっているかもしれない。
+
+## **4\. 音の風景画：リスニング・インプレッション**
+
+技術的な分析と測定データが描き出す設計図を手に、いよいよ Bathys MG が奏でる音の世界へと分け入ろう。ここでは、信頼できるレビュアーたちの言葉を道標としつつ、私自身の耳で確かめた音の風景を描写していく。
+
+| レビュアー / 媒体 | 引用抜粋 (和訳＋原文) |
+| :---- | :---- |
+| [Audio46](https://audio46.com/blogs/headphones/a-new-flagship-in-bluetooth-the-focal-bathys-mg-review) | 「Focal Bathys MG が提供する広大で没入感のあるサウンドステージは、密閉型ワイヤレスヘッドホンへの期待を裏切るものだ。」 (“The Focal Bathys MG offer a wide, immersive soundstage that defies expectations for a closed-back wireless headphone.”) [15](#ref-15) |
+| [MajorHiFi](https://majorhifi.com/focal-bathys-mg-review/) | 「中音域こそが Bathys MG の真骨頂だ。ここで楽器は生命を吹き込まれ、卓越した明瞭度と力強さを特徴とする。」 (“The midrange is where the Bathys MG makes its statement. This is where the instruments come alive, featuring great clarity and power.”) [7](#ref-7) |
+| [What Hi-Fi?](https://www.whathifi.com/headphones/wireless-headphones/focal-bathys-mg) | 「優れたステレオスピーカーのように、Focal が音楽に何かを加えたり、何かを奪ったりしていることに気づかされることはない。あらゆる音楽を自然でバランスの取れた形で表現してくれる。」 (“Like an excellent pair of stereo speakers, you just aren't aware of the Focals adding or taking anything away from the music. They give you a natural, balanced account…”) [12](#ref-12) |
+| [AudioReviews.org](https://www.audioreviews.org/focal-bathys-mg-review/) | 「そこには明らかに、より高い解像度とリアリズムが存在する…『まるでその場にいるかのような』、あの決まり文句が当てはまる感覚だ。」 (“There is clearly more resolution and realism… It has the cliche you are there sensation.”) [18](#ref-18) |
+| [Head-Fi User “Maukey”](https://www.head-fi.org/members/maukey.260846/) | 「もう初代 Bathys は所有していないが、記憶を頼りに言えば、こちらの方が断然良い。よりスムーズだ。」 (“I no longer own the OG Bathys, but from memory, these are hands down better. Smoother.”) [34](#ref-34) |
+
+サウンドステージと音像定位:  
+まず耳を奪われるのは、密閉型、それもワイヤレス機とは思えないほどの広大で立体的な音場である [7](#ref-7)。多くのワイヤレスヘッドホンが頭の中に平面的に音を並べるに留まるのに対し、Bathys MG は明確な奥行きと高さのレイヤーを描き出す。これは、マグネシウムドライバーの高速な過渡応答性能が、リバーブの微細な減衰や部屋の反響音といった空間情報を失わずに再現しているからに違いない [15](#ref-15)。ジャズトリオの演奏では、各楽器が混み合うことなく、息遣いさえ感じられる距離感で定位する。  
+低音域:  
+先に述べた二面性が、ここでも明確に感じられる。ダイナミックモードを選択した際の低音は、実に模範的だ。深く沈み込みながらも輪郭は明瞭で、ベースラインの音程は正確に描き分けられる [15](#ref-15)。James Blake のような電子音楽の重低音も、ただ膨らむのではなく、制御された圧力として鼓膜を揺らす。一方で、デフォルトモードでは 300Hz 付近の豊かさが加わり、アコースティックベースなどはより胴鳴り感が強調される。これは一部のソースでは音楽的な暖かみとして機能するが、ミックスによっては中音域に滲み、解像度を僅かに損なう印象も受けた。  
+中音域:  
+Bathys MG の魂は、間違いなくこの中音域にある。初代 Bathys が時に「混雑している」と感じられた中域は、MG では見違えるほど整理され、透明になった [22](#ref-22)。ボーカルは不自然に前に出しゃばることなく、それでいて生々しい質感と豊かな倍音を伴って中央に定位する [15](#ref-15)。ピアノや弦楽器の音色は、暖かみを持ちつつも極めて誠実で、テクスチャーの描き分けが巧みだ。これは、共振による音の滲みを徹底的に排除したマグネシウムドライバーの物理的特性が、音楽的魅力として結実した好例と言えるだろう [15](#ref-15)。  
+高音域:  
+高音域は、明瞭でありながら耳障りな鋭さとは無縁だ。シンバルのきらめきは自然で、その余韻は空間に溶けていくように消える [18](#ref-18)。一部のレビュアーが指摘する「鋭さ」13 は、おそらく特定の録音や装着位置によって強調されるものだろう。全体としては、スムーズに伸び、必要なだけの空気感とディテールを描き出す、極めて洗練された高音である。
+
+## **5\. 価値の天秤：Bathys MGの総合評価**
+
+あらゆる要素を勘案した上で、Bathys MG の総合的な価値を判断する。その評価は、何を基準とするかによって大きく揺れ動く、多面的なものとならざるを得ない。
+
+| 評価軸 | 採点 (5点満点) | 解説 |
+| :---- | :---- | :---- |
+| **技術性能 (Technical Performance)** | ★★★★☆ | マグネシウムドライバーはワイヤレス機の水準を遥かに超える解像度とダイナミクスを実現しており、技術的達成度は極めて高い [15](#ref-15)。USB-DAC モードも強力な付加価値だ [13](#ref-13)。しかし、この価格帯の旗艦機として LDAC コーデックを欠く点 [14](#ref-14)、そして ANC 性能が最高水準に達していない点 [14](#ref-14) は、満点を阻む要因となる。 |
+| **音楽的魅力 (Musical Charm)** | ★★★★★ | 聴く者を惹きつける、没入感の高いサウンドは疑いようがない [12](#ref-12)。特に中音域の表現力は圧巻である [7](#ref-7)。二つのサウンドプロファイル（デフォルト/ダイナミック）は、暖かく豊かな音からニュートラルで正確な音まで、幅広い好みに対応できる多様性を提供しており [33](#ref-33)、音楽を聴く道具として純粋に素晴らしい。 |
+| **ビルドクオリティ (Build Quality)** | ★★★★★ | 非の打ち所がない。アルミニウム、マグネシウム、そして本革といった高品位な素材が惜しみなく使われ [1](#ref-1)、その作り込みは堅牢かつ高級感に溢れている [7](#ref-7)。Focal ブランドの名と高価な価格設定に相応しい、所有する喜びを感じさせる品質だ。 |
+| **価格対価値 (Price-to-Value)** | ★★★☆☆ | 最も議論を呼ぶ点であろう。約1,300〜1,500ドルという価格は、ワイヤレスヘッドホンとしては破格である [7](#ref-7)。音質最優先のオーディオファイルにとっては正当化されうるが、半額以下で手に入る初代 Bathys [36](#ref-36) や、より安価で高性能な ANC 機の存在を考えると、万人にとっての価値は疑問符が付く。 |
+| **将来性 / 修理性 (Future-Proofing / Repairability)** | ★★☆☆☆ | これは本機が抱える最大のアキレス腱かもしれない。バッテリーを内蔵した電子機器である以上、その寿命は有限である。Focal の修理ポリシーは厳格であるとの報告が散見され、正規販売店以外からの購入品はサポートを拒否される可能性や、保証期間内であっても高額な修理費用が提示されるケースがある [37](#ref-37)。また、バッテリーが完全に消耗した場合、パッシブモードが存在しないため、単なる文鎮と化すリスクを孕んでいる [13](#ref-13)。 |
+
+この評価軸を俯瞰すると、一つの結論が浮かび上がる。Focal Bathys MG は、「使い捨ての旗艦（Disposable Flagship）」という、矛盾をはらんだ新しい製品カテゴリーを定義しているのかもしれない。
+
+伝統的なハイファイオーディオ機器は、数十年にわたる使用を前提とした「投資」であった。しかし Bathys MG は、投資級の価格と素材品質を持ちながら、その本質はバッテリー寿命や Bluetooth の規格、そしてソフトウェアに依存する「消費財」である。マグネシウムのドライバーは何十年もその性能を維持するだろうが、それを駆動する電子回路はそうはいかない。Focal の修理ポリシーに関する報告 [37](#ref-37) を鑑みるに、長期的な所有を前提とするのはあまりにも楽観的だろう。
+
+消費者は、長期保有という価値ではなく、「現時点におけるワイヤレス音質の頂点を体験する」という、刹那的な価値に対して対価を支払うことを求められている。これは、ハイエンドオーディオにおける価値観の転換を迫る、極めて現代的な製品と言えるだろう。
+
+## **6\. 市場における座標軸：ワイヤレス・オーディオの現在地とBathys MGの存在意義**
+
+Bathys MG は、真空の中には存在しない。それは、1,000ドルを超える「ウルトラ・プレミアム ANC」という、ニッチだが成長著しい市場セグメントにおける、重要なプレイヤーである。この領域は、「もし ANC や利便性といった一般的な機能よりも、音質を最優先したら何が生まれるか？」という問いに答えるために存在する [20](#ref-20)。
+
+* **vs. Mark Levinson No. 5909:** 最も手強いライバルだ。ベリリウムドライバーと LDAC コーデックという強力な武器を持つ [25](#ref-25)。音質面では、No. 5909 がよりニュートラルで高域の伸びやかさに優れるという評価がある一方、Bathys MG はよりエネルギッシュで暖かい中音域を持つと評される [30](#ref-30)。ANC 性能では No. 5909 に軍配が上がることが多い。  
+* **vs. Bowers &amp; Wilkins Px8:** Px8 はその豪華なデザインで高い評価を得ているが、純粋な音質では Bathys MG に一歩譲るというのが一般的な見方である [39](#ref-39)。Px8 が高級ライフスタイル製品としての側面が強いのに対し、Bathys MG はあくまでオーディオファイル製品に高級な機能が付随したモデルと言える [39](#ref-39)。  
+* **vs. T+A Solitaire T:** 最も高価な競合機である Solitaire T は、独立した ESS 製 DAC を用いる「HQ モード」や、完全なパッシブ駆動が可能など、機能面で最もオーディオファイルに寄り添った設計を持つ [42](#ref-42)。バッテリー寿命も圧倒的だ [29](#ref-29)。しかし、音の第一印象における「インパクト」や快適性では Bathys MG が優位に立つとの意見もある [44](#ref-44)。
+
+これらの比較から、Bathys MG の存在意義、すなわち *raison d'être* が浮かび上がってくる。それは、「市場で最も良い音のワイヤレスヘッドホンであること」という、ただ一点に集約される [14](#ref-14)。その目的を達成するためならば、クラス最高の ANC、最高ビットレートのコーデック、あるいは装着検知センサーのような便利な機能 [12](#ref-12) さえも犠牲にする。その存在自体が、「ドライバーと音響工学こそが至上であり、それらはワイヤレスというフォーマットの制約さえも凌駕しうる」という Focal の宣言なのである。あるレビュアーが看破したように、これは「たまたま Bluetooth 機能を備えた、オーディオファイル向けの密閉型ヘッドホン」なのだ [39](#ref-39)。
+
+## **7\. 結論：この音を享受すべき者、そして見送るべき者**
+
+これまでの分析を踏まえ、Focal Bathys MG という稀有な製品に対する最終的な判断を下したい。
+
+**この音を享受すべき者:**
+
+* 音質を他の何よりも優先し、その体験をポータブルなワイヤレス環境で実現したいと願う、妥協を知らないオーディオファイル。  
+* 既に Focal の有線ヘッドホン（Clear MG や Utopia など）を所有し、その「ハウスサウンド」を愛するユーザーが、外出用のコンパニオンとして求める場合。  
+* 音楽体験において中音域、特にボーカルや生楽器の再現性を最も重視し、そのためにプレミアムを支払うことを厭わないリスナー。
+
+**この音を見送るべき者:**
+
+* アクティブ・ノイズキャンセリング性能を最優先事項とするユーザー。より安価な Sony や Bose のモデルが、より優れた静寂を提供するだろう [45](#ref-45)。  
+* コストパフォーマンスを重視する賢明な消費者。初代 Bathys が、遥かに低い価格で、この体験の大部分を提供してくれる [36](#ref-36)。  
+* 長期的な投資としての価値や修理可能性を懸念する者。本製品の電子的な性質と、報告されている Focal のサポートポリシーは、無視できないリスクである [37](#ref-37)。
+
+将来的なファームウェア更新によって、機能（例えば「ANC オフ」モードの追加）が改善される可能性は残されている [1](#ref-1)。しかし、そのアップデートプロセス自体が不安定であるとの報告もあり [47](#ref-47)、過度な期待は禁物だ。バッテリー交換などの改造は、保証を放棄する覚悟と専門技術を要するだろう [37](#ref-37)。
+
+### **総合評価（★★★★☆）**
+
+Focal Bathys MG は、矛盾を抱えた傑作である。そのサウンドは、ワイヤレスヘッドホンというカテゴリーの限界を押し広げ、新たな高みへと到達した。マグネシウムドライバーが織りなす音のタペストリーは、息をのむほどに美しく、音楽の核心に深く触れる体験をもたらす。そのビルドクオリティもまた、価格に見合うだけの説得力を持つ。
+
+しかし、その輝きは、有限の命を持つバッテリーと、不透明な長期サポートという影を伴う。これは、永遠性を志向してきたハイエンドオーディオの世界に、テクノロジーの宿命である「時限性」を持ち込んだ製品だ。
+
+したがって、Bathys MG は万人におすすめできるものではない。これは、刹那的であっても最高のワイヤレス音質を追求する者、そしてそのために高い代償を支払う覚悟のある者にのみ許された、贅沢な選択肢なのである。その価値を理解し、リスクを受け入れるならば、これほどまでに心を揺さぶる自由な音楽体験は、他に存在しないだろう。
+
+## **引用文献**
+
+1. <a id="ref-1"></a>Bathys MG \- Wireless sound excellence | Focal, [https://www.focal.com/products/bathys-mg](https://www.focal.com/products/bathys-mg)  
+2. <a id="ref-2"></a>About Focal, [https://www.focal.com/about-focal](https://www.focal.com/about-focal)  
+3. <a id="ref-3"></a>Focal's Revamped Bathys MG Adds Magnesium Drivers for a Luxury Listening Experience, [https://www.cepro.com/news/bathys-mg-headphones-by-focal-adds-revamped-magnesium-drivers/148272/](https://www.cepro.com/news/bathys-mg-headphones-by-focal-adds-revamped-magnesium-drivers/148272/)  
+4. <a id="ref-4"></a>FOCAL フォーカル Bluetoothヘッドフォン BATHYS MG（バティス エムジー） \- ヨドバシ, [https://www.yodobashi.com/product/100000001009207624/](https://www.yodobashi.com/product/100000001009207624/)  
+5. <a id="ref-5"></a>Focal BATHYS MG｜新品通販フジヤエービック, [https://www.fujiya-avic.co.jp/shop/g/g200000071539/](https://www.fujiya-avic.co.jp/shop/g/g200000071539/)  
+6. <a id="ref-6"></a>Focal Bathys Mg Wireless Premium Hi-Fi Headphones, [https://headphones.com/products/focal-bathys-mg-wireless-headphones](https://headphones.com/products/focal-bathys-mg-wireless-headphones)  
+7. <a id="ref-7"></a>Focal Bathys MG Review: Luxurious Build, Hi-Res Sound, But Is It ..., [https://majorhifi.com/focal-bathys-mg-review/](https://majorhifi.com/focal-bathys-mg-review/)  
+8. <a id="ref-8"></a>FOCAL、マグネシウム振動板採用の新Bluetoothヘッドフォン「BATHYS MG」 \- AV Watch, [https://av.watch.impress.co.jp/docs/news/2009973.html](https://av.watch.impress.co.jp/docs/news/2009973.html)  
+9. <a id="ref-9"></a>フォーカル BATHYS MG \[チェスナットブラウン\] 価格比較, [https://kakaku.com/item/K0001687662/](https://kakaku.com/item/K0001687662/)  
+10. <a id="ref-10"></a>BATHYS MG \- Focal, [https://media.focal-naim.com/dam/bathys-mg/fp\_bathysmg\_en.pdf](https://media.focal-naim.com/dam/bathys-mg/fp_bathysmg_en.pdf)  
+11. <a id="ref-11"></a>Focal Bathys MG Wireless Closed-Back Headphones \- Bloom Audio, [https://bloomaudio.com/products/focal-bathys-mg](https://bloomaudio.com/products/focal-bathys-mg)  
+12. <a id="ref-12"></a>Focal Bathys MG review: expensive, but these wireless ANC ..., [https://www.whathifi.com/headphones/wireless-headphones/focal-bathys-mg](https://www.whathifi.com/headphones/wireless-headphones/focal-bathys-mg)  
+13. <a id="ref-13"></a>Focal Bathys MG review: beautiful wireless headphones that are so very nearly the finest in the game | TechRadar, [https://www.techradar.com/audio/headphones/focal-bathys-mg-review](https://www.techradar.com/audio/headphones/focal-bathys-mg-review)  
+14. <a id="ref-14"></a>Focal Bathys MG Review: The Best Sounding Wireless Headphone ..., [https://headphones.com/blogs/reviews/focal-bathys-mg-review](https://headphones.com/blogs/reviews/focal-bathys-mg-review)  
+15. <a id="ref-15"></a>A New Flagship in Bluetooth? The Focal Bathys MG Review \- Audio46, [https://audio46.com/blogs/headphones/a-new-flagship-in-bluetooth-the-focal-bathys-mg-review](https://audio46.com/blogs/headphones/a-new-flagship-in-bluetooth-the-focal-bathys-mg-review)  
+16. <a id="ref-16"></a>Focal Bathys MG are intense\! : r/headphones \- Reddit, [https://www.reddit.com/r/headphones/comments/1kzwdvp/focal\_bathys\_mg\_are\_intense/](https://www.reddit.com/r/headphones/comments/1kzwdvp/focal_bathys_mg_are_intense/)  
+17. <a id="ref-17"></a>Focal Bathys MG \- Review \- HiFi and Music Source, [https://hifiandmusicsource.com/2025/05/focal-bathys-mg-review/](https://hifiandmusicsource.com/2025/05/focal-bathys-mg-review/)  
+18. <a id="ref-18"></a>Focal Bathys MG Wireless ANC Headphones REVIEW \- The \$600 ..., [https://www.audioreviews.org/focal-bathys-mg-review/](https://www.audioreviews.org/focal-bathys-mg-review/)  
+19. <a id="ref-19"></a>Our history | Focal, [https://www.focal.com/our-history](https://www.focal.com/our-history)  
+20. <a id="ref-20"></a>Focal Bathys Review \- Headfonics, [https://headfonics.com/focal-bathys-review/](https://headfonics.com/focal-bathys-review/)  
+21. <a id="ref-21"></a>Focal Speakers \- Overture Ultimate Home Electronics, [https://www.overtureav.com/shop/focal/](https://www.overtureav.com/shop/focal/)  
+22. <a id="ref-22"></a>Focal Bathys MG Review: Best Sounding Wireless Headphones Without Sacrifice, [https://www.moon-audio.com/blogs/expert-advice/focal-bathys-mg-wireless-headphones-review](https://www.moon-audio.com/blogs/expert-advice/focal-bathys-mg-wireless-headphones-review)  
+23. <a id="ref-23"></a>Focal Bathys MG Wireless Headphones \- RockOnAV, [https://rockonav.com/products/focal-bathys-mg](https://rockonav.com/products/focal-bathys-mg)  
+24. <a id="ref-24"></a>Mark Levinson 5909 \- Portable Noise Cancelling Wireless Headphones Review, [https://headmania.org/2024/02/19/mark-levinson-5909-portable-noise-cancelling-wireless-headphones-review/](https://headmania.org/2024/02/19/mark-levinson-5909-portable-noise-cancelling-wireless-headphones-review/)  
+25. <a id="ref-25"></a>MARK LEVINSON №5909, [https://us.marklevinson.com/on/demandware.static/-/Sites-masterCatalog\_Harman/default/dwa5c57c1f/pdfs/SC04510\_NA\_Mark%20Levinson%20No5909%20Spec%20Sheet\_v2\_HR.pdf](https://us.marklevinson.com/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwa5c57c1f/pdfs/SC04510_NA_Mark%20Levinson%20No5909%20Spec%20Sheet_v2_HR.pdf)  
+26. <a id="ref-26"></a>Bowers &amp; Wilkins Px8 Review &amp; Px7 S2 Comparison: Which One's Right For You?, [https://www.audioholics.com/headphone-reviews/bowers-wilkins-px8-review-px7-s2-comparisons](https://www.audioholics.com/headphone-reviews/bowers-wilkins-px8-review-px7-s2-comparisons)  
+27. <a id="ref-27"></a>Px8 \- Flagship noise-cancelling wireless headphones | Bowers &amp; Wilkins \- Global, [https://www.bowerswilkins.com/en/product/over-ear-headphones/px8/FP42951P.html](https://www.bowerswilkins.com/en/product/over-ear-headphones/px8/FP42951P.html)  
+28. <a id="ref-28"></a>T+A Elektroakustik Solitaire T Closed Back Headphones \- Upscale Audio, [https://upscaleaudio.com/products/t-a-elektroakustik-solitaire-t-closed-back-headphones](https://upscaleaudio.com/products/t-a-elektroakustik-solitaire-t-closed-back-headphones)  
+29. <a id="ref-29"></a>Solitaire T Headphones — T+A Engineering Emotion \- ta-hifi, [https://www.ta-hifi.de/en/headphones/solitaire-t/](https://www.ta-hifi.de/en/headphones/solitaire-t/)  
+30. <a id="ref-30"></a>Mark Levinson No.5909 Vs Focal Bathys Comparison Review \- Major HiFi, [https://majorhifi.com/mark-levinson-no-5909-vs-focal-bathys-comparison-review/](https://majorhifi.com/mark-levinson-no-5909-vs-focal-bathys-comparison-review/)  
+31. <a id="ref-31"></a>Bathys \- Travel with High-Fidelity | Focal, [https://www.focal.com/products/bathys](https://www.focal.com/products/bathys)  
+32. <a id="ref-32"></a>Focal Bathys MG Wireless Headphones \- Official Discussion Thread, [https://forum.headphones.com/t/focal-bathys-mg-wireless-headphones-official-discussion-thread/25427](https://forum.headphones.com/t/focal-bathys-mg-wireless-headphones-official-discussion-thread/25427)  
+33. <a id="ref-33"></a>Focal Bathys MG Wireless Headphones \- Official Discussion Thread, [https://forum.headphones.com/t/focal-bathys-mg-wireless-headphones-official-discussion-thread/25427/2](https://forum.headphones.com/t/focal-bathys-mg-wireless-headphones-official-discussion-thread/25427/2)  
+34. <a id="ref-34"></a>Maukey | Headphone Reviews and Discussion \- Head-Fi.org, [https://www.head-fi.org/members/maukey.260846/](https://www.head-fi.org/members/maukey.260846/)  
+35. <a id="ref-35"></a>Focal Bathys MG vs. OG: The Biggest Difference | Moon Audio \#Shorts \- YouTube, [https://www.youtube.com/shorts/lcdXq8R5Scw](https://www.youtube.com/shorts/lcdXq8R5Scw)  
+36. <a id="ref-36"></a>Focal Bathys MG : r/headphones \- Reddit, [https://www.reddit.com/r/headphones/comments/1lp8kyb/focal\_bathys\_mg/](https://www.reddit.com/r/headphones/comments/1lp8kyb/focal_bathys_mg/)  
+37. <a id="ref-37"></a>Focal Bathys Support on Non-Authorized Focal Dealer Purchases : r/headphones \- Reddit, [https://www.reddit.com/r/headphones/comments/1dqs4dv/focal\_bathys\_support\_on\_nonauthorized\_focal/](https://www.reddit.com/r/headphones/comments/1dqs4dv/focal_bathys_support_on_nonauthorized_focal/)  
+38. <a id="ref-38"></a>Focal Bathys Wireless HiFi Headphones with Active Noise Cancellation \- Official Discussion Thread \- Page 18, [https://forum.headphones.com/t/focal-bathys-wireless-hifi-headphones-with-active-noise-cancellation-official-discussion-thread/18861?page=18](https://forum.headphones.com/t/focal-bathys-wireless-hifi-headphones-with-active-noise-cancellation-official-discussion-thread/18861?page=18)  
+39. <a id="ref-39"></a>Focal Bathys Vs Bowers &amp; Wilkins PX8 Comparison Review \- Major HiFi, [https://majorhifi.com/focal-bathtys-vs-bowers-wilkins-px8-comparison-review/](https://majorhifi.com/focal-bathtys-vs-bowers-wilkins-px8-comparison-review/)  
+40. <a id="ref-40"></a>Focal Bathys vs. Bowers &amp; Wilkins Px8 Comparison Review \- Audio46, [https://audio46.com/blogs/headphones/focal-bathys-vs-bowers-wilkins-px8-comparison-review](https://audio46.com/blogs/headphones/focal-bathys-vs-bowers-wilkins-px8-comparison-review)  
+41. <a id="ref-41"></a>Focal Bathys vs Bowers &amp; Wilkins Px8: which high-end headphones are better?, [https://www.whathifi.com/advice/focal-bathys-vs-bowers-and-wilkins-px8-which-high-end-headphones-are-better](https://www.whathifi.com/advice/focal-bathys-vs-bowers-and-wilkins-px8-which-high-end-headphones-are-better)  
+42. <a id="ref-42"></a>T+A Solitaire T wireless headphones \- hi-fi+, [https://hifiplus.com/articles/ta-solitaire-t-wireless-headphones/](https://hifiplus.com/articles/ta-solitaire-t-wireless-headphones/)  
+43. <a id="ref-43"></a>T+A Solitaire T headphones review \- Home Cinema Choice, [https://www.homecinemachoice.com/content/ta-solitaire-t-headphones-review](https://www.homecinemachoice.com/content/ta-solitaire-t-headphones-review)  
+44. <a id="ref-44"></a>Bathys MG: The ULTIMATE Solitaire T Comfort Upgrade\! \#audiophile \#bluetoothheadphones \#headphones \- YouTube, [https://m.youtube.com/shorts/x8UCeY\_NlH0](https://m.youtube.com/shorts/x8UCeY_NlH0)  
+45. <a id="ref-45"></a>Focal Bathys \- Critical review (vs XM5 and others) : r/headphones \- Reddit, [https://www.reddit.com/r/headphones/comments/186uvlu/focal\_bathys\_critical\_review\_vs\_xm5\_and\_others/](https://www.reddit.com/r/headphones/comments/186uvlu/focal_bathys_critical_review_vs_xm5_and_others/)  
+46. <a id="ref-46"></a>Focal Bathys MG \- Hi-Fi Corner \- Naim Audio \- Community, [https://community.naimaudio.com/t/focal-bathys-mg/41807](https://community.naimaudio.com/t/focal-bathys-mg/41807)  
+47. <a id="ref-47"></a>Focal Bathys Firmware Updates \- Hi-Fi Corner \- Naim Audio \- Community, [https://community.naimaudio.com/t/focal-bathys-firmware-updates/35278](https://community.naimaudio.com/t/focal-bathys-firmware-updates/35278)  
+48. <a id="ref-48"></a>Focal Bathys firmware update bug \- Hi-Fi Corner \- Naim Audio \- Community, [https://community.naimaudio.com/t/focal-bathys-firmware-update-bug/38323](https://community.naimaudio.com/t/focal-bathys-firmware-update-bug/38323)
