@@ -12,7 +12,7 @@ function list(dir) {
   try {
     return readdirSync(dir)
       .map(n => join(dir, n))
-      .filter(p => statSync(p).isFile() && /\.md$/i.test(p));
+      .filter(p => statSync(p).isFile() && /\.mdx$/i.test(p));
   } catch { return []; }
 }
 
@@ -21,4 +21,4 @@ if (!files.length) {
   console.error('No target .md found (searched: ' + CANDIDATES.join(', ') + ')');
   process.exit(2);
 }
-console.log(files.join(' '));
+console.log(files[0]);

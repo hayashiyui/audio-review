@@ -103,6 +103,21 @@ tasks:
     cmds:
       - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/40_link_citations.md $FILES
 
+  codex:dedupe-citations:
+    desc: Step 5 - 過剰な引用番号を除去し、セクション末にまとめる（Codex）
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/50_dedupe_citations.md $FILES
+
+  codex:internal-links:
+    desc: Step 6 - 既存レビューへの内部リンク付与（最初の1回のみ）
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/60_internal_links.md $FILES
+
+  codex:insert-measurements-mcp:
+    desc: Step 7 (MCP) - 測定グラフを自動取得してMDXへ挿入（Playwright+Filesystem）
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/70_insert_measurements_mcp.md $FILES
+
   postprocess:
     desc: ASTベースで決定論整形（AI残りの微調整を確実化）
     cmds:
