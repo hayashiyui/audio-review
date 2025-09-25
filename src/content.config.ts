@@ -82,6 +82,7 @@ const reviews = defineCollection({
       // i18n fields
       locale: z.enum(['ja', 'en']).default('ja'),
       translationKey: z.string().optional(),
+      price: z.string().optional(),
     }),
 })
 
