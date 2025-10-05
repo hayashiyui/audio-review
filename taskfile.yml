@@ -8,56 +8,9 @@ vars:
   TARGETS_CMD: "node scripts/targets.mjs"
 
 tasks:
-  setup:
-    desc: 依存導入＋Playwright 準備
-    cmds:
-      - pnpm i
-      - pnpm exec playwright install chromium --with-deps
-
-  watch:
-    desc: _incoming を監視して全自動パイプライン実行
-    cmds:
-      - pnpm exec chokidar "{{.INCOMING}}/**/*.{docx,html,md}" -c "task pipeline"
-    silent: true
-
   pipeline:
     desc: 変換→アセット→AI→最終整形
-    deps: [convert, assets, ai, postprocess]
-
-  convert:
-    desc: Google Doc のエクスポート(HTML/Docx)を MD へ統一（Pandoc）
-    cmds:
-      - node scripts/gdoc_to_md.mjs
-
-  assets:
-    desc: ヒーロー画像取得/変換＋測定グラフ収集
-    cmds:
-      - node scripts/prepare_assets.mjs
-      - node scripts/fetch_graphs.mjs
-
-  ai:frontmatter:
-    cmds:
-      - FILES=$({{.TARGETS_CMD}}); node scripts/run_claude.mjs doc/playbooks/01_frontmatter.md $FILES
-
-  ai:table:
-    cmds:
-      - FILES=$({{.TARGETS_CMD}}); node scripts/run_claude.mjs doc/playbooks/02_table_shorten.md $FILES
-
-  ai:citations:
-    cmds:
-      - FILES=$({{.TARGETS_CMD}}); node scripts/run_claude.mjs doc/playbooks/03_citations_linking.md $FILES
-
-  ai:internal:
-    cmds:
-      - FILES=$({{.TARGETS_CMD}}); node scripts/run_claude.mjs doc/playbooks/04_internal_links.md $FILES
-
-  ai:graphs:
-    cmds:
-      - FILES=$({{.TARGETS_CMD}}); node scripts/run_claude.mjs doc/playbooks/05_insert_graphs.md $FILES
-
-  ai:translate:
-    cmds:
-      - FILES=$({{.TARGETS_CMD}}); node scripts/run_claude.mjs doc/playbooks/06_translate_en.md $FILES
+    deps: [convert, assets, ai, postocess]
 
   codex:validate-frontmatter:
     cmds:
@@ -118,11 +71,98 @@ tasks:
     cmds:
       - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/70_insert_measurements_mcp.md $FILES
 
-  postprocess:
-    desc: ASTベースで決定論整形（AI残りの微調整を確実化）
+  gemini:insert-measurements-old:
+    desc: Step 7 (Gemini) - 測定グラフ挿入（非対話）
     cmds:
-      - node scripts/md_postprocess.mjs
-      - node scripts/related.mjs
+      - |
+        FILES=$({{.TARGETS_CMD}})
+        printf "/measurements:insert %s\n" "$FILES" | gemini \
+          --include-directories . \
+          --approval-mode auto_edit \
+          --allowed-tools write_file,read_file,replace,glob,search_file_content,browser_navigate,browser_evaluate,browser_query_selector,browser_query_selector_all,browser_screenshot,request_get \
+
+  gemini:insert-measurements:
+    desc: Step 7 (Gemini) - 測定グラフ挿入（非対話）
+    cmds:
+      - |
+        FILES=$({{.TARGETS_CMD}})
+        PROMPT=$'# 実行指示\n@doc/playbooks/70_insert_measurements_mcp_gemini.md\n\n# 対象MDX'
+        for f in $FILES; do PROMPT="$PROMPT"$'\n'"@$f"; done
+        gemini \
+          --approval-mode auto_edit \
+          --allowed-tools write_file,read_file,replace,glob,search_file_content,browser_navigate,browser_evaluate,browser_query_selector,browser_query_selector_all,browser_screenshot,request_get \
+          -p "$PROMPT"
+
+  codex:hero:
+    desc: 【非推奨】Step 9 (Codex+MCP) - 公式サイトからヒーロー画像DL→frontmatter.heroImage更新（拡張子自動）
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/79_fetch_and_set_hero_mcp.md $FILES
+
+  claude:hero:
+    desc: Step 9 (Claude+MCP) - 公式サイトからヒーロー画像DL→frontmatter.heroImage更新（拡張子自動）
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_claude.mjs doc/playbooks/79_fetch_and_set_hero_mcp.md $FILES
+
+  build:catalog:
+    desc: 全記事のメタカタログを構築
+    cmds:
+      - node scripts/build_catalog.mjs
+
+  codex:related:auto:
+    desc: Step 8 - frontmatter.relatedArticles を自動設定/補完
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/80_related_auto.md $FILES
+
+  codex:tags:auto:
+    desc: Step 13 - catalog.json の人気度に基づき frontmatter.tags を人気順で上書き（最大7件）
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/83_tags_from_catalog.md $FILES
+
+  claude:translate-en:
+    desc: 英語版記事を生成/更新（Claude：高品質翻訳、MD/MDX対応、frontmatter整備）
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_claude.mjs doc/playbooks/90_translate_en.md $FILES
+
+  filemove:
+    desc: reviews/_incoming → reviews/ にファイル移動（冪等・git mv対応）
+    cmds:
+      - |
+        set -euo pipefail
+        FILES="${FILES:-$({{.TARGETS_CMD}})}"
+        if [ -z "${FILES}" ]; then
+          echo "No target files. Set FILES or adjust TARGETS_CMD."; exit 0
+        fi
+
+        # 既定は上書き禁止。FORCE=1 で上書き許可。
+        MV_FLAGS="-n"
+        [ "${FORCE:-0}" = "1" ] && MV_FLAGS="-f"
+
+        for f in ${FILES}; do
+          # 対象は .md / .mdx のみ
+          case "$f" in
+            *.md|*.mdx) ;;
+            *) echo "skip (not md/mdx): $f"; continue ;;
+          esac
+
+          # _incoming から reviews 直下へ（サブフォルダは温存）
+          dest="${f/src\/content\/reviews\/_incoming\//src/content/reviews/}"
+          if [ "$dest" = "$f" ]; then
+            echo "skip (not in _incoming): $f"; continue
+          fi
+
+          mkdir -p "$(dirname "$dest")"
+
+          # DRY=1 でドライラン（実際には移動しない）
+          if [ "${DRY:-0}" = "1" ]; then
+            echo "[DRY] mv ${MV_FLAGS} -- '$f' '$dest'"
+            continue
+          fi
+
+          mv ${MV_FLAGS} -- "$f" "$dest"
+
+          echo "moved: $f -> $dest"
+        done
+
 
   build:
     desc: Astro のビルド

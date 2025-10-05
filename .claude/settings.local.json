@@ -33,7 +33,10 @@
       "Bash(do if grep -q '[^#\\[\\]ref-][0-9][。、）]' \"$file\")",
       "Bash(! grep -q '\\[[0-9]\\](#ref-[0-9]\\)' \"$file\")",
       "Bash(then echo \"$file\")",
-      "Bash(fi)"
+      "Bash(fi)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_evaluate",
+      "WebFetch(domain:media.focal-naim.com)"
     ],
     "deny": []
   }
