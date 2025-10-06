@@ -9,9 +9,8 @@
 - 画像保存先: `src/assets/images/contents/`
 
 依存（MCP）:
-- Playwright MCP（ブラウズ・DOM探索・HTTP取得）
-- Filesystem MCP（base64 書き込み）
-- いずれも Codex から利用可能であること
+- chrome-devtools-mcp（ブラウズ・DOM探索・HTTP取得）
+- Filesystem MCP（書き込み）
 
 セクション検出:
 - 本文を見出しで分割し、見出しに以下を含むものを測定系とみなす:
@@ -26,7 +25,7 @@
 - URLが取れないセクションはスキップ（本文改変禁止）
 
 候補画像の収集（Playwright MCP）:
-- `browser_navigate(url)` → DOM安定待ち（必要に応じて小休止）
+- `navigate_page(url)` → DOM安定待ち（必要に応じて小休止）
 - **候補要素**を広く列挙:
   1) `<img>`（`currentSrc` / `srcset` 最大解像度、`data-src` 等の遅延属性も見る）
   2) `<picture><source>`（`srcset` を解決）
@@ -35,8 +34,9 @@
   5) **<svg>**（`outerHTML` を直接 `.svg` として保存可能）
 - それぞれについて**“元データ”を優先**:
   - 第一: **HTTPバイナリ取得**（`context.request.get(imgUrl)` or `page.request.get(imgUrl)`）→ **ボディをそのまま base64 化**（再エンコード禁止）
-  - 第二: ページ内 `fetch(imgUrl)` → ArrayBuffer → base64（第一が不可のとき）
-  - 第三（最終手段）: **要素スクリーンショット**（PNG, 品質=高）。※HTTP取得できた場合は**使わない**
+  - 第二: curlコマンドによる直接取得
+  - 第三: ページ内 `fetch(imgUrl)` → ArrayBuffer → base64（第一が不可のとき）
+  - 第四（最終手段）: **要素スクリーンショット**（PNG, 品質=高）。※HTTP取得できた場合は**使わない**
   - `<canvas>` は `toDataURL` を**第一手段**とみなし、PNGをそのまま base64 化
   - `<svg>` は `outerHTML` を**そのまま** `.svg` として保存（テキスト）
 
