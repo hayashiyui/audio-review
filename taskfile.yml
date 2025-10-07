@@ -93,6 +93,11 @@ tasks:
     cmds:
       - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/83_tags_from_catalog.md $FILES
 
+  codex:link-from-others:auto:
+    desc: Step 14 - 他の記事から言及がある場合、当該記事に内部リンクが貼られていない場合はリンクを貼る。
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/84_link_from_others.md $FILES
+
   codex:build:fix:
     desc: Step 14 - build and fix errors
     cmds:
@@ -153,10 +158,10 @@ tasks:
     desc: 一連の自動化を順次実行（frontmatter→整形→正規化→表短縮→引用リンク→重複整理→内部リンク→カタログ→測定→ヒーロー→関連記事→タグ→翻訳→ファイル移動）
     cmds:
       # frontmatter 初期整備（Claude）
-      - task: claude:frontmatter
+      #- task: claude:frontmatter
 
       # ヒーロー画像の取得とfrontmatter反映（Claude MCP）
-      - task: claude:hero
+      #- task: claude:hero
 
       # 整形まわり（表/リンク脚注）
       - task: codex:fix-tables
@@ -181,12 +186,13 @@ tasks:
       # 関連・タグの自動設定（catalogに基づく）
       - task: codex:related:auto
       - task: codex:tags:auto
+      - task: codex:link-from-others:auto
 
       # ビルドとエラー修正
       - task: codex:build:fix
 
+  pipeline:translate:
       # 英語版の生成/更新（Claude）
-      #- task: claude:translate-en
-
+      - task: claude:translate-en
       # 最終：_incoming から正規ディレクトリへ移動
-      #- task: filemove
+      - task: filemove
