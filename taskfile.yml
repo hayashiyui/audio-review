@@ -93,6 +93,11 @@ tasks:
     cmds:
       - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/83_tags_from_catalog.md $FILES
 
+  codex:build:fix:
+    desc: Step 14 - build and fix errors
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/90_build_fix.md $FILES
+
   claude:translate-en:
     desc: 英語版記事を生成/更新（Claude：高品質翻訳、MD/MDX対応、frontmatter整備）
     cmds:
@@ -148,7 +153,7 @@ tasks:
     desc: 一連の自動化を順次実行（frontmatter→整形→正規化→表短縮→引用リンク→重複整理→内部リンク→カタログ→測定→ヒーロー→関連記事→タグ→翻訳→ファイル移動）
     cmds:
       # frontmatter 初期整備（Claude）
-      #- task: claude:frontmatter
+      - task: claude:frontmatter
 
       # ヒーロー画像の取得とfrontmatter反映（Claude MCP）
       - task: claude:hero
@@ -177,8 +182,11 @@ tasks:
       - task: codex:related:auto
       - task: codex:tags:auto
 
+      # ビルドとエラー修正
+      - task: codex:build:fix
+
       # 英語版の生成/更新（Claude）
-      - task: claude:translate-en
+      #- task: claude:translate-en
 
       # 最終：_incoming から正規ディレクトリへ移動
-      - task: filemove
+      #- task: filemove

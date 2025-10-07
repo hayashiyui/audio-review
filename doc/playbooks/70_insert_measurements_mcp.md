@@ -87,3 +87,9 @@ MDXへの挿入（1セクションあたり選択枚数分）:
 - 各画像を `import measurementFR1 from '@assets/images/contents/<filename>'` のように変数化
   - 変数名は `measurementFR1|measurementFR2|measurementNC1|measurementMisc1...` とカテゴリ＋通番で命名
 - 当該セクションの適切な位置に、選択した枚数分の `<ImageWithCitation ... />` を挿入
+
+ImageWithCitationコンポーネント仕様
+- imagePath(必須): 画像ファイルのパス（例: {mesurementGraph01}）
+- sourceTitle(必須): 画像引用元のタイトル。引用元と図表の内容がわかるようにする（例: "Fig.1 Boulder 2150, frequency response - Stereophile"）
+- sourceUrl(必須): 画像引用元サイトのURL。内部リンクではなく直接外部リンクを指定すること（例: "https://www.stereophile.com/content/boulder-amplifiers-2150-monoblock-power-amplifier-measurements"）
+- alt(任意): デフォルトでimgのaltにはsourceTitleがセットされるが、SEO上の理由などで別途alt指定したい場合に設定する
