@@ -24,7 +24,7 @@
 - 末尾「引用文献/参考文献/References」で `<a id="ref-n"></a>` を持つ項目から、最初の `http/https` URL を取得
 - URLが取れないセクションはスキップ（本文改変禁止）
 
-候補画像の収集（Playwright MCP）:
+候補画像の収集（chrome-devtools-mcp）:
 - `navigate_page(url)` → DOM安定待ち（必要に応じて小休止）
 - **候補要素**を広く列挙:
   1) `<img>`（`currentSrc` / `srcset` 最大解像度、`data-src` 等の遅延属性も見る）
@@ -32,12 +32,18 @@
   3) **CSS背景**（`getComputedStyle(el).backgroundImage` の `url(...)` から実URL抽出）
   4) **<canvas>**（`toDataURL('image/png',1.0)` で生PNGを取得）
   5) **<svg>**（`outerHTML` を直接 `.svg` として保存可能）
-- それぞれについて**“元データ”を優先**:
-  - 第一: **HTTPバイナリ取得**（`context.request.get(imgUrl)` or `page.request.get(imgUrl)`）→ **ボディをそのまま base64 化**（再エンコード禁止）
+- それぞれについて**"元データ"を優先**:
+  - 第一: **HTTPバイナリ取得**（`context.request.get(imgUrl)` or `page.request.get(imgUrl)`）
   - 第二: curlコマンドによる直接取得
-  - 第三: ページ内 `fetch(imgUrl)` → ArrayBuffer → base64（第一が不可のとき）
+    ```bash
+    # サンプル: User-Agentヘッダーを付与して元画像を取得
+    curl -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" \
+      "https://www.stereophile.com/images/0324-BW801fig4-600.jpg" \
+      -o src/assets/images/contents/bowers-and-wilkins-801d4-fr-1.jpg
+    ```
+  - 第三: ページ内 `fetch(imgUrl)`
   - 第四（最終手段）: **要素スクリーンショット**（PNG, 品質=高）。※HTTP取得できた場合は**使わない**
-  - `<canvas>` は `toDataURL` を**第一手段**とみなし、PNGをそのまま base64 化
+  - `<canvas>` は `toDataURL` を**第一手段**とみなし、PNGをそのまま
   - `<svg>` は `outerHTML` を**そのまま** `.svg` として保存（テキスト）
 
 メタ情報とラベリング:

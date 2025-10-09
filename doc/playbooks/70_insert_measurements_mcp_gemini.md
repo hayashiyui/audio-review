@@ -9,9 +9,7 @@
 - 画像保存先: `src/assets/images/contents/`
 
 依存（MCP）:
-- Playwright MCP（ブラウズ・DOM探索・HTTP取得）
-- Filesystem（write_file / replace 等の編集ツール）
-- **いずれも Gemini CLI から利用可能であること**
+- chrome-devtools-mcp（ブラウズ・DOM探索・HTTP取得）
 
 セクション検出:
 - 本文を見出しで分割し、見出しに以下を含むものを測定系とみなす:
@@ -25,8 +23,8 @@
 - 末尾「引用文献/参考文献/References」で `<a id="ref-n"></a>` を持つ項目から、最初の `http/https` URL を取得
 - URLが取れないセクションはスキップ（本文改変禁止）
 
-候補画像の収集（Playwright MCP）:
-- `browser_navigate(url)` → DOM安定待ち（必要に応じて小休止）
+候補画像の収集（chrome-devtools-mcp）:
+- `navigate_page(url)` → DOM安定待ち（必要に応じて小休止）
 - **候補要素**を広く列挙:
   1) `<img>`（`currentSrc` / `srcset` 最大解像度、`data-src` 等の遅延属性も見る）
   2) `<picture><source>`（`srcset` を解決）
@@ -35,8 +33,9 @@
   5) **<svg>**（`outerHTML` を直接 `.svg` として保存可能）
 - それぞれについて**“元データ”を優先**:
   - 第一: **HTTPバイナリ取得**（`context.request.get(imgUrl)` or `page.request.get(imgUrl)`）→ **ボディをそのまま base64 化**（再エンコード禁止）
-  - 第二: ページ内 `fetch(imgUrl)` → ArrayBuffer → base64（第一が不可のとき）
-  - 第三（最終手段）: **要素スクリーンショット**（PNG, 品質=高）。※HTTP取得できた場合は**使わない**
+  - 第二: curlコマンドによる直接取得
+  - 第三: ページ内 `fetch(imgUrl)` → ArrayBuffer → base64（第一が不可のとき）
+  - 第四（最終手段）: **要素スクリーンショット**（PNG, 品質=高）。※HTTP取得できた場合は**使わない**
   - `<canvas>` は `toDataURL` を**第一手段**とみなし、PNGをそのまま base64 化
   - `<svg>` は `outerHTML` を**そのまま** `.svg` として保存（テキスト）
 
@@ -87,3 +86,9 @@ MDXへの挿入（1セクションあたり選択枚数分）:
 - 各画像を `import measurementFR1 from '@assets/images/contents/<filename>'` のように変数化
   - 変数名は `measurementFR1|measurementFR2|measurementNC1|measurementMisc1...` とカテゴリ＋通番で命名
 - 当該セクションの適切な位置に、選択した枚数分の `<ImageWithCitation ... />` を挿入
+
+ImageWithCitationコンポーネント仕様
+- imagePath(必須): 画像ファイルのパス（例: {mesurementGraph01}）
+- sourceTitle(必須): 画像引用元のタイトル。引用元と図表の内容がわかるようにする（例: "Fig.1 Boulder 2150, frequency response - Stereophile"）
+- sourceUrl(必須): 画像引用元サイトのURL。内部リンクではなく直接外部リンクを指定すること（例: "https://www.stereophile.com/content/boulder-amplifiers-2150-monoblock-power-amplifier-measurements"）
+- alt(任意): デフォルトでimgのaltにはsourceTitleがセットされるが、SEO上の理由などで別途alt指定したい場合に設定する

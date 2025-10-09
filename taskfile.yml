@@ -68,15 +68,32 @@ tasks:
     cmds:
       - FILES=$({{.TARGETS_CMD}}); node scripts/run_claude.mjs doc/playbooks/70_insert_measurements_mcp.md $FILES
 
+  gemini:insert-measurements:
+    desc: Step 7 (Gemini) - 測定グラフ挿入（非対話）
+    cmds:
+      - |
+        FILES=$({{.TARGETS_CMD}})
+        PROMPT=$'# 実行指示\n@doc/playbooks/70_insert_measurements_mcp_gemini.md\n\n# 対象MDX'
+        for f in $FILES; do PROMPT="$PROMPT"$'\n'"@$f"; done
+        gemini \
+          --approval-mode auto_edit \
+          --allowed-tools write_file,read_file,replace,glob,search_file_content,browser_navigate,browser_evaluate,browser_query_selector,browser_query_selector_all,browser_screenshot,request_get \
+          -p "$PROMPT"
+
   codex:hero:
     desc: 【非推奨】Step 9 (Codex+MCP) - 公式サイトからヒーロー画像DL→frontmatter.heroImage更新（拡張子自動）
     cmds:
-      - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/79_fetch_and_set_hero_mcp.md $FILES
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_codex.mjs doc/playbooks/75_fetch_and_set_hero_mcp.md.md $FILES
 
   claude:hero:
     desc: Step 9 (Claude+MCP) - 公式サイトからヒーロー画像DL→frontmatter.heroImage更新（拡張子自動）
     cmds:
-      - FILES=$({{.TARGETS_CMD}}); node scripts/run_claude.mjs doc/playbooks/79_fetch_and_set_hero_mcp.md $FILES
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_claude.mjs doc/playbooks/75_fetch_and_set_hero_mcp.md $FILES
+
+  claude:image:
+    desc: Step 9 (Claude+MCP) - 公式サイトから画像DL→MDXへ挿入（拡張子自動）
+    cmds:
+      - FILES=$({{.TARGETS_CMD}}); node scripts/run_claude.mjs doc/playbooks/76_fetch_and_set_image_mcp.md $FILES
 
   build:catalog:
     desc: 全記事のメタカタログを構築
@@ -158,10 +175,11 @@ tasks:
     desc: 一連の自動化を順次実行（frontmatter→整形→正規化→表短縮→引用リンク→重複整理→内部リンク→カタログ→測定→ヒーロー→関連記事→タグ→翻訳→ファイル移動）
     cmds:
       # frontmatter 初期整備（Claude）
-      #- task: claude:frontmatter
+      
+      - task: claude:frontmatter
 
       # ヒーロー画像の取得とfrontmatter反映（Claude MCP）
-      #- task: claude:hero
+      - task: claude:hero
 
       # 整形まわり（表/リンク脚注）
       - task: codex:fix-tables
@@ -182,6 +200,8 @@ tasks:
 
       # 測定グラフの自動挿入（Claude MCP）
       - task: claude:insert-measurements
+      # 画像の自動挿入（Claude MCP）
+      - task: claude:image
 
       # 関連・タグの自動設定（catalogに基づく）
       - task: codex:related:auto

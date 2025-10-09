@@ -3,7 +3,7 @@
 - 本文は一切変更しない（frontmatter 以外に触らない）
 
 対象:
-- {{FILES}} に列挙された .md のみ編集
+- {{FILES}} に列挙された .md / .mdx のみ編集
 - 対象以外のファイルは読み取り専用
 
 作業方針:
@@ -29,7 +29,7 @@ relatedArticles(必須): []
 
 ルール:
 1) title/brand/model を本文の先頭見出し・導入の明示箇所から抽出（なければファイル名を分割して推定）
-2) slug は brand と model から生成（例: "Focal Bathys" → "focal-bathys"）。既存 slug (mdファイル名)があれば維持
+2) slug は brand と model から生成（例: "Focal Bathys" → "focal-bathys"）。既存 slug (md / mdxファイル名)があれば維持
 3) category が本文やfrontmatterにあれば尊重。
 4) lang は 'ja' を設定（既存が ja 以外なら ja に修正）
 5) relatedArticlesは一旦空で
