@@ -98,18 +98,22 @@ function replaceRelatedArticlesYaml(content, relatedList) {
 
   let newFrontmatter = frontmatter
   if (startIdx >= 0) {
-    // find end index: next top-level key or end marker '---'
-    let endIdx = lines.length - 1
+    // Determine block indent of 'relatedArticles:' and find the block end robustly
+    const keyIndent = (lines[startIdx].match(/^\s*/)?.[0] || '').length
+    let endIdx = startIdx
     for (let j = startIdx + 1; j < lines.length; j++) {
       const line = lines[j]
-      if (/^---\s*$/.test(line)) {
+      if (/^---\s*$/.test(line)) { // end of YAML FM
         endIdx = j - 1
         break
       }
-      if (/^[A-Za-z0-9_\-]+\s*:/.test(line)) {
+      const indentLen = (line.match(/^\s*/)?.[0] || '').length
+      const isTopLevelKey = indentLen <= keyIndent && /^[A-Za-z0-9_\-]+\s*:/.test(line)
+      if (isTopLevelKey) {
         endIdx = j - 1
         break
       }
+      endIdx = j
     }
     const before = lines.slice(0, startIdx).join('\n')
     const after = lines.slice(endIdx + 1).join('\n')
@@ -129,6 +133,7 @@ function parseExistingRelatedFromYaml(content) {
   const lines = frontmatter.split('\n')
   const arr = []
   let collecting = false
+  let keyIndent = 0
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]
     if (/^relatedArticles\s*:\s*\[\s*\]\s*$/.test(line)) {
@@ -137,11 +142,13 @@ function parseExistingRelatedFromYaml(content) {
     }
     if (/^relatedArticles\s*:/.test(line)) {
       collecting = true
+      keyIndent = (line.match(/^\s*/)?.[0] || '').length
       continue
     }
     if (collecting) {
       if (/^---\s*$/.test(line)) break
-      if (/^[A-Za-z0-9_\-]+\s*:/.test(line)) break
+      const indentLen = (line.match(/^\s*/)?.[0] || '').length
+      if (indentLen <= keyIndent && /^[A-Za-z0-9_\-]+\s*:/.test(line)) break
       const m1 = line.match(/^\s*-\s*collection:\s*(\S+)/)
       if (m1) {
         arr.push({ collection: m1[1], id: null })
@@ -218,15 +225,27 @@ function uniqueById(list) {
 }
 
 function buildRelatedList(existing, ranked, maxItems = 9) {
-  const existingSet = new Set(existing.map(e => `${e.collection}:${e.id}`))
-  const additions = []
+  // De-duplicate existing while preserving order
+  const seen = new Set()
+  const normalized = []
+  for (const e of existing) {
+    const k = `${e.collection}:${e.id}`
+    if (seen.has(k)) continue
+    seen.add(k)
+    normalized.push(e)
+  }
+  // Enforce hard cap first (idempotent)
+  let out = normalized.slice(0, maxItems)
+  if (out.length >= maxItems) return out
+  const existingSet = new Set(out.map(e => `${e.collection}:${e.id}`))
   for (const r of ranked) {
     const key = `${r.collection}:${r.slug}`
     if (existingSet.has(key)) continue
-    additions.push({ collection: r.collection, id: r.slug })
-    if (existing.length + additions.length >= maxItems) break
+    out.push({ collection: r.collection, id: r.slug })
+    existingSet.add(key)
+    if (out.length >= maxItems) break
   }
-  return [...existing, ...additions]
+  return out
 }
 
 function ensureGridImport(content) {

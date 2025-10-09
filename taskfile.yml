@@ -175,7 +175,6 @@ tasks:
     desc: 一連の自動化を順次実行（frontmatter→整形→正規化→表短縮→引用リンク→重複整理→内部リンク→カタログ→測定→ヒーロー→関連記事→タグ→翻訳→ファイル移動）
     cmds:
       # frontmatter 初期整備（Claude）
-      
       - task: claude:frontmatter
 
       # ヒーロー画像の取得とfrontmatter反映（Claude MCP）
@@ -206,7 +205,6 @@ tasks:
       # 関連・タグの自動設定（catalogに基づく）
       - task: codex:related:auto
       - task: codex:tags:auto
-      - task: codex:link-from-others:auto
 
       # ビルドとエラー修正
       - task: codex:build:fix
@@ -214,5 +212,6 @@ tasks:
   pipeline:translate:
       # 英語版の生成/更新（Claude）
       - task: claude:translate-en
+      - task: codex:link-from-others:auto
       # 最終：_incoming から正規ディレクトリへ移動
       - task: filemove
